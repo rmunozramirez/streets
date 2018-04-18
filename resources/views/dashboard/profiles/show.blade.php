@@ -27,12 +27,9 @@
 					               <figure>
 						            	<img height="300" class="
 						            	" src="{{URL::to('/images/' . $profile->image)}}" alt="{{ $profile->name }}" name="{{ $profile->name }}" />
-						            </figure>
-									
+						            </figure>				
 				            	</div>
 								<div class="col-md-8">
-									
-
 							      	<div class="row">
 									    <dl class="dl-horizontal">
 									    	<h3><dt>User Name:</dt>
@@ -119,61 +116,57 @@
 				</div>
 			</div>
 		</div>
-
+<!-- Channel panel  -->
 	    <div class="wrapper wrapper-content animated fadeInUp">		
-	        <div class="row wrapper border-bottom white-bg">		
-				
+	        <div class="row wrapper border-bottom white-bg">
 				<div class="inside">
-					@if( $profile->title ) 
-	                <h2>Channel: {{$profile->title}}</h2>
-
-	                <hr>
-					<div id="contenido"  class="card">
-						<div class="card-body">
+					@if( $profile->channel ) 
+		                <h2>Channel: {!! $profile->channel->title !!}</h2>
+		                <hr>
+						<div id="contenido"  class="card">
+							<div class="card-body">
 							<div class="row">
-								@if(count($profile->discussions) > 0)
-									<table class="table table-striped table-hover">
-								         <thead>
-								            <tr>
-								                <th>Discussions</th>
-								                <th>Answers</th>
-								                <th>Date</th>
-								            </tr>
-								         </thead>
-								         <tbody>
-								         	@foreach ($profile->discussions as $discussion)
-								            <tr>
-								               <td><a href="">{{$discussion->title}}</a></td>
-								               <td>{{count($discussion->replies)}}</td>
-								               <td>{{$discussion->created_at}}</td>
-								               <td>
-								               		<a type="button" class="col-md-6 btn btn-secondary" href="">Edit</a>
-									            	<div class="col-md-6">
-										            	{!! Form::open(['route' => ['channels.destroy', $discussion->slug], 'method' => 'DELETE']) !!}
+								<div class="col-md-6">
+					               <figure>
+						            	<img height="300" class="
+						            	" src="{{URL::to('/images/' . $profile->channel->image)}}" alt="{{ $profile->channel->title }}" name="{{ $profile->channel->title }}" />
+						            </figure>				
+				            	</div>
+								<div class="col-md-6">
+							      	<div class="row">
+									    <dl class="dl-horizontal">
+									    	<h3><dt>Channel Name:</dt>
+											<dd>{!! $profile->channel->title !!}</dd></h3>
 
-														{!! Form::submit('Delete', ['class' => 'btn btn-block btn-danger']) !!}
+									        <dt>Channel subtitle:</dt>
+									        <dd class="pb-3">{{ $profile->channel->subtitle}}</dd>
 
-														{!! Form::close() !!}
-													</div>
-								               </td>
-								            </tr>
-								            @endforeach
+									        <dt>Subcategory:</dt>
+									        <dd class="pb-3">{{ $profile->channel->subcategory->title}}</dd>
 
-								         </tbody>
-								      </table>
-								@else
-									<h2>{!! $profile->user->name !!} did not initiated any discussions</h2>
-								@endif
-							</div>	
+									        <dt>Status</dt>
+									        <dd class="pb-3">{!! $profile->channel->status->name !!}</dd>
+
+									        <dt>Registered at:</dt>
+									        <dd class="pb-3">{{ $profile->channel->created_at}}</dd>
+
+									        <dt>Likes</dt>
+									        <dd class="pb-3">{{ count($profile->channel->likes)}}</dd>
+									    </dl>
+							         </div>		            
+						        </div>
+					        </div>	
+							</div>
 						</div>
-					</div>
-					@else <h2>{!! $profile->user->name !!} does not have a channel</h2>
+					@else <h2>{!! $profile->user_name !!} does not have a channel</h2>
 			        @endif
 				</div>
 				
 			</div>
 		</div>
-  
+<!-- End Channel panel  -->
+
+<!-- Discussions panel  -->
 	    <div class="wrapper wrapper-content animated fadeInUp">		
 	        <div class="row wrapper border-bottom white-bg">
 				<div class="inside">
@@ -189,15 +182,23 @@
 								         <thead>
 								            <tr>
 								                <th>Discussions</th>
+								                <th>Status</th>
 								                <th>Answers</th>
-								                <th>Likes</th>
+								                <th>Total Likes</th>
 								                <th>Date</th>
 								            </tr>
 								         </thead>
 								         <tbody>
 								         	@foreach ($profile->discussions as $discussion)
 								            <tr>
-								               <td><a href="">{{$discussion->title}}</a></td>
+								               <td>
+													<a href="{{route('discussions.show', $discussion->slug)}}">
+										               	<figure>
+											            	<img class="img-circle" height="50" src="{{URL::to('/images/' . $discussion->image)}}" alt="{{ $discussion->title }}" name="{{ $discussion->title }}"><span class="pl-5"> {{$discussion->title}}</span>
+											            </figure>	
+										           	</a>
+								               </td>
+								               <td>{{$discussion->status->name}}</td>
 								               <td>{{count($discussion->replies)}}</td>
 								               <td>{{$discussion->likes}}</td>
 								               <td>{{$discussion->created_at}}</td>
@@ -215,9 +216,9 @@
 								            @endforeach
 
 								         </tbody>
-								      </table>
+								    </table>
 								@else
-									<h2>{{ $name}} did not initiated any discussions</h2>
+									<h2>{{ $profile->user_name}} did not initiated any discussions</h2>
 								@endif
 							</div>	
 						</div>
@@ -225,7 +226,7 @@
 				</div>
 			</div>
 		</div>
-
+<!-- End Discussions panel  -->
 </section>
 
 	

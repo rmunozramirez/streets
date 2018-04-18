@@ -22,9 +22,9 @@ class DashboardProfileController extends Controller
         $all_statuses = Status::pluck('name', 'id')->all();
         $profiles = Profile::orderBy('created_at', 'asc')->paginate(4);
         $all_profiles = Profile::all();
-        $active_pr = Profile::where('status_id', 1)->get();
-        $bann_pr = Profile::where('status_id', 2)->get();
-        $trash_pr = Profile::where('status_id', 3)->get();
+        $active_pr = Profile::where('status_id', 1)->paginate(4);
+        $bann_pr = Profile::where('status_id', 2)->paginate(4);
+        $trash_pr = Profile::where('status_id', 3)->paginate(4);
         $page_name = 'Profile';
 
        return view('dashboard.profiles.index', compact('profiles', 'page_name', 'all_profiles', 'all_statuses', 'all_roles', 'active_pr', 'bann_pr', 'trash_pr'));
@@ -77,9 +77,14 @@ class DashboardProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $all_roles = Role::pluck('name', 'id')->all();
+        $all_st = Status::pluck('name', 'id')->all();
+        $profile = Profile::where('slug', $slug)->first(); 
+        $page_name = 'Edit: ' . $profile->title;
+
+          return view('dashboard.profiles.edit', compact('profile', 'page_name', 'all_roles', 'all_st'));
     }
 
     /**

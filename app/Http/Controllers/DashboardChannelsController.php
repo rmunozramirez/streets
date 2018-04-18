@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Profile;
+use App\Channel;
+use App\Status;
+use App\Role;
+use Session;
 
 class DashboardChannelsController extends Controller
 {
@@ -13,7 +18,15 @@ class DashboardChannelsController extends Controller
      */
     public function index()
     {
-        //
+
+        $channels = Channel::orderBy('created_at', 'asc')->paginate(4);
+        $all_ch = Channel::all();
+        $active_ch = Channel::where('status_id', 1)->paginate(4);
+        $bann_ch = Channel::where('status_id', 2)->paginate(4);
+        $trash_ch = Channel::where('status_id', 3)->paginate(4);
+        $page_name = 'channels';
+
+       return view('dashboard.channels.index', compact('channels', 'page_name', 'all_ch', 'active_ch', 'bann_ch', 'trash_ch'));
     }
 
     /**
@@ -23,7 +36,12 @@ class DashboardChannelsController extends Controller
      */
     public function create()
     {
-        //
+        $all_roles = Role::pluck('name', 'id')->all();
+        $all_st = Status::pluck('name', 'id')->all();
+        $all_ch = Channel::all();
+        $page_name =  'Create a new Channel';
+
+        return view('dashboard.channels.create', compact('all_ch', 'page_name', 'all_roles', 'all_st'));
     }
 
     /**
@@ -43,9 +61,12 @@ class DashboardChannelsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $channel = Channel::where('slug', $slug)->first();
+        $page_name = $channel->title;
+
+        return view('dashboard.channels.show', compact('channel', 'page_name'));
     }
 
     /**

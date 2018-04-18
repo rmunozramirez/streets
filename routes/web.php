@@ -46,7 +46,6 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function() {
 	Route::resource('subcategories', 'DashboardSubcategoriesController');
 
 //admin categories
-
 	Route::get('categories/trashed', 'DashboardCategoriesController@trashed')
 	->name('categories.trashed');
 	Route::get('categories/{slug}/restore', 'DashboardCategoriesController@restore')
@@ -54,5 +53,14 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function() {
 	Route::get('categories/{slug}/kill', 'DashboardCategoriesController@kill')
 	->name('categories.kill');
 	Route::resource('categories', 'DashboardCategoriesController');
+
+//admin discussions
+	Route::get('discussions/trashed', 'DashboardDiscussionsController@trashed')
+	->name('discussions.trashed');
+	Route::get('discussions/{slug}/restore', 'DashboardDiscussionsController@restore')
+	->name('discussions.restore');
+	Route::get('discussions/{slug}/kill', 'DashboardDiscussionsController@kill')
+	->name('discussions.kill');
+	Route::resource('discussions', 'DashboardDiscussionsController');
 
 });

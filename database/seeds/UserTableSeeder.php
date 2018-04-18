@@ -75,7 +75,7 @@ De ascendencia itálica (por su madre), y púnica-bereber (por su padre), Severo
             'user_name'	=>  'Amelies Paintings',
             'status_id'	=>  1,
             'role_id'   =>  2,
-            'slug'		=> 'amelies-peinting',
+            'slug'		=> 'amelies-painting',
             'birthday' 	=>  '2005-09-29',
             'image'    	=>  'amelie.jpg',
             'web'    	=>  'http://malanga.blue',

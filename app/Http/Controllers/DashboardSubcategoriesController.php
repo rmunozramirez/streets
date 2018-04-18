@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Profile;
+use App\Subcategory;
+use App\Status;
+use App\Role;
+use Session;
 
 class DashboardSubcategoriesController extends Controller
 {
@@ -13,7 +18,14 @@ class DashboardSubcategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $subcategories = Subcategory::orderBy('created_at', 'asc')->paginate(4);
+        $all_sub = Subcategory::all();
+        $active_sub = Subcategory::where('status_id', 1)->paginate(4);
+        $bann_sub = Subcategory::where('status_id', 2)->paginate(4);
+        $trash_sub = Subcategory::where('status_id', 3)->paginate(4);
+        $page_name = 'Categories';
+
+       return view('dashboard.subcategories.index', compact('subcategories', 'page_name', 'all_sub', 'active_sub', 'bann_sub', 'trash_sub'));
     }
 
     /**
@@ -23,7 +35,12 @@ class DashboardSubcategoriesController extends Controller
      */
     public function create()
     {
-        //
+        $all_roles = Role::pluck('name', 'id')->all();
+        $all_st = Status::pluck('name', 'id')->all();
+        $all_sub = Subcategory::all();
+        $page_name =  'Create a new Subcategory';
+
+        return view('dashboard.subcategories.create', compact('all_sub', 'page_name', 'all_roles', 'all_st'));
     }
 
     /**
@@ -43,9 +60,12 @@ class DashboardSubcategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $subcategory = Subcategory::where('slug', $slug)->first();
+        $page_name = $subcategory->title;
+
+        return view('dashboard.subcategories.show', compact('subcategory', 'page_name'));
     }
 
     /**

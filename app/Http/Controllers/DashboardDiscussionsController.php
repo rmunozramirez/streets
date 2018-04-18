@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Profile;
-use App\Category;
+use App\Discussion;
 use App\Status;
 use App\Role;
 use Session;
 
-class DashboardCategoriesController extends Controller
+class DashboardDiscussionsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,14 +18,15 @@ class DashboardCategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('created_at', 'asc')->paginate(4);
-        $all_cat = Category::all();
-        $active_cat = Category::where('status_id', 1)->paginate(4);
-        $bann_cat = Category::where('status_id', 2)->paginate(4);
-        $trash_cat = Category::where('status_id', 3)->paginate(4);
-        $page_name = 'Categories';
 
-       return view('dashboard.categories.index', compact('categories', 'page_name', 'all_cat', 'active_cat', 'bann_cat', 'trash_cat'));
+        $discussions = Discussion::orderBy('created_at', 'asc')->paginate(4);
+        $all_disc = Discussion::all();
+        $active_disc = Discussion::where('status_id', 1)->paginate(4);
+        $bann_disc = Discussion::where('status_id', 2)->paginate(4);
+        $trash_disc = Discussion::where('status_id', 3)->paginate(4);
+        $page_name = 'Discussion';
+
+       return view('dashboard.discussions.index', compact('discussions', 'page_name', 'all_disc', 'active_disc', 'bann_disc', 'trash_disc'));
     }
 
     /**
@@ -37,10 +38,10 @@ class DashboardCategoriesController extends Controller
     {
         $all_roles = Role::pluck('name', 'id')->all();
         $all_st = Status::pluck('name', 'id')->all();
-        $all_cat = Category::all();
-        $page_name =  'Create a new Category';
+        $all_disc = Discussion::all();
+        $page_name =  'Create a new Discussion';
 
-        return view('dashboard.categories.create', compact('all_cat', 'page_name', 'all_roles', 'all_st'));
+        return view('dashboard.discussions.create', compact('all_disc', 'page_name', 'all_roles', 'all_st'));
     }
 
     /**
@@ -49,14 +50,10 @@ class DashboardCategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function store(Request $request)
     {
-        $category = Category::where('slug', $slug)->first();
-        $page_name = $category->title;
-
-        return view('dashboard.categories.show', compact('category', 'page_name'));
+        //
     }
-
 
     /**
      * Display the specified resource.
@@ -64,9 +61,12 @@ class DashboardCategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $discussion = Discussion::where('slug', $slug)->first();
+        $page_name = $discussion->title;
+
+        return view('dashboard.profiles.show', compact('discussion', 'page_name'));
     }
 
     /**

@@ -112,7 +112,6 @@
 									<div class="m-t-md">
 										<h2>Profile information</h2>
 										{!!Form::open(array('route' => 'profiles.store', 'files' => true)) !!}   
-
 										<div class="row">        
 											<div class="col-md-4"> 
 												<i class="fa fa-image fa-5x"></i>

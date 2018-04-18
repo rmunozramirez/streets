@@ -1,131 +1,122 @@
-@extends('admin.layouts.app')
+@extends('dashboard.index')
 @section ('title', "| $page_name")
 @section('content')
-
 <section id="content">
-    <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="wrapper wrapper-content animated fadeInUp">
         <div class="row wrapper border-bottom white-bg">
 			<div class="inside">
-                <h2>{!! $page_name !!} <span class="mt-3 small pull-right">Total Chanels: {{count($all_chanels)}}</span> </h2>
+                <h2>User profile</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="{{route('dashboard')}}"> Dashboard</a>
+                        <a href="{{route('index')}}"> Dashboard</a>
                     </li>
                     <li class="active">
-                        <i class="fas fa-pencil-alt"></i> All {!! $page_name !!}s
+                        <i class="fas fa-pencil-alt"></i> {!! $page_name !!}
                     </li>
                     <span class="pull-right">
-                    	<i class="fas fa-chevron-left"></i> <a href="{{route('admin-chanels.index')}}">Back to Chanels</a>
-					   	<i class="fas fa-trash"></i> <a href="{{route('admin-chanels.trashed')}}">Trashed Chanels</a>
+                    	<i class="fa fa-chevron-left"></i> <a href="{{route('profiles.index')}}">Back to profiles</a>
                     </span>
                 </ol>
                 <hr>
-    			<div id="contenido"  class="card">
-					<div class="inside">
 
-					    @if(count($errors) > 0)
-					        <ul class="list-group">
-					        
-					            @foreach($errors->all() as $error)
-					                <li class="list-group-item text-danger">{{$error}}</li>
-					            @endforeach
-					        </ul>
-					    @endif
-		
-						<div class="row">
-							<div class="card-body">        
+			    <div id="contenido"  class="card">
+				    @if(count($errors) > 0)
+				        <ul class="list-group">    
+				            @foreach($errors->all() as $error)
+				                <li class="list-group-item text-danger">{{$error}}</li>
+				            @endforeach
+				        </ul>
+				    @endif
+						<div class="tab-pane" id="tab-profile">
+							<div class="m-t-md">
+								<h2>Profile information</h2>
+								 {!! Form::model($profile, ['method'=>'PATCH', 'action'=> ['DashboardProfileController@update', $profile->slug ],'files'=>true]) !!}   
+								<div class="row">        
+									<div class="col-md-4"> 
+										<i class="fa fa-image fa-5x"></i>
+										<div class=" pt-5">
+											{!!Form::label('image', 'Upload a Featured Image') !!}
+											{!!Form::file('image', null, array('class' => 'form-control', 'required' => ''))!!}
+										</div>
+									</div>
+				  
+									<div class="col-md-8"> 
+										<div class="row">
+											<div class="col-md-6">       
+												{!!Form::label('user_name', 'Profile title', array('class' => 'form-spacing-top'))!!}
+												{!!Form::text('user_name', null, array('class' => 'form-control', 'required' => '', 'maxlength' => '255'))!!}
+											</div>
 
-			        		{!! Form::model($chanel, ['method'=>'PATCH', 'action'=> ['AdminChanelController@update', $chanel->slug ],'files'=>true]) !!} 
+											<div class="col-md-6">
+												{!!Form::label('birthday', 'Birthday', array('class' => 'form-spacing-top'))!!}
+												{!!Form::date('birthday', null, array('class' => 'form-control', 'required' => '', 'maxlength' => '255'))!!}
+											</div>		            		
+										</div>
 
-				            <div class="row">        
-					            <div class="col-md-4"> 
-					            	<img class="img-responsive"  src="{{URL::to('/images/' . $chanel->image ) }}" alt="{{$chanel->title}}" >
-					            	<div class=" pt-5">
-						                {!!Form::label('image', 'Upload a Featured Image') !!}
-						                {!!Form::file('image', null, array('class' => 'form-control', 'required' => ''))!!}
-					            	</div>  
-					            	<hr>
-					            	 <iframe id="ytplayer" type="text/html" width="100%" height="200" src="{!! $chanel->video !!}" frameborder="0" allowfullscreen></iframe>
+										<div class="row pt-4">   
+											<div class="col-md-6">               
+												{!! Form::label('id', 'Role:') !!}
+												{!! Form::select('id', ['' => 'Choose a Role'] + $all_roles, null, array('class' => 'form-control')) !!}
+											</div>
 
-					            	<div class=" pt-5">
-						                {!!Form::label('video', 'Your video', array('class' => 'form-spacing-top'))!!}
-							                {!!Form::text('video', null, array('class' => 'form-control', 'maxlength' => '255'))!!} 
-					            	</div>  
-					            </div>
-		      
-				            	<div class="col-md-8"> 
-						            <div class="row">
-						            	<div class="col-md-6">       
-							                {!!Form::label('title', 'Chanel title', array('class' => 'form-spacing-top'))!!}
-							                {!!Form::text('title', null, array('class' => 'form-control', 'required' => '', 'maxlength' => '255'))!!}
-							            </div>
+											<div class="col-md-6"> 
+												{!! Form::label('id', 'Status:') !!}
+												{!! Form::select('id', ['' => 'Choose a Status'] + $all_st, null, array('class' => 'form-control')) !!}     
+											</div>
+										</div>										
 
-							            <div class="col-md-6">      
-								                {!!Form::label('subtitle', 'Chanel subtitle', array('class' => 'form-spacing-top'))!!}
-								                {!!Form::text('subtitle', null, array('class' => 'form-control', 'required' => '', 'maxlength' => '255'))!!}		            		
-							            </div>		            		
-						            </div>		            		
+										<div class="row pt-4">
+											
+											<div class="col-md-6">               
+												{!!Form::label('web', 'Website', array('class' => 'form-spacing-top'))!!}
+												{!!Form::text('web', null, array('class' => 'form-control', 'maxlength' => '255'))!!}
+											</div>
 
-						            <div class="row pt-5">
-						            	<div class="col-md-6">
-							            	{!! Form::label('subcategory_id', 'Subcategory:') !!}
-		                        			{!! Form::select('subcategory_id', ['' => 'Choose a Subcategory'] + $all_subcategories, null, array('class' => 'form-control')) !!}
-							            </div>
-		        
-							            <div class="col-md-6">               
-							                {!!Form::label('web', 'Website', array('class' => 'form-spacing-top'))!!}
-							                {!!Form::text('web', null, array('class' => 'form-control', 'maxlength' => '255'))!!}
-							            </div>
-						            </div>
+											<div class="col-md-6"> 
+												{!!Form::label('youtube', 'Your video', array('class' => 'form-spacing-top'))!!}
+												{!!Form::text('youtube', null, array('class' => 'form-control', 'maxlength' => '255'))!!}      
+											</div>
+										</div>
 
-						            <div class="row pt-5">
-						            	<div class="col-md-12"> 
-							                {!!Form::label('excerpt', 'Chanel excerpt', array('class' => 'form-spacing-top'))!!}
-							                {!!Form::text('excerpt', null, array('class' => 'form-control', 'maxlength' => '255'))!!}      
-							                
-							            </div>
-						            </div>
+										<div class="row pt-4">
+											<div class="col-md-6">
+												{!!Form::label('twitter', 'Twitter', array('class' => 'form-spacing-top'))!!}
+												{!!Form::text('twitter', null, array('class' => 'form-control', 'maxlength' => '255'))!!}
+											</div>
+					
+											<div class="col-md-6">               
+												{!!Form::label('facebook', 'Facebook', array('class' => 'form-spacing-top'))!!}
+												{!!Form::text('facebook', null, array('class' => 'form-control', 'maxlength' => '255'))!!}
+											</div>
+										</div>
 
-						            <div class="row pt-5">
-						            	<div class="col-md-6">
-											{!!Form::label('twitter', 'Twitter', array('class' => 'form-spacing-top'))!!}
-							                {!!Form::text('twitter', null, array('class' => 'form-control', 'maxlength' => '255'))!!}
-							            </div>
-		        
-							            <div class="col-md-6">               
-							                {!!Form::label('facebook', 'Facebook', array('class' => 'form-spacing-top'))!!}
-							                {!!Form::text('facebook', null, array('class' => 'form-control', 'maxlength' => '255'))!!}
-							            </div>
-						            </div>
+										<div class="row pt-4">
+											<div class="col-md-6">
+												{!!Form::label('linkedin', 'Linkedin', array('class' => 'form-spacing-top'))!!}
+												{!!Form::text('linkedin', null, array('class' => 'form-control', 'maxlength' => '255'))!!}
+											</div>
+					
+											<div class="col-md-6">               
+												{!!Form::label('googleplus', 'Googleplus', array('class' => 'form-spacing-top'))!!}
+												{!!Form::text('googleplus', null, array('class' => 'form-control', 'maxlength' => '255'))!!}
+											</div>
+										</div>
 
-						            <div class="row pt-5">
-						            	<div class="col-md-6">
-							                {!!Form::label('linkedin', 'Linkedin', array('class' => 'form-spacing-top'))!!}
-							                {!!Form::text('linkedin', null, array('class' => 'form-control', 'maxlength' => '255'))!!}
-							            </div>
-		        
-							            <div class="col-md-6">               
-							                {!!Form::label('googleplus', 'Googleplus', array('class' => 'form-spacing-top'))!!}
-							                {!!Form::text('googleplus', null, array('class' => 'form-control', 'maxlength' => '255'))!!}
-							            </div>
-						            </div>
+										<div class="row pt-4"> 
+											<div class="col-md-12">      
+												{!!Form::label('about', 'Profile description:', array('class' => 'form-spacing-top'))!!}
+												{!!Form::textarea('about_chanel', null, array('id' => 'summernote','class' => 'form-control', 'rows' => 9))!!}                       
+											</div>
+										</div>
 
-						            <div class="row pt-5"> 
-							            <div class="col-md-12">      
-							                {!!Form::label('about_chanel', 'Chanel description:', array('class' => 'form-spacing-top'))!!}
-							                {!!Form::textarea('about_chanel', null, array('id' => 'summernote','class' => 'form-control', 'rows' => 9))!!}                       
-							            </div>
-						            </div>
-
-						            <div class="pt-5">    
-						                {!!Form::submit('Edit Chanel', array('class' => 'btn btn-success btn-block')) !!}
-						                {!!Form::close() !!}       
-						            </div>
-					            </div>
-				            </div>  
-				            
-						    </div>
-						</div>
+										<div class="pt-4">    
+											{!!Form::submit('Add profile', array('class' => 'btn btn-success btn-block')) !!}
+											{!!Form::close() !!}       
+										</div>
+									</div>
+								</div>  		
+							</div>
+				    	</div>
 					</div>
 				</div>
 			</div>
@@ -133,7 +124,4 @@
 	</div>
 </section>
 
-	
 @endsection
-
-

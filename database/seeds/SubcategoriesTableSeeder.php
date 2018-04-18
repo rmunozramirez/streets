@@ -25,7 +25,7 @@ class SubcategoriesTableSeeder extends Seeder
         App\Subcategory::create ([
         'category_id' 		=>	2,
         'status_id'			=>	1,
-        'title'  			=>	'Pupular dance',
+        'title'  			=>	'Popular dance',
         'slug'  			=>	'popular-dance',
         'subtitle' 			=>	'And of course here I do what I want',
         'image'				=>	'flamenco.jpg',
