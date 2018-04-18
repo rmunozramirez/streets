@@ -3,7 +3,7 @@
 
     @include('dashboard.partials.header')
 
-<body class="pace-done">
+<body class="">
 
     <div id="wrapper">
 

@@ -2897,11 +2897,16 @@ a.forum-item-title:hover {
 .tabs-container .nav-tabs > li.active > a:focus {
   border: 1px solid #e7eaec;
   border-bottom-color: transparent;
-  background-color: #fff;
+  background-color: #707070;
+  color: #fff;
 }
 .tabs-container .nav-tabs > li {
   float: left;
   margin-bottom: -1px;
+}
+.tabs-container .user-tabs > li {
+  width: 33.3%;
+
 }
 .tabs-container .tab-pane .panel-body {
   border-top: none;
@@ -2962,9 +2967,9 @@ a.forum-item-title:hover {
   margin-bottom: 0;
 }
 .tabs-container .tabs-below > .nav-tabs > li > a {
-  -webkit-border-radius: 0 0 4px 4px;
-  -moz-border-radius: 0 0 4px 4px;
-  border-radius: 0 0 4px 4px;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
 }
 .tabs-container .tabs-below > .nav-tabs > li > a:hover,
 .tabs-container .tabs-below > .nav-tabs > li > a:focus {
@@ -2987,9 +2992,9 @@ a.forum-item-title:hover {
 }
 .tabs-container .tabs-left > .nav-tabs > li > a {
   margin-right: -1px;
-  -webkit-border-radius: 4px 0 0 4px;
-  -moz-border-radius: 4px 0 0 4px;
-  border-radius: 4px 0 0 4px;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
 }
 .tabs-container .tabs-left > .nav-tabs .active > a,
 .tabs-container .tabs-left > .nav-tabs .active > a:hover,
@@ -4300,10 +4305,7 @@ code {
   background-color: #ffffff;
   color: inherit;
   padding: 15px 20px 20px 20px;
-  border-color: #e7eaec;
-  border-image: none;
-  border-style: solid solid none;
-  border-width: 1px 0;
+  border: none;
 }
 .ibox-footer {
   color: inherit;

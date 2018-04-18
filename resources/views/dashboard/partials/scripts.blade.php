@@ -4,6 +4,10 @@
 <script src="{{ asset('js/admin/jquery.slimscroll.min.js') }}"></script>
 <script src="{{ asset('js/admin/pace.min.js') }}"></script>
 <script src="{{ asset('js/admin/inspinia.js') }}"></script>
+<script src="{{ asset('js/admin/jquery.steps.min.js') }}"></script>
+<script src="{{ asset('js/admin/jquery.select2.min.js') }}"></script>
+<script src="{{ asset('js/admin/jquery.summernote.js') }}"></script>
+<script src="{{ asset('js/admin/jquery.toastr.min.js') }}"></script>
 
     <script>
         //toastr
@@ -60,3 +64,37 @@
             height: 200
         });
     </script>
+
+<script>
+    $(document).ready(function() {
+        var $validator = $("#commentForm").validate({
+          rules: {
+            emailfield: {
+              required: true,
+              email: true,
+              minlength: 3
+            },
+            namefield: {
+              required: true,
+              minlength: 3
+            },
+            urlfield: {
+              required: true,
+              minlength: 3,
+              url: true
+            }
+          }
+        });
+     
+          $('#rootwizard').bootstrapWizard({
+            'tabClass': 'nav nav-pills',
+            'onNext': function(tab, navigation, index) {
+              var $valid = $("#commentForm").valid();
+              if(!$valid) {
+                $validator.focusInvalid();
+                return false;
+              }
+            }
+          });
+    });
+</script>
