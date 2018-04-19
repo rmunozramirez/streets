@@ -23,6 +23,9 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{route('status.index')}}"><i class="fa fa-users"></i>  <span class="nav-label">Statuses</span>  </a>
+                </li>
+                <li>
                     <a href="{{route('profiles.index')}}"><i class="fa fa-users"></i>  <span class="nav-label">Profiles</span>  </a>
                 </li>
                 <li>

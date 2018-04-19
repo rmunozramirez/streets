@@ -24,7 +24,14 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function() {
 //admin Dashboard
 	Route::get('/', 'DashboardController@dashboard')->name('index');
 
+//admin 
+//admin Statuses
+
+	Route::resource('status', 'DashboardStatusController');
+
 //admin Profiles
+	Route::get('profiles/{slug}/allow', 'DashboardProfileController@allow')->name('profiles.allow');
+	Route::get('profiles/{slug}/bann', 'DashboardProfileController@bann')->name('profiles.bann');
 	Route::get('profiles/trashed', 'DashboardProfileController@trashed')->name('profiles.trashed');
 	Route::get('profiles/{slug}/restore', 'DashboardProfileController@restore')->name('profiles.restore');
 	Route::get('profiles/{slug}/kill', 'DashboardProfileController@kill')->name('profiles.kill');

@@ -2903,9 +2903,9 @@ a.forum-item-title:hover {
 .tabs-container .nav-tabs > li {
   float: left;
   margin-bottom: -1px;
+   width: 25%; 
 }
-.tabs-container .user-tabs > li {
-  width: 33.3%;
+.tabs-container .user-tabs > li.active {
 
 }
 .tabs-container .tab-pane .panel-body {
@@ -2914,8 +2914,9 @@ a.forum-item-title:hover {
 .tabs-container .nav-tabs > li.active > a,
 .tabs-container .nav-tabs > li.active > a:hover,
 .tabs-container .nav-tabs > li.active > a:focus {
-  border: 1px solid #e7eaec;
+  border: 1px solid #2f4050;
   border-bottom-color: transparent;
+  background-color: #2f4050;
 }
 .tabs-container .nav-tabs {
   border-bottom: 1px solid #e7eaec;

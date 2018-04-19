@@ -22,7 +22,8 @@
                     <div class="tabs-container">
                         <ul class="nav nav-tabs user-tabs">
 	                        <li class="active"><a data-toggle="tab" href="#tab-3-active"> <i class="fa fa-users"></i>Active Users</a></li>
-	                        <li class=""><a data-toggle="tab" href="#tab-4-banned"><i class="fa fa-desktop"></i>Banned</a></li>
+	                        <li class=""><a data-toggle="tab" href="#tab-4-banned"><i class="fa fa-ban"></i>Banned</a></li>
+	                        <li class=""><a data-toggle="tab" href="#tab-6-hold"><i class="fa fa-pause-circle"></i>On Hold Users</a></li>
 	                        <li class=""><a data-toggle="tab" href="#tab-5-trashed"><i class="fa fa-trash"></i>Trashed</a></li>
 	                    </ul>
                         <div class="tab-content">
@@ -36,11 +37,12 @@
 									            <tr>
 									                <th>User</th>
 									                <th>Role</th>
+									                <th>Status</th>
 									                <th>Date</th>
 									            </tr>
 									         </thead>
 									         <tbody>
-									         	@foreach ($profiles as $profile)
+									         	@foreach ($active_pr as $profile)
 									            <tr>
 									               <td><a href="{{route('profiles.show', $profile->slug)}}">
 										               	<figure>
@@ -50,10 +52,63 @@
 										               </a>
 										           </td>
 									               <td>{{$profile->role->name}}</td>
+									               <td><a href="{{route('status.index')}}">{{$profile->status->name}}</a></td>
 									               <td>{{$profile->created_at}}</td>
 									               <td>
-									               		<a type="button" class="col-md-6 btn btn-secondary" href="{{route('profiles.edit', $profile->slug)}}">Edit</a>
-										            	<div class="col-md-6">
+									               		<a type="button" class="col-md-4" href="{{route('profiles.edit', $profile->slug)}}">Edit</a>
+									               		<a type="button" class="col-md-4" href="{{route('profiles.bann', $profile->slug)}}">Ban</a>
+										            	<div class="col-md-4">
+											            	{!! Form::open(['route' => ['profiles.destroy', $profile->slug], 'method' => 'DELETE']) !!}
+
+															{!! Form::submit('Delete', ['class' => 'btn btn-block btn-danger']) !!}
+
+															{!! Form::close() !!}
+
+									               </td>
+									            </tr>
+									            @endforeach
+									         </tbody>
+									      	</table>
+									      	<div class="text-center">
+									        	
+									    	</div>
+										@else
+											<div class="col-md-12"><h3>There are not active users!</h3></div>
+										@endif
+									</div>	
+								</div>
+                            </div>
+                            <div id="tab-6-hold" class="tab-pane">
+                            	<div class="row">
+                                	<div class="col-md-12 pt-4">
+                                		<div class="col-md-12"><h3>On Hold Users</h3></div>
+										@if(count($on_hold_pr) > 0)
+											<table class="table table-striped table-hover">
+									         <thead>
+									            <tr>
+									                <th>User</th>
+									                <th>Role</th>
+									                <th>Status</th>
+									                <th>Date</th>
+									            </tr>
+									         </thead>
+									         <tbody>
+									         	@foreach ($on_hold_pr as $profile)
+									            <tr>
+									               <td><a href="{{route('profiles.show', $profile->slug)}}">
+										               	<figure>
+											            	<img class="img-circle" height="50" src="{{URL::to('/images/' . $profile->image)}}" alt="{{ $profile->title }}" name="{{ $profile->title }}"><span class="pl-5"> {{$profile->user->name}}</span>
+											            </figure>
+										               	
+										               </a>
+										           </td>
+									               <td>{{$profile->role->name}}</td>
+									               <td>{{$profile->status->name}}</td>
+									               <td>{{$profile->created_at}}</td>
+									               <td>
+									               		<a type="button" class="col-md-4" href="{{route('profiles.allow', $profile->slug)}}">Activate</a>
+									               		<a type="button" class="col-md-4" href="{{route('profiles.edit', $profile->slug)}}">Edit</a>
+										            	<div class="col-md-4">
 											            	{!! Form::open(['route' => ['profiles.destroy', $profile->slug], 'method' => 'DELETE']) !!}
 
 															{!! Form::submit('Delete', ['class' => 'btn btn-block btn-danger']) !!}
@@ -66,10 +121,10 @@
 									         </tbody>
 									      	</table>
 									      	<div class="text-center">
-									        	{{ $active_pr->links() }}
-									    	</div>
+										       
+										    </div>
 										@else
-											<div class="col-md-12"><h3>There are not active users!</h3></div>
+										<div class="col-md-12"><h3>There are not On Hold users!</h3></div>
 										@endif
 									</div>	
 								</div>
@@ -84,6 +139,7 @@
 									            <tr>
 									                <th>User</th>
 									                <th>Role</th>
+									                <th>Status</th>
 									                <th>Date</th>
 									            </tr>
 									         </thead>
@@ -98,10 +154,12 @@
 										               </a>
 										           </td>
 									               <td>{{$profile->role->name}}</td>
+									               <td>{{$profile->status->name}}</td>
 									               <td>{{$profile->created_at}}</td>
 									               <td>
-									               		<a type="button" class="col-md-6 btn btn-secondary" href="{{route('profiles.edit', $profile->slug)}}">Edit</a>
-										            	<div class="col-md-6">
+									               		<a type="button" class="col-md-4" href="{{route('profiles.allow', $profile->slug)}}">Allow</a>
+									               		<a type="button" class="col-md-4" href="{{route('profiles.edit', $profile->slug)}}">Edit</a>
+										            	<div class="col-md-4">
 											            	{!! Form::open(['route' => ['profiles.destroy', $profile->slug], 'method' => 'DELETE']) !!}
 
 															{!! Form::submit('Delete', ['class' => 'btn btn-block btn-danger']) !!}
@@ -114,7 +172,7 @@
 									         </tbody>
 									      	</table>
 									      	<div class="text-center">
-										        {{ $bann_pr->links() }}
+										       
 										    </div>
 										@else
 										<div class="col-md-12"><h3>There are not banned users!</h3></div>
@@ -126,17 +184,18 @@
                                 <div class="row">
                                 	<div class="col-md-12 pt-4">
                                 		<div class="col-md-12"><h3>Trashed users</h3></div>
-										@if(count($trash_pr) > 0)
+										@if(count($trashed_pr) > 0)
 											<table class="table table-striped table-hover">
 									         <thead>
 									            <tr>
 									                <th>User</th>
 									                <th>Role</th>
+									                <th>Status</th>
 									                <th>Date</th>
 									            </tr>
 									         </thead>
 									         <tbody>
-									         	@foreach ($trash_pr as $profile)
+									         	@foreach ($trashed_pr as $profile)
 									            <tr>
 									               <td><a href="{{route('profiles.show', $profile->slug)}}">
 										               	<figure>
@@ -146,7 +205,9 @@
 										               </a>
 										           </td>
 									               <td>{{$profile->role->name}}</td>
+									               <td>{{$profile->status->name}}</td>
 									               <td>{{$profile->created_at}}</td>
+									               <td><a href="{{route('profiles.restore', $profile->slug)}}">Restore</a></td>
 									               <td>
 									               		<a type="button" class="col-md-6 btn btn-secondary" href="{{route('profiles.edit', $profile->slug)}}">Edit</a>
 										            	<div class="col-md-6">
@@ -162,7 +223,7 @@
 									         </tbody>
 									      	</table>
 									      	<div class="text-center">
-										        {{ $trash_pr->links() }}
+										   
 										    </div>
 										@else
 											<div class="col-md-12"><h3>No trashed users!</h3></div>

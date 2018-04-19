@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StatusRequest;
 use App\Profile;
 use App\Discussion;
 use App\Status;
 use App\Role;
 use Session;
-
-class DashboardDiscussionsController extends Controller
+class DashboardStatusController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,14 +19,15 @@ class DashboardDiscussionsController extends Controller
     public function index()
     {
 
-        $discussions = Discussion::orderBy('created_at', 'asc')->paginate(4);
-        $all_disc = Discussion::all();
-        $active_disc = Discussion::where('status_id', 1)->paginate(4);
-        $bann_disc = Discussion::where('status_id', 2)->paginate(4);
-        $trash_disc = Discussion::where('status_id', 3)->paginate(4);
-        $page_name = 'Discussion';
+        $all_st = Status::all();
+        $active_st = Status::where('id', 1)->get();
+        $inactive_st = Status::where('id', 2)->get();
+        $on_hold_st = Status::where('id', 3)->get();
+        $bann_st = Status::where('id', 4)->get();
+        $feat_st = Status::where('id', 5)->get();
+        $page_name = 'Status';
 
-       return view('dashboard.discussions.index', compact('discussions', 'page_name', 'all_disc', 'active_disc', 'bann_disc', 'trash_disc'));
+       return view('dashboard.status.index', compact('all_st', 'active_st', 'inactive_st', 'on_hold_st', 'bann_st', 'feat_st', 'feat_st', 'page_name'));
     }
 
     /**
@@ -36,12 +37,7 @@ class DashboardDiscussionsController extends Controller
      */
     public function create()
     {
-        $all_roles = Role::pluck('name', 'id')->all();
-        $all_st = Status::pluck('name', 'id')->all();
-        $all_disc = Discussion::all();
-        $page_name =  'Create a new Discussion';
-
-        return view('dashboard.discussions.create', compact('all_disc', 'page_name', 'all_roles', 'all_st'));
+        //
     }
 
     /**
@@ -61,12 +57,9 @@ class DashboardDiscussionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show($id)
     {
-        $discussion = Discussion::where('slug', $slug)->first();
-        $page_name = $discussion->title;
-
-        return view('dashboard.discussions.show', compact('discussion', 'page_name'));
+        //
     }
 
     /**

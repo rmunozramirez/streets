@@ -29,17 +29,16 @@
 				    @endif
 						<div class="tab-pane" id="tab-profile">
 							<div class="m-t-md">
-								<h2>Profile information</h2>
+								<h2 class="pb-5">Profile information</h2>
 								 {!! Form::model($profile, ['method'=>'PATCH', 'action'=> ['DashboardProfileController@update', $profile->slug ],'files'=>true]) !!}   
 								<div class="row">        
 									<div class="col-md-4"> 
-										<i class="fa fa-image fa-5x"></i>
+										<img class="img-responsive"  src="{{URL::to('/images/' . $profile->image ) }}" alt="{{$profile->title}}" >
 										<div class=" pt-5">
 											{!!Form::label('image', 'Upload a Featured Image') !!}
 											{!!Form::file('image', null, array('class' => 'form-control', 'required' => ''))!!}
 										</div>
 									</div>
-				  
 									<div class="col-md-8"> 
 										<div class="row">
 											<div class="col-md-6">       
@@ -55,13 +54,13 @@
 
 										<div class="row pt-4">   
 											<div class="col-md-6">               
-												{!! Form::label('id', 'Role:') !!}
-												{!! Form::select('id', ['' => 'Choose a Role'] + $all_roles, null, array('class' => 'form-control')) !!}
+												{!! Form::label('role_id', 'Role:') !!}
+												{!! Form::select('role_id', ['' => 'Choose a Role'] + $all_roles, null, array('class' => 'form-control')) !!}
 											</div>
 
 											<div class="col-md-6"> 
-												{!! Form::label('id', 'Status:') !!}
-												{!! Form::select('id', ['' => 'Choose a Status'] + $all_st, null, array('class' => 'form-control')) !!}     
+												{!! Form::label('status_id', 'Status:') !!}
+												{!! Form::select('status_id',  ['' => 'Choose Status', '1' => 'Active', '3' => 'On Hold', '4' => 'Banned'], null, array('class' => 'form-control')) !!} 
 											</div>
 										</div>										
 
@@ -105,12 +104,12 @@
 										<div class="row pt-4"> 
 											<div class="col-md-12">      
 												{!!Form::label('about', 'Profile description:', array('class' => 'form-spacing-top'))!!}
-												{!!Form::textarea('about_chanel', null, array('id' => 'summernote','class' => 'form-control', 'rows' => 9))!!}                       
+												{!!Form::textarea('about', null, array('id' => 'summernote','class' => 'form-control', 'rows' => 9))!!}                       
 											</div>
 										</div>
 
 										<div class="pt-4">    
-											{!!Form::submit('Add profile', array('class' => 'btn btn-success btn-block')) !!}
+											{!!Form::submit('Edit profile', array('class' => 'btn btn-success btn-block')) !!}
 											{!!Form::close() !!}       
 										</div>
 									</div>
