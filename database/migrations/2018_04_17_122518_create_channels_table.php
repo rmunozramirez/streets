@@ -17,7 +17,6 @@ class CreateChannelsTable extends Migration
             $table->increments('id');
             $table->integer('subcategory_id')->index()->unsigned();
             $table->integer('profile_id')->index()->unsigned();
-            $table->integer('status_id')->index()->unsigned();
             $table->string('title')->unique();  
             $table->string('slug')->unique();  
             $table->string('subtitle')->nullable();  

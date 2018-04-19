@@ -14,7 +14,6 @@ class SubcategoriesTableSeeder extends Seeder
 		
         App\Subcategory::create ([
         'category_id' 	=>	1,
-        'status_id'			=>	1,
         'title'  			=>	'The world of PHP',
         'slug'  			=>	'the-world-of-php',
         'subtitle' 			=>	'Hier is all about programming',
@@ -24,7 +23,6 @@ class SubcategoriesTableSeeder extends Seeder
         		
         App\Subcategory::create ([
         'category_id' 		=>	2,
-        'status_id'			=>	1,
         'title'  			=>	'Popular dance',
         'slug'  			=>	'popular-dance',
         'subtitle' 			=>	'And of course here I do what I want',
@@ -34,7 +32,6 @@ class SubcategoriesTableSeeder extends Seeder
         		
         App\Subcategory::create ([
         'category_id' 		=>	2,
-        'status_id'			=>	1,
         'title'  			=>	'Ballet',
         'slug'  			=>	'Ballet',
         'subtitle' 			=>	'And of course here I do what I want',
@@ -44,7 +41,6 @@ class SubcategoriesTableSeeder extends Seeder
         		
         App\Subcategory::create ([
         'category_id' 		=>	3,
-        'status_id'			=>	1,
         'title'  			=>	'Popular music',
         'slug'  			=>	'popular-music',
         'subtitle' 			=>	'Beat, Hip, Hop',
@@ -54,14 +50,11 @@ class SubcategoriesTableSeeder extends Seeder
         		
         App\Subcategory::create ([
         'category_id' 		=>	3,
-        'status_id'			=>	1,
         'title'  			=>	'Classical Music',
         'slug'  			=>	'classical-music',
         'subtitle' 			=>	'Opera and Co.',
         'image'				=>	'opera singer.jpg',
         ]);
-
-
 
     }
 }

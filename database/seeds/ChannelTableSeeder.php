@@ -15,7 +15,6 @@ class ChannelTableSeeder extends Seeder
         App\Channel::create ([
         'subcategory_id' 	=>	1,
         'profile_id'		=>	1,
-        'status_id'			=>	1,
         'title'  			=>	'This is my place',
         'slug'  			=>	'this-is-my-place',
         'subtitle' 			=>	'And of course here I do what I want',
@@ -27,7 +26,6 @@ class ChannelTableSeeder extends Seeder
         App\Channel::create ([
         'subcategory_id' 	=>	2,
         'profile_id'		=>	2,
-        'status_id'			=>	1,
         'title'  			=>	'The Super Kike in action',
         'slug'  			=>	'the-super-kike-in-action',
         'subtitle' 			=>	'Hier is all about swimmmingt',
@@ -39,7 +37,6 @@ class ChannelTableSeeder extends Seeder
         App\Channel::create ([
         'subcategory_id' 	=>	2,
         'profile_id'		=>	3,
-        'status_id'			=>	1,
         'title'  			=>	'My paintings World',
         'slug'  			=>	'my-paintings-world',
         'subtitle' 			=>	'This is the work from my entire life',
@@ -51,7 +48,6 @@ class ChannelTableSeeder extends Seeder
         App\Channel::create ([
         'subcategory_id' 	=>	3,
         'profile_id'		=>	4,
-        'status_id'			=>	1,
         'title'  			=>	'This is another Channel from Pamela',
         'slug'  			=>	'this-is-another-channel-from-pamela',
         'subtitle' 			=>	'Pamela is a very good singer',
@@ -63,7 +59,6 @@ class ChannelTableSeeder extends Seeder
         App\Channel::create ([
         'subcategory_id' 	=>	4,
         'profile_id'		=>	5,
-        'status_id'			=>	1,
         'title'  			=>	'The Good Hamberger',
         'slug'  			=>	'the-good-hamberger',
         'subtitle' 			=>	'I like a lot the birds meet and the Hamberger',
@@ -75,7 +70,6 @@ class ChannelTableSeeder extends Seeder
         App\Channel::create ([
         'subcategory_id' 	=>	4,
         'profile_id'		=>	6,
-        'status_id'			=>	1,
         'title'  			=>	'I have not idea',
         'slug'  			=>	'i-have-not-idea',
         'subtitle' 			=>	'And of course here I do what I want',
@@ -87,7 +81,6 @@ class ChannelTableSeeder extends Seeder
         App\Channel::create ([
         'subcategory_id' 	=>	4,
         'profile_id'		=>	7,
-        'status_id'			=>	1,
         'title'  			=>	'This is not ba channel',
         'slug'  			=>	'this-is-not-a-channel',
         'subtitle' 			=>	'And of course here I do what I want',

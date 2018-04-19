@@ -21,11 +21,15 @@ class Subcategory extends Model
 	use SoftDeletes;
     protected $dates = ['deleted_at'];
 
-    public function status()
+    // public function status()
+    // {
+    //     return $this->belongsTo('App\Status');
+    // }
+    
+    public function statuses()
     {
-        return $this->belongsTo('App\Status');
-    } 
-
+        return $this->morphMany('App\Status', 'statusable');
+    }
 
     public function category()
     {

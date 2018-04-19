@@ -19,17 +19,14 @@ class DashboardProfileController extends Controller
      */
     public function index()
     {
+
         $all_roles = Role::pluck('name', 'id')->all();
-        $all_statuses = Status::pluck('name', 'id')->all();
         $profiles = Profile::orderBy('created_at', 'asc')->paginate(4);
-        $all_profiles = Profile::all();
-        $active_pr = Profile::where('status_id', 1)->get();
-        $bann_pr = Profile::where('status_id', 4)->get();
-        $on_hold_pr = Profile::where('status_id', 3)->get();
+        $all_profiles = Profile::get();
         $trashed_pr = Profile::onlyTrashed()->get();
         $page_name = 'Profile';
 
-       return view('dashboard.profiles.index', compact('profiles', 'page_name', 'all_profiles', 'all_statuses', 'all_roles', 'active_pr', 'bann_pr', 'trashed_pr', 'on_hold_pr'));
+       return view('dashboard.profiles.index', compact('all_roles', 'profiles', 'page_name', 'all_profiles', 'trashed_pr', 'status'));
     }
 
     /**

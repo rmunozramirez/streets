@@ -24,8 +24,9 @@
 							<table class="table table-striped table-hover">
 					         <thead>
 					            <tr>
-				                	<th>Name</th>
-				                	<th>Quantity</th>
+				                	<th>Title</th>
+				                	<th>Element</th>
+				                	<th>Status</th>
 
 					            </tr>
 					         </thead>
@@ -33,8 +34,11 @@
 					            <tr>
 					            	@foreach ($all_st as $status)
 					                	<tr>
-					                		<td>{{$status->name}}</td>
-					                		<td>nummer</td>
+					                		<td>
+					                			{{$status->statusable->title}}
+					                		</td>					                		
+					                		<td>{{$status->statusable_type}}</td>					                		
+					                		<td><a href="{{route($status->statusable_type . '.index')}}">{{$status->status}}</a></td>
 					                	</tr>
 				               	 	@endforeach
 

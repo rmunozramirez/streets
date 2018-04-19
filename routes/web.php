@@ -26,8 +26,10 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function() {
 
 //admin 
 //admin Statuses
-
 	Route::resource('status', 'DashboardStatusController');
+
+//admin Roles
+	Route::resource('roles', 'DashboardRolesController');
 
 //admin Profiles
 	Route::get('profiles/{slug}/allow', 'DashboardProfileController@allow')->name('profiles.allow');

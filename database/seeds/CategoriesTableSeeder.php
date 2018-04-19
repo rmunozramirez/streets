@@ -12,7 +12,6 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         App\Category::create ([
-        'status_id'			=>	1,
         'title'  			=>	'Architecture',
         'slug'  			=>	'architecture',
         'subtitle' 			=>	'From architect to software developer',
@@ -22,7 +21,6 @@ class CategoriesTableSeeder extends Seeder
 
 
         App\Category::create ([
-        'status_id'			=>	2,
         'title'  			=>	'Dance',
         'slug'  			=>	'dance',
         'subtitle' 			=>	'The world in movement',
@@ -32,7 +30,6 @@ class CategoriesTableSeeder extends Seeder
 
 
         App\Category::create ([
-        'status_id'			=>	3,
         'title'  			=>	'Music',
         'slug'  			=>	'music',
         'subtitle' 			=>	'The sound of the bests',

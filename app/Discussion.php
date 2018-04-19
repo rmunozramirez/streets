@@ -26,9 +26,14 @@ class Discussion extends Model
         return $this->belongsTo('App\Profile');
     }
 
-    public function status()
+    // public function status()
+    // {
+    //     return $this->belongsTo('App\Status');
+    // }
+
+    public function statuses()
     {
-        return $this->belongsTo('App\Status');
-    }
+        return $this->morphMany('App\Status', 'statusable');
+    }   
 
 }

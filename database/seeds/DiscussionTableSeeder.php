@@ -15,7 +15,6 @@ class DiscussionTableSeeder extends Seeder
         App\Discussion::create ([
 
 	        'profile_id'		=>	1,
-	        'status_id'		=>	1,
 	        'title'  		=>	'First discussion',
 	        'slug'  		=>	'first-discussion',
 	        'image'			=>	'ballet-revolution.jpg',
@@ -27,7 +26,6 @@ class DiscussionTableSeeder extends Seeder
         App\Discussion::create ([
 
 	        'profile_id'	=>	3,
-	        'status_id'		=>	1,
 	        'title'  		=>	'Berlin ist in Deutschland',
 	        'slug'  		=>	'berlin-ist-in-deutschland',
 	        'image'			=>	'berlin.jpg',
@@ -39,7 +37,6 @@ class DiscussionTableSeeder extends Seeder
         App\Discussion::create ([
 
 	        'profile_id'	=>	3,
-	        'status_id'		=>	1,
 	        'title'  		=>	'Samuel L Jackson',
 	        'slug'  		=>	'samuel-l-jackson',
 	        'image'			=>	'auto-clasico.jpg',
@@ -50,7 +47,6 @@ class DiscussionTableSeeder extends Seeder
         App\Discussion::create ([
 
 	        'profile_id'	=>	4,
-	        'status_id'		=>	1,
 	        'title'  		=>	'The antidüring',
 	        'slug'  		=>	'the-antiduering',
 	        'image'			=>	'bad-wimpfen.jpg',

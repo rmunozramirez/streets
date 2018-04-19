@@ -38,11 +38,15 @@ class Profile extends Model
         return $this->belongsTo('App\Role');
     }
 
-    public function status()
-    {
-        return $this->belongsTo('App\Status');
-    }
+    // public function status()
+    // {
+    //     return $this->belongsTo('App\Status');
+    // }
 
+    public function statuses()
+    {
+        return $this->morphMany('App\Status', 'statusable');
+    }
     
     public function channel()
     {

@@ -3,13 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\StatusRequest;
-use App\Profile;
-use App\Discussion;
-use App\Status;
-use App\Role;
-use Session;
-class DashboardStatusController extends Controller
+
+class DashboardRolesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +13,7 @@ class DashboardStatusController extends Controller
      */
     public function index()
     {
-
-        $all_st = Status::all();
-        $page_name = 'Status';
-
-       return view('dashboard.status.index', compact('all_st', 'page_name'));
+        //
     }
 
     /**
@@ -52,12 +43,9 @@ class DashboardStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show($id)
     {
-        $statuses= Status::where('status', $slug);
-        $page_name = 'Status: ' . $slug;
-
-        return view('dashboard.status.show', compact('statuses', 'page_name'));
+        //
     }
 
     /**

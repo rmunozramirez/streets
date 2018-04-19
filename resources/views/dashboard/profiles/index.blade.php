@@ -21,50 +21,34 @@
 			    <div id="contenido"  class="card">
                     <div class="tabs-container">
                         <ul class="nav nav-tabs user-tabs">
-	                        <li class="active"><a data-toggle="tab" href="#tab-3-active"> <i class="fa fa-users"></i>Active Users</a></li>
-	                        <li class=""><a data-toggle="tab" href="#tab-4-banned"><i class="fa fa-ban"></i>Banned</a></li>
-	                        <li class=""><a data-toggle="tab" href="#tab-6-hold"><i class="fa fa-pause-circle"></i>On Hold Users</a></li>
-	                        <li class=""><a data-toggle="tab" href="#tab-5-trashed"><i class="fa fa-trash"></i>Trashed</a></li>
+	                        <li class="active"><a data-toggle="tab" href="#tab-1-active"> <i class="fa fa-users"></i>Active Users</a></li>
+	                        <li class=""><a data-toggle="tab" href="#tab-2-banned"><i class="fa fa-ban"></i>Banned</a></li>
+	                        <li class=""><a data-toggle="tab" href="#tab-3-hold"><i class="fa fa-pause-circle"></i>On Hold Users</a></li>
+	                        <li class=""><a data-toggle="tab" href="#tab-4-trashed"><i class="fa fa-trash"></i>Trashed</a></li>
 	                    </ul>
                         <div class="tab-content">
-                            <div id="tab-3-active" class="tab-pane active">
+                            <div id="tab-1-active" class="tab-pane active">
                                 <div class="row">
                                 	<div class="col-md-12 pt-4">
                                 		<div class="col-md-12"><h3>Active Users</h3></div>
-										@if(count($active_pr) > 0)
 											<table class="table table-striped table-hover">
 									         <thead>
 									            <tr>
 									                <th>User</th>
+									                <th>Profile</th>
 									                <th>Role</th>
 									                <th>Status</th>
 									                <th>Date</th>
 									            </tr>
 									         </thead>
 									         <tbody>
-									         	@foreach ($active_pr as $profile)
+									         	@foreach ($all_profiles as $profile)
 									            <tr>
-									               <td><a href="{{route('profiles.show', $profile->slug)}}">
-										               	<figure>
-											            	<img class="img-circle" height="50" src="{{URL::to('/images/' . $profile->image)}}" alt="{{ $profile->title }}" name="{{ $profile->title }}"><span class="pl-5"> {{$profile->user->name}}</span>
-											            </figure>
-										               	
-										               </a>
-										           </td>
-									               <td>{{$profile->role->name}}</td>
-									               <td><a href="{{route('status.index')}}">{{$profile->status->name}}</a></td>
+									               <td>{{$profile->user->name}}</td>
+									               <td><a href="{{route('profiles.show', $profile->slug)}}">{{$profile->title}}</a></td>
+									               <td><a href="{{route('roles.show', $profile->role->slug)}}">{{$profile->role->name}}</a></td>
+									               <td><a href="{{route('status.show', $profile->statuses[0]->status)}}">{{$profile->statuses[0]->status}}</a></td>
 									               <td>{{$profile->created_at}}</td>
-									               <td>
-									               		<a type="button" class="col-md-4" href="{{route('profiles.edit', $profile->slug)}}">Edit</a>
-									               		<a type="button" class="col-md-4" href="{{route('profiles.bann', $profile->slug)}}">Ban</a>
-										            	<div class="col-md-4">
-											            	{!! Form::open(['route' => ['profiles.destroy', $profile->slug], 'method' => 'DELETE']) !!}
-
-															{!! Form::submit('Delete', ['class' => 'btn btn-block btn-danger']) !!}
-
-															{!! Form::close() !!}
-
-									               </td>
 									            </tr>
 									            @endforeach
 									         </tbody>
@@ -72,115 +56,24 @@
 									      	<div class="text-center">
 									        	
 									    	</div>
-										@else
-											<div class="col-md-12"><h3>There are not active users!</h3></div>
-										@endif
 									</div>	
 								</div>
                             </div>
-                            <div id="tab-6-hold" class="tab-pane">
+                            <div id="tab-2-banned" class="tab-pane">
                             	<div class="row">
                                 	<div class="col-md-12 pt-4">
-                                		<div class="col-md-12"><h3>On Hold Users</h3></div>
-										@if(count($on_hold_pr) > 0)
-											<table class="table table-striped table-hover">
-									         <thead>
-									            <tr>
-									                <th>User</th>
-									                <th>Role</th>
-									                <th>Status</th>
-									                <th>Date</th>
-									            </tr>
-									         </thead>
-									         <tbody>
-									         	@foreach ($on_hold_pr as $profile)
-									            <tr>
-									               <td><a href="{{route('profiles.show', $profile->slug)}}">
-										               	<figure>
-											            	<img class="img-circle" height="50" src="{{URL::to('/images/' . $profile->image)}}" alt="{{ $profile->title }}" name="{{ $profile->title }}"><span class="pl-5"> {{$profile->user->name}}</span>
-											            </figure>
-										               	
-										               </a>
-										           </td>
-									               <td>{{$profile->role->name}}</td>
-									               <td>{{$profile->status->name}}</td>
-									               <td>{{$profile->created_at}}</td>
-									               <td>
-									               		<a type="button" class="col-md-4" href="{{route('profiles.allow', $profile->slug)}}">Activate</a>
-									               		<a type="button" class="col-md-4" href="{{route('profiles.edit', $profile->slug)}}">Edit</a>
-										            	<div class="col-md-4">
-											            	{!! Form::open(['route' => ['profiles.destroy', $profile->slug], 'method' => 'DELETE']) !!}
-
-															{!! Form::submit('Delete', ['class' => 'btn btn-block btn-danger']) !!}
-
-															{!! Form::close() !!}
-														</div>
-									               </td>
-									            </tr>
-									            @endforeach
-									         </tbody>
-									      	</table>
-									      	<div class="text-center">
-										       
-										    </div>
-										@else
-										<div class="col-md-12"><h3>There are not On Hold users!</h3></div>
-										@endif
+ 										banned
 									</div>	
 								</div>
                             </div>
-                            <div id="tab-4-banned" class="tab-pane">
+                            <div id="tab-3-hold" class="tab-pane">
                             	<div class="row">
                                 	<div class="col-md-12 pt-4">
-                                		<div class="col-md-12"><h3>Banned Users</h3></div>
-										@if(count($bann_pr) > 0)
-											<table class="table table-striped table-hover">
-									         <thead>
-									            <tr>
-									                <th>User</th>
-									                <th>Role</th>
-									                <th>Status</th>
-									                <th>Date</th>
-									            </tr>
-									         </thead>
-									         <tbody>
-									         	@foreach ($bann_pr as $profile)
-									            <tr>
-									               <td><a href="{{route('profiles.show', $profile->slug)}}">
-										               	<figure>
-											            	<img class="img-circle" height="50" src="{{URL::to('/images/' . $profile->image)}}" alt="{{ $profile->title }}" name="{{ $profile->title }}"><span class="pl-5"> {{$profile->user->name}}</span>
-											            </figure>
-										               	
-										               </a>
-										           </td>
-									               <td>{{$profile->role->name}}</td>
-									               <td>{{$profile->status->name}}</td>
-									               <td>{{$profile->created_at}}</td>
-									               <td>
-									               		<a type="button" class="col-md-4" href="{{route('profiles.allow', $profile->slug)}}">Allow</a>
-									               		<a type="button" class="col-md-4" href="{{route('profiles.edit', $profile->slug)}}">Edit</a>
-										            	<div class="col-md-4">
-											            	{!! Form::open(['route' => ['profiles.destroy', $profile->slug], 'method' => 'DELETE']) !!}
-
-															{!! Form::submit('Delete', ['class' => 'btn btn-block btn-danger']) !!}
-
-															{!! Form::close() !!}
-														</div>
-									               </td>
-									            </tr>
-									            @endforeach
-									         </tbody>
-									      	</table>
-									      	<div class="text-center">
-										       
-										    </div>
-										@else
-										<div class="col-md-12"><h3>There are not banned users!</h3></div>
-										@endif
+                                		Hold
 									</div>	
 								</div>
                             </div>
-                            <div id="tab-5-trashed" class="tab-pane">
+                            <div id="tab-4-trashed" class="tab-pane">
                                 <div class="row">
                                 	<div class="col-md-12 pt-4">
                                 		<div class="col-md-12"><h3>Trashed users</h3></div>
@@ -233,11 +126,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
-
 				</div>
 			</div>
 		</div>

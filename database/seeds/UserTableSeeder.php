@@ -21,8 +21,7 @@ class UserTableSeeder extends Seeder
 
         App\Profile::create ([
             'user_id'   =>  1,
-            'user_name'	=>  'Yo soy Severus',
-            'status_id'	=>  1,
+            'title'	=>  'Yo soy Severus',
             'role_id'   =>  1,
             'slug'		=> 'yo-soy-severus',
             'birthday' 	=>  '1966-05-19',
@@ -48,8 +47,7 @@ De ascendencia itálica (por su madre), y púnica-bereber (por su padre), Severo
 
         App\Profile::create ([
             'user_id'   =>  2,
-            'user_name'	=>  'Superkike',
-            'status_id'	=>  1,
+            'title'	=>  'Superkike',
             'role_id'   =>  2,
             'slug'		=> 'superkike',
             'birthday' 	=>  '2007-08-23',
@@ -72,8 +70,7 @@ De ascendencia itálica (por su madre), y púnica-bereber (por su padre), Severo
 
         App\Profile::create ([
             'user_id'   =>   3,
-            'user_name'	=>  'Amelies Paintings',
-            'status_id'	=>  1,
+            'title'	=>  'Amelies Paintings',
             'role_id'   =>  2,
             'slug'		=> 'amelies-painting',
             'birthday' 	=>  '2005-09-29',
@@ -97,8 +94,7 @@ De ascendencia itálica (por su madre), y púnica-bereber (por su padre), Severo
 
         App\Profile::create ([
             'user_id'   =>   4,
-            'user_name'	=>  'Pamelas Welt',
-            'status_id'	=>  1,
+            'title'	=>  'Pamelas Welt',
             'role_id'   =>  3,
             'slug'		=> 'pamelas-welt',
             'image'    	=>  'pamela.jpg',
@@ -122,8 +118,7 @@ De ascendencia itálica (por su madre), y púnica-bereber (por su padre), Severo
 
         App\Profile::create ([
             'user_id'   =>   5,
-            'user_name'	=>  'Los Aldeano',
-            'status_id'	=>  1,
+            'title'	=>  'Los Aldeano',
             'role_id'   =>  3,
             'slug'		=> 'los-aldeano',
             'image'    	=>  'aldeano.jpg',
@@ -147,8 +142,7 @@ De ascendencia itálica (por su madre), y púnica-bereber (por su padre), Severo
 
         App\Profile::create ([
             'user_id'   =>   6,
-            'user_name'	=>  'Die Ostalgie',
-            'status_id'	=>  1,
+            'title'	=>  'Die Ostalgie',
             'role_id'   =>  4,
             'slug'		=> 'die-ostalgie',
             'image'    	=>  'ostalgie.jpg',
@@ -171,8 +165,7 @@ De ascendencia itálica (por su madre), y púnica-bereber (por su padre), Severo
 
         App\Profile::create ([
         	'user_id'      => 	7,
-            'user_name'	=>  'Die Gesunde Way of Dying',
-            'status_id'	=>  1,
+            'title'	=>  'Die Gesunde Way of Dying',
             'role_id'   =>  4,
             'slug'		=> 'die-gesunde-way-of-dying',
             'image'    	=>  'dying.jpg',

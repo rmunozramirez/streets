@@ -42,7 +42,7 @@
 									        <dd class="pb-3">{{ $profile->role->name}}</dd>
 
 									        <dt>Status</dt>
-									        <dd class="pb-3">{!! $profile->status->name !!}</dd>
+									        <dd class="pb-3">{!! $profile->statuses[0]->status !!}</dd>
 
 									        <dt>Registered at:</dt>
 									        <dd class="pb-3">{{ $profile->created_at}}</dd>
@@ -145,7 +145,7 @@
 									        <dd class="pb-3">{{ $profile->channel->subcategory->title}}</dd>
 
 									        <dt>Status</dt>
-									        <dd class="pb-3">{!! $profile->channel->status->name !!}</dd>
+									        <dd class="pb-3">{!! $profile->channel->statuses[0]->status !!}</dd>
 
 									        <dt>Registered at:</dt>
 									        <dd class="pb-3">{{ $profile->channel->created_at}}</dd>
@@ -198,7 +198,7 @@
 											            </figure>	
 										           	</a>
 								               </td>
-								               <td>{{$discussion->status->name}}</td>
+								               <td>{{$discussion->statuses[0]->status}}</td>
 								               <td>{{count($discussion->replies)}}</td>
 								               <td>{{$discussion->likes}}</td>
 								               <td>{{$discussion->created_at}}</td>
