@@ -151,7 +151,7 @@
 									        <dd class="pb-3">{{ $profile->channel->created_at}}</dd>
 
 									        <dt>Likes</dt>
-									        <dd class="pb-3">{{ count($profile->channel->likes)}}</dd>
+									        <dd class="pb-3">{{ $profile->channel->likes}}</dd>
 									    </dl>
 							         </div>		            
 						        </div>
@@ -199,7 +199,7 @@
 										           	</a>
 								               </td>
 								               <td>{{$discussion->statuses[0]->status}}</td>
-								               <td>{{count($discussion->replies)}}</td>
+								               <td>{{$discussion->replies}}</td>
 								               <td>{{$discussion->likes}}</td>
 								               <td>{{$discussion->created_at}}</td>
 								               <td>

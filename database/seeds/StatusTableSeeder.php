@@ -11,7 +11,7 @@ class StatusTableSeeder extends Seeder
      */
     public function run()
     {
-//Categories
+//categories
         App\Status::create ([
             'statusable_id'     =>  1,
             'statusable_type'   =>  'categories',
@@ -61,7 +61,7 @@ class StatusTableSeeder extends Seeder
             'status'            =>  'inactive',
         ]); 
 
-//Channels
+//channelss
         App\Status::create ([
             'statusable_id'     =>  1,
             'statusable_type'   =>  'channels',
@@ -83,7 +83,7 @@ class StatusTableSeeder extends Seeder
         App\Status::create ([
             'statusable_id'     =>  4,
             'statusable_type'   =>  'channels',
-            'status'            =>  'on_hold',
+            'status'            =>  'inactive',
         ]); 
 
         App\Status::create ([
@@ -104,7 +104,7 @@ class StatusTableSeeder extends Seeder
             'status'            =>  'inactive',
         ]); 
 
-//profiless
+//profilesss
         App\Status::create ([
             'statusable_id'     =>  1,
             'statusable_type'   =>  'profiles',
@@ -138,7 +138,7 @@ class StatusTableSeeder extends Seeder
         App\Status::create ([
             'statusable_id'     =>  6,
             'statusable_type'   =>  'profiles',
-            'status'            =>  'on_hold',
+            'status'            =>  'inactive',
         ]); 
 
         App\Status::create ([
@@ -164,7 +164,7 @@ class StatusTableSeeder extends Seeder
         App\Status::create ([
             'statusable_id'     =>  3,
             'statusable_type'   =>  'discussions',
-            'status'            =>  'on_hols',
+            'status'            =>  'inactive',
         ]); 
 
         App\Status::create ([

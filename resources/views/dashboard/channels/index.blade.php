@@ -35,26 +35,37 @@
 									         <thead>
 									            <tr>
 									                <th>Channel</th>
+									                <th>Subcategory</th>
 									                <th>Profile</th>
-									                <th>Status</th>
-									                <th>Date</th>
+									                <th>Role</th>
+									                <th>Created at</th>
 									            </tr>
 									         </thead>
 									         <tbody>
 									         	@foreach ($active_ch as $channel)
-									            <tr>
-									               <td><a href="{{route('channels.show', $channel->slug)}}">
-										               	<figure>
-											            	<img class="img-circle" height="50" src="{{URL::to('/images/' . $channel->image)}}" alt="{{ $channel->title }}" name="{{ $channel->title }}"><span class="pl-5"> {{$channel->title}}</span>
-											            </figure>
-										               	
-										               </a>
-										           </td>
-									               <td><a href="{{route('profiles.show', $channel->profile->slug)}}">{{$channel->profile->user_name}}</a></td>
-									               <td><a href="{{route('status.create')}}">{{$channel->status->name}}</a></td>
-									               <td>{{$channel->created_at}}</td>
+							                	<tr>
+							                		<td>
+														<a href="{{route('channels.show', $channel->statusable->channel->slug)}}">
+											               	<figure>
+												            	<img height="50" width="50" src="{{URL::to('/images/' . $channel->statusable->channel->image)}}" alt="{{ $channel->statusable->channel->title }}" name="{{ $channel->statusable->channel->title }}">
+												            	<span class="pl-5"> {{$channel->statusable->channel->title}}</span>
+												            </figure>
+							                			</a>
+							                		</td>
+							                		<td><a href="{{route('roles.show', $channel->statusable->channel->subcategory->slug)}}">
+							                			{{$channel->statusable->channel->subcategory->title}}</a>
+							                		</td>					                		
+							                		<td>
+							                			<a href="{{route('profiles.show', $channel->statusable->channel->profile->slug)}}">
+								                			{{$channel->statusable->channel->profile->title}}
+								                		</a>
+							                		</td>
+							                		<td><a href="{{route('roles.show', $channel->statusable->role->slug)}}">
+							                			{{$channel->statusable->role->name}}</a>
+							                		</td>
+									              	<td>{{$channel->statusable->user->created_at}}</td>
 									               <td>
-									               		<a type="button" class="col-md-6 btn btn-secondary" href="{{route('channels.edit', $channel->slug)}}">Edit</a>
+									               		<a type="button" class="col-md-6 btn btn-secondary" href="{{route('channels.edit', $channel->statusable->slug)}}">Edit</a>
 										            	<div class="col-md-6">
 											            	{!! Form::open(['route' => ['channels.destroy', $channel->slug], 'method' => 'DELETE']) !!}
 
@@ -63,12 +74,12 @@
 															{!! Form::close() !!}
 														</div>
 									               </td>
-									            </tr>
+							                	</tr>
 									            @endforeach
 									         </tbody>
 									      	</table>
 									      	<div class="text-center">
-									        	{{ $active_ch->links() }}
+									     
 									    	</div>
 										@else
 											<div class="col-md-12"><h3>There are not active channels!</h3></div>
@@ -85,26 +96,37 @@
 									         <thead>
 									            <tr>
 									                <th>Channel</th>
+									                <th>Subcategory</th>
 									                <th>Profile</th>
-									                <th>Status</th>
-									                <th>Date</th>
+									                <th>Role</th>
+									                <th>Created at</th>
 									            </tr>
 									         </thead>
 									         <tbody>
 									         	@foreach ($bann_ch as $channel)
-									            <tr>
-									               <td><a href="{{route('channels.show', $channel->slug)}}">
-										               	<figure>
-											            	<img class="img-circle" height="50" src="{{URL::to('/images/' . $channel->image)}}" alt="{{ $channel->title }}" name="{{ $channel->title }}"><span class="pl-5"> {{$channel->title}}</span>
-											            </figure>
-										               	
-										               </a>
-										           </td>
-									               <td><a href="{{route('profiles.show', $channel->profile->slug)}}">{{$channel->profile->user_name}}</a></td>
-									               <td><a href="">{{$channel->status->name}}</a></td>
-									               <td>{{$channel->created_at}}</td>
+									            							                	<tr>
+							                		<td>
+														<a href="{{route('channels.show', $channel->statusable->channel->slug)}}">
+											               	<figure>
+												            	<img height="50" width="50" src="{{URL::to('/images/' . $channel->statusable->channel->image)}}" alt="{{ $channel->statusable->channel->title }}" name="{{ $channel->statusable->channel->title }}">
+												            	<span class="pl-5"> {{$channel->statusable->channel->title}}</span>
+												            </figure>
+							                			</a>
+							                		</td>
+							                		<td><a href="{{route('roles.show', $channel->statusable->channel->subcategory->slug)}}">
+							                			{{$channel->statusable->channel->subcategory->title}}</a>
+							                		</td>					                		
+							                		<td>
+							                			<a href="{{route('profiles.show', $channel->statusable->channel->profile->slug)}}">
+								                			{{$channel->statusable->channel->profile->title}}
+								                		</a>
+							                		</td>
+							                		<td><a href="{{route('roles.show', $channel->statusable->role->slug)}}">
+							                			{{$channel->statusable->role->name}}</a>
+							                		</td>
+									              	<td>{{$channel->statusable->user->created_at}}</td>
 									               <td>
-									               		<a type="button" class="col-md-6 btn btn-secondary" href="{{route('channels.edit', $channel->slug)}}">Edit</a>
+									               		<a type="button" class="col-md-6 btn btn-secondary" href="{{route('channels.edit', $channel->statusable->slug)}}">Edit</a>
 										            	<div class="col-md-6">
 											            	{!! Form::open(['route' => ['channels.destroy', $channel->slug], 'method' => 'DELETE']) !!}
 
@@ -113,12 +135,12 @@
 															{!! Form::close() !!}
 														</div>
 									               </td>
-									            </tr>
+							                	</tr>
 									            @endforeach
 									         </tbody>
 									      	</table>
 									      	<div class="text-center">
-										        {{ $bann_ch->links() }}
+										       
 										    </div>
 										@else
 										<div class="col-md-12"><h3>There are not banned users!</h3></div>

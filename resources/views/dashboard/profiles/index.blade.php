@@ -22,55 +22,118 @@
                     <div class="tabs-container">
                         <ul class="nav nav-tabs user-tabs">
 	                        <li class="active"><a data-toggle="tab" href="#tab-1-active"> <i class="fa fa-users"></i>Active Users</a></li>
-	                        <li class=""><a data-toggle="tab" href="#tab-2-banned"><i class="fa fa-ban"></i>Banned</a></li>
-	                        <li class=""><a data-toggle="tab" href="#tab-3-hold"><i class="fa fa-pause-circle"></i>On Hold Users</a></li>
+	                        <li class=""><a data-toggle="tab" href="#tab-2-banned"><i class="fa fa-coffee"></i>Inactive users</a></li>
+	                        <li class=""><a data-toggle="tab" href="#tab-3-hold"><i class="fa fa-ban"></i>Banned Users</a></li>
 	                        <li class=""><a data-toggle="tab" href="#tab-4-trashed"><i class="fa fa-trash"></i>Trashed</a></li>
 	                    </ul>
                         <div class="tab-content">
                             <div id="tab-1-active" class="tab-pane active">
                                 <div class="row">
                                 	<div class="col-md-12 pt-4">
-                                		<div class="col-md-12"><h3>Active Users</h3></div>
-											<table class="table table-striped table-hover">
-									         <thead>
+                                		<h3>Active Users</h3>
+										<table class="table table-striped table-hover">
+								         	<thead>
 									            <tr>
-									                <th>User</th>
 									                <th>Profile</th>
+									                <th>User</th>
 									                <th>Role</th>
-									                <th>Status</th>
 									                <th>Date</th>
 									            </tr>
 									         </thead>
-									         <tbody>
-									         	@foreach ($all_profiles as $profile)
-									            <tr>
-									               <td>{{$profile->user->name}}</td>
-									               <td><a href="{{route('profiles.show', $profile->slug)}}">{{$profile->title}}</a></td>
-									               <td><a href="{{route('roles.show', $profile->role->slug)}}">{{$profile->role->name}}</a></td>
-									               <td><a href="{{route('status.show', $profile->statuses[0]->status)}}">{{$profile->statuses[0]->status}}</a></td>
-									               <td>{{$profile->created_at}}</td>
-									            </tr>
-									            @endforeach
-									         </tbody>
-									      	</table>
-									      	<div class="text-center">
-									        	
-									    	</div>
+								         	<tbody>
+								         	@foreach ($active_pr as $status)
+							                	<tr>
+							                		<td>
+														<a href="{{route('profiles.show', $status->statusable->slug)}}">
+											               	<figure>
+												            	<img height="50" width="50" src="{{URL::to('/images/' . $status->statusable->image)}}" alt="{{ $status->statusable->title }}" name="{{ $status->statusable->title }}">
+												            	<span class="pl-5"> {{$status->statusable->title}}</span>
+												            </figure>
+							                			</a>
+							                		</td>					                		
+							                		<td>{{$status->statusable->user->name}}</td>
+							                		<td><a href="{{route('roles.show', $status->statusable->role->slug)}}">
+							                			{{$status->statusable->role->name}}</a>
+							                		</td>
+									              	<td>{{$status->statusable->user->created_at}}</td>
+							                	</tr>	          
+								            @endforeach
+								         	</tbody>
+								      	</table>
 									</div>	
 								</div>
                             </div>
                             <div id="tab-2-banned" class="tab-pane">
                             	<div class="row">
                                 	<div class="col-md-12 pt-4">
- 										banned
-									</div>	
+                                		<h3>Inactive Users</h3>
+										<table class="table table-striped table-hover">
+								         	<thead>
+									            <tr>
+									                <th>Profile</th>
+									                <th>User</th>
+									                <th>Role</th>
+									                <th>Date</th>
+									            </tr>
+									         </thead>
+								         	<tbody>
+								         	@foreach ($inactive_pr as $status)
+									            <tr>
+									               <td>
+										               	<a href="{{route($status->statusable_type . '.show', $status->statusable->slug)}}">
+										               	<figure>
+											            	<img height="50" width="50" src="{{URL::to('/images/' . $status->statusable->image)}}" alt="{{ $status->statusable->title }}" name="{{ $status->statusable->title }}">
+											            	<span class="pl-5"> {{$status->statusable->title}}</span>
+											            </figure>               	
+										               </a>
+							                		</td>
+							                		<td>{{$status->statusable->user->name}}</td>
+							                		<td><a href="{{route('roles.show', $status->statusable->role->slug)}}">
+							                			{{$status->statusable->role->name}}</a>
+							                		</td>
+									              	<td>{{$status->statusable->user->created_at}}</td>
+									            </tr>
+
+								            @endforeach
+								         	</tbody>
+								      	</table>
+									</div>
 								</div>
                             </div>
                             <div id="tab-3-hold" class="tab-pane">
                             	<div class="row">
                                 	<div class="col-md-12 pt-4">
-                                		Hold
-									</div>	
+                                		<h3>Banned Users</h3>
+										<table class="table table-striped table-hover">
+								         	<thead>
+									            <tr>
+									                <th>Profile</th>
+									                <th>User</th>
+									                <th>Role</th>
+									                <th>Date</th>
+									            </tr>
+									         </thead>
+								         	<tbody>
+								         	@foreach ($bann_pr as $status)
+									            <tr>
+									               <td>
+										               	<a href="{{route($status->statusable_type . '.show', $status->statusable->slug)}}">
+										               	<figure>
+											            	<img height="50" width="50" src="{{URL::to('/images/' . $status->statusable->image)}}" alt="{{ $status->statusable->title }}" name="{{ $status->statusable->title }}">
+											            	<span class="pl-5"> {{$status->statusable->title}}</span>
+											            </figure>               	
+										               </a>
+							                		</td>
+							                		<td>{{$status->statusable->user->name}}</td>
+							                		<td><a href="{{route('roles.show', $status->statusable->role->slug)}}">
+							                			{{$status->statusable->role->name}}</a>
+							                		</td>
+									              	<td>{{$status->statusable->user->created_at}}</td>
+									            </tr>
+								            @endforeach
+								         	</tbody>
+								      	</table>
+									</div>
 								</div>
                             </div>
                             <div id="tab-4-trashed" class="tab-pane">

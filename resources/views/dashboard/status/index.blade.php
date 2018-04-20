@@ -14,7 +14,7 @@
                     <li class="active">
                         <i class="fas fa-pencil-alt"></i> All {!! $page_name !!}es
                     </li>
-                    <span class="pull-right"><i class="fas fa-pencil-alt"></i> <a href="{{route('profiles.create')}}">Create a new profile</a></span>
+                    <span class="pull-right"><i class="fas fa-pencil-alt"></i> <a href="{{route('profiles.create')}}">Create a new Status</a></span>
                 </ol>
                 <hr>
 			    <div id="contenido"  class="card">
@@ -27,7 +27,6 @@
 				                	<th>Title</th>
 				                	<th>Element</th>
 				                	<th>Status</th>
-
 					            </tr>
 					         </thead>
 					         <tbody>
@@ -35,10 +34,16 @@
 					            	@foreach ($all_st as $status)
 					                	<tr>
 					                		<td>
-					                			{{$status->statusable->title}}
+												<a href="{{route($status->statusable_type . '.show', $status->statusable->slug)}}">
+										               	<figure>
+											            	<img height="50" width="50" src="{{URL::to('/images/' . $status->statusable->image)}}" alt="{{ $status->statusable->title }}" name="{{ $status->statusable->title }}">
+											            	<span class="pl-5"> {{$status->statusable->title}}</span>
+											            </figure>               	
+										               </a>
+					                			</a>
 					                		</td>					                		
-					                		<td>{{$status->statusable_type}}</td>					                		
-					                		<td><a href="{{route($status->statusable_type . '.index')}}">{{$status->status}}</a></td>
+					                		<td><a href="{{route($status->statusable_type . '.index')}}">{{$status->statusable_type}}</a></td>					                		
+					                		<td><a href="{{route('status.show',  $status->status, $status->status)}}">{{$status->status}}</a></td>
 					                	</tr>
 				               	 	@endforeach
 
