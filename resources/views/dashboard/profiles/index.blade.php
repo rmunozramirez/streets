@@ -6,7 +6,7 @@
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row wrapper border-bottom white-bg">
 			<div class="inside">
-                <h2>{!! $page_name !!} <span class="mt-3 small pull-right">Total profile: {{count($all_profiles)}}</span> </h2>
+                <h2>{!! $page_name !!} <span class="mt-3 small pull-right">Total profile: {{count($all_pr)}}</span> </h2>
                 <ol class="breadcrumb">
                     <li>
                         <a href="{{route('index')}}"> Dashboard</a>
@@ -41,22 +41,24 @@
 									            </tr>
 									         </thead>
 								         	<tbody>
-								         	@foreach ($active_pr as $status)
+								         	@foreach ($all_pr as $status)
+							                	@if($status->statuses[0]->status === 'active')
 							                	<tr>
 							                		<td>
-														<a href="{{route('profiles.show', $status->statusable->slug)}}">
+														<a href="{{route('profiles.show', $status->slug)}}">
 											               	<figure>
-												            	<img height="50" width="50" src="{{URL::to('/images/' . $status->statusable->image)}}" alt="{{ $status->statusable->title }}" name="{{ $status->statusable->title }}">
-												            	<span class="pl-5"> {{$status->statusable->title}}</span>
+												            	<img height="50" width="50" src="{{URL::to('/images/' . $status->image)}}" alt="{{ $status->title }}" name="{{ $status->title }}">
+												            	<span class="pl-5"> {{$status->title}}</span>
 												            </figure>
 							                			</a>
 							                		</td>					                		
-							                		<td>{{$status->statusable->user->name}}</td>
-							                		<td><a href="{{route('roles.show', $status->statusable->role->slug)}}">
-							                			{{$status->statusable->role->name}}</a>
+							                		<td>{{$status->user->name}}</td>
+							                		<td><a href="{{route('roles.show', $status->role->slug)}}">
+							                			{{$status->role->name}}</a>
 							                		</td>
-									              	<td>{{$status->statusable->user->created_at}}</td>
-							                	</tr>	          
+									              	<td>{{$status->user->created_at}}</td>
+							                	</tr>
+							                	@endif 
 								            @endforeach
 								         	</tbody>
 								      	</table>
@@ -77,23 +79,24 @@
 									            </tr>
 									         </thead>
 								         	<tbody>
-								         	@foreach ($inactive_pr as $status)
-									            <tr>
-									               <td>
-										               	<a href="{{route($status->statusable_type . '.show', $status->statusable->slug)}}">
-										               	<figure>
-											            	<img height="50" width="50" src="{{URL::to('/images/' . $status->statusable->image)}}" alt="{{ $status->statusable->title }}" name="{{ $status->statusable->title }}">
-											            	<span class="pl-5"> {{$status->statusable->title}}</span>
-											            </figure>               	
-										               </a>
+								         	@foreach ($all_pr as $status)
+							                	@if($status->statuses[0]->status === 'inactive')
+							                	<tr>
+							                		<td>
+														<a href="{{route('profiles.show', $status->slug)}}">
+											               	<figure>
+												            	<img height="50" width="50" src="{{URL::to('/images/' . $status->image)}}" alt="{{ $status->title }}" name="{{ $status->title }}">
+												            	<span class="pl-5"> {{$status->title}}</span>
+												            </figure>
+							                			</a>
+							                		</td>					                		
+							                		<td>{{$status->user->name}}</td>
+							                		<td><a href="{{route('roles.show', $status->role->slug)}}">
+							                			{{$status->role->name}}</a>
 							                		</td>
-							                		<td>{{$status->statusable->user->name}}</td>
-							                		<td><a href="{{route('roles.show', $status->statusable->role->slug)}}">
-							                			{{$status->statusable->role->name}}</a>
-							                		</td>
-									              	<td>{{$status->statusable->user->created_at}}</td>
-									            </tr>
-
+									              	<td>{{$status->user->created_at}}</td>
+							                	</tr>
+							                	@endif 
 								            @endforeach
 								         	</tbody>
 								      	</table>
@@ -114,22 +117,24 @@
 									            </tr>
 									         </thead>
 								         	<tbody>
-								         	@foreach ($bann_pr as $status)
-									            <tr>
-									               <td>
-										               	<a href="{{route($status->statusable_type . '.show', $status->statusable->slug)}}">
-										               	<figure>
-											            	<img height="50" width="50" src="{{URL::to('/images/' . $status->statusable->image)}}" alt="{{ $status->statusable->title }}" name="{{ $status->statusable->title }}">
-											            	<span class="pl-5"> {{$status->statusable->title}}</span>
-											            </figure>               	
-										               </a>
+								         	@foreach ($all_pr as $status)
+							                	@if($status->statuses[0]->status === 'banned')
+							                	<tr>
+							                		<td>
+														<a href="{{route('profiles.show', $status->slug)}}">
+											               	<figure>
+												            	<img height="50" width="50" src="{{URL::to('/images/' . $status->image)}}" alt="{{ $status->title }}" name="{{ $status->title }}">
+												            	<span class="pl-5"> {{$status->title}}</span>
+												            </figure>
+							                			</a>
+							                		</td>					                		
+							                		<td>{{$status->user->name}}</td>
+							                		<td><a href="{{route('roles.show', $status->role->slug)}}">
+							                			{{$status->role->name}}</a>
 							                		</td>
-							                		<td>{{$status->statusable->user->name}}</td>
-							                		<td><a href="{{route('roles.show', $status->statusable->role->slug)}}">
-							                			{{$status->statusable->role->name}}</a>
-							                		</td>
-									              	<td>{{$status->statusable->user->created_at}}</td>
-									            </tr>
+									              	<td>{{$status->user->created_at}}</td>
+							                	</tr>
+							                	@endif 
 								            @endforeach
 								         	</tbody>
 								      	</table>

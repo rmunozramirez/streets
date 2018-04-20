@@ -14,6 +14,7 @@ class Category extends Model
 		    'title',
             'slug',
             'subtitle',
+            'about',
             'image',
 
 	];
@@ -21,10 +22,10 @@ class Category extends Model
 	use SoftDeletes;
     protected $dates = ['deleted_at'];
 
-    // public function status()
-    // {
-    //     return $this->belongsTo('App\Status');
-    // }
+    function channels()
+    {
+        return $this->hasManyThrough('App\Channel', 'App\Subcategory', 'category_id', 'subcategory_id');
+    }
 
     public function statuses()
     {

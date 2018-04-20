@@ -18,14 +18,11 @@ class DashboardCategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('created_at', 'asc')->paginate(4);
+        $trash_cat = Category::onlyTrashed()->get();
         $all_cat = Category::all();
-        $active_cat = Category::where('status_id', 1)->paginate(4);
-        $bann_cat = Category::where('status_id', 2)->paginate(4);
-        $trash_cat = Category::where('status_id', 3)->paginate(4);
         $page_name = 'Categories';
 
-       return view('dashboard.categories.index', compact('categories', 'page_name', 'all_cat', 'active_cat', 'bann_cat', 'trash_cat'));
+       return view('dashboard.categories.index', compact('all_cat', 'page_name', 'trash_cat'));
     }
 
     /**
@@ -51,7 +48,7 @@ class DashboardCategoriesController extends Controller
      */
     public function show($slug)
     {
-        $category = Category::where('slug', $slug)->first();
+        $category = Category::withCount('subcategories')->where('slug', $slug)->first();
         $page_name = $category->title;
 
         return view('dashboard.categories.show', compact('category', 'page_name'));

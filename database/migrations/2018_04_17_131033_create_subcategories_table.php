@@ -18,7 +18,8 @@ class CreateSubcategoriesTable extends Migration
             $table->integer('category_id')->index()->unsigned();
             $table->string('title')->unique();  
             $table->string('slug')->unique();  
-            $table->string('subtitle')->nullable();  
+            $table->string('subtitle')->nullable();
+            $table->text('about')->nullable();
             $table->string('image')->unique();
             $table->softDeletes();
             $table->timestamps();

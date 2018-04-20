@@ -20,14 +20,11 @@ class DashboardChannelsController extends Controller
     {
 
         $channels = Channel::orderBy('created_at', 'asc')->paginate(4);
-        $all_ch = Channel::all();
-        $active_ch  = Status::where('status', 'active')->where('statusable_type' ,'profiles')->get();
-        $inactive_ch  = Status::where('status', 'inactive')->where('statusable_type' ,'profiles')->get();
-        $bann_ch  = Status::where('status', 'banned')->where('statusable_type' ,'profiles')->get();
+        $all_ch = Channel::with('statuses')->get();
         $page_name = 'channels';
         $trash_ch = Channel::onlyTrashed()->get();
 
-       return view('dashboard.channels.index', compact('channels', 'page_name', 'all_ch', 'active_ch', 'bann_ch', 'trash_ch'));
+       return view('dashboard.channels.index', compact('channels', 'page_name', 'all_ch', 'trash_ch'));
     }
 
     /**

@@ -18,14 +18,12 @@ class DashboardSubcategoriesController extends Controller
      */
     public function index()
     {
-        $subcategories = Subcategory::orderBy('created_at', 'asc')->paginate(4);
-        $all_sub = Subcategory::all();
-        $active_sub = Subcategory::where('status_id', 1)->paginate(4);
-        $bann_sub = Subcategory::where('status_id', 2)->paginate(4);
-        $trash_sub = Subcategory::where('status_id', 3)->paginate(4);
-        $page_name = 'Categories';
 
-       return view('dashboard.subcategories.index', compact('subcategories', 'page_name', 'all_sub', 'active_sub', 'bann_sub', 'trash_sub'));
+        $all_sub = Subcategory::all();
+        $trash_sub = Subcategory::onlyTrashed()->get();
+        $page_name = 'Subcategories';
+
+       return view('dashboard.subcategories.index', compact('page_name', 'all_sub', 'trash_sub'));
     }
 
     /**

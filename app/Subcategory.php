@@ -14,6 +14,7 @@ class Subcategory extends Model
 		    'title',
             'slug',
             'subtitle',
+            'about',
             'image',
 
 	];
@@ -21,11 +22,11 @@ class Subcategory extends Model
 	use SoftDeletes;
     protected $dates = ['deleted_at'];
 
-    // public function status()
-    // {
-    //     return $this->belongsTo('App\Status');
-    // }
-    
+
+    public function channels()
+    {
+        return $this->hasMany('App\Channel');
+    }
     public function statuses()
     {
         return $this->morphMany('App\Status', 'statusable');
