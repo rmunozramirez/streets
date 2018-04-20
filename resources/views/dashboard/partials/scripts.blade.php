@@ -5,9 +5,9 @@
 <script src="{{ asset('js/admin/pace.min.js') }}"></script>
 <script src="{{ asset('js/admin/inspinia.js') }}"></script>
 <script src="{{ asset('js/admin/jquery.steps.min.js') }}"></script>
-<script src="{{ asset('js/admin/jquery.select2.min.js') }}"></script>
-<script src="{{ asset('js/admin/jquery.summernote.js') }}"></script>
-<script src="{{ asset('js/admin/jquery.toastr.min.js') }}"></script>
+<script src="{{ asset('js/admin/select2.min.js') }}"></script>
+<script src="{{ asset('js/admin/summernote.js') }}"></script>
+<script src="{{ asset('js/admin/toastr.min.js') }}"></script>
 
     <script>
         //toastr

@@ -60,7 +60,7 @@ class DashboardSubcategoriesController extends Controller
      */
     public function show($slug)
     {
-        $subcategory = Subcategory::where('slug', $slug)->first();
+        $subcategory = Subcategory::withCount('channels')->where('slug', $slug)->first();
         $page_name = $subcategory->title;
 
         return view('dashboard.subcategories.show', compact('subcategory', 'page_name'));

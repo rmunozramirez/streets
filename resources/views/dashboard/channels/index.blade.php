@@ -14,7 +14,9 @@
                     <li class="active">
                         <i class="fas fa-pencil-alt"></i> All {!! $page_name !!}s
                     </li>
-                    <span class="pull-right"><i class="fas fa-pencil-alt"></i> <a href="{{route('profiles.create')}}">Create a new profile</a></span>
+                    <span class="pull-right">
+                		<i class="fa fa-plus"></i> <a href="{{route('channels.create')}}">Create a channel</a>
+                		<i class="fa fa-trash"></i> <a href="{{route('channels.trashed')}}">Trashed channels</a>
                 </ol>
                 
                 <hr>
@@ -86,7 +88,7 @@
 								                	@endif
 								            	@endforeach
 								         	</tbody>
-								      	</table>>
+								      	</table>
 									</div>	
 								</div>
                             </div>

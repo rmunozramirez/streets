@@ -1867,6 +1867,10 @@ div.dt-button-info {
 .glyphicon.fa {
   font-family: "FontAwesome";
 }
+
+.breadcrumb .pull-right i {
+  margin-left: 20px;
+}
 /* INPUTS */
 .inline {
   display: inline-block !important;
@@ -2903,7 +2907,7 @@ a.forum-item-title:hover {
 .tabs-container .nav-tabs > li {
   float: left;
   margin-bottom: -1px;
-   width: 25%; 
+   width: 33.33%; 
 }
 .tabs-container .user-tabs > li.active {
 

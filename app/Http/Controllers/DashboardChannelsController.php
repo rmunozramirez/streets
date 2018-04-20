@@ -90,14 +90,44 @@ class DashboardChannelsController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+
+    public function destroy($slug)
     {
-        //
+        
+        $channel = Channel::where('slug', $slug)->first();
+        $channel->delete();
+
+        Session::flash('success', 'Channel successfully deleted!');
+        return redirect()->route('channels.index');
     }
+
+
+    public function trashed()
+    {
+        $trash_ch = Channel::onlyTrashed()->get();
+        $all_ch = Channel::all();
+        $page_name = 'Trashed Channels';
+
+        return view('dashboard.channels.trashed', compact('trash_ch', 'page_name', 'all_ch'));
+    }
+
+    public function restore($slug)
+    {
+        $channel = Channel::withTrashed()->where('slug', $slug)->first();
+        $channel->statuses->status = 'inactive';
+        $channel->restore();
+
+        Session::flash('success', 'Channel successfully restored!');
+        return redirect()->route('channels.index');
+    }
+
+    public function kill($slug)
+    {
+        $channel = Channel::withTrashed()->where('slug', $slug)->first();
+        $channel->forceDelete();
+
+        Session::flash('success', 'Channel pemanently deleted!');
+        return redirect()->route('channels.index');
+    }
+
 }

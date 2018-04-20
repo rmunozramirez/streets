@@ -34,7 +34,7 @@
 								            <tr>
 							                	<th>Title</th>
 							                	<th>Element</th>
-							                	<th>Status</th>
+
 								            </tr>
 								         </thead>
 								         @foreach ($all_st as $status)
@@ -53,9 +53,6 @@
 							                		<td>
 							                			<a href="{{route($status->statusable_type . '.index')}}">{{$status->statusable_type}}</a>
 							                		</td>					                		
-							                		<td>
-							                			<a href="{{route('status.show',  $status->status, $status->status)}}">{{$status->status}}</a>
-							                		</td>
 							                	</tr>
 								         	</tbody>
 								         @endif

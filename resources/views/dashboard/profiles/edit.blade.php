@@ -14,7 +14,9 @@
                         <i class="fas fa-pencil-alt"></i> {!! $page_name !!}
                     </li>
                     <span class="pull-right">
-                    	<i class="fa fa-chevron-left"></i> <a href="{{route('profiles.index')}}">Back to profiles</a>
+	                    	<i class="fa fa-chevron-left"></i> <a href="{{route('profiles.index')}}">Back to profiles</a>
+                    		<i class="fa fa-plus"></i> <a href="{{route('profiles.create')}}">Create a new profile</a>
+                    		<i class="fa fa-trash"></i> <a href="{{route('profiles.trashed')}}">Trashed profiles</a>
                     </span>
                 </ol>
                 <hr>
@@ -42,8 +44,8 @@
 									<div class="col-md-8"> 
 										<div class="row">
 											<div class="col-md-6">       
-												{!!Form::label('user_name', 'Profile title', array('class' => 'form-spacing-top'))!!}
-												{!!Form::text('user_name', null, array('class' => 'form-control', 'required' => '', 'maxlength' => '255'))!!}
+												{!!Form::label('title', 'Profile title', array('class' => 'form-spacing-top'))!!}
+												{!!Form::text('title', null, array('class' => 'form-control', 'required' => '', 'maxlength' => '255'))!!}
 											</div>
 
 											<div class="col-md-6">
@@ -59,8 +61,8 @@
 											</div>
 
 											<div class="col-md-6"> 
-												{!! Form::label('status_id', 'Status:') !!}
-												{!! Form::select('status_id',  ['' => 'Choose Status', '1' => 'Active', '3' => 'On Hold', '4' => 'Banned'], null, array('class' => 'form-control')) !!} 
+												{!! Form::label('status', 'Status:') !!}
+												{!! Form::select('status',  ['' => 'Choose Status', 'active' => 'Active', 'inactive' => 'Inactive', 'banned' => 'Banned'], null, array('class' => 'form-control')) !!} 
 											</div>
 										</div>										
 

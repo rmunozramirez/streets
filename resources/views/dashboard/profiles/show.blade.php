@@ -16,6 +16,8 @@
 	                    </li>
 	                    <span class="pull-right">
 	                    	<i class="fa fa-chevron-left"></i> <a href="{{route('profiles.index')}}">Back to profiles</a>
+                    		<i class="fa fa-pencil"></i> <a href="{{route('profiles.edit', $profile->slug)}}">Edit</a>
+                    		<i class="fa fa-trash"></i> <a href="{{route('profiles.trashed')}}">Trashed profiles</a>
 	                    </span>
 	                </ol>
 	                <hr>

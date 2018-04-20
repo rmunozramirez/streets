@@ -12,11 +12,7 @@ use Session;
 
 class DashboardProfileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
 
@@ -29,11 +25,6 @@ class DashboardProfileController extends Controller
        return view('dashboard.profiles.index', compact('all_roles', 'profiles', 'page_name', 'all_pr', 'trashed_pr', 'status'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $all_roles = Role::pluck('name', 'id')->all();
@@ -44,15 +35,9 @@ class DashboardProfileController extends Controller
         return view('dashboard.profiles.create', compact('all_profiles', 'page_name', 'all_roles', 'all_st'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(ProfileRequest $request)
     {
-dd($request);
+
         $file = $request->file('image');
         $name = time() . '-' . $file->getClientOriginalName();
         $file->move('images', $name);
@@ -84,12 +69,6 @@ dd($request);
         return redirect()->route('profiles.show', $profile->slug);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($slug)
     {
 
@@ -99,29 +78,16 @@ dd($request);
         return view('dashboard.profiles.show', compact('profile', 'page_name'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($slug)
     {
         $all_roles = Role::pluck('name', 'id')->all();
-        $all_st = Status::pluck('name', 'id')->all();
+        $all_st = Status::pluck('status', 'id')->all();
         $profile = Profile::where('slug', $slug)->first(); 
         $page_name = 'Edit: ' . $profile->user_name;
 
           return view('dashboard.profiles.edit', compact('profile', 'page_name', 'all_roles', 'all_st'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(ProfileRequest $request, $slug)
     {
         $input = $request->all();
@@ -178,14 +144,16 @@ dd($request);
     public function trashed()
     {
         $trashed_pr = Profile::onlyTrashed()->get();
+        $all_pr = Profile::all();
         $page_name = 'Trashed Profiles';
 
-        return view('dashboard.profiles.trashed', compact('trashed_pr', 'page_name'));
+        return view('dashboard.profiles.trashed', compact('trashed_pr', 'page_name', 'all_pr'));
     }
 
     public function restore($slug)
     {
         $profile = Profile::withTrashed()->where('slug', $slug)->first();
+        $profile->statuses->status = 'inactive';
         $profile->restore();
 
         Session::flash('success', 'Profile successfully restored!');
