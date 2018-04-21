@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Profile;
 use App\Subcategory;
+use App\Category;
 use App\Status;
 use App\Role;
 use Session;
@@ -28,12 +29,12 @@ class DashboardSubcategoriesController extends Controller
 
     public function create()
     {
-        $all_roles = Role::pluck('name', 'id')->all();
-        $all_st = Status::pluck('name', 'id')->all();
-        $all_sub = Subcategory::all();
-        $page_name =  'Create a new Subcategory';
+        $all_cat = Category::pluck('title', 'id')->all();
+        $all_st = Status::pluck('status', 'id')->all();
+        $all_ = Subcategory::all();
+        $page_name =  'subcategories';
 
-        return view('dashboard.subcategories.create', compact('all_sub', 'page_name', 'all_roles', 'all_st'));
+        return view('dashboard.subcategories.create', compact('all_', 'page_name', 'all_cat', 'all_st'));
     }
 
     /**
@@ -75,9 +76,10 @@ class DashboardSubcategoriesController extends Controller
     public function show($slug)
     {
         $subcategory = Subcategory::withCount('channels')->where('slug', $slug)->first();
-        $page_name = $subcategory->title;
+        $page_name = 'subcategories';
+        $all_ = Subcategory::all();
 
-        return view('dashboard.subcategories.show', compact('subcategory', 'page_name'));
+        return view('dashboard.subcategories.show', compact('subcategory', 'page_name', 'all_'));
     }
 
     /**
@@ -89,10 +91,11 @@ class DashboardSubcategoriesController extends Controller
     public function edit($slug)
     {
         $subcategory = Subcategory::where('slug', $slug)->first(); 
-        $page_name = 'Edit: ' . $subcategory->title;
+        $page_name = 'subcategories';
         $categories = Category::orderBy('title', 'asc')->pluck('title', 'id')->all();
+        $all_ = Subcategory::all();
 
-          return view('dashboard.subcategories.edit', compact('subcategory', 'categories', 'page_name'));
+          return view('dashboard.subcategories.edit', compact('subcategory', 'categories', 'page_name', 'all_'));
 
     }
 
@@ -152,10 +155,11 @@ class DashboardSubcategoriesController extends Controller
 
     public function trashed()
     {
-        $subcategories = Subcategory::onlyTrashed()->get();
-        $page_name = 'Trashed Subcategories';
+        $trash_sub = Subcategory::onlyTrashed()->get();
+        $page_name = 'subcategories';
+        $all_ = Subcategory::all();
 
-        return view('dashboard.subcategories.trashed', compact('subcategories', 'page_name'));
+        return view('dashboard.subcategories.trashed', compact('trash_sub', 'page_name', 'all_'));
     }
 
     public function restore($slug)

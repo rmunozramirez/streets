@@ -25,7 +25,7 @@
                 <div class="inside">
                     <h2>{{ ucfirst(trans($page_name)) }}
                         @if($page_name !== 'dashboard')
-                        <span class="mt-3 small pull-right">Total {{$page_name}}s: {{count($all_)}}</span>
+                        <span class="mt-3 small pull-right">Total {{$page_name}}: {{count($all_)}}</span>
                         @endif 
                     </h2>
                     <ol class="breadcrumb">

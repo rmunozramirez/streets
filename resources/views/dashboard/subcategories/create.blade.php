@@ -4,7 +4,7 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row wrapper border-bottom white-bg">
     	<div class="inside">
-    		    <h2>Create a Category
+    		    <h2>Create a Subcategory
     		    	<span class="small pull-right">
                     	<i class="fa fa-chevron-left"></i> <a href="{{route('categories.index')}}">Back to categories</a>
                     </span>
@@ -36,21 +36,27 @@
 				            	<div class="col-md-8"> 
 						            <div class="row">
 						            	<div class="col-md-6">       
-							                {!!Form::label('title', 'Add a Category title', array('class' => 'form-spacing-top'))!!}
+							                {!!Form::label('title', 'Add a subategory title', array('class' => 'form-spacing-top'))!!}
 							                {!!Form::text('title', null, array('class' => 'form-control', 'required' => '', 'maxlength' => '255'))!!}
 							            </div>
 
 							            <div class="col-md-6">      
-								                {!!Form::label('subtitle', 'Add a Category subtitle', array('class' => 'form-spacing-top'))!!}
+								                {!!Form::label('subtitle', 'Add a subcategory subtitle', array('class' => 'form-spacing-top'))!!}
 								                {!!Form::text('subtitle', null, array('class' => 'form-control', 'required' => '', 'maxlength' => '255'))!!}	            		
 							            </div>		            		
 						            </div>		            		
 
 
+						            <div class="row pt-5">
+						            	<div class="col-md-6">
+							            	{!! Form::label('category_id', 'Subcategory:') !!}
+		                        			{!! Form::select('category_id', ['' => 'Choose a category'] + $all_cat, null, array('class' => 'form-control')) !!}
+							            </div>
+							       	</div>
 
 						            <div class="row pt-5"> 
 							            <div class="col-md-12">      
-							                {!!Form::label('about_category', 'Category description:', array('class' => 'form-spacing-top'))!!}
+							                {!!Form::label('about', 'Category description:', array('class' => 'form-spacing-top'))!!}
 							                {!!Form::textarea('about_category', null, array('id' => 'summernote','class' => 'form-control', 'rows' => 9))!!}                       
 							            </div>
 						            </div>

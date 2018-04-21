@@ -84,9 +84,10 @@ class DashboardProfileController extends Controller
         $all_roles = Role::pluck('name', 'id')->all();
         $all_st = Status::pluck('status', 'id')->all();
         $profile = Profile::where('slug', $slug)->first(); 
-        $page_name = 'Edit: ' . $profile->user_name;
+        $page_name = 'profiles';
+        $all_ = Profile::all();
 
-          return view('dashboard.profiles.edit', compact('profile', 'page_name', 'all_roles', 'all_st'));
+          return view('dashboard.profiles.edit', compact('profile', 'page_name', 'all_roles', 'all_st', 'all_'));
     }
 
     public function update(ProfileRequest $request, $slug)

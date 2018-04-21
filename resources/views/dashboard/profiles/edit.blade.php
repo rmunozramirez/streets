@@ -4,22 +4,12 @@
 <section id="content">
     <div class="wrapper wrapper-content animated fadeInUp">
         <div class="row wrapper border-bottom white-bg">
-			<div class="inside">
-                <h2>Edit user profile</h2>
-                <ol class="breadcrumb">
-                    <li>
-                        <a href="{{route('index')}}"> Dashboard</a>
-                    </li>
-                    <li class="active">
-                        <i class="fas fa-pencil-alt"></i> {!! $page_name !!}
-                    </li>
-                    <span class="pull-right">
-	                    	<i class="fa fa-chevron-left"></i> <a href="{{route('profiles.index')}}">Back to profiles</a>
-                    		<i class="fa fa-plus"></i> <a href="{{route('profiles.create')}}">Create a new profile</a>
-                    		<i class="fa fa-trash"></i> <a href="{{route('profiles.trashed')}}">Trashed profiles</a>
-                    </span>
-                </ol>
-                <hr>
+		<div class="inside">
+            <h2>Edit: {!! $profile->title !!}
+            <span class="small pull-right">
+            	<i class="fa fa-chevron-left"></i> <a href="{{route('profiles.index')}}">Back to profiles</a>
+            </span></h2>
+        	<hr>
 
 			    <div id="contenido"  class="card">
 				    @if(count($errors) > 0)

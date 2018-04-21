@@ -6,21 +6,11 @@
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row wrapper border-bottom white-bg">
 			<div class="inside">
-                <h2>{!! $page_name !!} <span class="mt-3 small pull-right">Total subcategories: {{$subcategory->channels_count}}</span> </h2>
-                <ol class="breadcrumb">
-                    <li>
-                        <a href="{{route('index')}}"> Dashboard</a>
-                    </li>
-                    <li class="active">
-                        <i class="fas fa-pencil-alt"></i> {!! $page_name !!}
-                    </li>
-                    <span class="pull-right">
-                    	<i class="fa fa-pencil-alt"></i> <a href="{{route('subcategories.create')}}">Create a new subcategory</a>
-		            	<i class="fa fa-chevron-left"></i> <a href="{{route('subcategories.index')}}">Back to subcategories</a>
-		            	<i class="fa fa-trash"></i> <a href="{{route('subcategories.trashed')}}">Trashed Subcategories</a>
-                    </span>
-                </ol>
-                <hr>
+                <h2>{!! $subcategory->title !!}
+                <span class="small pull-right">
+                	<i class="fa fa-chevron-left"></i> <a href="{{route('subcategories.index')}}">Back to subcategories</a>
+                </span></h2>
+            	<hr>
 			    <div id="contenido"  class="card">
 					<div class="card-body">        
 			            <div class="row">
@@ -35,6 +25,11 @@
 
 							        <dt>Subcategory subtitle:</dt>
 							        <dd class="pb-3">{!! $subcategory->subtitle !!}</dd>
+
+							        <dt>Belongs to category:</dt>
+							        <dd class="pb-3">
+							        	<a href="{{route('categories.show', $subcategory->category->slug)}}">
+							        	{!! $subcategory->category->title !!}</a></dd>
 
 							        <dt>Status</dt>
 							        <dd class="pb-3">{!! $subcategory->statuses[0]->status !!}</dd>

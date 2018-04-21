@@ -3,7 +3,12 @@
 @section('content')
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row wrapper border-bottom white-bg">
-    	<div class="inside">
+		<div class="inside">
+            <h2>Create a profile
+            <span class="small pull-right">
+            	<i class="fa fa-chevron-left"></i> <a href="{{route('profiles.index')}}">Back to profiles</a>
+            </span></h2>
+        	<hr>
 			<div id="contenido"  class="card">
 			    @if(count($errors) > 0)
 			        <ul class="list-group">    

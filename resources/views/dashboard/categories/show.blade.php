@@ -4,8 +4,13 @@
 
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row wrapper border-bottom white-bg">
-			<div class="inside">
-                <hr>
+			<div class="inside">		                
+				<h2>{!! $category->title !!}
+	                <span class="small pull-right">
+                    	<i class="fa fa-chevron-left"></i> <a href="{{route('categories.index')}}">Back to categories</a>
+                    </span>
+                </h2>
+	                <hr>
 			    <div id="contenido"  class="card">
 					<div class="card-body">        
 			            <div class="row">

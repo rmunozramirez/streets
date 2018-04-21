@@ -63,9 +63,10 @@ class DashboardChannelsController extends Controller
     public function show($slug)
     {
         $channel = Channel::where('slug', $slug)->first();
-        $page_name = $channel->title;
+        $page_name = 'channels';
+        $all_ = Channel::with('statuses')->get();
 
-        return view('dashboard.channels.show', compact('channel', 'page_name'));
+        return view('dashboard.channels.show', compact('channel', 'page_name', 'all_'));
     }
 
     public function edit($slug)
@@ -117,7 +118,7 @@ class DashboardChannelsController extends Controller
     {
         $trash_ch = Channel::onlyTrashed()->get();
         $all_ = Channel::all();
-        $page_name = 'trashed';
+        $page_name = 'channels';
 
         return view('dashboard.channels.trashed', compact('trash_ch', 'page_name', 'all_'));
     }

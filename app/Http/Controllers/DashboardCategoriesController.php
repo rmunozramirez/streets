@@ -11,6 +11,12 @@ use Session;
 
 class DashboardCategoriesController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $all_ = Category::all();
+
+    //     return $all_;
+    // }
 
     public function index()
     {
@@ -58,17 +64,19 @@ class DashboardCategoriesController extends Controller
     public function show($slug)
     {
         $category = Category::withCount('subcategories')->where('slug', $slug)->first();
-        $page_name = $category->title;
+        $all_ = Category::all();
+        $page_name = 'categories';
 
-        return view('dashboard.categories.show', compact('category', 'page_name'));
+        return view('dashboard.categories.show', compact('category', 'all_', 'page_name'));
     }
 
     public function edit($slug)
     {
         $category = Category::where('slug', $slug)->first(); 
-        $page_name = 'Edit: ' . $category->title;
+        $page_name = 'categories';
+        $all_ = Category::all();
 
-          return view('categories.edit', compact('category', 'page_name'));
+          return view('dashboard.categories.edit', compact('category', 'page_name', 'all_'));
     }
 
     public function update(CategoriesRequest $request, $slug)
@@ -119,9 +127,10 @@ class DashboardCategoriesController extends Controller
     public function trashed()
     {
         $trash_cat = Category::onlyTrashed()->get();
-        $page_name = 'Trashed Categories';
+        $all_ = Category::all();
+        $page_name = 'categories';
 
-        return view('dashboard.categories.trashed', compact('trash_cat', 'page_name'));
+        return view('dashboard.categories.trashed', compact('trash_cat', 'page_name', 'all_'));
     }
 
     public function restore($slug)

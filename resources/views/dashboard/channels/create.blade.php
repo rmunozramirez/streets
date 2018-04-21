@@ -7,21 +7,10 @@
 	    <div class="wrapper wrapper-content animated fadeInUp">		
 	        <div class="row wrapper border-bottom white-bg">
 				<div class="inside">
-		                <h2>Create a channel</h2>
-		                <ol class="breadcrumb">
-	                    <li>
-	                        <a href="{{route('index')}}"> Dashboard</a>
-	                    </li>
-	                    <li class="active">
-	                        <a href="{{route('channels.index')}}"> Channels</a>
-	                    </li>
-	                    <li class="">
-	                         {!! $page_name !!}
-	                    </li>
-	                    <span class="pull-right">
+		            <h2>Create a channel<span class="small pull-right">
 	                    	<i class="fa fa-chevron-left"></i> <a href="{{route('channels.index')}}">Back to channels</a>
 	                    </span>
-	                </ol>
+	                </h2>
 	                <hr>
 				    <div id="contenido"  class="card">
 						<div class="inside">

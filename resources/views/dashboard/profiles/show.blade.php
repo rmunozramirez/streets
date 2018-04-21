@@ -5,7 +5,12 @@
 <!-- Profile panel  -->
 <div class="wrapper wrapper-content animated fadeInUp">		
     <div class="row wrapper border-bottom white-bg">
-    	<div class="inside">
+		<div class="inside">
+            <h2>{!! $profile->title !!}
+            <span class="small pull-right">
+            	<i class="fa fa-chevron-left"></i> <a href="{{route('profiles.index')}}">Back to profiles</a>
+            </span></h2>
+        	<hr>
 			<div id="contenido"  class="card">
 				<div class="card-body">
 					<div class="row">
