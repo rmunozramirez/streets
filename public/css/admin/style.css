@@ -3643,10 +3643,10 @@ video {
   overflow-x: hidden;
 }
 .wrapper {
-  padding: 0 20px;
+  padding: 10px 20px;
 }
 .wrapper-content {
-  padding: 10px 10px 20px;
+  padding: 10px;
 }
 #page-wrapper {
   padding: 0 15px;

@@ -6,20 +6,7 @@
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row wrapper border-bottom white-bg">
 			<div class="inside">
-                <h2>{!! $page_name !!} <span class="mt-3 small pull-right">Total channels: {{count($all_ch)}}</span> </h2>
-                <ol class="breadcrumb">
-                    <li>
-                        <a href="{{route('index')}}"> Dashboard</a>
-                    </li>
-                    <li class="active">
-                        <i class="fas fa-pencil-alt"></i> All {!! $page_name !!}s
-                    </li>
-                    <span class="pull-right">
-                    	<i class="fa fa-chevron-left"></i> <a href="{{route('channels.index')}}">Back to channels</a>
-                		<i class="fa fa-plus"></i> <a href="{{route('channels.create')}}">Create a channel</a>
-                </ol>
-                
-                <hr>
+
 			    <div id="contenido"  class="card">
                     <div class="row">
                     	<div class="col-md-12 pt-4">

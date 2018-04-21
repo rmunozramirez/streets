@@ -20,10 +20,10 @@ class DashboardDiscussionsController extends Controller
     {
 
         $discussions = Discussion::orderBy('created_at', 'asc')->paginate(4);
-        $all_disc = Discussion::all();
-        $page_name = 'Discussion';
+        $all_ = Discussion::all();
+        $page_name = 'discussions';
 
-       return view('dashboard.discussions.index', compact('discussions', 'page_name', 'all_disc'));
+       return view('dashboard.discussions.index', compact('discussions', 'page_name', 'all_'));
     }
 
     /**

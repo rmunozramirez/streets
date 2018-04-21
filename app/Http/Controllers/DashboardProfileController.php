@@ -18,21 +18,21 @@ class DashboardProfileController extends Controller
 
         $all_roles = Role::pluck('name', 'id')->all();
         $profiles = Profile::orderBy('created_at', 'asc')->paginate(4);
-        $all_pr = Profile::with('statuses')->get();
+        $all_ = Profile::with('statuses')->get();
         $trashed_pr = Profile::onlyTrashed()->get();
-        $page_name = 'Profile';
+        $page_name = 'profiles';
 
-       return view('dashboard.profiles.index', compact('all_roles', 'profiles', 'page_name', 'all_pr', 'trashed_pr', 'status'));
+       return view('dashboard.profiles.index', compact('all_roles', 'profiles', 'page_name', 'all_', 'trashed_pr', 'status'));
     }
 
     public function create()
     {
         $all_roles = Role::pluck('name', 'id')->all();
         $all_st = Status::pluck('status', 'id')->all();
-        $all_profiles = Profile::all();
-        $page_name =  'Create a new User';
+        $all_ = Profile::all();
+        $page_name =  'profiles';
 
-        return view('dashboard.profiles.create', compact('all_profiles', 'page_name', 'all_roles', 'all_st'));
+        return view('dashboard.profiles.create', compact('all_', 'page_name', 'all_roles', 'all_st'));
     }
 
     public function store(ProfileRequest $request)
@@ -73,9 +73,10 @@ class DashboardProfileController extends Controller
     {
 
         $profile = Profile::where('slug', $slug)->first();
-        $page_name = 'Profile from: ' . $profile->user_name;
+        $page_name = 'profiles';
+        $all_ = Profile::all();
 
-        return view('dashboard.profiles.show', compact('profile', 'page_name'));
+        return view('dashboard.profiles.show', compact('profile', 'page_name', 'all_'));
     }
 
     public function edit($slug)
@@ -144,10 +145,10 @@ class DashboardProfileController extends Controller
     public function trashed()
     {
         $trashed_pr = Profile::onlyTrashed()->get();
-        $all_pr = Profile::all();
-        $page_name = 'Trashed Profiles';
+        $all_ = Profile::all();
+        $page_name = 'profiles';
 
-        return view('dashboard.profiles.trashed', compact('trashed_pr', 'page_name', 'all_pr'));
+        return view('dashboard.profiles.trashed', compact('trashed_pr', 'page_name', 'all_'));
     }
 
     public function restore($slug)

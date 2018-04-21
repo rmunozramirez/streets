@@ -19,11 +19,11 @@ class DashboardSubcategoriesController extends Controller
     public function index()
     {
 
-        $all_sub = Subcategory::all();
+        $all_ = Subcategory::all();
         $trash_sub = Subcategory::onlyTrashed()->get();
-        $page_name = 'Subcategories';
+        $page_name = 'subcategories';
 
-       return view('dashboard.subcategories.index', compact('page_name', 'all_sub', 'trash_sub'));
+       return view('dashboard.subcategories.index', compact('page_name', 'all_sub', 'trash_sub', 'all_'));
     }
 
     public function create()

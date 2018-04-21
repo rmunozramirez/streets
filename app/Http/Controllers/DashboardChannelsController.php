@@ -17,11 +17,12 @@ class DashboardChannelsController extends Controller
     {
 
         $channels = Channel::orderBy('created_at', 'asc')->paginate(4);
-        $all_ch = Channel::with('statuses')->get();
+        $all_ = Channel::with('statuses')->get();
         $page_name = 'channels';
         $trash_ch = Channel::onlyTrashed()->get();
 
-       return view('dashboard.channels.index', compact('channels', 'page_name', 'all_ch', 'trash_ch'));
+
+       return view('dashboard.channels.index', compact('channels', 'page_name', 'all_', 'trash_ch'));
     }
 
     public function create()
@@ -29,10 +30,10 @@ class DashboardChannelsController extends Controller
         $all_roles = Role::pluck('name', 'id')->all();
         $all_st = Status::pluck('status', 'id')->all();
         $all_sub = Subcategory::pluck('title', 'id')->all();
-        $all_ch = Channel::all();
-        $page_name =  'Create a new Channel';
+        $all_ = Channel::all();
+        $page_name =  'channels';
 
-        return view('dashboard.channels.create', compact('all_ch', 'page_name', 'all_roles', 'all_st', 'all_sub'));
+        return view('dashboard.channels.create', compact('all_', 'page_name', 'all_roles', 'all_st', 'all_sub'));
     }
 
     public function store(ChannelsRequest $request)
@@ -115,10 +116,10 @@ class DashboardChannelsController extends Controller
     public function trashed()
     {
         $trash_ch = Channel::onlyTrashed()->get();
-        $all_ch = Channel::all();
-        $page_name = 'Trashed Channels';
+        $all_ = Channel::all();
+        $page_name = 'trashed';
 
-        return view('dashboard.channels.trashed', compact('trash_ch', 'page_name', 'all_ch'));
+        return view('dashboard.channels.trashed', compact('trash_ch', 'page_name', 'all_'));
     }
 
     public function restore($slug)
