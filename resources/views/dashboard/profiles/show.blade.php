@@ -123,7 +123,7 @@
 	        <div class="row wrapper border-bottom white-bg">
 				<div class="inside">
 					@if( $profile->channel ) 
-		                <h2>Channel: {!! $profile->channel->title !!}</h2>
+		                <h2>Channel: {!! $profile->channel->title !!}<span class="pull-right"><a class="small pt-3" href="{{route('channels.show', $profile->channel->slug)}}"><i class="fa fa-info"></i> Details</a></span></h2>
 		                <hr>
 						<div id="contenido"  class="card">
 							<div class="card-body">
@@ -154,6 +154,9 @@
 
 									        <dt>Likes</dt>
 									        <dd class="pb-3">{{ $profile->channel->likes}}</dd>
+
+									        <dt>Description</dt>
+									        <dd class="pb-3">{{ $profile->channel->about}}</dd>
 									    </dl>
 							         </div>		            
 						        </div>

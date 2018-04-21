@@ -28,7 +28,7 @@ class DashboardProfileController extends Controller
     public function create()
     {
         $all_roles = Role::pluck('name', 'id')->all();
-        $all_st = Status::pluck('name', 'id')->all();
+        $all_st = Status::pluck('status', 'id')->all();
         $all_profiles = Profile::all();
         $page_name =  'Create a new User';
 

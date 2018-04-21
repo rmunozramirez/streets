@@ -53,6 +53,9 @@
 
 									        <dt>Likes</dt>
 									        <dd class="pb-3">{{ $channel->likes}}</dd>
+
+									        <dt>Description</dt>
+									        <dd class="pb-3">{{ $channel->about}}</dd>
 									    </dl>
 							         </div>		            
 						        </div>

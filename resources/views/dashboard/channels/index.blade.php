@@ -29,9 +29,6 @@
 	                        <li class="">
 	                        	<a data-toggle="tab" href="#tab-2-inactive"><i class="fa fa-ban"></i>Banned</a>
 	                        </li>
-	                        <li class="">
-	                        	<a data-toggle="tab" href="#tab-3-trashed"><i class="fa fa-trash"></i>Trashed</a>
-	                        </li>
 	                    </ul>
                         <div class="tab-content">
                             <div id="tab-1-active" class="tab-pane active">
@@ -147,58 +144,6 @@
 									            @endforeach
 									         </tbody>
 								        </table>
-									</div>	
-								</div>
-                            </div>
-                            <div id="tab-3-trashed" class="tab-pane">
-                                <div class="row">
-                                	<div class="col-md-12 pt-4">
-                                		<div class="col-md-12">
-                                			<h3>Trashed users</h3>
-                                		</div>
-										@if(count($trash_ch) > 0)
-											<table class="table table-striped table-hover">
-									         <thead>
-									            <tr>
-									                <th>Channel</th>
-									                <th>Profile</th>
-									                <th>Status</th>
-									                <th>Date</th>
-									            </tr>
-									         </thead>
-									         <tbody>
-									         	@foreach ($trash_ch as $channel)
-									            <tr>
-									               <td><a href="{{route('channels.show', $channel->slug)}}">
-										               	<figure>
-											            	<img class="img-circle" height="50" src="{{URL::to('/images/' . $channel->image)}}" alt="{{ $channel->title }}" name="{{ $channel->title }}"><span class="pl-5"> {{$channel->title}}</span>
-											            </figure>
-										               	
-										               </a>
-										           </td>
-									               <td><a href="{{route('profiles.show', $channel->profile->slug)}}">{{$channel->profile->user_name}}</a></td>
-									               <td><a href="">{{$channel->status->name}}</a></td>
-									               <td>{{$channel->created_at}}</td>
-									               <td>
-									               		<a type="button" class="col-md-6 btn btn-secondary" href="{{route('channels.edit', $channel->slug)}}">Edit</a>
-										            	<div class="col-md-6">
-											            	{!! Form::open(['route' => ['channels.destroy', $channel->slug], 'method' => 'DELETE']) !!}
-
-															{!! Form::submit('Delete', ['class' => 'btn btn-block btn-danger']) !!}
-
-															{!! Form::close() !!}
-														</div>
-									               </td>
-									            </tr>
-									            @endforeach
-									         </tbody>
-									      	</table>
-									      	<div class="text-center">
-										        {{ $trash_ch->links() }}
-										    </div>
-										@else
-											<div class="col-md-12"><h3>No trashed channels!</h3></div>
-										@endif
 									</div>	
 								</div>
                             </div>

@@ -26,11 +26,6 @@ class DashboardSubcategoriesController extends Controller
        return view('dashboard.subcategories.index', compact('page_name', 'all_sub', 'trash_sub'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $all_roles = Role::pluck('name', 'id')->all();
@@ -47,9 +42,28 @@ class DashboardSubcategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SubcategoriesRequest $request)
     {
-        //
+        $file = $request->file('image');
+        $name = time() . '-' . $file->getClientOriginalName();
+        $file->move('images', $name);
+
+        $subcategory = Subcategory::create([
+    
+            'category_id'       => $request->category_id,
+            'title'             => $request->title,
+            'subtitle'          => $request->subtitle,
+            'slug'              => str_slug($request->title, '-'),
+            'about'             => $request->about_subcategory, 
+            'image'             => $name,
+            'status_id'         => $request->status_id,
+       ]);   
+
+        $subcategory->save();
+
+        Session::flash('success', 'Subcategory successfully created!');
+     
+        return redirect()->route('subcategories.show', $subcategory->slug);
     }
 
     /**
@@ -72,9 +86,14 @@ class DashboardSubcategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $subcategory = Subcategory::where('slug', $slug)->first(); 
+        $page_name = 'Edit: ' . $subcategory->title;
+        $categories = Category::orderBy('title', 'asc')->pluck('title', 'id')->all();
+
+          return view('dashboard.subcategories.edit', compact('subcategory', 'categories', 'page_name'));
+
     }
 
     /**
@@ -84,9 +103,24 @@ class DashboardSubcategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SubcategoriesRequest $request, $slug)
     {
-        //
+        $input = $request->all();
+        $input['slug'] = str_slug($request->title, '-');
+
+        if ( $file = $request->file('image')) {
+            $name = time() . '-' . $file->getClientOriginalName();
+            $file->move('images', $name);
+            $input['image'] = $name;
+        }
+
+        $subcategory = Subcategory::where('slug', $slug)->first();
+        $subcategory->fill($input)->save();
+        $page_name = $subcategory->title;
+
+        Session::flash('success', 'Subcategory successfully updated!');
+     
+        return redirect()->route('admin-subcategories.show', $subcategory->slug);
     }
 
     /**
@@ -95,8 +129,50 @@ class DashboardSubcategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($slug)
     {
-        //
+        $subcategory = Subcategory::where('slug', $slug)->first();
+
+        if(count($subcategory->chanels) == 0 ) {
+
+            $subcategory->delete();
+            Session::flash('success', 'Subcategory '  . $subcategory->title . ' successfully deleted!');
+
+            return redirect()->route('subcategories.index');
+
+        } else {
+
+            Session::flash('error', $subcategory->title . ' is not empty and can\'t be deleted!');
+
+            return redirect()->route('subcategories.show', $subcategory->slug);
+        }
+
+        
+    }     
+
+    public function trashed()
+    {
+        $subcategories = Subcategory::onlyTrashed()->get();
+        $page_name = 'Trashed Subcategories';
+
+        return view('dashboard.subcategories.trashed', compact('subcategories', 'page_name'));
+    }
+
+    public function restore($slug)
+    {
+        $subcategory = Subcategory::withTrashed()->where('slug', $slug)->first();
+        $subcategory->restore();
+
+        Session::flash('success', 'Subcategory successfully restored!');
+        return redirect()->route('subcategories.trashed');
+    }
+
+    public function kill($slug)
+    {
+        $subcategory = Subcategory::withTrashed()->where('slug', $slug)->first();
+        $subcategory->forceDelete();
+
+        Session::flash('success', 'Subcategory pemanently deleted!');
+        return redirect()->route('subcategories.trashed');
     }
 }

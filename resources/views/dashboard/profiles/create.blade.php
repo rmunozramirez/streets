@@ -36,11 +36,11 @@
 					    	<div class="tab-content">
 					    	    <div class="tab-pane active" id="tab-user">
 					    	    	<div class="m-t-md">
-										<h2>First, create an user</h2>
+										<h3>First, create an user</h3>
 									    <div class="row justify-content-center">
 									        <div class="col-md-8">
 									            <div class="card">
-									                 <div class="card-body">
+									                 <div class="card-body pt-5">
 									                    <form method="POST" action="{{ route('register') }}">
 									                        @csrf
 
@@ -110,9 +110,9 @@
 					    	    </div>
 								<div class="tab-pane" id="tab-profile">
 									<div class="m-t-md">
-										<h2>Profile information</h2>
+										<h3>Profile information</h3>
 										{!!Form::open(array('route' => 'profiles.store', 'files' => true)) !!}   
-										<div class="row">        
+										<div class="row pt-5">        
 											<div class="col-md-4"> 
 												<i class="fa fa-image fa-5x"></i>
 												<div class=" pt-5">

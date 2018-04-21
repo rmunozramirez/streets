@@ -11,11 +11,7 @@ use Session;
 
 class DashboardCategoriesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $trash_cat = Category::onlyTrashed()->get();
@@ -25,11 +21,6 @@ class DashboardCategoriesController extends Controller
        return view('dashboard.categories.index', compact('all_cat', 'page_name', 'trash_cat'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $all_roles = Role::pluck('name', 'id')->all();
@@ -40,12 +31,30 @@ class DashboardCategoriesController extends Controller
         return view('dashboard.categories.create', compact('all_cat', 'page_name', 'all_roles', 'all_st'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function store(CategoriesRequest $request)
+    {
+        $file = $request->file('image');
+        $name = time() . '-' . $file->getClientOriginalName();
+        $file->move('images', $name);
+
+        $category = Category::create([
+
+            'title'             => $request->title,
+            'status_id'         => $request->status_id,
+            'subtitle'          => $request->subtitle,
+            'slug'              => str_slug($request->title, '-'),
+            'about'             => $request->about_category, 
+            'image'             => $name,      
+
+       ]);   
+
+        $category->save();
+
+        Session::flash('success', 'Category successfully created!');
+     
+        return redirect()->route('categories.show', $category->slug);
+    }
+
     public function show($slug)
     {
         $category = Category::withCount('subcategories')->where('slug', $slug)->first();
@@ -53,27 +62,33 @@ class DashboardCategoriesController extends Controller
 
         return view('dashboard.categories.show', compact('category', 'page_name'));
     }
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+
+    public function edit($slug)
     {
-        //
+        $category = Category::where('slug', $slug)->first(); 
+        $page_name = 'Edit: ' . $category->title;
+
+          return view('categories.edit', compact('category', 'page_name'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(CategoriesRequest $request, $slug)
     {
-        //
+        $input = $request->all();
+        $input['slug'] = str_slug($request->title, '-');
+
+        if ( $file = $request->file('image')) {
+            $name = time() . '-' . $file->getClientOriginalName();
+            $file->move('images', $name);
+            $input['image'] = $name;
+        }
+
+        $category = Category::where('slug', $slug)->first();
+        $category->fill($input)->save();
+        $page_name = $category->title;
+
+        Session::flash('success', 'Category successfully updated!');
+     
+        return redirect()->route('categories.show', $category->slug);
     }
 
     /**
@@ -82,8 +97,48 @@ class DashboardCategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($slug)
     {
-        //
+        $category = Category::where('slug', $slug)->first();
+
+        if(count($category->subcategories) == 0 ) {
+
+            $category->delete();
+            Session::flash('success', $category->title . ' successfully deleted!');
+
+            return redirect()->route('categories.index');
+
+        } else {
+
+            Session::flash('error', $category->title . ' is not empty and can\'t be deleted!');
+
+            return redirect()->route('categories.show', $category->slug);
+        }
+    }     
+
+    public function trashed()
+    {
+        $categories = Category::onlyTrashed()->get();
+        $page_name = 'Trashed Categories';
+
+        return view('dashboard.categories.trashed', compact('categories', 'page_name'));
+    }
+
+    public function restore($slug)
+    {
+        $category = Category::withTrashed()->where('slug', $slug)->first();
+        $category->restore();
+
+        Session::flash('success', 'Category successfully restored!');
+        return redirect()->route('categories.trashed');
+    }
+
+    public function kill($slug)
+    {
+        $category = Category::withTrashed()->where('slug', $slug)->first();
+        $category->forceDelete();
+
+        Session::flash('success', 'Category pemanently deleted!');
+        return redirect()->route('categories.trashed');
     }
 }

@@ -21,12 +21,9 @@ class DashboardDiscussionsController extends Controller
 
         $discussions = Discussion::orderBy('created_at', 'asc')->paginate(4);
         $all_disc = Discussion::all();
-        $active_disc = Discussion::where('status_id', 1)->paginate(4);
-        $bann_disc = Discussion::where('status_id', 2)->paginate(4);
-        $trash_disc = Discussion::where('status_id', 3)->paginate(4);
         $page_name = 'Discussion';
 
-       return view('dashboard.discussions.index', compact('discussions', 'page_name', 'all_disc', 'active_disc', 'bann_disc', 'trash_disc'));
+       return view('dashboard.discussions.index', compact('discussions', 'page_name', 'all_disc'));
     }
 
     /**
@@ -50,9 +47,35 @@ class DashboardDiscussionsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DiscussionRequest $request)
     {
-        //
+
+        $file = $request->file('image');
+        $name = time() . '-' . $file->getClientOriginalName();
+        $file->move('images', $name);
+
+        $user = Auth::user();
+        $profile = Profile::where('user_id', $user->id)->first();
+
+        $discussion = Discussion::create([
+    
+            'profile_id'    => $profile->id,
+            'status_id'         => $request->status_id,
+            'title'         => $request->title,
+            'slug'          => str_slug($request->title, '-'),      
+            'about'          => $request->body,            
+            'image'         => $name,
+  
+       ]);   
+
+        $discussion->save();
+        $slug = $user->slug;
+        $slug_d = $discussion->slug;
+        $page_name = $discussion->title;
+
+        Session::flash('success', 'Discussion successfully created!');
+     
+        return redirect()->route('dashboard.discussions.show', compact( 'page_name', 'slug', 'slug_d'));
     }
 
     /**
@@ -69,27 +92,39 @@ class DashboardDiscussionsController extends Controller
         return view('dashboard.discussions.show', compact('discussion', 'page_name'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $discussion = Discussion::where('slug', $slug)->first();
+        $user = Auth::user();
+        $profile = Profile::where('user_id', $user->id)->first();
+        $all_user_discussions = Discussion::where('profile_id', $profile->id)->count();
+        $page_name = 'Edit: ' . $discussion->title;
+
+        return view('dashboard.discussions.edit', compact('discussion', 'page_name', 'user', 'all_user_discussions'));
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(DiscussionRequest $request, $slug)
     {
-        //
+
+        $input = $request->all();
+        $input['slug'] = str_slug($request->title, '-');
+
+        if ( $file = $request->file('image')) {
+            $name = time() . '-' . $file->getClientOriginalName();
+            $file->move('images', $name);
+            $input['image'] = $name;
+        }
+
+        $discussion = Discussion::where('slug', $slug_d)->first();
+        $discussion->fill($input)->save();
+        $page_name = $discussion->title;
+        $slug = Auth::user()->slug;
+        $slug_d = $discussion->slug;
+
+        Session::flash('success', 'Discussion successfully updated!');
+     
+        return redirect()->route('dashboard.discussions.show', compact('slug', 'slug_d'));
     }
 
     /**
@@ -98,8 +133,67 @@ class DashboardDiscussionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($slug)
     {
-        //
+
+        $discussion = Discussion::where('slug', $slug_d)->first();
+        $user = Auth::user();
+        $discussion->delete();
+
+        Session::flash('success', 'Discussion successfully deleted!');
+
+        return redirect()->route('dashboard.discussions.index', $user->slug);
     }
+
+    public function trashed($slug)
+    {
+        $user = Auth::user();
+        $profile = Profile::where('user_id', $user->id)->first();
+        $discussions = Discussion::where('profile_id', $profile->id)->onlyTrashed()->paginate(4);
+        $all_user_discussions = Discussion::where('profile_id', $profile->id)->count();
+        $page_name = 'Trashed discussion';
+
+        return view('dashboard.discussions.trashed', compact('discussions', 'user', 'slug', 'all_user_discussions','page_name'));
+    }
+
+    public function restore($slug)
+    {
+        $discussion = Discussion::withTrashed()->where('slug', $slug_d)->first();
+        $discussion->restore();
+
+        Session::flash('success', 'Discussion successfully restored!');
+        return redirect()->route('dashboard.discussions.trashed', $slug);
+    }
+
+    public function kill($slug)
+    {
+        $discussion = Discussion::withTrashed()->where('slug', $slug_d)->first();
+        if ($discussion != null) {
+            $discussion->forceDelete();
+        } else {
+            $user = Auth::user();
+            Session::flash('info', 'Discussion does not exist!');
+            return redirect()->route('dashboard.discussions.index', compact('user'));
+        }
+
+        Session::flash('success', 'Discussion pemanently deleted!');
+        return redirect()->route('dashboard.discussions.trashed', $slug);
+    }
+
+    public static  function all_likes($id) {
+
+        $user = User::find($id);
+        $profile = Profile::where('user_id', $user->id);
+        $discussions = Discussion::where('profile_id', $profile->id)->get();
+        $replies = array();
+        $all_likes = "";
+        foreach ($discussions as $discussion) {
+            foreach ($discussion->replies as $reply) {
+                $all_likes = $all_likes + count($reply->likes);
+            }
+        }
+
+        return $all_likes;
+    } 
+
 }

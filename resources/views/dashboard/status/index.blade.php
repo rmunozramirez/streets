@@ -9,7 +9,7 @@
                 <h2>{!! $page_name !!} </h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="{{route('index')}}"> Dashboard</a>
+                        <a href="{{route('index')}}">Dashboard</a>
                     </li>
                     <li class="active">
                         <i class="fas fa-pencil-alt"></i> All {!! $page_name !!}es
@@ -34,7 +34,6 @@
 								            <tr>
 							                	<th>Title</th>
 							                	<th>Element</th>
-
 								            </tr>
 								         </thead>
 								         @foreach ($all_st as $status)
@@ -42,13 +41,10 @@
 								         	<tbody>
 							                	<tr>
 							                		<td>
-														<a href="{{route($status->statusable_type . '.show', $status->statusable->slug)}}">
-												               	<figure>
-													            	<img height="50" width="50" src="{{URL::to('/images/' . $status->statusable->image)}}" alt="{{ $status->statusable->title }}" name="{{ $status->statusable->title }}">
-													            	<span class="pl-5"> {{$status->statusable->title}}</span>
-													            </figure>               	
-												               </a>
-							                			</a>
+										               	<figure>
+											            	<img height="50" width="50" src="{{URL::to('/images/' . $status->statusable->image)}}" alt="{{ $status->statusable->title }}" name="{{ $status->statusable->title }}">
+											            	<span class="pl-5"> {{$status->statusable->title}}</span>
+											            </figure>        
 							                		</td>					                		
 							                		<td>
 							                			<a href="{{route($status->statusable_type . '.index')}}">{{$status->statusable_type}}</a>
@@ -73,29 +69,23 @@
 							                	<th>Status</th>
 								            </tr>
 								         </thead>
-								         <tbody>
-								            <tr>
-								            	@foreach ($all_st as $status)
-								            		@if($status->status === 'inactive')
-									                	<tr>
-									                		<td>
-																<a href="{{route($status->statusable_type . '.show', $status->statusable->slug)}}">
-														               	<figure>
-															            	<img height="50" width="50" src="{{URL::to('/images/' . $status->statusable->image)}}" alt="{{ $status->statusable->title }}" name="{{ $status->statusable->title }}">
-															            	<span class="pl-5"> {{$status->statusable->title}}</span>
-															            </figure>               	
-														               </a>
-									                			</a>
-									                		</td>					                		
-									                		<td><a href="{{route($status->statusable_type . '.index')}}">{{$status->statusable_type}}</a></td>					                		
-									                		<td><a href="{{route('status.show',  $status->status, $status->status)}}">{{$status->status}}</a></td>
-									                	</tr>
-								                	@endif
-							               	 	@endforeach
-
-
-								            </tr>
-								         </tbody>
+								         @foreach ($all_st as $status)
+								            @if($status->status === 'inactive')
+								         	<tbody>
+							                	<tr>
+							                		<td>
+										               	<figure>
+											            	<img height="50" width="50" src="{{URL::to('/images/' . $status->statusable->image)}}" alt="{{ $status->statusable->title }}" name="{{ $status->statusable->title }}">
+											            	<span class="pl-5"> {{$status->statusable->title}}</span>
+											            </figure>        
+							                		</td>					                		
+							                		<td>
+							                			<a href="{{route($status->statusable_type . '.index')}}">{{$status->statusable_type}}</a>
+							                		</td>					                		
+							                	</tr>
+								         	</tbody>
+								         @endif
+							             @endforeach
 								      	</table>
 									</div>	
 								</div>

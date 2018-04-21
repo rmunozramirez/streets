@@ -52,7 +52,7 @@
 						               </td>
 						               <td>
 							            	<div class="col-md-6">
-								            	{!! Form::open(['route' => ['channels.destroy', $channel->slug], 'method' => 'DELETE']) !!}
+								            	{!! Form::open(['route' => ['channels.kill', $channel->slug], 'method' => 'DELETE']) !!}
 
 												{!! Form::submit('Delete', ['class' => 'btn btn-block btn-danger']) !!}
 

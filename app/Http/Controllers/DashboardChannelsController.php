@@ -5,17 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Profile;
 use App\Channel;
+use App\Subcategory;
 use App\Status;
 use App\Role;
 use Session;
 
 class DashboardChannelsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
 
@@ -27,38 +24,41 @@ class DashboardChannelsController extends Controller
        return view('dashboard.channels.index', compact('channels', 'page_name', 'all_ch', 'trash_ch'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $all_roles = Role::pluck('name', 'id')->all();
-        $all_st = Status::pluck('name', 'id')->all();
+        $all_st = Status::pluck('status', 'id')->all();
+        $all_sub = Subcategory::pluck('title', 'id')->all();
         $all_ch = Channel::all();
         $page_name =  'Create a new Channel';
 
-        return view('dashboard.channels.create', compact('all_ch', 'page_name', 'all_roles', 'all_st'));
+        return view('dashboard.channels.create', compact('all_ch', 'page_name', 'all_roles', 'all_st', 'all_sub'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(ChannelsRequest $request)
     {
-        //
+        $file = $request->file('image');
+        $name = time() . '-' . $file->getClientOriginalName();
+        $file->move('images', $name);
+
+        $channel = Channel::create([
+
+            'subcategory_id' => $request->subcategory_id,
+            'profile_id'    =>  $request->profile_id, 
+            'title'         =>  $request->title,
+            'slug'          =>  str_slug($request->title, '-'),      
+            'subtitle'      =>  $request->subtitle,                
+            'about'         =>  $request->about_channel,            
+            'image'         =>  $name,
+
+       ]);   
+
+        $channel->save();
+
+        Session::flash('success', 'Channel successfully created!');
+        return redirect()->route('channels.show', $channel->slug);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($slug)
     {
         $channel = Channel::where('slug', $slug)->first();
@@ -67,27 +67,37 @@ class DashboardChannelsController extends Controller
         return view('dashboard.channels.show', compact('channel', 'page_name'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+
+        $all_ch = Channel::with('statuses')->get();
+        $channel = Channel::where('slug', $slug)->first(); 
+        $page_name = 'Edit: ' . $channel->title;
+        $all_sub = Subcategory::orderBy('title', 'asc')->pluck('title', 'id')->all();
+
+
+          return view('dashboard.channels.edit', compact('channel', 'subcategories', 'page_name', 'all_ch'));
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(ChannelsRequest $request, $slug)
     {
-        //
+         $input = $request->all();
+        $input['slug'] = str_slug($request->title, '-');
+
+        if ( $file = $request->file('image')) {
+            $name = time() . '-' . $file->getClientOriginalName();
+            $file->move('images', $name);
+            $input['image'] = $name;
+        }
+
+        $channel = Channel::where('slug', $slug)->first();
+        $channel->fill($input)->save();
+        $page_name = $channel->title;
+
+        Session::flash('success', 'Channel successfully updated!');
+     
+        return redirect()->route('admin-channels.show', $channel->slug); 
     }
 
 

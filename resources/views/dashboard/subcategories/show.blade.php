@@ -59,7 +59,7 @@
 	    			@if($subcategory->channels_count > 0 )
 				<div class="row">
 					<div class="col-md-12">
-						@if(count($subcategory->channels_count) > 1 )
+						@if($subcategory->channels_count > 1 )
 							<h3>{{$subcategory->channels_count}} channels under {{$subcategory->title}}</h3>
 						@else
 							<h3>One channel under {{$subcategory->title}}</h3>

@@ -19,7 +19,8 @@ class CreateChannelsTable extends Migration
             $table->integer('profile_id')->index()->unsigned();
             $table->string('title')->unique();  
             $table->string('slug')->unique();  
-            $table->string('subtitle')->nullable();  
+            $table->string('subtitle')->nullable();
+            $table->text('about')->nullable();  
             $table->string('image')->unique();
             $table->integer('likes')->unsigned()->default(0);
             $table->softDeletes();
