@@ -51,16 +51,16 @@
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row wrapper border-bottom white-bg">
 			<div class="inside">
-	    			@if($subcategory->channels_count > 0 )
+	    	@if($subcategory->channels_count > 0 )
 				<div class="row">
 					<div class="col-md-12">
 						@if($subcategory->channels_count > 1 )
-							<h3>{{$subcategory->channels_count}} channels under {{$subcategory->title}}</h3>
+							<h2>{{$subcategory->channels_count}} channels under {{$subcategory->title}}</h2>
 						@else
-							<h3>One channel under {{$subcategory->title}}</h3>
+							<h2>One channel under {{$subcategory->title}}</h2>
 						@endif
 					</div>
-				
+				<hr />
 					<table class="table table-striped table-hover">
 				         <thead>
 				            <tr>
@@ -86,7 +86,7 @@
 				      </table>	
 				</div>
 			@else
-				<div class="col-md-12"><h3>No subcategories under {{$category->title}}</h3></div>
+				<div class="col-md-12"><h2>No channels under <strong>{{$subcategory->title}}</strong></h2></div>
 			@endif
 			</div>
 		</div>

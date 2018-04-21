@@ -36,6 +36,7 @@ class HomeController extends Controller
     {
         $home_categories = Category::all();
         $page_name = 'Home page';
+
         return view('welcome', compact('page_name', 'home_categories'));
     }
 

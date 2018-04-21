@@ -21,7 +21,8 @@ class DashboardCategoriesController extends Controller
     public function index()
     {
         $trash_cat = Category::onlyTrashed()->get();
-        $all_ = Category::all();
+        $all_ = Category::with('statuses')->get();
+
         $page_name = 'categories';
 
        return view('dashboard.categories.index', compact('all_cat', 'page_name', 'trash_cat', 'all_'));

@@ -4,9 +4,9 @@
 		<h2 class="text-center">Browse our Concerts</h2>
 		<!-- div class="pull-right mb-3">{!! Html::linkRoute('categories.index', 'See all Categories') !!}</div -->
 							    <div class="meta pull-right">
-					            	<i class="fa fa-tag"></i> Categories: <a href="{{route('categories.index')}}">{{count($all_categories)}}</a>
-					            	<i class="fa fa-tags"></i> Subcategories: <a href="{{route('subcategories.index')}}">{{count($all_subcategories)}}</a>
-					            	<i class="far fa-newspaper"></i> Chanels: <a href="{{route('chanels.index')}}">{{count($all_chanels)}}</a>
+					            	<i class="fa fa-tag"></i> Categories: <a href="{{route('categories.index')}}">{{count($all_cat)}}</a>
+					            	<i class="fa fa-tags"></i> Subcategories: <a href="{{route('subcategories.index')}}">{{count($all_sub)}}</a>
+					            	<i class="far fa-newspaper"></i> Channels: <a href="{{route('channels.index')}}">{{count($all_ch)}}</a>
 					            </div>
 					       
 	</div>
@@ -15,7 +15,7 @@
 
 	<div class="container">
 		<div class="row">
-			 @for ($i = 0; $i <= 3; $i++)
+			 @for ($i = 0; $i <= 2; $i++)
 			<div class="col-lg-3 col-md-4">	
 				<div class="card hovercard">
 					<img class="cardheader" src="{{URL::to('/images/' . $home_categories[$i]->image)}}">

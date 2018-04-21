@@ -1,5 +1,4 @@
 
-<?php if($page_name == 'Home page') : ?>
 <section class="blue py-5 top-100">	
 
 	<div class="container">		
@@ -52,11 +51,6 @@
 		</div>
 	</div>
 
-<?php else : ?>
-
-<section class="blue py-5">	
-
-<?php endif ?>
 
 	<div class="container pb-5 text-center py-5">		
 	    <div class="row">			

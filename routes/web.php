@@ -7,13 +7,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
-//admin Dashboard
-	Route::get('dashboard', 'DashboardController@index')->name('dashboard');
-
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function() {
 
 //admin 
+	//admin Dashboard
+	Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+
 //admin Statuses
 	Route::resource('status', 'DashboardStatusController');
 

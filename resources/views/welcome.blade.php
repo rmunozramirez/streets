@@ -5,13 +5,13 @@
 
     <section id="landing-page">       
         <!-- Navigation Section -->
-        @include('partials.navigation')
+        @include('frontend.partials.navigation')
 
         <!-- Upper section -->
-        @include('partials.uppersection')  
+        @include('frontend.partials.uppersection')  
         
         <!-- Featured home section -->
-        @include('partials.featured')
+        @include('frontend.partials.featured')
 
     </section>
     

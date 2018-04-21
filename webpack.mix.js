@@ -16,9 +16,6 @@ mix.js('resources/assets/js/app.js', 'public/js')
 
 mix.styles([
 
-    'resources/assets/css/libs/libs.css',
-    'resources/assets/css/libs/app.css',
-    'resources/assets/css/libs/admin.css',
     'resources/assets/css/libs/font-awesome.css',
     'resources/assets/css/libs/sky-forms.css',
     'resources/assets/css/libs/sky-mega-menu.css',

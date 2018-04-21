@@ -30,7 +30,7 @@
                     </h2>
                     <ol class="breadcrumb">
                         <li>
-                            <a href="{{route('index')}}"> Dashboard</a>
+                            <a href=""> Dashboard</a>
                         </li>
                         <li class="active">
                             <i class="fas fa-pencil-alt"></i> {{ ucfirst(trans($page_name)) }}

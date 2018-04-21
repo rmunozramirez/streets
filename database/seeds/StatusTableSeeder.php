@@ -30,6 +30,30 @@ class StatusTableSeeder extends Seeder
             'status'            =>  'active',
         ]); 
 
+        App\Status::create ([
+            'statusable_id'     =>  4,
+            'statusable_type'   =>  'categories',
+            'status'            =>  'inactive',
+        ]); 
+
+        App\Status::create ([
+            'statusable_id'     =>  5,
+            'statusable_type'   =>  'categories',
+            'status'            =>  'inactive',
+        ]); 
+
+        App\Status::create ([
+            'statusable_id'     =>  6,
+            'statusable_type'   =>  'categories',
+            'status'            =>  'active',
+        ]); 
+
+        App\Status::create ([
+            'statusable_id'     =>  7,
+            'statusable_type'   =>  'categories',
+            'status'            =>  'active',
+        ]); 
+
 //Subcategories
         App\Status::create ([
             'statusable_id'     =>  1,
@@ -57,6 +81,66 @@ class StatusTableSeeder extends Seeder
 
         App\Status::create ([
             'statusable_id'     =>  5,
+            'statusable_type'   =>  'subcategories',
+            'status'            =>  'inactive',
+        ]); 
+
+        App\Status::create ([
+            'statusable_id'     =>  6,
+            'statusable_type'   =>  'subcategories',
+            'status'            =>  'active',
+        ]); 
+
+        App\Status::create ([
+            'statusable_id'     =>  7,
+            'statusable_type'   =>  'subcategories',
+            'status'            =>  'active',
+        ]); 
+
+        App\Status::create ([
+            'statusable_id'     =>  8,
+            'statusable_type'   =>  'subcategories',
+            'status'            =>  'inactive',
+        ]); 
+
+        App\Status::create ([
+            'statusable_id'     =>  9,
+            'statusable_type'   =>  'subcategories',
+            'status'            =>  'inactive',
+        ]); 
+
+        App\Status::create ([
+            'statusable_id'     =>  10,
+            'statusable_type'   =>  'subcategories',
+            'status'            =>  'inactive',
+        ]); 
+
+        App\Status::create ([
+            'statusable_id'     =>  11,
+            'statusable_type'   =>  'subcategories',
+            'status'            =>  'active',
+        ]); 
+
+        App\Status::create ([
+            'statusable_id'     =>  12,
+            'statusable_type'   =>  'subcategories',
+            'status'            =>  'active',
+        ]); 
+
+        App\Status::create ([
+            'statusable_id'     =>  13,
+            'statusable_type'   =>  'subcategories',
+            'status'            =>  'inactive',
+        ]); 
+
+        App\Status::create ([
+            'statusable_id'     =>  14,
+            'statusable_type'   =>  'subcategories',
+            'status'            =>  'active',
+        ]); 
+
+        App\Status::create ([
+            'statusable_id'     =>  15,
             'statusable_type'   =>  'subcategories',
             'status'            =>  'inactive',
         ]); 

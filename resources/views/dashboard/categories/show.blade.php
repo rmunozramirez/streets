@@ -50,9 +50,9 @@
 				<div class="row">
 					<div class="col-md-12">
 						@if(count($category->subcategories) > 1 )
-							<h3>{{$category->subcategories_count}} subcategories under {{$category->title}}</h3>
+							<h2>{{$category->subcategories_count}} subcategories under {{$category->title}}</h2>
 						@else
-							<h3>One subcategory under {{$category->title}}</h3>
+							<h2>One subcategory under {{$category->title}}</h2>
 						@endif
 					</div>
 				
@@ -81,7 +81,7 @@
 				      </table>	
 				</div>
 			@else
-				<div class="col-md-12"><h3>No subcategories under {{$category->title}}</h3></div>
+				<div class="col-md-12"><h2>No subcategories under {{$category->title}}</h2></div>
 			@endif
 			</div>
 		</div>

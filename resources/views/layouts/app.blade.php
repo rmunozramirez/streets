@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 
-    @include('partials.header')
+    @include('frontend.partials.header')
 
 <body>
     <div id="app">
@@ -11,21 +11,21 @@
 
             @if($page_name != 'Home page')
         
-                @include('partials.bottomsection-inner') 
+                @include('frontend.partials.bottomsection-inner') 
 
              @endif
 
                 @yield('widgets')
 
-            @include('partials.content-footer')
+            @include('frontend.partials.content-footer')
         
         </main>  
 
-        @include('partials.footer')   
+        @include('frontend.partials.footer')   
 
     </div>
 
-        @include('partials.scripts') 
+        @include('frontend.partials.scripts') 
     <script>
         //toastr
 

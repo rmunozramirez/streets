@@ -12,7 +12,7 @@
     <title>Street Box @yield('title')</title>
 
     <!-- Styles -->
-    @include('partials._css-files')
+    @include('frontend.partials.css-files')
 
 
 	<!--[if lt IE 10]>
