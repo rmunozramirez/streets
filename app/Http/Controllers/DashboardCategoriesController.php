@@ -24,11 +24,11 @@ class DashboardCategoriesController extends Controller
     public function create()
     {
         $all_roles = Role::pluck('name', 'id')->all();
-        $all_st = Status::pluck('name', 'id')->all();
-        $all_cat = Category::all();
-        $page_name =  'Create a new Category';
+        $all_st = Status::pluck('status', 'id')->all();
+        $all_ = Category::all();
+        $page_name =  'categories';
 
-        return view('dashboard.categories.create', compact('all_cat', 'page_name', 'all_roles', 'all_st'));
+        return view('dashboard.categories.create', compact('all_', 'page_name', 'all_roles', 'all_st'));
     }
 
     public function store(CategoriesRequest $request)
@@ -118,10 +118,10 @@ class DashboardCategoriesController extends Controller
 
     public function trashed()
     {
-        $categories = Category::onlyTrashed()->get();
+        $trash_cat = Category::onlyTrashed()->get();
         $page_name = 'Trashed Categories';
 
-        return view('dashboard.categories.trashed', compact('categories', 'page_name'));
+        return view('dashboard.categories.trashed', compact('trash_cat', 'page_name'));
     }
 
     public function restore($slug)
