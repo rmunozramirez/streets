@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', 'HomeController@landing');
 
 Auth::routes();
 
@@ -22,7 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function() {
 
 //admin Dashboard
-	Route::get('/', 'DashboardController@dashboard')->name('index');
+	Route::resource('/', 'DashboardController');
 
 //admin 
 //admin Statuses
