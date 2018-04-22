@@ -10458,6 +10458,13 @@ svg:not(:root).svg-inline--fa {
   height: 100vh;
 }
 
+#landing-page .card {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(50%);
+          transform: translateY(50%);
+}
+
 #landing-page-webroom {
   background-attachment: fixed;
   background-image: url("/images/metallica.jpg");

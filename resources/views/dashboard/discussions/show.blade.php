@@ -1,32 +1,21 @@
-@extends('layouts.app')
-@section ('title', "| $page_name")
+@extends('dashboard.index')
+@section ('title', "| Discussions")
 @section('content')
-
-
-<section id="inner-page" class="header">		
-<!-- Navigation Section -->
-    @include('partials._navigation')
-
-</section>
-
-<section id="content">
-
-	@include ('partials._inner-title-blog')
-	
-    <div  id="contenido"  class="container left-right-shadow">	
-		<div class="inside">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row wrapper border-bottom white-bg">
+    	<div class="inside">
 			<h2>{!! $discussion->title !!} </h2>
 			<div class="row">
 				<div class="col-md-9">
 					<div class="breadcrumb">
 						<a href="{{url('/')}}"> Home</a>
-						 <a href="{{route('forum.index')}}">Forum</a> 
+						 <a href="{{route('discussions.index')}}">discussions</a> 
 						{!! $page_name !!}
 					</div>	
 				</div>
 				<div class="col-md-3">
 		            <div class="under-meta pull-right">
-		            	<i class="fas fa-chevron-left"></i> <a href="{{route('forum.index')}}">Back to Forum</a>
+		            	<i class="fas fa-chevron-left"></i> <a href="{{route('discussions.index')}}">Back to discussions</a>
 		            	<i class="fas fa-plus"></i></i> <a href="#reply">Answer</a> 
 		            </div>
 		        </div>					
@@ -76,12 +65,12 @@
 								  	</div>
 								  	<div class="card-footer text-muted">
 								    	@if($reply->is_like_by_auth_user())
-								    		<a href="{{route('forum.unlike', $reply->id)}}" class="btn btn-danger">
+								    		<a href="{{route('discussions.unlike', $reply->id)}}" class="btn btn-danger">
 								    		<i class="fas fa-thumbs-down"></i>
 								    		<span class="badge">{{ $reply->likes->count() }}</span>
 								    		</a>
 								    	@else
-								    		<a href="{{route('forum.like', $reply->id)}}" class="btn btn-success">
+								    		<a href="{{route('discussions.like', $reply->id)}}" class="btn btn-success">
 								    		<i class="fas fa-thumbs-up"></i>
 								    		<span class="badge">{{ $reply->likes->count() }}</span>
 								    		</a>
@@ -96,11 +85,10 @@
 		            </div>         
 	            </div>
             </div>
-
         	<div class="row">
 	        	<div id="reply" class="card-body ">
 		            <div class="col-lg-8 col-lg-offset-4"><hr />
-		            	{!! Form::open(['route' => ['forum.reply', $discussion->slug], 'method' => 'POST']) !!}
+		            	{!! Form::open(['route' => ['discussions.reply', $discussion->slug], 'method' => 'POST']) !!}
 		            	{!!Form::label('body', 'Answer:', array('class' => 'form-spacing-top'))!!}
 				        {!!Form::textarea('body', null, array('id' => 'summernote','class' => 'form-control'))!!} 
 				         {!!Form::submit('Your Answer', array('class' => 'mt-5 btn btn-success btn-block', 'onclick' => 'clearform()')) !!}
@@ -108,10 +96,7 @@
 		            </div>         
 	            </div>
             </div>
-
-
 		</div>	
-		
 	</div>
 </section>
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Erstellungszeit: 21. Apr 2018 um 23:50
+-- Erstellungszeit: 22. Apr 2018 um 14:51
 -- Server-Version: 5.7.19
 -- PHP-Version: 7.2.2
 
@@ -119,6 +119,20 @@ INSERT INTO `discussions` (`id`, `profile_id`, `title`, `slug`, `body`, `image`,
 -- --------------------------------------------------------
 
 --
+-- Tabellenstruktur für Tabelle `likes`
+--
+
+CREATE TABLE `likes` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `reply_id` int(10) UNSIGNED NOT NULL,
+  `profile_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Tabellenstruktur für Tabelle `migrations`
 --
 
@@ -141,7 +155,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (196, '2018_04_17_122518_create_channels_table', 1),
 (197, '2018_04_17_131033_create_subcategories_table', 1),
 (198, '2018_04_17_131237_create_categories_table', 1),
-(199, '2018_04_17_150649_create_discussions_table', 1);
+(199, '2018_04_17_150649_create_discussions_table', 1),
+(200, '2018_04_22_143544_create_replies_table', 2),
+(201, '2018_04_22_144220_create_likes_table', 2);
 
 -- --------------------------------------------------------
 
@@ -193,6 +209,21 @@ INSERT INTO `profiles` (`id`, `user_id`, `title`, `role_id`, `slug`, `birthday`,
 (5, 5, 'Los Aldeano', 3, 'los-aldeano', '1977-01-11', 'Los Aldeanos, aunque tiene cierto parecido con el nombre de Aldo, no es este realmente la inspiración del nombre del grupo. \"Somos personas humildes que vivimos en un país pequeño, en una ciudad pequeña, el barrio es pequeño; vivimos en una aldea\", de ahí es donde viene el nombre Los Aldeanos. Y entienden por aldea un lugar donde viven las personas y estas cooperan entre todas y todas tienen el mismo objetivo y aunque son caracteres diferentes y formas de hacer distinta, todo el mundo sabe que hay que halar en la misma dirección.', 'aldeano.jpg', 'http://el-aldeano.cu', 'https://facebook.com', 'https://googleplus.com', 'https://twitter.com', 'https://linkedin.com', 'https://youtube.com', '2018-04-21 20:48:31', '2018-04-21 20:48:31', NULL),
 (6, 6, 'Die Ostalgie', 4, 'die-ostalgie', '1982-11-25', 'Para tú para tú bananaaaa potatoooo bappleees aaaaaah pepete hana dul sae poulet tikka masala ti aamoo! Uuuhhh aaaaaah gelatooo uuuhhh jiji hana dul sae daa aaaaaah hahaha. Ti aamoo! baboiii baboiii poopayee. Po kass potatoooo bee do bee do bee do hahaha hahaha poopayee daa pepete. Bee do bee do bee do me want bananaaa! Uuuhhh baboiii underweaaar me want bananaaa!', 'ostalgie.jpg', 'http://ostalgie.de', 'https://facebook.com', 'https://googleplus.com', 'https://twitter.com', 'https://linkedin.com', 'https://youtube.com', '2018-04-21 20:48:31', '2018-04-21 20:48:31', NULL),
 (7, 7, 'Die Gesunde Way of Dying', 4, 'die-gesunde-way-of-dying', '1978-03-05', 'Well, the way they make shows is, they make one show. That shows called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they are going to make more shows. Some pilots get picked and become television programs. Some do not, become nothing. She starred in one of the ones that became nothing.', 'dying.jpg', 'http://death-or-alive.com', 'https://facebook.com', 'https://googleplus.com', 'https://twitter.com', 'https://linkedin.com', 'https://youtube.com', '2018-04-21 20:48:31', '2018-04-21 20:48:31', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `replies`
+--
+
+CREATE TABLE `replies` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `profile_id` int(10) UNSIGNED NOT NULL,
+  `discussion_id` int(10) UNSIGNED NOT NULL,
+  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -340,10 +371,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Rafael Muñoz', 'rafaelmunoznl@yahoo.com', '$2y$10$I92VhPK3AP3KkbUYGV5TjuyUDD3atHNqt0SKA1iInDysxmiIplEyu', NULL, '2018-04-21 20:48:31', '2018-04-21 20:48:31'),
-(2, 'Enrique (Kike) Muñoz Botschka', 'kike901@gmail.com', '$2y$10$bd8x/bpuwpNK65wvQ4UcueOnTid1kIisBPr98xMwMXVweVn2GnkBa', NULL, '2018-04-21 20:48:31', '2018-04-21 20:48:31'),
-(3, 'Amelie Muñoz Botschka', 'amelie@yahoo.com', '$2y$10$7RHUl5Heqd7Gps7Am1slAuIlGn2Mo6mPEbKN976dVVoNQZKBR9z4e', NULL, '2018-04-21 20:48:31', '2018-04-21 20:48:31'),
-(4, 'Pamela Rodriguez', 'prdguez@yahoo.com', '$2y$10$DomDSugNREPop.8ibWw1MeMnhUDUH1raZn0wtD9OlusdEj76TnYRe', NULL, '2018-04-21 20:48:31', '2018-04-21 20:48:31'),
+(1, 'Rafael Muñoz', 'rafaelmunoznl@yahoo.com', '$2y$10$I92VhPK3AP3KkbUYGV5TjuyUDD3atHNqt0SKA1iInDysxmiIplEyu', 'b6RVIvTAhPzNeyQJ75vYNui3T3fguFSPQtN6Y2NiTFcqGfk2hfFXOGXpeE5K', '2018-04-21 20:48:31', '2018-04-21 20:48:31'),
+(2, 'Enrique (Kike) Muñoz Botschka', 'kike901@gmail.com', '$2y$10$bd8x/bpuwpNK65wvQ4UcueOnTid1kIisBPr98xMwMXVweVn2GnkBa', 'ACJEsvJQYwC3hY2h4lfIxIoH6XK3TmjPvAMKmjPDCGYH6JxKQyytdpLYnn2e', '2018-04-21 20:48:31', '2018-04-21 20:48:31'),
+(3, 'Amelie Muñoz Botschka', 'amelie@yahoo.com', '$2y$10$7RHUl5Heqd7Gps7Am1slAuIlGn2Mo6mPEbKN976dVVoNQZKBR9z4e', 'i12GzC7LkGS9KBF0o9DwkwsIYJyaZMi1GgNyy3AoOUVEy8HIrvgp9uh9fZTa', '2018-04-21 20:48:31', '2018-04-21 20:48:31'),
+(4, 'Pamela Rodriguez', 'prdguez@yahoo.com', '$2y$10$DomDSugNREPop.8ibWw1MeMnhUDUH1raZn0wtD9OlusdEj76TnYRe', 'cPpuG8OEiYFmug7dbaJvinw7xWngdruHLS1alJqxHHNxUgdz74FEvgciZmwN', '2018-04-21 20:48:31', '2018-04-21 20:48:31'),
 (5, 'Arnaldo Schmidth', 'a.schmidth@smidth-and-sons.com', '$2y$10$6XGM6YVLTl.TmZenl.JGw.xiII8e/PaKu1vk1OsdRMGlcsjX6PRP2', NULL, '2018-04-21 20:48:31', '2018-04-21 20:48:31'),
 (6, 'Miguel Strogov', 'mstrogov@stroganov.ru', '$2y$10$7ybOLhpX4Ci9X4v7rE8XYeonPjGkRIvC5ehcOC3klB4mvKEwkoMQK', NULL, '2018-04-21 20:48:31', '2018-04-21 20:48:31'),
 (7, 'Tomas Mann', 't.lee@lee.cn', '$2y$10$O88bb5/WJOdXhUzvhvFCwej0aFBYD7uuyKXJ/oABeDdfycEwDsoz.', NULL, '2018-04-21 20:48:31', '2018-04-21 20:48:31');
@@ -383,6 +414,14 @@ ALTER TABLE `discussions`
   ADD KEY `discussions_profile_id_index` (`profile_id`);
 
 --
+-- Indizes für die Tabelle `likes`
+--
+ALTER TABLE `likes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `likes_reply_id_index` (`reply_id`),
+  ADD KEY `likes_profile_id_index` (`profile_id`);
+
+--
 -- Indizes für die Tabelle `migrations`
 --
 ALTER TABLE `migrations`
@@ -401,6 +440,14 @@ ALTER TABLE `profiles`
   ADD PRIMARY KEY (`id`),
   ADD KEY `profiles_user_id_index` (`user_id`),
   ADD KEY `profiles_role_id_index` (`role_id`);
+
+--
+-- Indizes für die Tabelle `replies`
+--
+ALTER TABLE `replies`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `replies_profile_id_index` (`profile_id`),
+  ADD KEY `replies_discussion_id_index` (`discussion_id`);
 
 --
 -- Indizes für die Tabelle `roles`
@@ -455,16 +502,28 @@ ALTER TABLE `discussions`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT für Tabelle `likes`
+--
+ALTER TABLE `likes`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT für Tabelle `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202;
 
 --
 -- AUTO_INCREMENT für Tabelle `profiles`
 --
 ALTER TABLE `profiles`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT für Tabelle `replies`
+--
+ALTER TABLE `replies`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `roles`

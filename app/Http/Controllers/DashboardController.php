@@ -12,6 +12,10 @@ use App\Role;
 class DashboardController extends Controller
 {
 
+   public function __construct() {
+        $this->middleware(['auth', 'admin']);
+    }
+    
     public function index(){
         $page_name = 'dashboard';
         $all_ = 'dashboard';

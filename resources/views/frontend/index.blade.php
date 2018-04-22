@@ -15,7 +15,7 @@
 
 	<div class="container">
 		<div class="row">
-			 @for ($i = 0; $i <= 2; $i++)
+			 @for ($i = 0; $i <= 3; $i++)
 			<div class="col-lg-3 col-md-4">	
 				<div class="card hovercard">
 					<img class="cardheader" src="{{URL::to('/images/' . $home_categories[$i]->image)}}">
