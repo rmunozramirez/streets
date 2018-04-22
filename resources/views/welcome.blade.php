@@ -5,7 +5,7 @@
 
     <section id="landing-page">       
         <!-- Navigation Section -->
-        @include('frontend.partials.navigation')
+        @include('layouts.navigation')
 
         <!-- Upper section -->
         @include('frontend.partials.uppersection')  
