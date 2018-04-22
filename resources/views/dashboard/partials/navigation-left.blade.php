@@ -17,7 +17,7 @@
                         </ul>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{route('dashboard')}}">
                         <i class="fa fa-tachometer-alt"></i> 
                         <span class="nav-label">Dashboard</span>
                     </a>

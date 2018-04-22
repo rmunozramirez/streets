@@ -12,7 +12,7 @@
 				@foreach ($discussions as $discussion)
 				<div class="col-lg-3 col-md-4">	
 					<div class="panel hovercard">
-						<img class="card-header" src="{{URL::to('/images/' . $discussion->image)}}">
+						<img height="200" class="img-responsive card-header" src="{{URL::to('/images/' . $discussion->image)}}">
 							<h3><a href="{{route('discussions.show' , $discussion->slug)}}">{{ $discussion->title }}</a></h3>
 						
 						<div class="panel-body">					

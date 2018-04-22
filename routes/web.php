@@ -1,17 +1,18 @@
 <?php
 
-
 Route::get('/', 'HomeController@landing');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()  {
 
 //admin 
 	//admin Dashboard
-	Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+	Route::get('/', 'DashboardController@index')->name('dashboard');
+	// Route::get('/create', 'DashboardController@create')->name('dashboard.create');
+	// Route::get('/trashed', 'DashboardController@trashed')->name('dashboard.trashed');
 
 //admin Statuses
 	Route::resource('status', 'DashboardStatusController');

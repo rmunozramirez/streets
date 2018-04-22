@@ -8927,3 +8927,9 @@ body.md-skin {
   }
 }
 
+/***** my experiment *** */
+
+.hovercard {
+  background-size: cover;
+  height: 150px;
+}

@@ -35,16 +35,26 @@
                         <li class="active">
                             <i class="fas fa-pencil-alt"></i> {{ ucfirst(trans($page_name)) }}
                         </li>
-                        @if($page_name !== 'dashboard' || $page_name !== 'trashed' )
-                        <span class="pull-right"><i class="fas fa-pencil-alt"></i>
-                                <i class="fa fa-plus"></i> <a href="{{route($page_name . '.create')}}">Create {{ ucfirst(trans($page_name)) }}</a>
-                                <i class="fa fa-trash"></i> <a href="{{route($page_name . '.trashed')}}">Trashed {{ ucfirst(trans($page_name)) }}</a>
+                        @if($page_name !== 'dashboard')
+                        <span class="pull-right">
+                            <i class="fas fa-pencil-alt"></i>
+                            <i class="fa fa-plus"></i> <a href="{{route($page_name . '.create')}}">Create {{ ucfirst(trans($page_name)) }}</a>
+                            <i class="fa fa-trash"></i> <a href="{{route($page_name . '.trashed')}}">Trashed {{ ucfirst(trans($page_name)) }}</a>
                         </span>
                         @endif
-                    </ol>
+                    </ol>    
                 </div>             
             </div>
-        </div>                                 
+        </div>   
+        @if($page_name === 'dashboard')
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="row wrapper border-bottom white-bg">
+                    <div class="inside">                                         
+                            @include ('dashboard.partials.resume')
+                    </div>             
+                </div>
+            </div>    
+        @endif                 
             @yield('content')
     </section>
 </div>

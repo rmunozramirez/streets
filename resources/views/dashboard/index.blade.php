@@ -8,6 +8,7 @@
     <div id="wrapper">
 
 		<!--  left vertical menu -->
+
 		@include ('dashboard.partials.navigation-left')
 
 		@include ('dashboard.partials.content')
