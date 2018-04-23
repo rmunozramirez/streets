@@ -13,6 +13,7 @@ class Like extends Model
     
 	];
 
+
     public function reply()
     {
         return $this->belongsTo('App\Reply');
@@ -22,5 +23,6 @@ class Like extends Model
     {
         return $this->belongsTo('App\Profile');
     }
+
 
 }

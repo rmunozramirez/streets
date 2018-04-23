@@ -17,7 +17,7 @@ class AdminMiddleware
     {
 
         $user = $request->user();
-        if ($user->profile->role->id <= 2) {
+        if ($user->profile->role->id <= 1) {
             return $next($request);
         }
 

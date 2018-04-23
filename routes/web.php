@@ -59,6 +59,10 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()  {
 	->name('discussions.restore');
 	Route::delete('discussions/{slug}/kill', 'DashboardDiscussionsController@kill')
 	->name('discussions.kill');
+		Route::get('discussions/{id}/like', 'DashboardDiscussionsController@like')->name('discussions.like');
+	Route::get('discussions/{id}/unlike', 'DashboardDiscussionsController@unlike')->name('discussions.unlike');
+	Route::post('discussions/{slug}', 'DashboardDiscussionsController@reply')->name('discussions.reply');
+	Route::delete('discussions/{slug}/reply/destroy', 'DashboardDiscussionsController@r_destroy')->name('discussions.r_destroy');
 	Route::resource('discussions', 'DashboardDiscussionsController');
 
 });

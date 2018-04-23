@@ -26,10 +26,16 @@ class Discussion extends Model
         return $this->belongsTo('App\Profile');
     }
 
-    // public function status()
-    // {
-    //     return $this->belongsTo('App\Status');
-    // }
+
+    public function replies()
+    {
+        return $this->hasMany('App\Reply');
+    }
+
+    public function likes()
+    {
+        return $this->hasManyThrough('App\Reply', 'App\Like');
+    }
 
     public function statuses()
     {

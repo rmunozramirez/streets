@@ -27,7 +27,7 @@
 									<dd>{!! $profile->user->name !!}</dd></h3>
 
 							        <dt>Profile Name:</dt>
-							        <dd class="pb-3">{{ $profile->user_name}}</dd>
+							        <dd class="pb-3">{{ $profile->title}}</dd>
 
 							        <dt>Role:</dt>
 							        <dd class="pb-3">{{ $profile->role->name}}</dd>

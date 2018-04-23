@@ -30,17 +30,12 @@
 									</a>
 		                		</td>	
 		                		<td>
-		                			Replies
+		                			{{$discussion->replies->count()}}
 		                		</td>
-		                		<td>
-		                			<a href="{{route('profiles.show', $discussion->profile->slug)}}">
-			                			{{$discussion->likes}}
-			                		</a>
-		                		</td>
+		                		<td>{{$discussion->likes}}</td>
 	
 				              	<td>{{$discussion->created_at}}</td>
 				               <td>
-				               		<a type="button" class="col-md-6 btn btn-secondary" href="{{route('discussions.edit', $discussion->slug)}}">Edit</a>
 					            	<div class="col-md-6">
 						            	{!! Form::open(['route' => ['discussions.destroy', $discussion->slug], 'method' => 'DELETE']) !!}
 
@@ -51,6 +46,9 @@
 				               </td>
 		                	</tr>
 		            	@endforeach
+						<div class="text-center">
+					        {{ $discussions->links() }}
+					    </div>		            	
 		         	</tbody>
 		      	</table>
 			</div>
