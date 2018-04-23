@@ -22,7 +22,6 @@ class CreateChannelsTable extends Migration
             $table->string('subtitle')->nullable();
             $table->text('about')->nullable();  
             $table->string('image')->unique();
-            $table->integer('likes')->unsigned()->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

@@ -20,7 +20,6 @@ class CreateDiscussionsTable extends Migration
             $table->string('slug')->unique();
             $table->text('body')->nullable();
             $table->string('image')->unique();
-            $table->integer('likes')->unsigned()->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

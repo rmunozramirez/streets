@@ -34,7 +34,7 @@ class Discussion extends Model
 
     public function likes()
     {
-        return $this->hasManyThrough('App\Reply', 'App\Like');
+        return $this->morphMany('App\Status', 'likeable');
     }
 
     public function statuses()

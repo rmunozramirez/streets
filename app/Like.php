@@ -3,13 +3,20 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
+
+Relation::morphMap([
+    'replies'    => 'App\Reply',
+    'discussions'   => 'App\Discussion',
+]);
 
 class Like extends Model
 {
 	protected $fillable = [
-
-        'reply_id',
-        'profile_id',		    
+	
+        'likeable_id',
+        'likeable_type',
+        'like',	    
     
 	];
 
@@ -19,10 +26,14 @@ class Like extends Model
         return $this->belongsTo('App\Reply');
     }
 
-    public function profile()
+    // public function profile()
+    // {
+    //     return $this->belongsTo('App\Profile');
+    // }
+
+
+    public function likeable()
     {
-        return $this->belongsTo('App\Profile');
+        return $this->morphTo();
     }
-
-
 }
