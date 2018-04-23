@@ -9,15 +9,38 @@
                 	<i class="fa fa-chevron-left"></i> <a href="{{route('discussions.index')}}">Back to discussions</a>
                 </span></h2>
             	<hr>
-		    <div class="row">
-				<div class="card-body">          
-			        <div class="row">        
+		    
+		        <div class="row">        
+		            <div class="col-md-4"> 
+		            	<div class=" pt-5">
+			               <figure>
+				            	<img class="img-responsive" src="{{URL::to('/images/' . $discussion->image)}}" alt="{{ $discussion->title }}" name="{{ $discussion->title }}">
+				            </figure>
+		            	</div> 
+		            </div>
+	            	<div class="col-md-8"> 
+	            	 	<div class="panel-body"> 
+							<div class="pt-5">{!! $discussion->body!!} </div>         	
+						</div>
+					  	<div class="panel-footer text-muted">
+					    	@if($discussion->is_like_by_auth_user())
+					    		<a href="{{route('discussions.unlike', $discussion->id)}}" class="btn btn-xs btn-danger">
+					    		<i class="fa fa-thumbs-down"></i>
+					    		<span class="badge">{{ $discussion->likes->count() }}</span>
+					    		</a>
+					    	@else
+					    		<a href="{{route('discussions.like', $discussion->id)}}" class="btn btn-xs btn-success">
+					    		<i class="fa fa-thumbs-up"></i>
+					    		<span class="badge">{{ $discussion->likes->count() }}</span>
+					    		</a>
+					    	@endif
+					  	</div>
+					</div>	
+	            </div>         
+            </div>
+        	<div class="row">
+	        	<div id="reply" class="card-body ">
 			            <div class="col-md-4"> 
-			            	<div class=" pt-5">
-				               <figure>
-					            	<img class="img-responsive" src="{{URL::to('/images/' . $discussion->image)}}" alt="{{ $discussion->title }}" name="{{ $discussion->title }}">
-					            </figure>
-			            	</div>
 			            	<div class=" pt-5">
 				                <dl class="dl-horizontal">
 							    	<h3><dt>Discussions name:</dt>
@@ -31,21 +54,12 @@
 							   	</dl>
 			            	</div>  
 			            </div>
-		            	<div class="col-md-8">    
-							<div class="pt-5">{!! $discussion->body!!} </div>         
-							<hr />	
-							<h3>Your reply</h3>            	     		
+		            <div class="col-lg-8"><hr />
+						<h3>Your reply</h3>            	     		
 		            	{!! Form::open(['route' => ['discussions.reply', $discussion->slug], 'method' => 'POST']) !!}
 				        {!!Form::textarea('body', null, array('id' => 'summernote','class' => 'form-control'))!!} 
 				         {!!Form::submit('Your Answer', array('class' => 'mt-5 btn btn-success btn-block', 'onclick' => 'clearform()')) !!}
 			             {!!Form::close() !!} 
-						</div>	
-		            </div>         
-	            </div>
-            </div>
-        	<div class="row">
-	        	<div id="reply" class="card-body ">
-		            <div class="col-lg-8 col-lg-offset-4"><hr />
 
 								@if(count($discussion->replies) > 0)
 						         	@foreach ($discussion->replies->reverse() as $reply)
@@ -71,12 +85,12 @@
 										  	</div>
 										  	<div class="panel-footer text-muted">
 										    	@if($reply->is_like_by_auth_user())
-										    		<a href="{{route('discussions.unlike', $reply->id)}}" class="btn btn-danger">
-										    		<i class="fasfa-thumbs-down"></i>
+										    		<a href="{{route('replies.unlike', $reply->id)}}" class="btn btn-xs btn-danger">
+										    		<i class="fa fa-thumbs-down"></i>
 										    		<span class="badge">{{ $reply->likes->count() }}</span>
 										    		</a>
 										    	@else
-										    		<a href="{{route('discussions.like', $reply->id)}}" class="btn btn-success">
+										    		<a href="{{route('replies.like', $reply->id)}}" class="btn btn-xs btn-success">
 										    		<i class="fa fa-thumbs-up"></i>
 										    		<span class="badge">{{ $reply->likes->count() }}</span>
 										    		</a>
@@ -86,7 +100,7 @@
 
 						            @endforeach 
 								@else
-								<div class="col-md-12"><h5>No replies to: {!! $page_name !!}</h5></div>
+								<div class="col-md-12 pt-5"><h3>No replies to: {!! $page_name !!}</h3></div>
 								@endif
 		            </div>         
 	            </div>

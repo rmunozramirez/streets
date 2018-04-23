@@ -65,4 +65,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()  {
 	Route::delete('discussions/{slug}/reply/destroy', 'DashboardDiscussionsController@r_destroy')->name('discussions.r_destroy');
 	Route::resource('discussions', 'DashboardDiscussionsController');
 
+//admin replies
+	Route::get('replies/{id}/like', 'DashboardReplyController@like')->name('replies.like');
+	Route::get('replies/{id}/unlike', 'DashboardReplyController@unlike')->name('replies.unlike');
+
 });

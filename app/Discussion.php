@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Discussion extends Model
 {
@@ -14,7 +15,6 @@ class Discussion extends Model
             'slug',
             'body',
             'image',
-            'likes', 
 
 	];
 
@@ -34,12 +34,27 @@ class Discussion extends Model
 
     public function likes()
     {
-        return $this->morphMany('App\Status', 'likeable');
+        return $this->morphMany('App\Like', 'likeable');
     }
 
     public function statuses()
     {
         return $this->morphMany('App\Status', 'statusable');
-    }   
+    }
+
+    public function is_like_by_auth_user(){
+        $id = Auth::id();
+        $likers = array();
+
+        foreach ($this->likes as $like) {
+            array_push($likers, $like->profile_id);
+        }
+
+        if (in_array($id, $likers)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }

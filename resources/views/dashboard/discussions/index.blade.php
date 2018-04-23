@@ -32,7 +32,8 @@
 		                		<td>
 		                			{{$discussion->replies->count()}}
 		                		</td>
-		                		<td>{{$discussion->likes}}</td>
+		                		
+		                		<td>{{$discussion->likes->count()}}</td>
 	
 				              	<td>{{$discussion->created_at}}</td>
 				               <td>
@@ -46,11 +47,12 @@
 				               </td>
 		                	</tr>
 		            	@endforeach
-						<div class="text-center">
-					        {{ $discussions->links() }}
-					    </div>		            	
+	            	
 		         	</tbody>
 		      	</table>
+						<div class="text-center">
+					        {{ $discussions->links() }}
+					    </div>			      	
 			</div>
 		</div>
 	</div>

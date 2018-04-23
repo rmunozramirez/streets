@@ -24,7 +24,7 @@ class DashboardDiscussionsController extends Controller
     {
 
         $discussions = Discussion::orderBy('created_at', 'asc')->paginate(4);
-        $all_ = Discussion::all();
+        $all_ = Discussion::with('likes')->get();
         $page_name = 'discussions';
 
        return view('dashboard.discussions.index', compact('discussions', 'page_name', 'all_'));
@@ -198,21 +198,26 @@ class DashboardDiscussionsController extends Controller
 
     public function reply(ReplyRequest $request, $slug)
     {
+        if($request->body) {
+            $discussion = Discussion::where('slug', $slug)->first();
+            $user = Auth::user();
+            $profile = Profile::where('user_id', $user->id)->first();
+            $all_user_discussions = Discussion::where('profile_id', $profile->id)->count();
+            $page_name = 'discussions';
+            $all_ = Discussion::all();
 
-        $discussion = Discussion::where('slug', $slug)->first();
-        $user = Auth::user();
-        $profile = Profile::where('user_id', $user->id)->first();
-        $all_user_discussions = Discussion::where('profile_id', $profile->id)->count();
-        $page_name = 'discussions';
-        $all_ = Discussion::all();
+            $reply = Reply::create([
 
-        $reply = Reply::create([
+                'profile_id'    => $user->profile->id,
+                'discussion_id' => $discussion->id,
+                'body'          =>   $request->body,
 
-            'profile_id'    => $user->profile->id,
-            'discussion_id' => $discussion->id,
-            'body'          =>   $request->body,
+            ]);
+        } else {
+            Session::flash('info', 'Your answer is empty, please try again.');
+            return redirect()->back();
+        }
 
-        ]);
 
         Session::flash('success', 'Answer successfully created!');
         return view('dashboard.discussions.show', compact('discussion', 'user',  'page_name', 'all_user_discussions', 'slug', 'all_'));
@@ -232,15 +237,17 @@ class DashboardDiscussionsController extends Controller
 
     public function like($id)
     {
-        $reply = Reply::find($id);
+        $discussion = Discussion::find($id);
         $profile_id = Auth::user()->profile->id;
 
         Like::create([
-            'reply_id'      => $id,
+            'likeable_id'   => $id,
             'profile_id'    => $profile_id,
+            'likeable_type' => 'discussions',
+            'like'          => 1,
         ]);
 
-        Session::flash('success', 'Reply Liked!');
+        Session::flash('success', 'Discussion Liked!');
         return redirect()->back();
     }
 
@@ -248,11 +255,11 @@ class DashboardDiscussionsController extends Controller
     {
         $user = Auth::user();
         $profile = Profile::where('user_id', $user->id)->first();
-        $like = Like::where('reply_id', $id)->where('profile_id', $profile->id)->first();
+        $like = Like::where('likeable_id', $id)->where('profile_id', $profile->id)->where('likeable_type', 'discussions')->first();
 
         $like->delete();
 
-        Session::flash('success', 'Reply Unliked!');
+        Session::flash('success', 'Discussion Unliked!');
         return redirect()->back();
     }
 

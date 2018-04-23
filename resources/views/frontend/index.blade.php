@@ -48,6 +48,7 @@
 	
 	<div class="container py-5">
 		<div class="col-md-4">
+			<div id="advanced" class="circle"></div>
 			<h2>Pleasure trip</h2>
 			<p>More than 16 million active travellers use Skapada. The world was never so small. Wether you want to experience that place in the other side of the globe or asist to a conference in other continent. Skapada make it possible.</p>
 			<a href="page.php">Learn more</a>

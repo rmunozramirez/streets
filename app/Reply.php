@@ -28,7 +28,7 @@ class Reply extends Model
 
     public function likes()
     {
-        return $this->morphMany('App\Status', 'likeable');
+        return $this->morphMany('App\Like', 'likeable');
     }
 
     public function is_like_by_auth_user(){

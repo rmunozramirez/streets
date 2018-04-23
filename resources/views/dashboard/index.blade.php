@@ -18,6 +18,7 @@
     </div>    
     @include('dashboard.partials.scripts')
 
+
 </body>
 
 </html>

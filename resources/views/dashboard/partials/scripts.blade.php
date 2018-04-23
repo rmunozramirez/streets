@@ -1,3 +1,5 @@
+<script src="{{ asset('js/admin/toastr.min.js') }}"></script>
+
 <script src="{{ asset('js/admin/jquery.min.js') }}"></script>
 <script src="{{ asset('js/admin/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/admin/jquery.metisMenu.js') }}"></script>
@@ -7,7 +9,6 @@
 <script src="{{ asset('js/admin/jquery.steps.min.js') }}"></script>
 <script src="{{ asset('js/admin/select2.min.js') }}"></script>
 <script src="{{ asset('js/admin/summernote.js') }}"></script>
-<script src="{{ asset('js/admin/toastr.min.js') }}"></script>
 
     <script>
         //toastr
@@ -64,37 +65,3 @@
             height: 200
         });
     </script>
-
-<script>
-    $(document).ready(function() {
-        var $validator = $("#commentForm").validate({
-          rules: {
-            emailfield: {
-              required: true,
-              email: true,
-              minlength: 3
-            },
-            namefield: {
-              required: true,
-              minlength: 3
-            },
-            urlfield: {
-              required: true,
-              minlength: 3,
-              url: true
-            }
-          }
-        });
-     
-          $('#rootwizard').bootstrapWizard({
-            'tabClass': 'nav nav-pills',
-            'onNext': function(tab, navigation, index) {
-              var $valid = $("#commentForm").valid();
-              if(!$valid) {
-                $validator.focusInvalid();
-                return false;
-              }
-            }
-          });
-    });
-</script>
