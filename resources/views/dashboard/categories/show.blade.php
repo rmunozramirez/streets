@@ -60,7 +60,6 @@
 				         <thead>
 				            <tr>
 				                <th>Subcategory</th>
-				                <th>Likes</th>
 				                <th>Date</th>
 				            </tr>
 				         </thead>
@@ -73,7 +72,6 @@
 				               		{{$subcategory->title}}
 				               		</a>
 				               	</td>
-				               <td>{{$subcategory->channels()->sum('likes')}}</td>
 				               <td>{{$subcategory->created_at}}</td>
 				            </tr>
 				            @endforeach

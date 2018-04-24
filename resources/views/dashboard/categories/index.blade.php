@@ -13,9 +13,6 @@
 			            <li class="">
 			            	<a data-toggle="tab" href="#tab-2-inactive"><i class="fa fa-ban"></i>Inactive</a>
 			            </li>
-			            <li class="">
-			            	<a data-toggle="tab" href="#tab-3-trashed"><i class="fa fa-trash"></i>Trashed</a>
-			            </li>
 			        </ul>
 			        <div class="tab-content">
 			            <div id="tab-1-active" class="tab-pane active">
@@ -50,7 +47,6 @@
 								               		<a type="button" class="col-md-6 btn btn-secondary" href="{{route('categories.edit', $cat->slug)}}">Edit</a>
 									            	<div class="col-md-6">
 										            	{!! Form::open(['route' => ['categories.destroy', $cat->slug], 'method' => 'DELETE']) !!}
-
 														{!! Form::submit('Delete', ['class' => 'btn btn-block btn-danger']) !!}
 														{!! Form::close() !!}
 													</div>
@@ -105,55 +101,6 @@
 						            	@endforeach
 							         	</tbody>
 							      	</table>
-								</div>	
-							</div>
-			            </div>
-			            <div id="tab-3-trashed" class="tab-pane">
-			                <div class="row">
-			                	<div class="col-md-12 pt-4">
-			                		<div class="col-md-12">
-			                			<h3>Trashed Subcategories</h3>
-			                		</div>
-									@if(count($trash_cat) > 0)
-										<table class="table table-striped table-hover">
-								         <thead>
-								            <tr>
-								                <th>Channel</th>
-								                <th>Profile</th>
-								                <th>Status</th>
-								                <th>Date</th>
-								            </tr>
-								         </thead>
-								         <tbody>
-								         	@foreach ($trash_cat as $cat)
-								            <tr>
-								               <td><a href="{{route('channels.show', $cat->slug)}}">
-									               	<figure>
-										            	<img class="img-circle" height="50" src="{{URL::to('/images/' . $cat->image)}}" alt="{{ $cat->title }}" name="{{ $cat->title }}"><span class="pl-5"> {{$cat->title}}</span>
-										            </figure>
-									               	
-									               </a>
-									           </td>
-								               <td><a href="{{route('profiles.show', $cat->profile->slug)}}">{{$cat->profile->user_name}}</a></td>
-								               <td><a href="">{{$cat->status->name}}</a></td>
-								               <td>{{$cat->created_at}}</td>
-								               <td>
-								               		<a type="button" class="col-md-6 btn btn-secondary" href="{{route('channels.edit', $cat->slug)}}">Edit</a>
-									            	<div class="col-md-6">
-										            	{!! Form::open(['route' => ['channels.destroy', $cat->slug], 'method' => 'DELETE']) !!}
-
-														{!! Form::submit('Delete', ['class' => 'btn btn-block btn-danger']) !!}
-
-														{!! Form::close() !!}
-													</div>
-								               </td>
-								            </tr>
-								            @endforeach
-								         </tbody>
-								      	</table>
-									@else
-										<div class="col-md-12"><h3>No trashed channels!</h3></div>
-									@endif
 								</div>	
 							</div>
 			            </div>

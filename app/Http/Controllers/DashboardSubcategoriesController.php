@@ -136,7 +136,7 @@ class DashboardSubcategoriesController extends Controller
     {
         $subcategory = Subcategory::where('slug', $slug)->first();
 
-        if(count($subcategory->chanels) == 0 ) {
+        if(count($subcategory->channels) == 0 ) {
 
             $subcategory->delete();
             Session::flash('success', 'Subcategory '  . $subcategory->title . ' successfully deleted!');

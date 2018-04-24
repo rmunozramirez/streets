@@ -5,46 +5,48 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row wrapper border-bottom white-bg">
     	<div class="inside">
+		    <h2>Trashed {!! $page_name !!}
+		    	<span class="small pull-right">
+                	<i class="fa fa-chevron-left"></i> <a href="{{route('categories.index')}}">Back to Categories</a>
+                </span>
+                </h2>
+             <hr />
 			<div id="contenido"  class="card">
 			    <div class="row">
-			    	<div class="col-md-12 pt-4">
-			    		<div class="col-md-12"><h3>Trashed users</h3></div>
+                	<div class="col-md-12 pt-4">
 						@if(count($trash_cat) > 0)
 							<table class="table table-striped table-hover">
 					         <thead>
 					            <tr>
-					                <th>User</th>
-					                <th>Role</th>
-					                <th>Date</th>
+					                <th>Category</th>
+					                <th>Deleted at</th>
 					            </tr>
 					         </thead>
 					         <tbody>
-					         	@foreach ($trash_cat as $category)
+					         	@foreach ($trash_cat as $cat)
 					            <tr>
-					               <td>
-					               		<a href="{{route('categories.show', $category->slug)}}">
-							               	<figure>
-								            	<img class="img-circle" height="50" src="{{URL::to('/images/' . $category->image)}}" alt="{{ $category->title }}" name="{{ $category->title }}"><span class="pl-5"> {{$category->user->name}}</span>
-								            </figure>
-										</a>
+					               <td><a href="{{route('categories.show', $cat->slug)}}">
+						               	<figure>
+							            	<img class="img-circle" height="50" src="{{URL::to('/images/' . $cat->image)}}" alt="{{ $cat->title }}" name="{{ $cat->title }}"><span class="pl-5"> {{$cat->title}}</span>
+							            </figure>
+						               	
+						               </a>
 						           </td>
-					               <td>{{$category->role->name}}</td>
-					               <td>{{$category->created_at}}</td>
-					               <td><a href="{{route('categories.restore', $category->slug)}}">Restore</a></td>
+					               <td>{{$cat->deleted_at}}</td>
+					               	<td>	<a href="{{route('categories.restore', $cat->slug)}}">Restore</a></td>
 					               <td>
-						            	{!! Form::open(['route' => ['categories.kill', $category->slug], 'method' => 'DELETE']) !!}
-										{!! Form::submit('Permanent Delete', ['class' => 'btn btn-block btn-danger']) !!}
-										{!! Form::close() !!}		
+						            	<div class="col-md-6">
+							            	{!! Form::open(['route' => ['categories.kill', $cat->slug], 'method' => 'DELETE']) !!}
+											{!! Form::submit('Delete', ['class' => 'btn btn-block btn-danger']) !!}
+											{!! Form::close() !!}
+										</div>
 					               </td>
 					            </tr>
 					            @endforeach
 					         </tbody>
 					      	</table>
-					      	<div class="text-center">
-						   
-						    </div>
 						@else
-							<div class="col-md-12"><h3>No trashed users!</h3></div>
+							<h3>No trashed Categories</h3>
 						@endif
 					</div>	
 				</div>
@@ -55,3 +57,4 @@
 @endsection
 
 
+			                

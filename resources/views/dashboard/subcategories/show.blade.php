@@ -65,7 +65,6 @@
 				         <thead>
 				            <tr>
 				                <th>Channel</th>
-				                <th>Likes</th>
 				                <th>Date</th>
 				            </tr>
 				         </thead>
@@ -78,7 +77,6 @@
 				               		{{$channel->title}}
 				               		</a>
 				               	</td>
-				               <td>{{$channel->sum('likes')}}</td>
 				               <td>{{$channel->created_at}}</td>
 				            </tr>
 				            @endforeach

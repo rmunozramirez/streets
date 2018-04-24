@@ -15,9 +15,6 @@
 			    <div id="contenido"  class="card">
                     <div class="row">
                     	<div class="col-md-12 pt-4">
-                    		<div class="col-md-12">
-                    			<h3>Trashed users</h3>
-                    		</div>
 							@if(count($trash_ch) > 0)
 								<table class="table table-striped table-hover">
 						         <thead>
@@ -56,7 +53,7 @@
 						         </tbody>
 						      	</table>
 							@else
-								<div class="col-md-12"><h3>No trashed channels!</h3></div>
+								<h3>No trashed channels!</h3>
 							@endif
 						</div>	
 					</div>     

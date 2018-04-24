@@ -136,8 +136,22 @@ class DashboardProfileController extends Controller
     {
         
         $profile = Profile::where('slug', $slug)->first();
-        $profile->delete();
+        if ($profile->channel) {
 
+            Session::flash('info', 'Profile has a channel. Please deleted channel first!');
+            return redirect()->route('profiles.show', $profile->slug);
+
+        } elseif ($profile->discussions) {
+
+            Session::flash('info', 'Profile has a channel. Please deleted channel first!');
+            return redirect()->route('profiles.show', $profile->slug);
+
+        } else {
+
+            $profile->delete();
+
+        }
+        
         Session::flash('success', 'Profile successfully deleted!');
         return redirect()->route('profiles.index');
     }
@@ -165,22 +179,8 @@ class DashboardProfileController extends Controller
     public function kill($slug)
     {
         $profile = Profile::withTrashed()->where('slug', $slug)->first();
-        if ($profile->channel) {
-
-            Session::flash('info', 'Profile has a channel. Please deleted channel first!');
-            return redirect()->route('profiles.show', $profile->slug);
-
-        } elseif ($profile->discussions) {
-
-            Session::flash('info', 'Profile has a channel. Please deleted channel first!');
-            return redirect()->route('profiles.show', $profile->slug);
-
-        } else {
-
-            $profile->forceDelete();
-            Session::flash('success', 'Profile pemanently deleted!');
-        
-        }
+        $profile->forceDelete();
+        Session::flash('success', 'Profile pemanently deleted!');
 
         return redirect()->route('profiles.index');
     }
