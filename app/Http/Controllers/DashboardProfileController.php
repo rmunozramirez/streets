@@ -165,9 +165,23 @@ class DashboardProfileController extends Controller
     public function kill($slug)
     {
         $profile = Profile::withTrashed()->where('slug', $slug)->first();
-        $profile->forceDelete();
+        if ($profile->channel) {
 
-        Session::flash('success', 'Profile pemanently deleted!');
+            Session::flash('info', 'Profile has a channel. Please deleted channel first!');
+            return redirect()->route('profiles.show', $profile->slug);
+
+        } elseif ($profile->discussions) {
+
+            Session::flash('info', 'Profile has a channel. Please deleted channel first!');
+            return redirect()->route('profiles.show', $profile->slug);
+
+        } else {
+
+            $profile->forceDelete();
+            Session::flash('success', 'Profile pemanently deleted!');
+        
+        }
+
         return redirect()->route('profiles.index');
     }
 

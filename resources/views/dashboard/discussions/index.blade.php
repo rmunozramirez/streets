@@ -49,10 +49,7 @@
 		            	@endforeach
 	            	
 		         	</tbody>
-		      	</table>
-						<div class="text-center">
-					        {{ $discussions->links() }}
-					    </div>			      	
+		      	</table>		      	
 			</div>
 		</div>
 	</div>

@@ -23,11 +23,10 @@ class DashboardDiscussionsController extends Controller
     public function index()
     {
 
-        $discussions = Discussion::orderBy('created_at', 'asc')->paginate(4);
         $all_ = Discussion::with('likes')->get();
         $page_name = 'discussions';
 
-       return view('dashboard.discussions.index', compact('discussions', 'page_name', 'all_'));
+       return view('dashboard.discussions.index', compact( 'page_name', 'all_'));
     }
 
     /**
@@ -143,16 +142,14 @@ class DashboardDiscussionsController extends Controller
         return redirect()->route('discussions.index', $user->slug);
     }
 
-    public function trashed($slug)
+    public function trashed()
     {
-        $user = Auth::user();
-        $profile = Profile::where('user_id', $user->id)->first();
-        $discussions = Discussion::where('profile_id', $profile->id)->onlyTrashed()->paginate(4);
-        $all_user_discussions = Discussion::where('profile_id', $profile->id)->count();
-        $page_name = 'Trashed discussion';
+
+        $trash_disc = Discussion::onlyTrashed()->get();
+        $page_name = 'discussions';
         $all_ = Discussion::all();
 
-        return view('dashboard.discussions.trashed', compact('discussions', 'user', 'slug', 'all_user_discussions','page_name', 'all_'));
+        return view('dashboard.discussions.trashed', compact('trash_disc', 'slug', 'page_name', 'all_'));
     }
 
     public function restore($slug)
@@ -176,7 +173,7 @@ class DashboardDiscussionsController extends Controller
         }
 
         Session::flash('success', 'Discussion pemanently deleted!');
-        return redirect()->route('dashboard.discussions.trashed', $slug);
+        return redirect()->route('discussions.trashed', $slug);
     }
 
     public static  function all_likes() {

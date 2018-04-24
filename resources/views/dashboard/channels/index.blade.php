@@ -29,7 +29,6 @@
 								                <th>Channel</th>
 								                <th>Subcategory</th>
 								                <th>Profile</th>
-								                <th>Role</th>
 								                <th>Created at</th>
 								            </tr>
 								         </thead>
@@ -52,9 +51,6 @@
 							                			<a href="{{route('profiles.show', $channel->profile->slug)}}">
 								                			{{$channel->profile->title}}
 								                		</a>
-							                		</td>
-							                		<td><a href="{{route('roles.show', $channel->profile->role->slug)}}">
-							                			{{$channel->profile->role->name}}</a>
 							                		</td>
 									              	<td>{{$channel->created_at}}</td>
 									               <td>
@@ -87,7 +83,6 @@
 								                <th>Channel</th>
 								                <th>Subcategory</th>
 								                <th>Profile</th>
-								                <th>Role</th>
 								                <th>Created at</th>
 								            </tr>
 								         </thead>
@@ -107,12 +102,9 @@
 							                			{{$channel->subcategory->title}}</a>
 							                		</td>					                		
 							                		<td>
-							                			<a href="{{route('profiles.show', $channel->slug)}}">
+							                			<a href="{{route('profiles.show', $channel->profile->slug)}}">
 								                			{{$channel->profile->title}}
 								                		</a>
-							                		</td>
-							                		<td><a href="{{route('roles.show', $channel->profile->role->slug)}}">
-							                			{{$channel->profile->role->name}}</a>
 							                		</td>
 									              	<td>{{$channel->created_at}}</td>
 									               <td>
