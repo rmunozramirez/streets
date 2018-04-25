@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use App\Status;
 
 Relation::morphMap([
-    //'posts'
+    'pages'         => 'App\Page',
+    'posts'         => 'App\Post',
+    'postcategories'=> 'App\PostCategory',
     'profiles'      => 'App\Profile',
     'channels'      => 'App\Channel',
     'subcategories' => 'App\Subcategory',

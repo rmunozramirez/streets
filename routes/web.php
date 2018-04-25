@@ -28,6 +28,21 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()  {
 	Route::delete('profiles/{slug}/kill', 'DashboardProfileController@kill')->name('profiles.kill');
 	Route::resource('profiles', 'DashboardProfileController');
 
+//admin posts
+	Route::get('posts/trashed', 'PostController@trashed')->name('posts.trashed');
+	Route::get('posts/{slug}/restore', 'PostController@restore')->name('posts.restore');
+	Route::delete('posts/{slug}/kill', 'PostController@kill')->name('posts.kill');
+	Route::resource('posts', 'PostController');
+
+//admin postcategories
+	Route::get('postcategories/trashed', 'PostCategoryController@trashed')
+	->name('postcategories.trashed');
+	Route::get('postcategories/{slug}/restore', 'PostCategoryController@restore')
+	->name('postcategories.restore');
+	Route::delete('postcategories/{slug}/kill', 'PostCategoryController@kill')
+	->name('postcategories.kill');
+	Route::resource('postcategories', 'PostCategoryController');
+
 //admin channels
 	Route::get('channels/trashed', 'DashboardChannelsController@trashed')->name('channels.trashed');
 	Route::get('channels/{slug}/restore', 'DashboardChannelsController@restore')->name('channels.restore');

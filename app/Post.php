@@ -4,33 +4,25 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Status;
 
-class Channel extends Model
+class Post extends Model
 {
-	protected $fillable = [
-			
-			'subcategory_id',
-			'profile_id',
+	protected $fillable = [	
+			'postcategory_id',
 		    'title',
             'slug',
             'subtitle',
+            'body',
             'image',
-
 	];
 
 	use SoftDeletes;
     protected $dates = ['deleted_at'];
 
-    public function profile()
+    public function postcategory()
     {
-        return $this->belongsTo('App\Profile');
-    }  
-
-    public function subcategory()
-    {
-        return $this->belongsTo('App\Subcategory');
-    } 
+        return $this->belongsTo('App\Postcategory');
+    }
 
     public function statuses()
     {

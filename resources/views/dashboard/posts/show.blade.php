@@ -1,0 +1,71 @@
+@extends('dashboard.index')
+@section ('title', "| $page_name")
+@section('content')
+<section id="content">
+
+<!-- Channel panel  -->
+	    <div class="wrapper wrapper-content animated fadeInUp">		
+	        <div class="row wrapper border-bottom white-bg">
+				<div class="inside">
+					@if( $channel ) 
+		                <h2>{!! $channel->title !!}
+		                <span class="small pull-right">
+	                    	<i class="fa fa-chevron-left"></i> <a class="small-link" href="{{route('channels.index')}}">Back to Channels</a>
+    	                 	<i class="fa fa-pencil"></i> <a href="{{route('channels.edit', $channel->slug)}}">Edit</a>
+	                    </span></h2>
+	                <hr>
+						<div id="contenido"  class="card">
+							<div class="card-body">
+							<div class="row">
+								<div class="col-md-6">
+					               <figure>
+						            	<img height="300" class="
+						            	" src="{{URL::to('/images/' . $channel->image)}}" alt="{{ $channel->title }}" name="{{ $channel->title }}" />
+						            </figure>				
+				            	</div>
+								<div class="col-md-6">
+							      	<div class="row">
+									    <dl class="dl-horizontal">
+									    	<h3><dt>Channel Name:</dt>
+											<dd>{!! $channel->title !!}</dd></h3>
+
+									        <dt>Channel subtitle:</dt>
+									        <dd class="pb-3">{{ $channel->subtitle}}</dd>
+
+									        <dt>Subcategory:</dt>
+									        <dd class="pb-3">
+									        	<a href="{{route('subcategories.show', $channel->subcategory->slug)}}">
+									        	{{ $channel->subcategory->title}}
+										        </a>
+										    </dd>
+
+									        <dt>Status</dt>
+									        <dd class="pb-3">{!! $channel->statuses[0]->status !!}</dd>
+
+									        <dt>Registered at:</dt>
+									        <dd class="pb-3">{{ $channel->created_at}}</dd>
+
+									        <dt>Likes</dt>
+									        <dd class="pb-3">{{ $channel->likes}}</dd>
+
+									        <dt>Description</dt>
+									        <dd class="pb-3">{{ $channel->about}}</dd>
+									    </dl>
+							         </div>		            
+						        </div>
+					        </div>	
+							</div>
+						</div>
+					@else <h2>{!! $user_name !!} does not have a channel</h2>
+			        @endif
+				</div>
+				
+			</div>
+		</div>
+<!-- End Channel panel  -->
+</section>
+
+	
+@endsection
+
+

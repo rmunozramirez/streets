@@ -53,6 +53,15 @@
                 </li>
 
                 <li>
+                    <a href=""><i class="fa fa-envelope"></i> <span class="nav-label">Blog </span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{route('posts.index')}}">Posts</a></li>
+                        <li><a href="{{route('postcategories.index')}}">Post Categories</a></li>
+
+                    </ul>
+                </li>
+
+                <li>
                     <a href=""><i class="fa fa-envelope"></i> <span class="nav-label">Mailbox </span><span class="label label-warning pull-right">16/24</span></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a href="mailbox.html">Inbox</a></li>
