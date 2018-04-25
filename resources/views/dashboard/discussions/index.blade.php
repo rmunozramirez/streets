@@ -11,6 +11,7 @@
 			            <tr>
 			                <th>Image</th>
 			                <th>Title</th>
+			                <th>Iniatiator</th>
 			                <th>Answer</th>
 			                <th>Likes</th>
 			                <th>Created</th>
@@ -30,12 +31,17 @@
 									</a>
 		                		</td>	
 		                		<td>
+		                			<a href="{{route('profiles.show', $discussion->profile->slug)}}">
+		                				{{$discussion->profile->title}}
+		                			</a>
+		                		</td>	
+		                		<td>
 		                			{{$discussion->replies->count()}}
 		                		</td>
 		                		
 		                		<td>{{$discussion->likes->count()}}</td>
 	
-				              	<td>{{$discussion->created_at}}</td>
+				              	<td>{{$discussion->created_at->format('m/d/Y')}}</td>
 				               <td>
 					            	<div class="col-md-6">
 						            	{!! Form::open(['route' => ['discussions.destroy', $discussion->slug], 'method' => 'DELETE']) !!}

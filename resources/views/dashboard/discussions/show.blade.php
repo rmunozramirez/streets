@@ -43,8 +43,8 @@
 			            <div class="col-md-4"> 
 			            	<div class=" pt-5">
 				                <dl class="dl-horizontal">
-							    	<h3><dt>Discussions name:</dt>
-									<dd><a href="{{route('profiles.show', $discussion->profile->slug)}}">{!! $discussion->profile->title !!}</a></dd></h3>
+							    	<h3><dt>Discussion name:</dt>
+									<dd>{!! $discussion->title !!}</dd></h3>
 
 							        <dt>Profile Name:</dt>
 							        <dd class="pb-3"><a href="{{route('profiles.show', $discussion->profile->slug)}}">{!! $discussion->profile->title !!}</a></dd>

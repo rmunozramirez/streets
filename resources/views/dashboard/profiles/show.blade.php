@@ -194,8 +194,8 @@
 										           	</a>
 								               </td>
 								               <td>{{$discussion->statuses[0]->status}}</td>
-								               <td>{{$discussion->replies}}</td>
-								               <td>{{$discussion->likes}}</td>
+								               <td>{{$discussion->replies->count()}}</td>
+								               <td>{{$discussion->likes->count()}}</td>
 								               <td>{{$discussion->created_at}}</td>
 								               <td>
 								               		<a type="button" class="col-md-6 btn btn-secondary" href="">Edit</a>
