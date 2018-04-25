@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\SubcategoriesRequest;
 use App\Profile;
 use App\Subcategory;
 use App\Category;
@@ -55,15 +56,16 @@ class DashboardSubcategoriesController extends Controller
             'title'             => $request->title,
             'subtitle'          => $request->subtitle,
             'slug'              => str_slug($request->title, '-'),
-            'about'             => $request->about_subcategory, 
+            'about'             => $request->about, 
             'image'             => $name,
-            'status_id'         => $request->status_id,
        ]);   
 
         $subcategory->save();
-
+        $type =  'subcategories';
+        $id = $subcategory->id;
+        Status::create_status($id, $type);
+        
         Session::flash('success', 'Subcategory successfully created!');
-     
         return redirect()->route('subcategories.show', $subcategory->slug);
     }
 
@@ -111,7 +113,7 @@ class DashboardSubcategoriesController extends Controller
         $input = $request->all();
         $input['slug'] = str_slug($request->title, '-');
 
-        if ( $file = $request->file('image')) {
+        if( $file = $request->file('image')) {
             $name = time() . '-' . $file->getClientOriginalName();
             $file->move('images', $name);
             $input['image'] = $name;
@@ -123,7 +125,7 @@ class DashboardSubcategoriesController extends Controller
 
         Session::flash('success', 'Subcategory successfully updated!');
      
-        return redirect()->route('admin-subcategories.show', $subcategory->slug);
+        return redirect()->route('subcategories.show', $subcategory->slug);
     }
 
     /**

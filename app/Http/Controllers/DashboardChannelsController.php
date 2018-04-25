@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ChannelRequest;
 use App\Profile;
 use App\Channel;
 use App\Subcategory;
 use App\Status;
 use App\Role;
 use Session;
+use Auth;
 
 class DashboardChannelsController extends Controller
 {
@@ -36,25 +38,32 @@ class DashboardChannelsController extends Controller
         return view('dashboard.channels.create', compact('all_', 'page_name', 'all_roles', 'all_st', 'all_sub'));
     }
 
-    public function store(ChannelsRequest $request)
+    public function store(ChannelRequest $request)
     {
         $file = $request->file('image');
         $name = time() . '-' . $file->getClientOriginalName();
         $file->move('images', $name);
 
+        $user = Auth::user();
+        $profile = Profile::where('user_id', $user->id)->first();
+
         $channel = Channel::create([
 
             'subcategory_id' => $request->subcategory_id,
-            'profile_id'    =>  $request->profile_id, 
+            'profile_id'    =>  $profile->id, 
             'title'         =>  $request->title,
             'slug'          =>  str_slug($request->title, '-'),      
             'subtitle'      =>  $request->subtitle,                
-            'about'         =>  $request->about_channel,            
+            'about'         =>  $request->about,            
             'image'         =>  $name,
 
-       ]);   
+       ]);
 
         $channel->save();
+
+        $type =  'channels';
+        $id = $channel->id;
+        $status = (new Status)->create_status($id, $type);
 
         Session::flash('success', 'Channel successfully created!');
         return redirect()->route('channels.show', $channel->slug);
@@ -72,22 +81,22 @@ class DashboardChannelsController extends Controller
     public function edit($slug)
     {
 
-        $all_ch = Channel::with('statuses')->get();
+        $all_ = Channel::with('statuses')->get();
         $channel = Channel::where('slug', $slug)->first(); 
-        $page_name = 'Edit: ' . $channel->title;
+        $page_name = 'channels';
         $all_sub = Subcategory::orderBy('title', 'asc')->pluck('title', 'id')->all();
 
 
-          return view('dashboard.channels.edit', compact('channel', 'subcategories', 'page_name', 'all_ch'));
+          return view('dashboard.channels.edit', compact('channel', 'subcategories', 'page_name', 'all_'));
 
     }
 
-    public function update(ChannelsRequest $request, $slug)
+    public function update(ChannelRequest $request, $slug)
     {
-         $input = $request->all();
+        $input = $request->all();
         $input['slug'] = str_slug($request->title, '-');
 
-        if ( $file = $request->file('image')) {
+        if( $file = $request->file('image')) {
             $name = time() . '-' . $file->getClientOriginalName();
             $file->move('images', $name);
             $input['image'] = $name;
@@ -99,7 +108,7 @@ class DashboardChannelsController extends Controller
 
         Session::flash('success', 'Channel successfully updated!');
      
-        return redirect()->route('admin-channels.show', $channel->slug); 
+        return redirect()->route('channels.show', $channel->slug); 
     }
 
 

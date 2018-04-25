@@ -38,14 +38,14 @@
 						            	<div class="col-md-8"> 
 								            <div class="row">
 								            	<div class="col-md-12">       
-									                {!!Form::label('title', 'Chanel title', array('class' => 'form-spacing-top'))!!}
+									                {!!Form::label('title', 'Channel title', array('class' => 'form-spacing-top'))!!}
 									                {!!Form::text('title', null, array('class' => 'form-control', 'required' => '', 'maxlength' => '255'))!!}
 									            </div>
 								            </div>
 
 								            <div class="row pt-5">
 									            <div class="col-md-12">      
-									                {!!Form::label('subtitle', 'Chanel subtitle', array('class' => 'form-spacing-top'))!!}
+									                {!!Form::label('subtitle', 'Channel subtitle', array('class' => 'form-spacing-top'))!!}
 									                {!!Form::text('subtitle', null, array('class' => 'form-control', 'required' => '', 'maxlength' => '255'))!!}		            		
 									            </div>		            		
 								            </div>		            		
@@ -58,13 +58,13 @@
 									       	</div>
 									       	<div class="row pt-5">
 									            <div class="col-md-12">      
-									                {!!Form::label('about', 'Chanel description:', array('class' => 'form-spacing-top'))!!}
-									                {!!Form::textarea('about_chanel', null, array('id' => 'summernote','class' => 'form-control', 'rows' => 9))!!}                       
+									                {!!Form::label('about', 'Channel description:', array('class' => 'form-spacing-top'))!!}
+									                {!!Form::textarea('about', null, array('id' => 'summernote','class' => 'form-control', 'rows' => 9))!!}                       
 									            </div>
 								            </div>
 
 								            <div class="pt-5">    
-								                {!!Form::submit('Add New Chanel', array('class' => 'btn btn-success btn-block')) !!}
+								                {!!Form::submit('Add New Channel', array('class' => 'btn btn-success btn-block')) !!}
 								                {!!Form::close() !!}       
 								            </div>
 							            </div>

@@ -72,6 +72,9 @@ class DashboardDiscussionsController extends Controller
        ]);   
 
         $discussion->save();
+        $type =  'discussions';
+        $id = $discussion->id;
+        Status::create_status($id, $type);
         $slug = $user->slug;
         $page_name = 'discussions';
 

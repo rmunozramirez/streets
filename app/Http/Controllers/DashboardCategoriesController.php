@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CategoriesRequest;
 use App\Profile;
 use App\Category;
 use App\Status;
@@ -46,15 +47,18 @@ class DashboardCategoriesController extends Controller
         $category = Category::create([
 
             'title'             => $request->title,
-            'status_id'         => $request->status_id,
             'subtitle'          => $request->subtitle,
             'slug'              => str_slug($request->title, '-'),
-            'about'             => $request->about_category, 
+            'about'             => $request->about, 
             'image'             => $name,      
 
        ]);   
 
         $category->save();
+
+        $type =  'categories';
+        $id = $category->id;
+        Status::create_status($id, $type);
 
         Session::flash('success', 'Category successfully created!');
      

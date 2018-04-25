@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ProfileRequest;
+use Illuminate\Support\Facades\Auth;
 use App\Profile;
 use App\Discussion;
 use App\Status;
@@ -42,16 +43,16 @@ class DashboardProfileController extends Controller
         $name = time() . '-' . $file->getClientOriginalName();
         $file->move('images', $name);
 
-        $user_name = User::
+        $user = Auth::user();
 
         $profile = Profile::create([
 
-            'user_name'     => $request->user_name, 
-            'status_id'     => $request->status_id,
+            'user_id'     => $request->user->id, 
             'role_id'       => $request->role_id,
+            'title'       => $request->title,
             'birthday'      => $request->birthday,
             'slug'          => str_slug($request->title, '-'),      
-            'about'         => $request->about_user,
+            'about'         => $request->about,
             'image'         => $name,
             'web'           => $request->web,
             'facebook'      =>  $request->facebook,
@@ -63,6 +64,10 @@ class DashboardProfileController extends Controller
        ]);   
 
         $profile->save();
+
+        $type =  'profiles';
+        $id = $profile->id;
+        Status::create_status($id, $type);
 
         Session::flash('success', 'Profile successfully created!');
      

@@ -7,7 +7,8 @@
 			<div class="inside">		                
 				<h2>{!! $category->title !!}
 	                <span class="small pull-right">
-                    	<i class="fa fa-chevron-left"></i> <a href="{{route('categories.index')}}">Back to categories</a>
+                    	<i class="fa fa-chevron-left"></i> <a class="small-link" href="{{route('categories.index')}}">Back to categories</a>
+                    	<i class="fa fa-pencil"></i> <a href="{{route('categories.edit', $category->slug)}}">Edit</a>
                     </span>
                 </h2>
 	                <hr>
@@ -60,6 +61,8 @@
 				         <thead>
 				            <tr>
 				                <th>Subcategory</th>
+				                <th>Status</th>
+				                <th>Channels</th>
 				                <th>Date</th>
 				            </tr>
 				         </thead>
@@ -72,6 +75,8 @@
 				               		{{$subcategory->title}}
 				               		</a>
 				               	</td>
+				               <td>{{$subcategory->statuses[0]->status}}</td>
+				               <td>{{$subcategory->channels->count()}}</td>
 				               <td>{{$subcategory->created_at}}</td>
 				            </tr>
 				            @endforeach
@@ -79,7 +84,9 @@
 				      </table>	
 				</div>
 			@else
-				<div class="col-md-12"><h2>No subcategories under {{$category->title}}</h2></div>
+				<h2>No subcategories under {{$category->title}}
+					<span class="small pull-right"><i class="fa fa-plus"></i> <a href="{{route('subcategories.create')}}">Create a subcategory</a></span>
+				</h2>
 			@endif
 			</div>
 		</div>

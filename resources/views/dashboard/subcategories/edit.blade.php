@@ -29,7 +29,7 @@
 
 				            <div class="row">        
 					            <div class="col-md-4"> 
-					            	<i class="fa fa-image fa-4x"></i>
+				            	<img class="img-responsive"  src="{{URL::to('/images/' . $subcategory->image ) }}" alt="{{$subcategory->title}}" >
 
 					            	<div class=" pt-5">
 						                {!!Form::label('image', 'Upload a Featured Image') !!}

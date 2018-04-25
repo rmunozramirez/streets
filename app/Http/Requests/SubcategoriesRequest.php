@@ -26,13 +26,11 @@ class SubcategoriesRequest extends FormRequest
         return [
 
             'title'             => 'required|max:255',
-            'about'         => 'required',
+            'about'             => 'required',
             'slug'              => 'string|max:255',         
             'subtitle'          => 'max:255',     
             'image'             => 'image',
-            'likes'             => 'integer',
-            'status_id'         =>  'integer',
-            'category_id'         =>  'integer',
+            'category_id'       =>  'integer',
         ];
     }
 }

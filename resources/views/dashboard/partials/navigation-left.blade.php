@@ -3,17 +3,15 @@
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
                     <div class="text-center dropdown profile-element"> <span>
-                        <img height="80" class="img-circle thumbnail-admin"  src="{{URL::to('/images/user.png' ) }}" alt="" />
+                        <img height="80" class="img-circle thumbnail-admin"  src="{{URL::to('/images/' . $profile->image) }}" alt="{{Auth::user()->name}}" title="{{Auth::user()->name}}" />
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{ Auth::user()->name }}</strong>
                              </span> <span class="text-muted text-xs block">{{ Auth::user()->profile->name }}<b class="caret"></b></span> </span> </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="profile.html">Profile</a></li>
+                            <li><a href="{{route('profiles.show', Auth::user()->profile->slug)}}">Profile</a></li>
                             <li><a href="contacts.html">Contacts</a></li>
                             <li><a href="mailbox.html">Mailbox</a></li>
-                            <li class="divider"></li>
-                            <li><a href="login.html">Logout</a></li>
                         </ul>
                 </li>
                 <li>

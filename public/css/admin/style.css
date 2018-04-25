@@ -3746,6 +3746,11 @@ body.body-small .footer.fixed {
   margin: 20px;
 }
 
+.inside .small-link {
+  border-right: 1px solid #eee;
+  margin-right: 20px;
+  padding-right: 20px;
+}
 .w-25 {
   width: 25% !important;
 }

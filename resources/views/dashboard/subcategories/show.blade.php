@@ -8,7 +8,8 @@
 			<div class="inside">
                 <h2>{!! $subcategory->title !!}
                 <span class="small pull-right">
-                	<i class="fa fa-chevron-left"></i> <a href="{{route('subcategories.index')}}">Back to subcategories</a>
+                	<i class="fa fa-chevron-left"></i> <a class="small-link" href="{{route('subcategories.index')}}">Back to subcategories</a>
+                 	<i class="fa fa-pencil"></i> <a href="{{route('subcategories.edit', $subcategory->slug)}}">Edit</a>
                 </span></h2>
             	<hr>
 			    <div id="contenido"  class="card">
@@ -65,6 +66,8 @@
 				         <thead>
 				            <tr>
 				                <th>Channel</th>
+				                <th>Status</th>
+				                <th>Profile</th>
 				                <th>Date</th>
 				            </tr>
 				         </thead>
@@ -77,6 +80,13 @@
 				               		{{$channel->title}}
 				               		</a>
 				               	</td>
+				               	<td>{{$channel->statuses[0]->status}}</td>
+				               	<td>
+				               		<a href="{{route('profiles.show', $channel->profile->slug)}}">
+				               			{{$channel->profile->title}}
+				               		</a>
+				               </td>
+				               
 				               <td>{{$channel->created_at}}</td>
 				            </tr>
 				            @endforeach
@@ -84,7 +94,7 @@
 				      </table>	
 				</div>
 			@else
-				<div class="col-md-12"><h2>No channels under <strong>{{$subcategory->title}}</strong></h2></div>
+				<h2>No channels under {{$subcategory->title}}</h2>
 			@endif
 			</div>
 		</div>

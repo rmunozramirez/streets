@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ChanelsRequest extends FormRequest
+class ChannelRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,8 +32,6 @@ class ChanelsRequest extends FormRequest
             'subtitle'      => 'required|string|max:255',
             'about'         => 'required',            
             'image'         => 'image',
-            'likes'         => 'integer',
-            
         ];
     }
 }

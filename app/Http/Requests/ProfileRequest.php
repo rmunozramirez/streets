@@ -25,9 +25,9 @@ class ProfileRequest extends FormRequest
     {
         return [
                     
-        'user_name'     => 'string|max:255',
-        'status_id'     => 'required|integer',
+        'user_id'       => 'integer|max:255',
         'role_id'       => 'required|integer',
+        'title'         => 'required|string|max:255',
         'slug'          => 'string|max:255',
         'birthday'      => 'date', 
         'about'         => 'required',

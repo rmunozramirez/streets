@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use App\Status;
 
 Relation::morphMap([
     //'posts'
@@ -19,8 +20,7 @@ class Status extends Model
 
    protected $fillable = [
 
-        'name',
-		'slug',
+        'status',
         'statusable_type',
         'statusable_id',
 
@@ -30,4 +30,16 @@ class Status extends Model
     {
         return $this->morphTo();
     }
+
+    public static function create_status($id, $type)
+    {
+        $status = new Status;
+        $status->statusable_id =  $id;
+        $status->statusable_type =  $type;
+        $status->status =  'active';
+
+        $status->save();
+        return $status;
+    }
+
 }

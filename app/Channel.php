@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Status;
 
 class Channel extends Model
 {
@@ -37,4 +38,5 @@ class Channel extends Model
     {
         return $this->morphMany('App\Status', 'statusable');
     }
+
 }

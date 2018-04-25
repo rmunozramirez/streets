@@ -2,37 +2,24 @@
 @section ('title', "| $page_name")
 @section('content')
 
-<section id="content">
-    <div class="wrapper wrapper-content animated fadeInRight">
-        <div class="row wrapper border-bottom white-bg">
-			<div class="inside">
-                <h2>{!! $page_name !!} <span class="mt-3 small pull-right">Total channels: {{count($all_ch)}}</span> </h2>
-                  <ol class="breadcrumb">
-                    <li>
-                        <a href="{{route('index')}}"> Dashboard</a>
-                    </li>
-                    <li class="active">
-                        <i class="fas fa-pencil-alt"></i> {!! $page_name !!}
-                    </li>
-                    <span class="pull-right">
-	                    	<i class="fa fa-chevron-left"></i> <a href="{{route('channels.index')}}">Back to channels</a>
-                    		<i class="fa fa-plus"></i> <a href="{{route('channels.create')}}">Create a channels</a>
-                    		<i class="fa fa-trash"></i> <a href="{{route('channels.trashed')}}">Trashed channels</a>
-                    </span>
-                </ol>
-			    <div id="contenido"  class="card">
-				    @if(count($errors) > 0)
-				        <ul class="list-group">
-				        
-				            @foreach($errors->all() as $error)
-				                <li class="list-group-item text-danger">{{$error}}</li>
-				            @endforeach
-				        </ul>
-				    @endif
 
-					<div class="row">
-						<div class="card-body">        
-		        		{!! Form::model($channel, ['method'=>'PATCH', 'action'=> ['DashboardChannelsController@update', $channel->slug ],'files'=>true]) !!} 
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row wrapper border-bottom white-bg">
+		<div class="inside">
+            <h2>{!! $page_name !!} <span class="mt-3 small pull-right">Total channels: {{count($all_ch)}}</span> </h2>
+		    <div id="contenido"  class="card">
+			    @if(count($errors) > 0)
+			        <ul class="list-group">
+			        
+			            @foreach($errors->all() as $error)
+			                <li class="list-group-item text-danger">{{$error}}</li>
+			            @endforeach
+			        </ul>
+			    @endif
+
+				<div class="row">
+					<div class="card-body">        
+	        		{!! Form::model($channel, ['method'=>'PATCH', 'action'=> ['DashboardChannelsController@update', $channel->slug ],'files'=>true]) !!} 
 
 			            <div class="row">        
 				            <div class="col-md-4"> 
@@ -69,7 +56,7 @@
 					            <div class="row pt-5"> 
 						            <div class="col-md-12">      
 						                {!!Form::label('about', 'Channel description:', array('class' => 'form-spacing-top'))!!}
-						                {!!Form::textarea('about_channel', null, array('id' => 'summernote','class' => 'form-control', 'rows' => 9))!!}                       
+						                {!!Form::textarea('about', null, array('id' => 'summernote','class' => 'form-control', 'rows' => 9))!!}                       
 						            </div>
 					            </div>
 
@@ -79,14 +66,14 @@
 					            </div>
 				            </div>
 			            </div>  
-			            
-					    </div>
-					</div>
+		            
+				    </div>
 				</div>
 			</div>
 		</div>
 	</div>
-</section>
+</div>
+
 @endsection
 
 

@@ -44,14 +44,12 @@
 								                {!!Form::label('subtitle', 'Add a Category subtitle', array('class' => 'form-spacing-top'))!!}
 								                {!!Form::text('subtitle', null, array('class' => 'form-control', 'required' => '', 'maxlength' => '255'))!!}	            		
 							            </div>		            		
-						            </div>		            		
-
-
+						            </div>
 
 						            <div class="row pt-5"> 
 							            <div class="col-md-12">      
-							                {!!Form::label('about_category', 'Category description:', array('class' => 'form-spacing-top'))!!}
-							                {!!Form::textarea('about_category', null, array('id' => 'summernote','class' => 'form-control', 'rows' => 9))!!}                       
+							                {!!Form::label('about', 'Category description:', array('class' => 'form-spacing-top'))!!}
+							                {!!Form::textarea('about', null, array('id' => 'summernote','class' => 'form-control', 'rows' => 9))!!}                       
 							            </div>
 						            </div>
 

@@ -21,7 +21,7 @@
 
 				<div class="row">
 					<div class="card-body">         
-				            {!!Form::open(array('route' => 'categories.store', 'files' => true)) !!}   
+				            {!!Form::open(array('route' => 'subcategories.store', 'files' => true)) !!}   
 
 				            <div class="row">        
 					            <div class="col-md-4"> 
@@ -57,12 +57,12 @@
 						            <div class="row pt-5"> 
 							            <div class="col-md-12">      
 							                {!!Form::label('about', 'Category description:', array('class' => 'form-spacing-top'))!!}
-							                {!!Form::textarea('about_category', null, array('id' => 'summernote','class' => 'form-control', 'rows' => 9))!!}                       
+							                {!!Form::textarea('about', null, array('id' => 'summernote','class' => 'form-control', 'rows' => 9))!!}                       
 							            </div>
 						            </div>
 
 						            <div class="pt-5">    
-						                {!!Form::submit('Add New Category', array('class' => 'btn btn-success btn-block')) !!}
+						                {!!Form::submit('Add new subcategory', array('class' => 'btn btn-success btn-block')) !!}
 						                {!!Form::close() !!}       
 						            </div>
 					            </div>

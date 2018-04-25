@@ -10,7 +10,6 @@ class Category extends Model
 
 	protected $fillable = [
 
-			'status_id',
 		    'title',
             'slug',
             'subtitle',

@@ -10,7 +10,8 @@
 					@if( $channel ) 
 		                <h2>{!! $channel->title !!}
 		                <span class="small pull-right">
-	                    	<i class="fa fa-chevron-left"></i> <a href="{{route('channels.index')}}">Back to channels</a>
+	                    	<i class="fa fa-chevron-left"></i> <a class="small-link" href="{{route('channels.index')}}">Back to Channels</a>
+    	                 	<i class="fa fa-pencil"></i> <a href="{{route('channels.edit', $channel->slug)}}">Edit</a>
 	                    </span></h2>
 	                <hr>
 						<div id="contenido"  class="card">
@@ -32,7 +33,11 @@
 									        <dd class="pb-3">{{ $channel->subtitle}}</dd>
 
 									        <dt>Subcategory:</dt>
-									        <dd class="pb-3">{{ $channel->subcategory->title}}</dd>
+									        <dd class="pb-3">
+									        	<a href="{{route('subcategories.show', $channel->subcategory->slug)}}">
+									        	{{ $channel->subcategory->title}}
+										        </a>
+										    </dd>
 
 									        <dt>Status</dt>
 									        <dd class="pb-3">{!! $channel->statuses[0]->status !!}</dd>

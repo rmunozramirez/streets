@@ -24,7 +24,7 @@
 
 					<div class="row">
 						<div class="card-body">        
-		        		{!! Form::model($category, ['method'=>'PATCH', 'action'=> ['DashboardSubcategoriesController@update', $category->slug ],'files'=>true]) !!} 
+		        		{!! Form::model($category, ['method'=>'PATCH', 'action'=> ['DashboardCategoriesController@update', $category->slug ],'files'=>true]) !!} 
 
 
 				            <div class="row">        

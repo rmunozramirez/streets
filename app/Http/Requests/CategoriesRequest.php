@@ -30,8 +30,6 @@ class CategoriesRequest extends FormRequest
             'slug'              => 'string|max:255',         
             'subtitle'          => 'max:255',     
             'image'             => 'image',
-            'likes'             => 'integer',
-            'status_id'         =>  'integer',
             
         ];
     }
