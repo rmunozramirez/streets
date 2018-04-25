@@ -10,7 +10,7 @@ class Discussion extends Model
 {
 	protected $fillable = [
 			
-			'status_id',
+			'profile_id',
             'title',
             'slug',
             'body',

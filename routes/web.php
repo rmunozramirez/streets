@@ -21,8 +21,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()  {
 	Route::resource('roles', 'DashboardRolesController');
 
 //admin Profiles
-	Route::get('profiles/{slug}/allow', 'DashboardProfileController@allow')->name('profiles.allow');
-	Route::get('profiles/{slug}/bann', 'DashboardProfileController@bann')->name('profiles.bann');
+	Route::get('profiles/{id}/allow', 'DashboardProfileController@allow')->name('profiles.allow');
+	Route::get('profiles/{id}/ban', 'DashboardProfileController@ban')->name('profiles.ban');
 	Route::get('profiles/trashed', 'DashboardProfileController@trashed')->name('profiles.trashed');
 	Route::get('profiles/{slug}/restore', 'DashboardProfileController@restore')->name('profiles.restore');
 	Route::delete('profiles/{slug}/kill', 'DashboardProfileController@kill')->name('profiles.kill');

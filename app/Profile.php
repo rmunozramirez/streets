@@ -58,4 +58,17 @@ class Profile extends Model
         return $this->hasMany('App\Discussion');
     }
 
+    public function is_banned($id)
+    {
+        $profile = Profile::find($id);
+        $status = $profile->statuses[0]->status;
+
+        if ($status != 'banned') {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
 }

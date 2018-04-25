@@ -115,28 +115,6 @@ class DashboardProfileController extends Controller
         return redirect()->route('profiles.show', $profile->slug);
     }
 
-    public function bann($slug)
-    {
-        $profile = Profile::where('slug', $slug)->first();
-        $profile->status_id = 4;
-
-        $profile->save();
-
-        Session::flash('success', 'Profile successfully banned!');
-        return redirect()->route('profiles.index');
-    }
-
-    public function allow($slug)
-    {
-        $profile = Profile::where('slug', $slug)->first();
-        $profile->status_id = 1;
-
-        $profile->save();
-
-        Session::flash('success', 'Profile successfully allowed!');
-        return redirect()->route('profiles.index');
-    }
-
     public function destroy($slug)
     {
         
@@ -188,6 +166,29 @@ class DashboardProfileController extends Controller
         Session::flash('success', 'Profile pemanently deleted!');
 
         return redirect()->route('profiles.index');
+    }
+
+
+    public function ban($id)
+    {
+
+        $status = Status::where('statusable_id', $id)->where('statusable_type', 'profiles')->first();
+        $status->status =  'banned';
+        $status->save();
+
+        Session::flash('success', 'User banned!');
+        return redirect()->back();
+    }
+
+    public function allow($id)
+    {
+
+        $status = Status::where('statusable_id', $id)->where('statusable_type', 'profiles')->first();
+        $status->status =  'active';
+        $status->save();
+
+        Session::flash('success', 'User banned!');
+        return redirect()->back();
     }
 
 }

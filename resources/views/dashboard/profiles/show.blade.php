@@ -7,17 +7,28 @@
     <div class="row wrapper border-bottom white-bg">
 		<div class="inside">
             <h2>{!! $profile->title !!}
-            <span class="small pull-right">
-            	<i class="fa fa-chevron-left"></i> <a href="{{route('profiles.index')}}">Back to profiles</a>
-            </span></h2>
+            	<span class="ml-5">
+            		@if($profile->is_banned($profile->id))
+			    		<a href="{{route('profiles.allow', $profile->id)}}" class="btn btn-success">
+			    			<i class="fa fa-thumbs-up"></i> Remove BANN!
+			    		</a>
+			    	@else
+			    		<a href="{{route('profiles.ban', $profile->id)}}" class="btn btn-danger">
+			    			<i class="fa fa-ban"></i> BANN the user!
+			    		</a>
+			    	@endif
+            	</span>
+	            <span class="small pull-right">
+	            	<i class="fa fa-chevron-left"></i> <a href="{{route('profiles.index')}}">Back to profiles</a>
+	            </span>
+	        </h2>
         	<hr>
 			<div id="contenido"  class="card">
 				<div class="card-body">
 					<div class="row">
 						<div class="col-md-4">
 			               <figure>
-				            	<img height="300" class="
-				            	" src="{{URL::to('/images/' . $profile->image)}}" alt="{{ $profile->name }}" name="{{ $profile->name }}" />
+				            	<img height="300" class="img-responsive" src="{{URL::to('/images/' . $profile->image)}}" alt="{{ $profile->name }}" name="{{ $profile->name }}" />
 				            </figure>				
 		            	</div>
 						<div class="col-md-8">
@@ -60,49 +71,6 @@
 				        </div>
 			        </div>
 			    </div>
-			    <hr />
-			    <div class="card-footer">
-			    	<div class="row">
-						<div class="col-md-4">
-							<div class="row no-gutters">
-								<div class="col-md-6">
-				               		{!! Form::model($profile, ['method'=>'PATCH', 'action'=> ['DashboardProfileController@update', $profile->slug ],'files'=>true]) !!}
-
-		        					{!!Form::select('status', array('' => 'Choose Status', 'active' => 'Active', 'inactive' => 'Inactive', 'on_hold' => 'On Hold', 'banned' => 'Banned'), null, array('class' => 'form-control'))!!}
-		    					</div>
-		    					<div class="col-md-6">
-		        					{!!Form::submit('New Status', array('class' => 'btn btn-block')) !!}
-				                	{!!Form::close() !!} 
-
-						        </div>
-					        </div>
-						</div>										
-						<div class="col-md-4 col-md-offset-1">
-								<div class="row no-gutter">
-								<div class="col-md-6">
-				               		{!! Form::model($profile, ['method'=>'PATCH', 'action'=> ['DashboardProfileController@update', $profile->slug ],'files'=>true]) !!}
-
-		                    		{!!Form::select('role', array('admin' => 'Admin', 'author' => 'Author', 'subscriber' => 'Subscriber'), null, array('class' => 'form-control'))!!}
-								</div>
-		    					<div class="col-md-6">
-		        					{!!Form::submit('Change Role', array('class' => 'btn btn-block')) !!}
-					                {!!Form::close() !!} 
-						        </div>
-					        </div>
-						</div>										
-						<div class="col-md-2 col-md-offset-1">
-							<div class="card-body">
-				            	<div class="col-md-6col-">
-					            	{!! Form::open(['route' => ['profiles.destroy', $profile->slug], 'method' => 'DELETE']) !!}
-
-									{!! Form::submit('Delete', ['class' => 'btn btn-block btn-danger']) !!}
-
-									{!! Form::close() !!}
-								</div>
-					        </div>
-						</div>
-					</div>
-			    </div>	
 			</div>
 		</div>
 	</div>
@@ -121,8 +89,7 @@
 							<div class="row">
 								<div class="col-md-6">
 					               <figure>
-						            	<img height="300" class="
-						            	" src="{{URL::to('/images/' . $profile->channel->image)}}" alt="{{ $profile->channel->title }}" name="{{ $profile->channel->title }}" />
+						            	<img height="300" class="img-responsive" src="{{URL::to('/images/' . $profile->channel->image)}}" alt="{{ $profile->channel->title }}" name="{{ $profile->channel->title }}" />
 						            </figure>				
 				            	</div>
 								<div class="col-md-6">

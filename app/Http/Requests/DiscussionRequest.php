@@ -27,7 +27,7 @@ class DiscussionRequest extends FormRequest
 
             'title'         =>  'required|max:255',
             'slug'          =>  'string|max:255',      
-            'about'          =>  'required',         
+            'body'          =>  'required',         
             'image'         =>  'image',
             'profile_id'    =>  'integer',
 

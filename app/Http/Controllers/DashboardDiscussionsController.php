@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\DiscussionRequest;
 use App\Http\Requests\ReplyRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Profile;
@@ -62,7 +63,7 @@ class DashboardDiscussionsController extends Controller
 
         $discussion = Discussion::create([
     
-            'profile_id'    => $profile->id,
+            'profile_id'    => Auth::user()->id,
             'title'         => $request->title,
             'slug'          => str_slug($request->title, '-'),      
             'body'          => $request->body,            
@@ -74,20 +75,13 @@ class DashboardDiscussionsController extends Controller
         $type =  'discussions';
         $id = $discussion->id;
         Status::create_status($id, $type);
-        $slug = $user->slug;
         $page_name = 'discussions';
 
         Session::flash('success', 'Discussion successfully created!');
      
-        return redirect()->route('discussions.show', compact( 'page_name', 'slug'));
+        return redirect()->route('discussions.show', $discussion->slug);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($slug)
     {
         $discussion = Discussion::where('slug', $slug)->first();
@@ -99,13 +93,11 @@ class DashboardDiscussionsController extends Controller
 
     public function edit($slug)
     {
+        $all_ = Discussion::with('statuses')->get();
         $discussion = Discussion::where('slug', $slug)->first();
-        $user = Auth::user();
-        $profile = Profile::where('user_id', $user->id)->first();
-        $all_user_discussions = Discussion::where('profile_id', $profile->id)->count();
-        $page_name = 'Edit: ' . $discussion->title;
+        $page_name = 'discussions';
 
-        return view('dashboard.discussions.edit', compact('discussion', 'page_name', 'user', 'all_user_discussions'));
+        return view('dashboard.discussions.edit', compact('discussion', 'page_name', 'all_'));
 
     }
 

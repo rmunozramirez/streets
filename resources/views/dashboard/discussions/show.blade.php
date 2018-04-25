@@ -6,7 +6,8 @@
     	<div class="inside">
 			<h2>{!! $discussion->title !!} 
                 <span class="small pull-right">
-                	<i class="fa fa-chevron-left"></i> <a href="{{route('discussions.index')}}">Back to discussions</a>
+                	<i class="fa fa-chevron-left"></i> <a class="small-link" href="{{route('discussions.index')}}">Back to discussions</a>
+                 	<i class="fa fa-pencil"></i> <a href="{{route('discussions.edit', $discussion->slug)}}">Edit</a>  	
                 </span></h2>
             	<hr>
 		    

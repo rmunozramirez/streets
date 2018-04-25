@@ -2,11 +2,11 @@
 @section ('title', "| $page_name")
 @section('content')
 
-
-<div class="wrapper wrapper-content animated fadeInRight">
+<div class="wrapper wrapper-content animated fadeInUp">		
     <div class="row wrapper border-bottom white-bg">
 		<div class="inside">
             <h2>{!! $page_name !!} <span class="mt-3 small pull-right">Total channels: {{count($all_ch)}}</span> </h2>
+            <hr />
 		    <div id="contenido"  class="card">
 			    @if(count($errors) > 0)
 			        <ul class="list-group">
@@ -17,7 +17,6 @@
 			        </ul>
 			    @endif
 
-				<div class="row">
 					<div class="card-body">        
 	        		{!! Form::model($channel, ['method'=>'PATCH', 'action'=> ['DashboardChannelsController@update', $channel->slug ],'files'=>true]) !!} 
 
@@ -65,10 +64,8 @@
 					                {!!Form::close() !!}       
 					            </div>
 				            </div>
-			            </div>  
-		            
+			            </div>       
 				    </div>
-				</div>
 			</div>
 		</div>
 	</div>

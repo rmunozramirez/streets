@@ -37,8 +37,8 @@
 				                {!!Form::text('title', null, array('class' => 'form-control', 'required' => '', 'maxlength' => '255'))!!}
 				            </div>
 					      	<div class="col-md-12 pt-5">      
-					           	{!!Form::label('about', 'Discussion body:', array('class' => 'form-spacing-top'))!!}
-				                {!!Form::textarea('about', null, array('id' => 'summernote','class' => 'form-control', 'rows' => 9))!!}                       
+					           	{!!Form::label('body', 'Discussion body:', array('class' => 'form-spacing-top'))!!}
+				                {!!Form::textarea('body', null, array('id' => 'summernote','class' => 'form-control', 'rows' => 9))!!}                       
 				            </div>
 				        </div>
 			            <div class="row">    
