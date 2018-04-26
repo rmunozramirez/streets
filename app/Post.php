@@ -9,6 +9,7 @@ class Post extends Model
 {
 	protected $fillable = [	
 			'postcategory_id',
+            'profile_id',
 		    'title',
             'slug',
             'subtitle',

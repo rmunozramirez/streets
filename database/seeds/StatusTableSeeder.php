@@ -256,6 +256,18 @@ class StatusTableSeeder extends Seeder
             'statusable_type'   =>  'discussions',
             'status'            =>  'banned',
         ]); 
+
+        App\Status::create ([
+            'statusable_id'     =>  5,
+            'statusable_type'   =>  'discussions',
+            'status'            =>  'banned',
+        ]); 
+
+        App\Status::create ([
+            'statusable_id'     =>  6,
+            'statusable_type'   =>  'discussions',
+            'status'            =>  'banned',
+        ]); 
 //pages
 
         App\Status::create ([

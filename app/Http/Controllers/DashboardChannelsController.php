@@ -86,9 +86,7 @@ class DashboardChannelsController extends Controller
         $page_name = 'channels';
         $all_sub = Subcategory::orderBy('title', 'asc')->pluck('title', 'id')->all();
 
-
-          return view('dashboard.channels.edit', compact('channel', 'subcategories', 'page_name', 'all_'));
-
+        return view('dashboard.channels.edit', compact('channel', 'subcategories', 'page_name', 'all_', 'all_sub'));
     }
 
     public function update(ChannelRequest $request, $slug)

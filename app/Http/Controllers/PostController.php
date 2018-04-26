@@ -25,10 +25,8 @@ class PostController extends Controller
         $posts = Post::orderBy('created_at', 'asc')->paginate(4);
         $all_ = Post::with('statuses')->get();
         $page_name = 'posts';
-        $trash_ch = Post::onlyTrashed()->get();
 
-
-       return view('dashboard.posts.index', compact('posts', 'page_name', 'all_', 'trash_post'));
+       return view('dashboard.posts.index', compact('posts', 'page_name', 'all_'));
     }
 
     /**
@@ -104,9 +102,15 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+
+        $all_ = Post::with('statuses')->get();
+        $post = Post::where('slug', $slug)->first(); 
+        $page_name = 'posts';
+        $all_postcat = PostCategory::orderBy('title', 'asc')->pluck('title', 'id')->all();
+
+        return view('dashboard.posts.edit', compact('post', 'postcategories', 'page_name', 'all_', 'all_postcat'));
     }
 
     /**
@@ -116,19 +120,61 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $slug)
     {
-        //
+        $input = $request->all();
+        $input['slug'] = str_slug($request->title, '-');
+
+        if( $file = $request->file('image')) {
+            $name = time() . '-' . $file->getClientOriginalName();
+            $file->move('images', $name);
+            $input['image'] = $name;
+        }
+
+        $post = Post::where('slug', $slug)->first();
+        $post->fill($input)->save();
+
+        Session::flash('success', 'Post successfully updated!');
+     
+        return redirect()->route('posts.show', $post->slug); 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy($slug)
     {
-        //
+        
+        $post = Post::where('slug', $slug)->first();
+        $post->delete();
+
+        Session::flash('success', 'Post successfully deleted!');
+        return redirect()->route('posts.index');
+    }
+
+
+    public function trashed()
+    {
+        $trash_post = Post::onlyTrashed()->get();
+        $all_ = Post::all();
+        $page_name = 'posts';
+
+        return view('dashboard.posts.trashed', compact('trash_post', 'page_name', 'all_'));
+    }
+
+    public function restore($slug)
+    {
+        $post = Post::withTrashed()->where('slug', $slug)->first();
+        $post->statuses->status = 'inactive';
+        $post->restore();
+
+        Session::flash('success', 'Post successfully restored!');
+        return redirect()->route('posts.index');
+    }
+
+    public function kill($slug)
+    {
+        $post = Post::withTrashed()->where('slug', $slug)->first();
+        $post->forceDelete();
+
+        Session::flash('success', 'Post pemanently deleted!');
+        return redirect()->route('posts.index');
     }
 }

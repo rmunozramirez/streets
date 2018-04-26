@@ -34,16 +34,6 @@
                 </li>
 
                 <li>
-                    <a href=""><i class="fa fa-envelope"></i> <span class="nav-label">Blog </span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="">Posts</a></li>
-                        <li><a href="">Post Categories</a></li>
-                        <li><a href="">Post Tags</a></li>
-                        <li><a href="">Pages</a></li>
-                    </ul>
-                </li>
-
-                <li>
                     <a href=""><i class="fa fa-envelope"></i> <span class="nav-label">Forum </span></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a href="{{route('discussions.index')}}">Discusssions</a></li>
@@ -57,6 +47,8 @@
                     <ul class="nav nav-second-level collapse">
                         <li><a href="{{route('posts.index')}}">Posts</a></li>
                         <li><a href="{{route('postcategories.index')}}">Post Categories</a></li>
+                        <li><a href="">Post Tags</a></li>
+                        <li><a href="">Pages</a></li>
 
                     </ul>
                 </li>

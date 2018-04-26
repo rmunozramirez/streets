@@ -5,7 +5,7 @@
 <div class="wrapper wrapper-content animated fadeInUp">		
     <div class="row wrapper border-bottom white-bg">
 		<div class="inside">
-            <h2>{!! $page_name !!} <span class="mt-3 small pull-right">Total channels: {{count($all_ch)}}</span> </h2>
+            <h2>{!! $page_name !!} <span class="mt-3 small pull-right">Total channels: {{count($all_)}}</span> </h2>
             <hr />
 		    <div id="contenido"  class="card">
 			    @if(count($errors) > 0)

@@ -44,4 +44,38 @@ class Status extends Model
         return $status;
     }
 
+
+    public static function ban($id, $type)
+    {
+
+        $status = Status::where('statusable_id', $id)->where('statusable_type', 'profiles')->first();
+        $status->status =  'banned';
+        $status->save();
+
+        Session::flash('success', 'User banned!');
+        return redirect()->back();
+    }
+
+    public static function allow($id, $type)
+    {
+
+        $status = Status::where('statusable_id', $id)->where('statusable_type', 'profiles')->first();
+        $status->status =  'active';
+        $status->save();
+
+        Session::flash('success', 'User banned!');
+        return redirect()->back();
+    }
+
+    public static function activate($id, $type)
+    {
+
+        $status = Status::where('statusable_id', $id)->where('statusable_type', 'profiles')->first();
+        $status->status =  'active';
+        $status->save();
+
+        Session::flash('success', 'User banned!');
+        return redirect()->back();
+    }
+
 }

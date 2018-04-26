@@ -39,6 +39,13 @@
 										        </a>
 										    </dd>
 
+									        <dt>Author</dt>
+									        <dd class="pb-3">
+									        	<a href="{{route('profiles.show', $channel->profile->slug)}}">
+									        		{!! $channel->profile->title !!}
+									        	</a>
+									        </dd>
+
 									        <dt>Status</dt>
 									        <dd class="pb-3">{!! $channel->statuses[0]->status !!}</dd>
 
