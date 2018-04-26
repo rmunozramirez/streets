@@ -9,7 +9,7 @@ use App\Status;
 Relation::morphMap([
     'pages'         => 'App\Page',
     'posts'         => 'App\Post',
-    'postcategories'=> 'App\PostCategory',
+    'postcategories'=> 'App\Postcategory',
     'profiles'      => 'App\Profile',
     'channels'      => 'App\Channel',
     'subcategories' => 'App\Subcategory',

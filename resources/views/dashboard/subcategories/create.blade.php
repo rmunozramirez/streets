@@ -36,7 +36,7 @@
 				            	<div class="col-md-8"> 
 						            <div class="row">
 						            	<div class="col-md-6">       
-							                {!!Form::label('title', 'Add a subategory title', array('class' => 'form-spacing-top'))!!}
+							                {!!Form::label('title', 'Add a subcategory title', array('class' => 'form-spacing-top'))!!}
 							                {!!Form::text('title', null, array('class' => 'form-control', 'required' => '', 'maxlength' => '255'))!!}
 							            </div>
 

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class PostsCategoriesTableSeeder extends Seeder
+class PostcategoriesTableseeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,7 +12,7 @@ class PostsCategoriesTableSeeder extends Seeder
     public function run()
     {
  
-        App\PostCategory::create ([
+        App\Postcategory::create ([
         'title'             =>  'Architecture',
         'slug'              =>  'architecture',
         'image'             =>  'parthenon.jpg',
@@ -21,7 +21,7 @@ class PostsCategoriesTableSeeder extends Seeder
         ]);
 
 
-        App\PostCategory::create ([
+        App\Postcategory::create ([
         'title'             =>  'Sculpture',
         'slug'              =>  'sculpture',
         'image'             =>  'sculpture.jpg',
@@ -30,12 +30,11 @@ class PostsCategoriesTableSeeder extends Seeder
         ]);
 
 
-        App\PostCategory::create ([
+        App\Postcategory::create ([
         'title'             =>  'Music',
         'slug'              =>  'music',
         'image'             =>  'music.jpg',
         'about'             =>  'You think water moves fast? You should see ice. It moves like it has a mind. Like it knows it killed the world once and got a taste for murder. After the avalanche, it took us a week to climb out. Now, I do not know exactly when we turned on each other, but I know that seven of us survived the slide... and only five made it out. Now we took an oath, that I am breaking now. We said we would say it was the snow that killed the other two, but it was not. Nature is lethal but it does not hold a candle to man.',
-
         ]);
 
     }

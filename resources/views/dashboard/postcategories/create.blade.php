@@ -4,9 +4,9 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row wrapper border-bottom white-bg">
     	<div class="inside">
-    		    <h2>Create a Subcategory
+    		    <h2>Create a Post ccategory
     		    	<span class="small pull-right">
-                    	<i class="fa fa-chevron-left"></i> <a href="{{route('categories.index')}}">Back to categories</a>
+                    	<i class="fa fa-chevron-left"></i> <a href="{{route('postcategories.index')}}">Back to post categories</a>
                     </span>
 	                </h2>
 	             <hr />
@@ -21,7 +21,7 @@
 
 				<div class="row">
 					<div class="card-body">         
-				            {!!Form::open(array('route' => 'subcategories.store', 'files' => true)) !!}   
+				            {!!Form::open(array('route' => 'postcategories.store', 'files' => true)) !!}   
 
 				            <div class="row">        
 					            <div class="col-md-4"> 
@@ -36,23 +36,15 @@
 				            	<div class="col-md-8"> 
 						            <div class="row">
 						            	<div class="col-md-6">       
-							                {!!Form::label('title', 'Add a subategory title', array('class' => 'form-spacing-top'))!!}
+							                {!!Form::label('title', 'Add a post category title', array('class' => 'form-spacing-top'))!!}
 							                {!!Form::text('title', null, array('class' => 'form-control', 'required' => '', 'maxlength' => '255'))!!}
 							            </div>
 
 							            <div class="col-md-6">      
-								                {!!Form::label('subtitle', 'Add a subcategory subtitle', array('class' => 'form-spacing-top'))!!}
+								                {!!Form::label('subtitle', 'Add a post category subtitle', array('class' => 'form-spacing-top'))!!}
 								                {!!Form::text('subtitle', null, array('class' => 'form-control', 'required' => '', 'maxlength' => '255'))!!}	            		
 							            </div>		            		
-						            </div>		            		
-
-
-						            <div class="row pt-5">
-						            	<div class="col-md-6">
-							            	{!! Form::label('category_id', 'Subcategory:') !!}
-		                        			{!! Form::select('category_id', ['' => 'Choose a category'] + $all_cat, null, array('class' => 'form-control')) !!}
-							            </div>
-							       	</div>
+						            </div>
 
 						            <div class="row pt-5"> 
 							            <div class="col-md-12">      
@@ -62,7 +54,7 @@
 						            </div>
 
 						            <div class="pt-5">    
-						                {!!Form::submit('Add new subcategory', array('class' => 'btn btn-success btn-block')) !!}
+						                {!!Form::submit('Add new post category', array('class' => 'btn btn-success btn-block')) !!}
 						                {!!Form::close() !!}       
 						            </div>
 					            </div>

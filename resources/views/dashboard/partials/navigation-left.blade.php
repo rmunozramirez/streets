@@ -48,7 +48,7 @@
                         <li><a href="{{route('posts.index')}}">Posts</a></li>
                         <li><a href="{{route('postcategories.index')}}">Post Categories</a></li>
                         <li><a href="">Post Tags</a></li>
-                        <li><a href="">Pages</a></li>
+                        <li><a href="{{route('pages.index')}}">Pages</a></li>
 
                     </ul>
                 </li>

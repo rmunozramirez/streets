@@ -34,14 +34,20 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()  {
 	Route::delete('posts/{slug}/kill', 'PostController@kill')->name('posts.kill');
 	Route::resource('posts', 'PostController');
 
+//admin pages
+	Route::get('pages/trashed', 'PagesController@trashed')->name('pages.trashed');
+	Route::get('pages/{slug}/restore', 'PagesController@restore')->name('pages.restore');
+	Route::delete('pages/{slug}/kill', 'PagesController@kill')->name('pages.kill');
+	Route::resource('pages', 'PagesController');
+
 //admin postcategories
-	Route::get('postcategories/trashed', 'PostCategoryController@trashed')
+	Route::get('postcategories/trashed', 'PostcategoriesController@trashed')
 	->name('postcategories.trashed');
-	Route::get('postcategories/{slug}/restore', 'PostCategoryController@restore')
+	Route::get('postcategories/{slug}/restore', 'PostcategoriesController@restore')
 	->name('postcategories.restore');
-	Route::delete('postcategories/{slug}/kill', 'PostCategoryController@kill')
+	Route::delete('postcategories/{slug}/kill', 'PostcategoriesController@kill')
 	->name('postcategories.kill');
-	Route::resource('postcategories', 'PostCategoryController');
+	Route::resource('postcategories', 'PostcategoriesController');
 
 //admin channels
 	Route::get('channels/trashed', 'DashboardChannelsController@trashed')->name('channels.trashed');

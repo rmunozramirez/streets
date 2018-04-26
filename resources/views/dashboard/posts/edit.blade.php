@@ -52,8 +52,8 @@
 
 					            <div class="row pt-5"> 
 						            <div class="col-md-12">      
-						                {!!Form::label('about', 'Post description:', array('class' => 'form-spacing-top'))!!}
-						                {!!Form::textarea('about', null, array('id' => 'summernote','class' => 'form-control', 'rows' => 9))!!}                       
+						                {!!Form::label('body', 'Post description:', array('class' => 'form-spacing-top'))!!}
+						                {!!Form::textarea('body', null, array('id' => 'summernote','class' => 'form-control', 'rows' => 9))!!}                       
 						            </div>
 					            </div>
 

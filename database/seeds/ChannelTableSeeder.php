@@ -19,8 +19,7 @@ class ChannelTableSeeder extends Seeder
         'slug'  			=>	'this-is-my-place',
         'subtitle' 			=>	'And of course here I do what I want',
         'image'				=>	'auto-clasico.jpg',
-        'about'				=>	'Normally, both your asses would be dead as fucking fried chicken, but you happen to pull this shit while I am in a transitional period so I do not wanna kill you, I wanna help you. But I ca not give you this case, it do not belong to me. Besides, I have already been through too much shit this morning over this case to hand it over to your dumb ass.
-',
+        'about'				=>	'Normally, both your asses would be dead as fucking fried chicken, but you happen to pull this shit while I am in a transitional period so I do not wanna kill you, I wanna help you. But I ca not give you this case, it do not belong to me. Besides, I have already been through too much shit this morning over this case to hand it over to your dumb ass.',
 
         ]);
 
@@ -42,8 +41,7 @@ class ChannelTableSeeder extends Seeder
         'slug'  			=>	'my-paintings-world',
         'subtitle' 			=>	'This is the work from my entire life',
         'image'				=>	'urban-dance.jpg',
-        'about'             =>  'Look, just because I do not be givin no man a foot massage do not make it right for Marsellus to throw Antwone into a glass motherfuckin house, fuckin up the way the nigger talks. Motherfucker do that shit to me, he better paralyze my ass, because I will kill the motherfucker, know what I am sayin?
-',
+        'about'             =>  'Look, just because I do not be givin no man a foot massage do not make it right for Marsellus to throw Antwone into a glass motherfuckin house, fuckin up the way the nigger talks. Motherfucker do that shit to me, he better paralyze my ass, because I will kill the motherfucker, know what I am sayin?',
 
         ]);
 
@@ -76,8 +74,7 @@ class ChannelTableSeeder extends Seeder
         'slug'  			=>	'i-have-not-idea',
         'subtitle' 			=>	'And of course here I do what I want',
         'image'				=>	'guitarra.jpg',
-        'about'             =>  'Now that we know who you are, I know who I am. I am not a mistake! It all makes sense! In a comic, you know how you can tell who the arch-villains going to be? He is the exact opposite of the hero. And most times they are friends, like you and me! I should have known way back when... You know why, David? Because of the kids. They called me Mr Glass.
-',
+        'about'             =>  'Now that we know who you are, I know who I am. I am not a mistake! It all makes sense! In a comic, you know how you can tell who the arch-villains going to be? He is the exact opposite of the hero. And most times they are friends, like you and me! I should have known way back when... You know why, David? Because of the kids. They called me Mr Glass.',
 
         ]);
 

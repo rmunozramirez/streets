@@ -10,10 +10,10 @@
 			    <div class="tabs-container">
 			        <ul class="nav nav-tabs user-tabs">
 			            <li class="active">
-			            	<a data-toggle="tab" href="#tab-1-active"> <i class="fa fa-users"></i>Active Subcategories</a>
+			            	<a data-toggle="tab" href="#tab-1-active"> <i class="fa fa-users"></i>Active post categories</a>
 			            </li>
 			            <li class="">
-			            	<a data-toggle="tab" href="#tab-2-inactive"><i class="fa fa-ban"></i>Inactive</a>
+			            	<a data-toggle="tab" href="#tab-2-inactive"><i class="fa fa-ban"></i>Inactive  post categories</a>
 			            </li>
 
 			        </ul>
@@ -22,36 +22,32 @@
 			                <div class="row">
 			                	<div class="col-md-12 pt-4">
 			                		<div class="col-md-12">
-			                			<h3>Active Subcategories</h3>
+			                			<h3>Active post categories</h3>
 			                		</div>
 									<table class="table table-striped table-hover">
 							         <thead>
 							            <tr>
 							                <th>Subcategory</th>
-							                <th>In Category</th>
-							                <th>Channels</th>
+							                <th>Posts</th>
 							                <th>Date</th>
 							            </tr>
 							         </thead>
 							         <tbody>
-							         		@foreach ($all_ as $sub)
-								         		@if($sub->statuses[0]->status === 'active')
+							         		@foreach ($all_ as $postcat)
+								         		@if($postcat->statuses[0]->status === 'active')
 							            <tr>
 							               <td>
-							               		<img class="mr-4" height="80" width="80" src="{{URL::to('/images/' . $sub->image ) }}" alt="{{$sub->title}}" > 
-							               		<a href="{{route('subcategories.show', $sub->slug)}}">
-							               		{{$sub->title}}
+							               		<img class="mr-4" height="80" width="80" src="{{URL::to('/images/' . $postcat->image ) }}" alt="{{$postcat->title}}" > 
+							               		<a href="{{route('postcategories.show', $postcat->slug)}}">
+							               		{{$postcat->title}}
 							               		</a>
 							               	</td>
-							               <td><a href="{{route('categories.show', $sub->category->slug)}}">
-							               		{{$sub->category->title}}
-							               		</a></td>
-							               <td>{{count($sub->channels)}}</td>
-							               <td>{{$sub->created_at}}</td>
+							               <td>{{count($postcat->posts)}}</td>
+							               <td>{{$postcat->created_at}}</td>
 							               <td>
-							               		<a type="button" class="col-md-6 btn btn-secondary" href="{{route('subcategories.edit', $sub->slug)}}">Edit</a>
+							               		<a type="button" class="col-md-6 btn btn-secondary" href="{{route('postcategories.edit', $postcat->slug)}}">Edit</a>
 								            	<div class="col-md-6">
-									            	{!! Form::open(['route' => ['subcategories.destroy', $sub->slug], 'method' => 'DELETE']) !!}
+									            	{!! Form::open(['route' => ['postcategories.destroy', $postcat->slug], 'method' => 'DELETE']) !!}
 													{!! Form::submit('Delete', ['class' => 'btn btn-block btn-danger']) !!}
 													{!! Form::close() !!}
 												</div>
@@ -68,39 +64,33 @@
 			            	<div class="row">
 			                	<div class="col-md-12 pt-4">
 			                		<div class="col-md-12">
-			                			<h3>Inactive Subcategories</h3>
+			                			<h3>Inactive Postcategories</h3>
 			                		</div>
 									<table class="table table-striped table-hover">
 							         <thead>
 							            <tr>
-							                <th>Subcategory</th>
-							                <th>In Category</th>
-							                <th>Channels</th>
+							                <th>Post ccategory</th>
+							                <th>Posts</th>
 							                <th>Date</th>
 							            </tr>
 							         </thead>
 							         <tbody>
-							         		@foreach ($all_ as $sub)
-								         		@if($sub->statuses[0]->status === 'inactive')
+							         		@foreach ($all_ as $postcat)
+								         		@if($postcat->statuses[0]->status === 'inactive')
 							            <tr>
 							               <td>
-							               		<img class="mr-4" height="80" width="80" src="{{URL::to('/images/' . $sub->image ) }}" alt="{{$sub->title}}" > 
-							               		<a href="{{route('subcategories.show', $sub->slug)}}">
-							               		{{$sub->title}}
+							               		<img class="mr-4" height="80" width="80" src="{{URL::to('/images/' . $postcat->image ) }}" alt="{{$postcat->title}}" > 
+							               		<a href="{{route('postcategories.show', $postcat->slug)}}">
+							               		{{$postcat->title}}
 							               		</a>
 							               	</td>
-							               <td><a href="{{route('categories.show', $sub->category->slug)}}">
-							               		{{$sub->category->title}}
-							               		</a></td>
-							               <td>{{count($sub->channels)}}</td>
-							               <td>{{$sub->created_at}}</td>
+							               <td>{{$postcat->posts}}</td>
+							               <td>{{$postcat->created_at}}</td>
 							               <td>
-							               		<a type="button" class="col-md-6 btn btn-secondary" href="{{route('subcategories.edit', $sub->slug)}}">Edit</a>
+							               		<a type="button" class="col-md-6 btn btn-secondary" href="{{route('oostcategories.edit', $postcat->slug)}}">Edit</a>
 								            	<div class="col-md-6">
-									            	{!! Form::open(['route' => ['subcategories.destroy', $sub->slug], 'method' => 'DELETE']) !!}
-
+									            	{!! Form::open(['route' => ['postcategories.destroy', $postcat->slug], 'method' => 'DELETE']) !!}
 													{!! Form::submit('Delete', ['class' => 'btn btn-block btn-danger']) !!}
-
 													{!! Form::close() !!}
 												</div>
 							               </td>

@@ -22,7 +22,7 @@ class Post extends Model
 
     public function postcategory()
     {
-        return $this->belongsTo('App\PostCategory');
+        return $this->belongsTo('App\Postcategory');
     }
 
     public function statuses()

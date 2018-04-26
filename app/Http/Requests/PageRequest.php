@@ -27,7 +27,7 @@ class PageRequest extends FormRequest
             'title'             => 'required|max:255',
             'slug'              => 'string|max:255',
             'subtitle'          => 'required|max:255',
-            'body'              => 'required|max:255',
+            'body'              => 'required',
             'image'             =>  'required|image',
         ];
     }

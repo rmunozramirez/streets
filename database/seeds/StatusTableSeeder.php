@@ -273,7 +273,7 @@ class StatusTableSeeder extends Seeder
         App\Status::create ([
             'statusable_id'     =>  1,
             'statusable_type'   =>  'pages',
-            'status'            =>  'inactive',
+            'status'            =>  'active',
         ]); 
 
         App\Status::create ([
@@ -285,7 +285,13 @@ class StatusTableSeeder extends Seeder
         App\Status::create ([
             'statusable_id'     =>  3,
             'statusable_type'   =>  'pages',
-            'status'            =>  'banned',
+            'status'            =>  'active',
+        ]); 
+
+        App\Status::create ([
+            'statusable_id'     =>  4,
+            'statusable_type'   =>  'pages',
+            'status'            =>  'active',
         ]); 
 
 //postcategories

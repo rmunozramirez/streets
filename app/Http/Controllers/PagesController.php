@@ -24,7 +24,7 @@ class PagesController extends Controller
         $all_ = Page::with('statuses')->get();
         $page_name = 'pages';
 
-       return view('dashboard.pages.index', compact('pages', 'page_name', 'all_', 'trash_post'));
+       return view('dashboard.pages.index', compact('pages', 'page_name', 'all_'));
     }
 
     /**
@@ -85,7 +85,7 @@ class PagesController extends Controller
         $page_name = 'pages';
         $all_ = Page::with('statuses')->get();
 
-        return view('dashboard.pages.show', compact('Page', 'page_name', 'all_'));
+        return view('dashboard.pages.show', compact('page', 'page_name', 'all_'));
     }
 
     /**
@@ -101,7 +101,7 @@ class PagesController extends Controller
         $page = Page::where('slug', $slug)->first(); 
         $page_name = 'pages';
 
-        return view('dashboard.pages.edit', compact('Page', 'Pagecategories', 'page_name', 'all_'));
+        return view('dashboard.pages.edit', compact('page', 'Pagecategories', 'page_name', 'all_'));
     }
 
     /**
@@ -143,11 +143,11 @@ class PagesController extends Controller
 
     public function trashed()
     {
-        $trash_post = Page::onlyTrashed()->get();
+        $trash_page = Page::onlyTrashed()->get();
         $all_ = Page::all();
         $page_name = 'pages';
 
-        return view('dashboard.pages.trashed', compact('trash_post', 'page_name', 'all_'));
+        return view('dashboard.pages.trashed', compact('trash_page', 'page_name', 'all_'));
     }
 
     public function restore($slug)

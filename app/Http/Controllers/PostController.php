@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use App\Profile;
 use App\Post;
-use App\PostCategory;
+use App\Postcategory;
 use App\Status;
 use App\Role;
 use Session;
@@ -37,7 +37,7 @@ class PostController extends Controller
     public function create()
     {
 
-        $all_postcat = PostCategory::pluck('title', 'id')->all();
+        $all_postcat = Postcategory::pluck('title', 'id')->all();
         $all_ = Post::all();
         $page_name =  'posts';
 
@@ -108,7 +108,7 @@ class PostController extends Controller
         $all_ = Post::with('statuses')->get();
         $post = Post::where('slug', $slug)->first(); 
         $page_name = 'posts';
-        $all_postcat = PostCategory::orderBy('title', 'asc')->pluck('title', 'id')->all();
+        $all_postcat = Postcategory::orderBy('title', 'asc')->pluck('title', 'id')->all();
 
         return view('dashboard.posts.edit', compact('post', 'postcategories', 'page_name', 'all_', 'all_postcat'));
     }

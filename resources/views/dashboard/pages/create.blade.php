@@ -7,8 +7,8 @@
 	    <div class="wrapper wrapper-content animated fadeInUp">		
 	        <div class="row wrapper border-bottom white-bg">
 				<div class="inside">
-		            <h2>Create a post<span class="small pull-right">
-	                    	<i class="fa fa-chevron-left"></i> <a href="{{route('posts.index')}}">Back to posts</a>
+		            <h2>Create a page<span class="small pull-right">
+	                    	<i class="fa fa-chevron-left"></i> <a href="{{route('pages.index')}}">Back to pages</a>
 	                    </span>
 	                </h2>
 	                <hr>
@@ -24,7 +24,7 @@
 						
 							<div class="row">
 								<div class="card-body">        
-						            {!!Form::open(array('route' => 'posts.store', 'files' => true)) !!}   
+						            {!!Form::open(array('route' => 'pages.store', 'files' => true)) !!}   
 
 						            <div class="row">        
 							            <div class="col-md-4"> 
@@ -38,33 +38,27 @@
 						            	<div class="col-md-8"> 
 								            <div class="row">
 								            	<div class="col-md-12">       
-									                {!!Form::label('title', 'Post title', array('class' => 'form-spacing-top'))!!}
+									                {!!Form::label('title', 'Page title', array('class' => 'form-spacing-top'))!!}
 									                {!!Form::text('title', null, array('class' => 'form-control', 'required' => '', 'maxlength' => '255'))!!}
 									            </div>
 								            </div>
 
 								            <div class="row pt-5">
 									            <div class="col-md-12">      
-									                {!!Form::label('subtitle', 'Post subtitle', array('class' => 'form-spacing-top'))!!}
+									                {!!Form::label('subtitle', 'Page subtitle', array('class' => 'form-spacing-top'))!!}
 									                {!!Form::text('subtitle', null, array('class' => 'form-control', 'required' => '', 'maxlength' => '255'))!!}		            		
 									            </div>		            		
 								            </div>		            		
 
-								            <div class="row pt-5">
-								            	<div class="col-md-6">
-									            	{!! Form::label('postcategory_id', 'Post category:') !!}
-				                        			{!! Form::select('postcategory_id', ['' => 'Choose a Post category'] + $all_postcat, null, array('class' => 'form-control')) !!}
-									            </div>
-									       	</div>
 									       	<div class="row pt-5">
 									            <div class="col-md-12">      
-									                {!!Form::label('body', 'Post Body:', array('class' => 'form-spacing-top'))!!}
+									                {!!Form::label('body', 'Page Body:', array('class' => 'form-spacing-top'))!!}
 									                {!!Form::textarea('body', null, array('id' => 'summernote','class' => 'form-control', 'rows' => 9))!!}                       
 									            </div>
 								            </div>
 
 								            <div class="pt-5">    
-								                {!!Form::submit('Add post', array('class' => 'btn btn-success btn-block')) !!}
+								                {!!Form::submit('Add page', array('class' => 'btn btn-success btn-block')) !!}
 								                {!!Form::close() !!}       
 								            </div>
 							            </div>

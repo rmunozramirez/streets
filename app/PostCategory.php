@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class PostCategory extends Model
+class Postcategory extends Model
 {
 	protected $fillable = [
 	    'title',
