@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Page extends Model
 {
 	protected $fillable = [	
-
 		    'title',
             'slug',
             'subtitle',

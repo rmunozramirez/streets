@@ -29,13 +29,13 @@ class DashboardChannelsController extends Controller
 
     public function create()
     {
-        $all_roles = Role::pluck('name', 'id')->all();
+
         $all_st = Status::pluck('status', 'id')->all();
         $all_sub = Subcategory::pluck('title', 'id')->all();
         $all_ = Channel::all();
         $page_name =  'channels';
 
-        return view('dashboard.channels.create', compact('all_', 'page_name', 'all_roles', 'all_st', 'all_sub'));
+        return view('dashboard.channels.create', compact('all_', 'page_name', 'all_st', 'all_sub'));
     }
 
     public function store(ChannelRequest $request)

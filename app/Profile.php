@@ -52,6 +52,10 @@ class Profile extends Model
     {
         return $this->hasOne('App\Channel');
     }
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
+    }
 
     public function discussions()
     {

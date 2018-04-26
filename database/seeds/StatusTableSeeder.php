@@ -256,6 +256,114 @@ class StatusTableSeeder extends Seeder
             'statusable_type'   =>  'discussions',
             'status'            =>  'banned',
         ]); 
+//pages
+
+        App\Status::create ([
+            'statusable_id'     =>  1,
+            'statusable_type'   =>  'pages',
+            'status'            =>  'inactive',
+        ]); 
+
+        App\Status::create ([
+            'statusable_id'     =>  2,
+            'statusable_type'   =>  'pages',
+            'status'            =>  'active',
+        ]); 
+
+        App\Status::create ([
+            'statusable_id'     =>  3,
+            'statusable_type'   =>  'pages',
+            'status'            =>  'banned',
+        ]); 
+
+//postcategories
+
+        App\Status::create ([
+            'statusable_id'     =>  1,
+            'statusable_type'   =>  'postcategories',
+            'status'            =>  'active',
+        ]); 
+
+        App\Status::create ([
+            'statusable_id'     =>  2,
+            'statusable_type'   =>  'postcategories',
+            'status'            =>  'active',
+        ]); 
+
+        App\Status::create ([
+            'statusable_id'     =>  3,
+            'statusable_type'   =>  'postcategories',
+            'status'            =>  'active',
+        ]); 
+
+//posts
+
+        App\Status::create ([
+            'statusable_id'     =>  1,
+            'statusable_type'   =>  'posts',
+            'status'            =>  'active',
+        ]); 
+
+        App\Status::create ([
+            'statusable_id'     =>  2,
+            'statusable_type'   =>  'posts',
+            'status'            =>  'active',
+        ]); 
+
+        App\Status::create ([
+            'statusable_id'     =>  3,
+            'statusable_type'   =>  'posts',
+            'status'            =>  'active',
+        ]);       
+
+        App\Status::create ([
+            'statusable_id'     =>  4,
+            'statusable_type'   =>  'posts',
+            'status'            =>  'active',
+        ]); 
+
+        App\Status::create ([
+            'statusable_id'     =>  5,
+            'statusable_type'   =>  'posts',
+            'status'            =>  'active',
+        ]); 
+
+        App\Status::create ([
+            'statusable_id'     =>  6,
+            'statusable_type'   =>  'posts',
+            'status'            =>  'active',
+        ]);       
+
+        App\Status::create ([
+            'statusable_id'     =>  7,
+            'statusable_type'   =>  'posts',
+            'status'            =>  'active',
+        ]); 
+
+        App\Status::create ([
+            'statusable_id'     =>  8,
+            'statusable_type'   =>  'posts',
+            'status'            =>  'active',
+        ]); 
+
+        App\Status::create ([
+            'statusable_id'     =>  9,
+            'statusable_type'   =>  'posts',
+            'status'            =>  'active',
+        ]);       
+
+        App\Status::create ([
+            'statusable_id'     =>  10,
+            'statusable_type'   =>  'posts',
+            'status'            =>  'active',
+        ]); 
+
+        App\Status::create ([
+            'statusable_id'     =>  11,
+            'statusable_type'   =>  'posts',
+            'status'            =>  'active',
+        ]); 
+      
 
     }
 }

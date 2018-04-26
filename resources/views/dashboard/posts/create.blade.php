@@ -3,12 +3,12 @@
 @section('content')
 <section id="content">
 
-<!-- Channel panel  -->
+<!-- post panel  -->
 	    <div class="wrapper wrapper-content animated fadeInUp">		
 	        <div class="row wrapper border-bottom white-bg">
 				<div class="inside">
-		            <h2>Create a channel<span class="small pull-right">
-	                    	<i class="fa fa-chevron-left"></i> <a href="{{route('channels.index')}}">Back to channels</a>
+		            <h2>Create a post<span class="small pull-right">
+	                    	<i class="fa fa-chevron-left"></i> <a href="{{route('posts.index')}}">Back to posts</a>
 	                    </span>
 	                </h2>
 	                <hr>
@@ -24,7 +24,7 @@
 						
 							<div class="row">
 								<div class="card-body">        
-						            {!!Form::open(array('route' => 'channels.store', 'files' => true)) !!}   
+						            {!!Form::open(array('route' => 'posts.store', 'files' => true)) !!}   
 
 						            <div class="row">        
 							            <div class="col-md-4"> 
@@ -38,33 +38,33 @@
 						            	<div class="col-md-8"> 
 								            <div class="row">
 								            	<div class="col-md-12">       
-									                {!!Form::label('title', 'Channel title', array('class' => 'form-spacing-top'))!!}
+									                {!!Form::label('title', 'Post title', array('class' => 'form-spacing-top'))!!}
 									                {!!Form::text('title', null, array('class' => 'form-control', 'required' => '', 'maxlength' => '255'))!!}
 									            </div>
 								            </div>
 
 								            <div class="row pt-5">
 									            <div class="col-md-12">      
-									                {!!Form::label('subtitle', 'Channel subtitle', array('class' => 'form-spacing-top'))!!}
+									                {!!Form::label('subtitle', 'Post subtitle', array('class' => 'form-spacing-top'))!!}
 									                {!!Form::text('subtitle', null, array('class' => 'form-control', 'required' => '', 'maxlength' => '255'))!!}		            		
 									            </div>		            		
 								            </div>		            		
 
 								            <div class="row pt-5">
 								            	<div class="col-md-6">
-									            	{!! Form::label('subcategory_id', 'Subcategory:') !!}
-				                        			{!! Form::select('subcategory_id', ['' => 'Choose a Subcategory'] + $all_sub, null, array('class' => 'form-control')) !!}
+									            	{!! Form::label('postcategory_id', 'Post category:') !!}
+				                        			{!! Form::select('postcategory_id', ['' => 'Choose a Post category'] + $all_postcat, null, array('class' => 'form-control')) !!}
 									            </div>
 									       	</div>
 									       	<div class="row pt-5">
 									            <div class="col-md-12">      
-									                {!!Form::label('about', 'Channel description:', array('class' => 'form-spacing-top'))!!}
-									                {!!Form::textarea('about', null, array('id' => 'summernote','class' => 'form-control', 'rows' => 9))!!}                       
+									                {!!Form::label('body', 'Post Body:', array('class' => 'form-spacing-top'))!!}
+									                {!!Form::textarea('body', null, array('id' => 'summernote','class' => 'form-control', 'rows' => 9))!!}                       
 									            </div>
 								            </div>
 
 								            <div class="pt-5">    
-								                {!!Form::submit('Add New Channel', array('class' => 'btn btn-success btn-block')) !!}
+								                {!!Form::submit('Add post', array('class' => 'btn btn-success btn-block')) !!}
 								                {!!Form::close() !!}       
 								            </div>
 							            </div>
@@ -78,7 +78,7 @@
 				</div>		
 			</div>
 		</div>
-<!-- End Channel panel  -->
+<!-- End post panel  -->
 </section>
 
 	

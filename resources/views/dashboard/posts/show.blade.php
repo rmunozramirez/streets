@@ -3,66 +3,66 @@
 @section('content')
 <section id="content">
 
-<!-- Channel panel  -->
+<!-- post panel  -->
 	    <div class="wrapper wrapper-content animated fadeInUp">		
 	        <div class="row wrapper border-bottom white-bg">
 				<div class="inside">
-					@if( $channel ) 
-		                <h2>{!! $channel->title !!}
+					@if( $post ) 
+		                <h2>{!! $post->title !!}
 		                <span class="small pull-right">
-	                    	<i class="fa fa-chevron-left"></i> <a class="small-link" href="{{route('channels.index')}}">Back to Channels</a>
-    	                 	<i class="fa fa-pencil"></i> <a href="{{route('channels.edit', $channel->slug)}}">Edit</a>
+	                    	<i class="fa fa-chevron-left"></i> <a class="small-link" href="{{route('posts.index')}}">Back to posts</a>
+    	                 	<i class="fa fa-pencil"></i> <a href="{{route('posts.edit', $post->slug)}}">Edit</a>
 	                    </span></h2>
 	                <hr>
 						<div id="contenido"  class="card">
 							<div class="card-body">
 							<div class="row">
-								<div class="col-md-6">
+								<div class="col-md-4">
 					               <figure>
 						            	<img height="300" class="
-						            	" src="{{URL::to('/images/' . $channel->image)}}" alt="{{ $channel->title }}" name="{{ $channel->title }}" />
+						            	" src="{{URL::to('/images/' . $post->image)}}" alt="{{ $post->title }}" name="{{ $post->title }}" />
 						            </figure>				
 				            	</div>
-								<div class="col-md-6">
+								<div class="col-md-8">
 							      	<div class="row">
 									    <dl class="dl-horizontal">
-									    	<h3><dt>Channel Name:</dt>
-											<dd>{!! $channel->title !!}</dd></h3>
+									    	<h3><dt>Post Name:</dt>
+											<dd>{!! $post->title !!}</dd></h3>
 
-									        <dt>Channel subtitle:</dt>
-									        <dd class="pb-3">{{ $channel->subtitle}}</dd>
+									        <dt>Post subtitle:</dt>
+									        <dd class="pb-3">{{ $post->subtitle}}</dd>
 
 									        <dt>Subcategory:</dt>
 									        <dd class="pb-3">
-									        	<a href="{{route('subcategories.show', $channel->subcategory->slug)}}">
-									        	{{ $channel->subcategory->title}}
+									        	<a href="{{route('postcategories.show', $post->postcategory->slug)}}">
+									        	{{ $post->postcategory->title}}
 										        </a>
 										    </dd>
 
 									        <dt>Status</dt>
-									        <dd class="pb-3">{!! $channel->statuses[0]->status !!}</dd>
+									        <dd class="pb-3">{!! $post->statuses[0]->status !!}</dd>
 
 									        <dt>Registered at:</dt>
-									        <dd class="pb-3">{{ $channel->created_at}}</dd>
+									        <dd class="pb-3">{{ $post->created_at}}</dd>
 
 									        <dt>Likes</dt>
-									        <dd class="pb-3">{{ $channel->likes}}</dd>
+									        <dd class="pb-3">{{ $post->likes}}</dd>
 
-									        <dt>Description</dt>
-									        <dd class="pb-3">{{ $channel->about}}</dd>
+									        <dt>Body</dt>
+									        <dd class="pb-3">{!! $post->body !!}</dd>
 									    </dl>
 							         </div>		            
 						        </div>
 					        </div>	
 							</div>
 						</div>
-					@else <h2>{!! $user_name !!} does not have a channel</h2>
+					@else <h2>{!! $user_name !!} does not have a post</h2>
 			        @endif
 				</div>
 				
 			</div>
 		</div>
-<!-- End Channel panel  -->
+<!-- End post panel  -->
 </section>
 
 	

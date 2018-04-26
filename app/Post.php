@@ -21,7 +21,7 @@ class Post extends Model
 
     public function postcategory()
     {
-        return $this->belongsTo('App\Postcategory');
+        return $this->belongsTo('App\PostCategory');
     }
 
     public function statuses()
@@ -29,4 +29,9 @@ class Post extends Model
         return $this->morphMany('App\Status', 'statusable');
     }
 
+
+    public function profile()
+    {
+        return $this->belongsTo('App\Profile');
+    } 
 }
