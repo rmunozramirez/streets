@@ -30,9 +30,13 @@ class Post extends Model
         return $this->morphMany('App\Status', 'statusable');
     }
 
-
     public function profile()
     {
         return $this->belongsTo('App\Profile');
-    } 
+    }
+
+    public function tags()
+    {
+        return $this->morphToMany('App\Tag', 'taggable');
+    }
 }

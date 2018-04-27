@@ -36,5 +36,9 @@ class Channel extends Model
     {
         return $this->morphMany('App\Status', 'statusable');
     }
-
+    
+    public function tags()
+    {
+        return $this->morphToMany('App\Tag', 'taggable');
+    }
 }

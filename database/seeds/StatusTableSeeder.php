@@ -11,6 +11,7 @@ class StatusTableSeeder extends Seeder
      */
     public function run()
     {
+        
 //categories
         App\Status::create ([
             'statusable_id'     =>  1,

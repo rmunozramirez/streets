@@ -1,0 +1,39 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
+
+Relation::morphMap([
+
+    'pages'         => 'App\Page',
+    'profiles'      => 'App\Profile',
+    'channels'      => 'App\Channel',
+    'discussions'   => 'App\Discussion',
+    
+]);
+
+class Tag extends Model
+{
+
+	protected $fillable = [	
+		    'title',
+	];
+
+    /**
+     * Get all of the posts that are assigned this tag.
+     */
+    public function posts()
+    {
+        return $this->morphedByMany('App\Post', 'taggable');
+    }
+
+    /**
+     * Get all of the channels that are assigned this tag.
+     */
+    public function channels()
+    {
+        return $this->morphedByMany('App\Channel', 'taggable');
+    }
+}
