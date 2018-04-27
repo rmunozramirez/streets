@@ -1,10 +1,10 @@
 @extends('dashboard.index')
-@section ('title', "| $page_name")
+@section ('title', "| Create $page_name")
 @section('content')
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row wrapper border-bottom white-bg">
 		<div class="inside">
-            <h2>Create a profile
+            <h2>Create a rofile
             <span class="small pull-right">
             	<i class="fa fa-chevron-left"></i> <a href="{{route('profiles.index')}}">Back to profiles</a>
             </span></h2>

@@ -1,11 +1,11 @@
 @extends('dashboard.index')
-@section ('title', "| $page_name")
+@section ('title', "| Posts")
 @section('content')
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row wrapper border-bottom white-bg">
     	<div class="inside">
-    		    <h2>All {!! $page_name !!}</h2><hr />
+		    <h2>All {!! $page_name !!}</h2><hr />
 			<div id="contenido"  class="card">
 			    <div class="tabs-container">
 			        <ul class="nav nav-tabs user-tabs">

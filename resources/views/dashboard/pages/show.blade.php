@@ -8,7 +8,7 @@
 	        <div class="row wrapper border-bottom white-bg">
 				<div class="inside">
 					@if( $element ) 
-		                <h2>{!! $element->title !!}
+		                <h2>{{ ucfirst(trans($element->title)) }}
 		                <span class="small pull-right">
 	                    	<i class="fa fa-chevron-left"></i> <a class="small-link" href="{{route('pages.index')}}">Back to pages</a>
     	                 	<i class="fa fa-pencil"></i> <a href="{{route('pages.edit', $element->slug)}}">Edit</a>

@@ -98,7 +98,7 @@ class PostcategoriesController extends Controller
         $element = Postcategory::where('slug', $slug)->first(); 
         $page_name = 'postcategories';
         $all_ = Postcategory::all();
-        $index = 'edit';
+        $index = 'Edit';
 
           return view('dashboard.postcategories.edit', compact('element', 'page_name', 'all_', 'index'));
 

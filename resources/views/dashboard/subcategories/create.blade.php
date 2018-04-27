@@ -1,10 +1,10 @@
 @extends('dashboard.index')
-@section ('title', "| $page_name")
+@section ('title', "| Create a subcategory")
 @section('content')
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row wrapper border-bottom white-bg">
     	<div class="inside">
-    		    <h2>Create a Subcategory
+    		    <h2>Create a subcategory
     		    	<span class="small pull-right">
                     	<i class="fa fa-chevron-left"></i> <a href="{{route('subcategories.index')}}">Back to categories</a>
                     </span>

@@ -1,5 +1,5 @@
 @extends('dashboard.index')
-@section ('title', "| Discussions")
+@section ('title', "| Create a discussion")
 @section('content')
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row wrapper border-bottom white-bg">

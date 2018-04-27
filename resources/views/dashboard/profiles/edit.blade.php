@@ -1,5 +1,5 @@
 @extends('dashboard.index')
-@section ('title', "| $page_name")
+@section ('title', "| $element->title | Edit")
 @section('content')
 <section id="content">
     <div class="wrapper wrapper-content animated fadeInUp">
@@ -7,10 +7,9 @@
 		<div class="inside">
             <h2>Edit: {!! $element->title !!}
             <span class="small pull-right">
-            	<i class="fa fa-chevron-left"></i> <a href="{{route('profiles.index')}}">Back to profiles</a>
+            	<i class="fa fa-chevron-left"></i> <a href="{{route('profiles.index')}}">Back to {!! $page_name !!}</a>
             </span></h2>
         	<hr>
-
 			    <div id="contenido"  class="card">
 				    @if(count($errors) > 0)
 				        <ul class="list-group">    

@@ -38,13 +38,13 @@ class DashboardDiscussionsController extends Controller
      */
     public function create()
     {
-        $all_roles = Role::pluck('name', 'id')->all();
+
         $all_st = Status::pluck('status', 'id')->all();
         $all_ = Discussion::all();
         $page_name =  'discussions';
         $index = 'create';
 
-        return view('dashboard.discussions.create', compact('all_', 'page_name', 'all_roles', 'all_st', 'index'));
+        return view('dashboard.discussions.create', compact('all_', 'page_name', 'all_st', 'index'));
     }
 
     /**

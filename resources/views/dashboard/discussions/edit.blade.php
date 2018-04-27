@@ -1,5 +1,5 @@
 @extends('dashboard.index')
-@section ('title', "| $page_name")
+@section ('title', "| $element->title | Edit")
 @section('content')
 
 

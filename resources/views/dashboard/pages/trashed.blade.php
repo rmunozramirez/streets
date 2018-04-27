@@ -1,5 +1,5 @@
 @extends('dashboard.index')
-@section ('title', "| $page_name")
+@section ('title', "| Trashed $page_name")
 @section('content')
 
 <section id="content">

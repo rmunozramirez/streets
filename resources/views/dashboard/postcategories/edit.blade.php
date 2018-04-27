@@ -1,14 +1,14 @@
 @extends('dashboard.index')
-@section ('title', "| $page_name")
+@section ('title', "| $element->title | $index")
 @section('content')
 
 <section id="content">
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row wrapper border-bottom white-bg">
 			<div class="inside">
-                <h2>Edit: {{ $element->title}}
+                <h2>{!! $index !!} {{ $element->title}}
     		    	<span class="small pull-right">
-                    	<i class="fa fa-chevron-left"></i> <a href="{{route('postcategories.index')}}">Back to post categories</a>
+                    	<i class="fa fa-chevron-left"></i> <a href="{{route('postcategories.index')}}">Back to {!! $page_name !!}</a>
                     </span>
 	                </h2>
 	             <hr />

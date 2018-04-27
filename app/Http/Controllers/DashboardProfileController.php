@@ -18,7 +18,7 @@ class DashboardProfileController extends Controller
     public function index()
     {
 
-        $all_roles = Role::pluck('name', 'id')->all();
+        $all_roles = Role::pluck('title', 'id')->all();
         $profiles = Profile::orderBy('created_at', 'asc')->paginate(4);
         $all_ = Profile::with('statuses')->get();
         $trashed_pr = Profile::onlyTrashed()->get();
@@ -30,7 +30,7 @@ class DashboardProfileController extends Controller
 
     public function create()
     {
-        $all_roles = Role::pluck('name', 'id')->all();
+        $all_roles = Role::pluck('title', 'id')->all();
         $all_st = Status::pluck('status', 'id')->all();
         $all_ = Profile::all();
         $page_name =  'profiles';
@@ -90,7 +90,7 @@ class DashboardProfileController extends Controller
 
     public function edit($slug)
     {
-        $all_roles = Role::pluck('name', 'id')->all();
+        $all_roles = Role::pluck('title', 'id')->all();
         $all_st = Status::pluck('status', 'id')->all();
         $element = Profile::where('slug', $slug)->first();
         $page_name = 'profiles';

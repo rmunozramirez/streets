@@ -15,6 +15,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()  {
 	// Route::get('/trashed', 'DashboardController@trashed')->name('dashboard.trashed');
 
 //admin Statuses
+	Route::get('status/trashed', 'DashboardStatusController@trashed')->name('status.trashed');
 	Route::resource('status', 'DashboardStatusController');
 
 //admin Roles

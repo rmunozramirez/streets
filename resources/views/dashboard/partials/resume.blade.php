@@ -5,13 +5,8 @@
     <tbody>
     <tr>
         <td>
-            <a href="{{route('categories.index')}}">
-                <button type="button" class="btn btn-info m-r-sm">{{count($all_cat)}}</button>Categories
-            </a>
-        </td>
-        <td>
-            <a href="{{route('subcategories.index')}}">
-                <button type="button" class="btn btn-primary m-r-sm">{{count($all_sub)}}</button>Subcategories
+            <a href="{{route('profiles.index')}}">
+                <button type="button" class="btn btn-success m-r-sm">{{count($all_pr)}}</button>Profiles
             </a>
         </td>
         <td>
@@ -20,8 +15,28 @@
             </a>
         </td>
         <td>
-            <a href="{{route('profiles.index')}}">
-                <button type="button" class="btn btn-success m-r-sm">{{count($all_pr)}}</button>Profiles
+            <a href="{{route('subcategories.index')}}">
+                <button type="button" class="btn btn-primary m-r-sm">{{count($all_sub)}}</button>Subcategories
+            </a>
+        </td>
+        <td>
+            <a href="{{route('categories.index')}}">
+                <button type="button" class="btn btn-info m-r-sm">{{count($all_cat)}}</button>Categories
+            </a>
+        </td>
+        <td>
+            <a href="{{route('posts.index')}}">
+                <button type="button" class="btn btn-info m-r-sm">{{$all_posts->count()}}</button>Posts
+            </a>
+        </td>
+        <td>
+            <a href="{{route('postcategories.index')}}">
+                <button type="button" class="btn btn-info m-r-sm">{{count($all_postcat)}}</button>Post categories
+            </a>
+        </td>
+        <td>
+            <a href="{{route('discussions.index')}}">
+                <button type="button" class="btn btn-info m-r-sm">{{count($all_postcat)}}</button> Discussions
             </a>
         </td>
         <td>
@@ -30,8 +45,8 @@
             </a>
         </td>
         <td>
-            <a href="">
-                <button type="button" class="btn btn-info m-r-sm">4</button>Posts
+            <a href="{{route('status.index')}}">
+                <button type="button" class="btn btn-info m-r-sm">4</button>Status
             </a>
         </td>
     </tr>

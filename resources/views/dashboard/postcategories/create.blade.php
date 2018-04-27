@@ -1,10 +1,10 @@
 @extends('dashboard.index')
-@section ('title', "| $page_name")
+@section ('title', "| Create a post category")
 @section('content')
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row wrapper border-bottom white-bg">
     	<div class="inside">
-    		    <h2>Create a Post ccategory
+    		    <h2>Create a post category
     		    	<span class="small pull-right">
                     	<i class="fa fa-chevron-left"></i> <a href="{{route('postcategories.index')}}">Back to post categories</a>
                     </span>

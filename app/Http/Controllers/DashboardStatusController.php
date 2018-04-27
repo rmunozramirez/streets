@@ -19,10 +19,11 @@ class DashboardStatusController extends Controller
     public function index()
     {
 
-        $all_st = Status::orderBy('statusable_type', 'asc')->get();
-        $page_name = 'Status';
+        $all_ = Status::orderBy('statusable_type', 'asc')->get();
+        $page_name = 'status';
+        $index = 'yes';
 
-       return view('dashboard.status.index', compact('all_st', 'page_name'));
+       return view('dashboard.status.index', compact('all_', 'page_name', 'index'));
     }
 
     /**

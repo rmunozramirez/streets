@@ -40,7 +40,7 @@
 						                		</td>					                		
 						                		<td>{{$pr->user->name}}</td>
 						                		<td><a href="{{route('roles.show', $pr->role->slug)}}">
-						                			{{$pr->role->name}}</a>
+						                			{{$pr->role->title}}</a>
 						                		</td>
 								              	<td>{{$pr->user->created_at}}</td>
 							              		<td>
@@ -86,7 +86,7 @@
 						                		</td>					                		
 						                		<td>{{$pr->user->name}}</td>
 						                		<td><a href="{{route('roles.show', $pr->role->slug)}}">
-						                			{{$pr->role->name}}</a>
+						                			{{$pr->role->title}}</a>
 						                		</td>
 								              	<td>{{$pr->user->created_at}}</td>
 							              		<td>
@@ -132,7 +132,7 @@
 						                		</td>					                		
 						                		<td>{{$pr->user->name}}</td>
 						                		<td><a href="{{route('roles.show', $pr->role->slug)}}">
-						                			{{$pr->role->name}}</a>
+						                			{{$pr->role->title}}</a>
 						                		</td>
 								              	<td>{{$pr->user->created_at}}</td>
 							              		<td>

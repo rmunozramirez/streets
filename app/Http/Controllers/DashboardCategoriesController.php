@@ -31,13 +31,12 @@ class DashboardCategoriesController extends Controller
 
     public function create()
     {
-        $all_roles = Role::pluck('name', 'id')->all();
         $all_st = Status::pluck('status', 'id')->all();
         $all_ = Category::all();
         $page_name =  'categories';
         $index = 'create';
 
-        return view('dashboard.categories.create', compact('all_', 'page_name', 'all_roles', 'all_st', 'index'));
+        return view('dashboard.categories.create', compact('all_', 'page_name', 'all_st', 'index'));
     }
 
     public function store(CategoriesRequest $request)
