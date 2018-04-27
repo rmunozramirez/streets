@@ -31,7 +31,12 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+
+        $all_ = Tag::all();
+        $page_name =  'tags';
+        $index = 'create';
+
+        return view('dashboard.tags.create', compact('all_', 'page_name', 'index'));
     }
 
     /**
@@ -51,9 +56,15 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+
+        $element = Tag::where('slug', $slug)->first();
+        $page_name = 'tags';
+        $index = 'show';
+        $all_ = Tag::all();
+
+        return view('dashboard.tags.show', compact('element', 'all_', 'page_name', 'index'));
     }
 
     /**
