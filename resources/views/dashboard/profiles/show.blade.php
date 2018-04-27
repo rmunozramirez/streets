@@ -42,7 +42,7 @@
 							        <dd class="pb-3">{{ $element->title}}</dd>
 
 							        <dt>Role:</dt>
-							        <dd class="pb-3">{{ $element->role->name}}</dd>
+							        <dd class="pb-3">{{ $element->role->title}}</dd>
 
 							        <dt>Status</dt>
 							        <dd class="pb-3">{!! $element->statuses[0]->status !!}</dd>
@@ -67,6 +67,15 @@
 
 							        <dt>About</dt>
 							        <dd class="pb-3">{!! $element->about !!}</dd>
+
+							        <dt>Tags</dt>
+							        <dd class="pb-3">
+							        	@foreach($element->tags as $tag)
+							        		<a class="btn btn-info" href="{{route('tags.show', $tag->slug)}}">
+										    	{!! $tag->title !!}
+										    </a>
+										@endforeach
+							        </dd>
 							    </dl>
 					         </div>		            
 				        </div>
@@ -129,6 +138,15 @@
 
 									        <dt>Description</dt>
 									        <dd class="pb-3">{{ $element->channel->about}}</dd>
+
+									        <dt>Tags</dt>
+									        <dd class="pb-3">
+									        	@foreach($element->tags as $tag)
+									        		<a class="btn btn-info" href="{{route('tags.show', $tag->slug)}}">
+												    	{!! $tag->title !!}
+												    </a>
+												@endforeach
+									        </dd>
 									    </dl>
 							         </div>		            
 						        </div>

@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PostcategoriesTableseeder::class);          
         $this->call(PagesTableSeeder::class);  
         $this->call(PostsTableSeeder::class);
-        $this->call(DiscussionTableSeeder::class); 
+        $this->call(DiscussionTableSeeder::class);
+        $this->call(TagsTableSeeder::class);
     }
 }

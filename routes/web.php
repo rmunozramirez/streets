@@ -11,8 +11,10 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()  {
 //admin 
 	//admin Dashboard
 	Route::get('/', 'DashboardController@index')->name('dashboard');
-	// Route::get('/create', 'DashboardController@create')->name('dashboard.create');
-	// Route::get('/trashed', 'DashboardController@trashed')->name('dashboard.trashed');
+
+//admin Tags
+	Route::get('tags/trashed', 'TagController@trashed')->name('tags.trashed');
+	Route::resource('tags', 'TagController');
 
 //admin Statuses
 	Route::get('status/trashed', 'DashboardStatusController@trashed')->name('status.trashed');

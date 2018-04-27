@@ -5,10 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\StatusRequest;
 use App\Tag;
-use App\Taggable;
 use Session;
 
-class DashboardStatusController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +17,11 @@ class DashboardStatusController extends Controller
     public function index()
     {
 
-        $all_ = Status::orderBy('statusable_type', 'asc')->get();
-        $page_name = 'status';
+        $all_ = Tag::all();
+        $page_name = 'tags';
         $index = 'yes';
 
-       return view('dashboard.status.index', compact('all_', 'page_name', 'index'));
+       return view('dashboard.tags.index', compact('all_', 'page_name', 'index'));
     }
 
     /**
@@ -30,7 +29,10 @@ class DashboardStatusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
+    public function create()
+    {
+        //
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -49,12 +51,9 @@ class DashboardStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show($id)
     {
-        $statuses= Status::where('status', $slug);
-        $page_name = 'Status: ' . $slug;
-
-        return view('dashboard.status.show', compact('statuses', 'page_name'));
+        //
     }
 
     /**

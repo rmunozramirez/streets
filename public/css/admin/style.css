@@ -9023,7 +9023,3 @@ body.md-skin {
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
 }
-
-.inside table {
-  table-layout: fixed;
-}

@@ -38,10 +38,10 @@ class Profile extends Model
         return $this->belongsTo('App\Role');
     }
 
-    // public function status()
-    // {
-    //     return $this->belongsTo('App\Status');
-    // }
+    public function tags()
+    {
+        return $this->morphToMany('App\Tag', 'taggable');
+    }
 
     public function statuses()
     {

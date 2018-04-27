@@ -39,6 +39,17 @@
 
 									        <dt>Body</dt>
 									        <dd class="pb-3">{!! $element->body !!}</dd>
+
+									        <dt>Tags</dt>
+									        <dd class="pb-3">
+									        	@foreach($element->tags as $tag)
+									        	<div class="pb-3">
+									        		<a class="btn btn-info" href="{{route('tags.show', $tag->slug)}}">
+												    	{!! $tag->title !!}
+												    </a>
+												</div>
+												@endforeach
+									        </dd>
 									    </dl>
 							         </div>		            
 						        </div>

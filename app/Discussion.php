@@ -41,6 +41,11 @@ class Discussion extends Model
     {
         return $this->morphMany('App\Status', 'statusable');
     }
+    
+    public function tags()
+    {
+        return $this->morphToMany('App\Tag', 'taggable');
+    }
 
     public function is_like_by_auth_user(){
         $id = Auth::id();
