@@ -16,7 +16,7 @@
                 	<div class="col-md-12 pt-4">
                 		<div class="col-md-12">
                 		</div>
-						@if(count($trash_sub) > 0)
+						@if(count($element) > 0)
 							<table class="table table-striped table-hover">
 					         <thead>
 					            <tr>
@@ -26,7 +26,7 @@
 					            </tr>
 					         </thead>
 					         <tbody>
-					         	@foreach ($trash_sub as $sub)
+					         	@foreach ($element as $sub)
 					            <tr>
 					               <td><a href="{{route('subcategories.show', $sub->slug)}}">
 						               	<figure>

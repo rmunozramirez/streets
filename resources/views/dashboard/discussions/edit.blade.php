@@ -6,8 +6,12 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row wrapper border-bottom white-bg">
 		<div class="inside">
-            <h2>{!! $page_name !!} <span class="mt-3 small pull-right">Back to discussions</span> </h2>
-            <hr />
+			<h2>{!! $element->title !!} 
+                <span class="small pull-right">
+                	<i class="fa fa-chevron-left"></i> <a class="small-link" href="{{route('discussions.index')}}">Back to discussions</a>
+                 	<i class="fa fa-pencil"></i> Edit	
+                </span></h2>
+            	<hr>
 		    <div id="contenido"  class="card">
 			    @if(count($errors) > 0)
 			        <ul class="list-group">		        
@@ -17,11 +21,11 @@
 			        </ul>
 			    @endif
 				<div class="card-body">        
-        		{!! Form::model($discussion, ['method'=>'PATCH', 'action'=> ['DashboardDiscussionsController@update', $discussion->slug ],'files'=>true]) !!} 
+        		{!! Form::model($element, ['method'=>'PATCH', 'action'=> ['DashboardDiscussionsController@update', $element->slug ],'files'=>true]) !!} 
 		            <div class="row">        
 			            <div class="col-md-4"> 
 			            	<figure>
-				            	<img class="img-responsive" src="{{URL::to('/images/' . $discussion->image)}}" alt="{{ $discussion->title }}" name="{{ $discussion->title }}">
+				            	<img class="img-responsive" src="{{URL::to('/images/' . $element->image)}}" alt="{{ $element->title }}" name="{{ $element->title }}">
 				            </figure>
 			            	<div class=" pt-5">
 				                {!!Form::label('image', 'Upload a Featured Image') !!}

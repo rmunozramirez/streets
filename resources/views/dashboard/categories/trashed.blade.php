@@ -14,7 +14,7 @@
 			<div id="contenido"  class="card">
 			    <div class="row">
                 	<div class="col-md-12 pt-4">
-						@if(count($trash_cat) > 0)
+						@if(count($element) > 0)
 							<table class="table table-striped table-hover">
 					         <thead>
 					            <tr>
@@ -23,7 +23,7 @@
 					            </tr>
 					         </thead>
 					         <tbody>
-					         	@foreach ($trash_cat as $cat)
+					         	@foreach ($element as $cat)
 					            <tr>
 					               <td><a href="{{route('categories.show', $cat->slug)}}">
 						               	<figure>

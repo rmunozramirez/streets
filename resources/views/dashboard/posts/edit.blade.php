@@ -5,7 +5,11 @@
 <div class="wrapper wrapper-content animated fadeInUp">		
     <div class="row wrapper border-bottom white-bg">
 		<div class="inside">
-            <h2>{!! $page_name !!} <span class="mt-3 small pull-right">Total posts: {{count($all_)}}</span> </h2>
+            <h2>Edit: {{ $element->title}}
+		    	<span class="small pull-right">
+	            	<i class="fa fa-chevron-left"></i> <a href="{{route('posts.index')}}">Back to post</a>
+	            </span>
+            </h2>
             <hr />
 		    <div id="contenido"  class="card">
 			    @if(count($errors) > 0)
@@ -18,11 +22,11 @@
 			    @endif
 
 					<div class="card-body">        
-	        		{!! Form::model($post, ['method'=>'PATCH', 'action'=> ['PostController@update', $post->slug ],'files'=>true]) !!} 
+	        		{!! Form::model($element, ['method'=>'PATCH', 'action'=> ['PostController@update', $element->slug ],'files'=>true]) !!} 
 
 			            <div class="row">        
 				            <div class="col-md-4"> 
-				            	<img class="img-responsive"  src="{{URL::to('/images/' . $post->image ) }}" alt="{{$post->title}}" >
+				            	<img class="img-responsive"  src="{{URL::to('/images/' . $element->image ) }}" alt="{{$element->title}}" >
 				            	<div class=" pt-5">
 					                {!!Form::label('image', 'Upload a Featured Image') !!}
 					                {!!Form::file('image', null, array('class' => 'form-control', 'required' => ''))!!}

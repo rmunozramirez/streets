@@ -25,8 +25,9 @@ class PostController extends Controller
         $posts = Post::orderBy('created_at', 'asc')->paginate(4);
         $all_ = Post::with('statuses')->get();
         $page_name = 'posts';
+        $index = 'yes';
 
-       return view('dashboard.posts.index', compact('posts', 'page_name', 'all_'));
+       return view('dashboard.posts.index', compact('posts', 'page_name', 'all_', 'index'));
     }
 
     /**
@@ -40,8 +41,9 @@ class PostController extends Controller
         $all_postcat = Postcategory::pluck('title', 'id')->all();
         $all_ = Post::all();
         $page_name =  'posts';
+        $index = 'create';
 
-        return view('dashboard.posts.create', compact('all_', 'page_name', 'all_postcat'));
+        return view('dashboard.posts.create', compact('all_', 'page_name', 'all_postcat', 'index'));
     }
 
     /**
@@ -89,11 +91,12 @@ class PostController extends Controller
      */
     public function show($slug)
     {
-        $post = Post::where('slug', $slug)->first();
+        $element = Post::where('slug', $slug)->first();
         $page_name = 'posts';
         $all_ = Post::with('statuses')->get();
+        $index = 'show';
 
-        return view('dashboard.posts.show', compact('post', 'page_name', 'all_'));
+        return view('dashboard.posts.show', compact('element', 'page_name', 'all_', 'index'));
     }
 
     /**
@@ -106,11 +109,12 @@ class PostController extends Controller
     {
 
         $all_ = Post::with('statuses')->get();
-        $post = Post::where('slug', $slug)->first(); 
+        $element = Post::where('slug', $slug)->first(); 
         $page_name = 'posts';
         $all_postcat = Postcategory::orderBy('title', 'asc')->pluck('title', 'id')->all();
+        $index = 'edit';
 
-        return view('dashboard.posts.edit', compact('post', 'postcategories', 'page_name', 'all_', 'all_postcat'));
+        return view('dashboard.posts.edit', compact('element', 'postcategories', 'page_name', 'all_', 'all_postcat', 'index'));
     }
 
     /**
@@ -152,11 +156,12 @@ class PostController extends Controller
 
     public function trashed()
     {
-        $trash_post = Post::onlyTrashed()->get();
+        $element = Post::onlyTrashed()->get();
         $all_ = Post::all();
         $page_name = 'posts';
+        $index = 'trash';
 
-        return view('dashboard.posts.trashed', compact('trash_post', 'page_name', 'all_'));
+        return view('dashboard.posts.trashed', compact('element', 'page_name', 'all_', 'index'));
     }
 
     public function restore($slug)

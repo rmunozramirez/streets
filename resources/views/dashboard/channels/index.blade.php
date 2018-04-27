@@ -1,5 +1,5 @@
 @extends('dashboard.index')
-@section ('title', "| $page_name")
+@section ('title', "| Channels")
 @section('content')
 
 <div class="wrapper wrapper-content animated fadeInRight">
@@ -10,13 +10,13 @@
 			    <div class="tabs-container">
 			        <ul class="nav nav-tabs user-tabs">
 			            <li class="active">
-			            	<a data-toggle="tab" href="#tab-1-active"> <i class="fa fa-users"></i>Active channels</a>
+			            	<a data-toggle="tab" href="#tab-1-active"> <i class="fa fa-thumbs-up"></i>Active channels</a>
 			            </li>
 			            <li class="">
-			            	<a data-toggle="tab" href="#tab-2-inactive"><i class="fa fa-ban"></i>Inactive channels</a>
+			            	<a data-toggle="tab" href="#tab-2-inactive"><i class="fa fa-coffee"></i>Inactive channels</a>
 			            </li>
 			            <li class="">
-			            	<a data-toggle="tab" href="#tab-3-banned"><i class="fa fa-ban"></i>From banned users</a>
+			            	<a data-toggle="tab" href="#tab-3-banned"><i class="fa fa-ban"></i>From banned profile</a>
 			            </li>
 			        </ul>
 			        <div class="tab-content">

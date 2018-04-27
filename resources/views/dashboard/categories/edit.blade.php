@@ -6,7 +6,7 @@
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row wrapper border-bottom white-bg">
 			<div class="inside">
-                <h2>Edit: {{ $category->title}}
+                <h2>Edit: {{ $element->title}}
     		    	<span class="small pull-right">
                     	<i class="fa fa-chevron-left"></i> <a href="{{route('categories.index')}}">Back to categories</a>
                     </span>
@@ -24,7 +24,7 @@
 
 					<div class="row">
 						<div class="card-body">        
-		        		{!! Form::model($category, ['method'=>'PATCH', 'action'=> ['DashboardCategoriesController@update', $category->slug ],'files'=>true]) !!} 
+		        		{!! Form::model($element, ['method'=>'PATCH', 'action'=> ['DashboardCategoriesController@update', $element->slug ],'files'=>true]) !!} 
 
 
 				            <div class="row">        

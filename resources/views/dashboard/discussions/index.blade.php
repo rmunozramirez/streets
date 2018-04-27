@@ -8,9 +8,9 @@
 			<div id="contenido"  class="card">
 			    <div class="tabs-container">
 			        <ul class="nav nav-tabs user-tabs">
-			            <li class="active"><a data-toggle="tab" href="#tab-1-active"> <i class="fa fa-users"></i>Active discussions</a></li>
+			            <li class="active"><a data-toggle="tab" href="#tab-1-active"> <i class="fa fa-thumbs-up"></i>Active discussions</a></li>
 			            <li class=""><a data-toggle="tab" href="#tab-2-inactive"><i class="fa fa-coffee"></i>Inactive discussions</a></li>
-			            <li class=""><a data-toggle="tab" href="#tab-3-banned"><i class="fa fa-ban"></i>From banned users</a></li>
+			            <li class=""><a data-toggle="tab" href="#tab-3-banned"><i class="fa fa-ban"></i>From banned profile</a></li>
 			        </ul>
 			        <div class="tab-content">
 			            <div id="tab-1-active" class="tab-pane active">

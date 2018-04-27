@@ -6,40 +6,40 @@
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row wrapper border-bottom white-bg">
 			<div class="inside">
-                <h2>{!! $subcategory->title !!}
+                <h2>{!! $element->title !!}
                 <span class="small pull-right">
                 	<i class="fa fa-chevron-left"></i> <a class="small-link" href="{{route('subcategories.index')}}">Back to subcategories</a>
-                 	<i class="fa fa-pencil"></i> <a href="{{route('subcategories.edit', $subcategory->slug)}}">Edit</a>
+                 	<i class="fa fa-pencil"></i> <a href="{{route('subcategories.edit', $element->slug)}}">Edit</a>
                 </span></h2>
             	<hr>
 			    <div id="contenido"  class="card">
 					<div class="card-body">        
 			            <div class="row">
 				            <div class="col-md-4"> 
-				            	<img class="img-responsive"  src="{{URL::to('/images/' . $subcategory->image ) }}" name="{{$subcategory->title}}" alt="{{$subcategory->title}}" >
+				            	<img class="img-responsive"  src="{{URL::to('/images/' . $element->image ) }}" name="{{$element->title}}" alt="{{$element->title}}" >
 				            </div>
 		  
 			            	<div class="col-md-8"> 
 					            <dl class="dl-horizontal">
 							    	<h3><dt>Subcategory Name:</dt>
-									<dd>{!! $subcategory->title !!}</dd></h3>
+									<dd>{!! $element->title !!}</dd></h3>
 
 							        <dt>Subcategory subtitle:</dt>
-							        <dd class="pb-3">{!! $subcategory->subtitle !!}</dd>
+							        <dd class="pb-3">{!! $element->subtitle !!}</dd>
 
 							        <dt>Belongs to category:</dt>
 							        <dd class="pb-3">
-							        	<a href="{{route('categories.show', $subcategory->category->slug)}}">
-							        	{!! $subcategory->category->title !!}</a></dd>
+							        	<a href="{{route('categories.show', $element->category->slug)}}">
+							        	{!! $element->category->title !!}</a></dd>
 
 							        <dt>Status</dt>
-							        <dd class="pb-3">{!! $subcategory->statuses[0]->status !!}</dd>
+							        <dd class="pb-3">{!! $element->statuses[0]->status !!}</dd>
 
 							        <dt>Registered at:</dt>
-							        <dd class="pb-3">{{ $subcategory->created_at}}</dd>
+							        <dd class="pb-3">{{ $element->created_at}}</dd>
 
 							        <dt>About Category:</dt>
-							        <dd class="pb-3">{!! $subcategory->about !!}</dd>
+							        <dd class="pb-3">{!! $element->about !!}</dd>
 							    </dl>	            		
 				            </div>
 			            </div>  
@@ -52,13 +52,13 @@
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row wrapper border-bottom white-bg">
 			<div class="inside">
-	    	@if($subcategory->channels_count > 0 )
+	    	@if($element->channels_count > 0 )
 				<div class="row">
 					<div class="col-md-12">
-						@if($subcategory->channels_count > 1 )
-							<h2>{{$subcategory->channels_count}} channels under {{$subcategory->title}}</h2>
+						@if($element->channels_count > 1 )
+							<h2>{{$element->channels_count}} channels under {{$element->title}}</h2>
 						@else
-							<h2>One channel under {{$subcategory->title}}</h2>
+							<h2>One channel under {{$element->title}}</h2>
 						@endif
 					</div>
 				<hr />
@@ -72,7 +72,7 @@
 				            </tr>
 				         </thead>
 				         <tbody>
-				         	@foreach ($subcategory->channels as $channel)	
+				         	@foreach ($element->channels as $channel)	
 				            <tr>
 				               <td>
 				               		<img class="mr-4" height="80" width="80" src="{{URL::to('/images/' . $channel->image ) }}" alt="{{$channel->title}}" > 
@@ -94,7 +94,7 @@
 				      </table>	
 				</div>
 			@else
-				<h2>No channels under {{$subcategory->title}}</h2>
+				<h2>No channels under {{$element->title}}</h2>
 			@endif
 			</div>
 		</div>

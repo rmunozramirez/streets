@@ -21,11 +21,12 @@ class DashboardCategoriesController extends Controller
 
     public function index()
     {
-        $trash_cat = Category::onlyTrashed()->get();
+
         $all_ = Category::with('statuses')->get();
         $page_name = 'categories';
+        $index = 'yes';
 
-       return view('dashboard.categories.index', compact('all_cat', 'page_name', 'trash_cat', 'all_'));
+       return view('dashboard.categories.index', compact('all_cat', 'page_name', 'all_', 'index'));
     }
 
     public function create()
@@ -34,8 +35,9 @@ class DashboardCategoriesController extends Controller
         $all_st = Status::pluck('status', 'id')->all();
         $all_ = Category::all();
         $page_name =  'categories';
+        $index = 'create';
 
-        return view('dashboard.categories.create', compact('all_', 'page_name', 'all_roles', 'all_st'));
+        return view('dashboard.categories.create', compact('all_', 'page_name', 'all_roles', 'all_st', 'index'));
     }
 
     public function store(CategoriesRequest $request)
@@ -67,20 +69,22 @@ class DashboardCategoriesController extends Controller
 
     public function show($slug)
     {
-        $category = Category::withCount('subcategories')->where('slug', $slug)->first();
+        $element = Category::withCount('subcategories')->where('slug', $slug)->first();
         $all_ = Category::all();
         $page_name = 'categories';
+        $index = 'show';
 
-        return view('dashboard.categories.show', compact('category', 'all_', 'page_name'));
+        return view('dashboard.categories.show', compact('element', 'all_', 'page_name',  'index'));
     }
 
     public function edit($slug)
     {
-        $category = Category::where('slug', $slug)->first(); 
+        $element = Category::where('slug', $slug)->first(); 
         $page_name = 'categories';
         $all_ = Category::all();
+        $index = 'edit'; 
 
-          return view('dashboard.categories.edit', compact('category', 'page_name', 'all_'));
+          return view('dashboard.categories.edit', compact('element', 'page_name', 'all_', 'index'));
     }
 
     public function update(CategoriesRequest $request, $slug)
@@ -130,11 +134,12 @@ class DashboardCategoriesController extends Controller
 
     public function trashed()
     {
-        $trash_cat = Category::onlyTrashed()->get();
+        $element = Category::onlyTrashed()->get();
         $all_ = Category::all();
         $page_name = 'categories';
+        $index = 'trash';
 
-        return view('dashboard.categories.trashed', compact('trash_cat', 'page_name', 'all_'));
+        return view('dashboard.categories.trashed', compact('element', 'page_name', 'all_', 'index'));
     }
 
     public function restore($slug)

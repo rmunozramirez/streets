@@ -23,8 +23,9 @@ class PagesController extends Controller
         $pages = Page::orderBy('created_at', 'asc')->paginate(4);
         $all_ = Page::with('statuses')->get();
         $page_name = 'pages';
+        $index = 'yes';
 
-       return view('dashboard.pages.index', compact('pages', 'page_name', 'all_'));
+       return view('dashboard.pages.index', compact('pages', 'page_name', 'all_', 'index'));
     }
 
     /**
@@ -37,8 +38,9 @@ class PagesController extends Controller
 
         $all_ = Page::all();
         $page_name =  'pages';
+        $index = 'create';
 
-        return view('dashboard.pages.create', compact('all_', 'page_name'));
+        return view('dashboard.pages.create', compact('all_', 'page_name', 'index'));
     }
 
     /**
@@ -81,11 +83,12 @@ class PagesController extends Controller
      */
     public function show($slug)
     {
-        $page = Page::where('slug', $slug)->first();
+        $element = Page::where('slug', $slug)->first();
         $page_name = 'pages';
         $all_ = Page::with('statuses')->get();
+        $index = 'show';
 
-        return view('dashboard.pages.show', compact('page', 'page_name', 'all_'));
+        return view('dashboard.pages.show', compact('element', 'page_name', 'all_', 'index'));
     }
 
     /**
@@ -98,10 +101,11 @@ class PagesController extends Controller
     {
 
         $all_ = Page::with('statuses')->get();
-        $page = Page::where('slug', $slug)->first(); 
+        $element = Page::where('slug', $slug)->first(); 
         $page_name = 'pages';
+        $index = 'edit';
 
-        return view('dashboard.pages.edit', compact('page', 'Pagecategories', 'page_name', 'all_'));
+        return view('dashboard.pages.edit', compact('element', 'Pagecategories', 'page_name', 'all_', 'index'));
     }
 
     /**
@@ -143,11 +147,12 @@ class PagesController extends Controller
 
     public function trashed()
     {
-        $trash_page = Page::onlyTrashed()->get();
+        $element = Page::onlyTrashed()->get();
         $all_ = Page::all();
         $page_name = 'pages';
+        $index = 'trash';
 
-        return view('dashboard.pages.trashed', compact('trash_page', 'page_name', 'all_'));
+        return view('dashboard.pages.trashed', compact('element', 'page_name', 'all_', 'index'));
     }
 
     public function restore($slug)

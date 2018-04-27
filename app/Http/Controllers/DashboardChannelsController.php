@@ -22,9 +22,9 @@ class DashboardChannelsController extends Controller
         $all_ = Channel::with('statuses')->get();
         $page_name = 'channels';
         $trash_ch = Channel::onlyTrashed()->get();
+        $index = 'yes';
 
-
-       return view('dashboard.channels.index', compact('channels', 'page_name', 'all_', 'trash_ch'));
+       return view('dashboard.channels.index', compact('channels', 'page_name', 'all_', 'trash_ch', 'index'));
     }
 
     public function create()
@@ -34,8 +34,9 @@ class DashboardChannelsController extends Controller
         $all_sub = Subcategory::pluck('title', 'id')->all();
         $all_ = Channel::all();
         $page_name =  'channels';
+        $index = 'create';
 
-        return view('dashboard.channels.create', compact('all_', 'page_name', 'all_st', 'all_sub'));
+        return view('dashboard.channels.create', compact('all_', 'page_name', 'all_st', 'all_sub', 'index'));
     }
 
     public function store(ChannelRequest $request)
@@ -71,22 +72,24 @@ class DashboardChannelsController extends Controller
 
     public function show($slug)
     {
-        $channel = Channel::where('slug', $slug)->first();
+        $element = Channel::where('slug', $slug)->first();
         $page_name = 'channels';
         $all_ = Channel::with('statuses')->get();
+        $index = 'show';
 
-        return view('dashboard.channels.show', compact('channel', 'page_name', 'all_'));
+        return view('dashboard.channels.show', compact('element', 'page_name', 'all_', 'index'));
     }
 
     public function edit($slug)
     {
 
         $all_ = Channel::with('statuses')->get();
-        $channel = Channel::where('slug', $slug)->first(); 
+        $element = Channel::where('slug', $slug)->first(); 
         $page_name = 'channels';
         $all_sub = Subcategory::orderBy('title', 'asc')->pluck('title', 'id')->all();
+        $index = 'edit'; 
 
-        return view('dashboard.channels.edit', compact('channel', 'subcategories', 'page_name', 'all_', 'all_sub'));
+        return view('dashboard.channels.edit', compact('element', 'subcategories', 'page_name', 'all_', 'all_sub', 'index'));
     }
 
     public function update(ChannelRequest $request, $slug)
@@ -123,11 +126,12 @@ class DashboardChannelsController extends Controller
 
     public function trashed()
     {
-        $trash_ch = Channel::onlyTrashed()->get();
+        $element = Channel::onlyTrashed()->get();
         $all_ = Channel::all();
         $page_name = 'channels';
+        $index = 'trash';
 
-        return view('dashboard.channels.trashed', compact('trash_ch', 'page_name', 'all_'));
+        return view('dashboard.channels.trashed', compact('element', 'page_name', 'all_', 'index'));
     }
 
     public function restore($slug)

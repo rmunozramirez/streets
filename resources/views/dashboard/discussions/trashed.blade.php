@@ -15,7 +15,7 @@
 			    <div id="contenido"  class="card">
                     <div class="row">
                     	<div class="col-md-12 pt-4">
-							@if(count($trash_disc) > 0)
+							@if(count($element) > 0)
 								<table class="table table-striped table-hover">
 						         <thead>
 						            <tr>
@@ -25,7 +25,7 @@
 						            </tr>
 						         </thead>
 						         <tbody>
-						         	@foreach ($trash_disc as $discussion)
+						         	@foreach ($element as $discussion)
 						            <tr>
 						               <td><a href="{{route('discussions.show', $discussion->slug)}}">
 							               	<figure>

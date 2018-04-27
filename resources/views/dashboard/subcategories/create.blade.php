@@ -6,7 +6,7 @@
     	<div class="inside">
     		    <h2>Create a Subcategory
     		    	<span class="small pull-right">
-                    	<i class="fa fa-chevron-left"></i> <a href="{{route('categories.index')}}">Back to categories</a>
+                    	<i class="fa fa-chevron-left"></i> <a href="{{route('subcategories.index')}}">Back to categories</a>
                     </span>
 	                </h2>
 	             <hr />

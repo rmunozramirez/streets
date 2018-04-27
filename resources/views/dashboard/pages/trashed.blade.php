@@ -15,7 +15,7 @@
 			    <div id="contenido"  class="card">
                     <div class="row">
                     	<div class="col-md-12 pt-4">
-							@if(count($trash_page) > 0)
+							@if(count($element) > 0)
 									<table class="table table-striped table-hover">
 								         <thead>
 								            <tr>
@@ -25,7 +25,7 @@
 								            </tr>
 								         </thead>
 								         <tbody>
-							         		@foreach ($trash_page as $page)
+							         		@foreach ($element as $page)
 							                	<tr>
 							                		<td>
 														<a href="{{route('pages.show', $page->slug)}}">

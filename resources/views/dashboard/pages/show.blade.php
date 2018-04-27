@@ -1,5 +1,5 @@
 @extends('dashboard.index')
-@section ('title', "| $page_name")
+@section ('title', "| $element->title")
 @section('content')
 <section id="content">
 
@@ -7,11 +7,11 @@
 	    <div class="wrapper wrapper-content animated fadeInUp">		
 	        <div class="row wrapper border-bottom white-bg">
 				<div class="inside">
-					@if( $page ) 
-		                <h2>{!! $page->title !!}
+					@if( $element ) 
+		                <h2>{!! $element->title !!}
 		                <span class="small pull-right">
 	                    	<i class="fa fa-chevron-left"></i> <a class="small-link" href="{{route('pages.index')}}">Back to pages</a>
-    	                 	<i class="fa fa-pencil"></i> <a href="{{route('pages.edit', $page->slug)}}">Edit</a>
+    	                 	<i class="fa fa-pencil"></i> <a href="{{route('pages.edit', $element->slug)}}">Edit</a>
 	                    </span></h2>
 	                <hr>
 						<div id="contenido"  class="card">
@@ -19,26 +19,26 @@
 							<div class="row">
 								<div class="col-md-4">
 					               <figure>
-						            	<img height="300" class="img-responsive" src="{{URL::to('/images/' . $page->image)}}" alt="{{ $page->title }}" name="{{ $page->title }}" />
+						            	<img height="300" class="img-responsive" src="{{URL::to('/images/' . $element->image)}}" alt="{{ $element->title }}" name="{{ $element->title }}" />
 						            </figure>				
 				            	</div>
 								<div class="col-md-8">
 							      	<div class="row">
 									    <dl class="dl-horizontal">
 									    	<h3><dt>Page Name:</dt>
-											<dd>{!! $page->title !!}</dd></h3>
+											<dd>{!! $element->title !!}</dd></h3>
 
 									        <dt>Page subtitle:</dt>
-									        <dd class="pb-3">{{ $page->subtitle}}</dd>
+									        <dd class="pb-3">{{ $element->subtitle}}</dd>
 
 									        <dt>Status</dt>
-									        <dd class="pb-3">{!! $page->statuses[0]->status !!}</dd>
+									        <dd class="pb-3">{!! $element->statuses[0]->status !!}</dd>
 
 									        <dt>Registered at:</dt>
-									        <dd class="pb-3">{{ $page->created_at}}</dd>
+									        <dd class="pb-3">{{ $element->created_at}}</dd>
 
 									        <dt>Body</dt>
-									        <dd class="pb-3">{!! $page->body !!}</dd>
+									        <dd class="pb-3">{!! $element->body !!}</dd>
 									    </dl>
 							         </div>		            
 						        </div>

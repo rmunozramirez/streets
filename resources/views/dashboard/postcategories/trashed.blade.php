@@ -16,7 +16,7 @@
                 	<div class="col-md-12 pt-4">
                 		<div class="col-md-12">
                 		</div>
-						@if(count($trash_postcat) > 0)
+						@if(count($element) > 0)
 							<table class="table table-striped table-hover">
 					         <thead>
 					            <tr>
@@ -26,7 +26,7 @@
 					            </tr>
 					         </thead>
 					         <tbody>
-					         	@foreach ($trash_postcat as $postcat)
+					         	@foreach ($element as $postcat)
 					            <tr>
 					               <td><a href="{{route('postcategories.show', $postcat->slug)}}">
 						               	<figure>

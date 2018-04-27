@@ -7,11 +7,11 @@
 	    <div class="wrapper wrapper-content animated fadeInUp">		
 	        <div class="row wrapper border-bottom white-bg">
 				<div class="inside">
-					@if( $post ) 
-		                <h2>{!! $post->title !!}
+					@if( $element ) 
+		                <h2>{!! $element->title !!}
 		                <span class="small pull-right">
 	                    	<i class="fa fa-chevron-left"></i> <a class="small-link" href="{{route('posts.index')}}">Back to posts</a>
-    	                 	<i class="fa fa-pencil"></i> <a href="{{route('posts.edit', $post->slug)}}">Edit</a>
+    	                 	<i class="fa fa-pencil"></i> <a href="{{route('posts.edit', $element->slug)}}">Edit</a>
 	                    </span></h2>
 	                <hr>
 						<div id="contenido"  class="card">
@@ -19,43 +19,43 @@
 							<div class="row">
 								<div class="col-md-4">
 					               <figure>
-						            	<img height="300" class="img-responsive" src="{{URL::to('/images/' . $post->image)}}" alt="{{ $post->title }}" name="{{ $post->title }}" />
+						            	<img height="300" class="img-responsive" src="{{URL::to('/images/' . $element->image)}}" alt="{{ $element->title }}" name="{{ $element->title }}" />
 						            </figure>				
 				            	</div>
 								<div class="col-md-8">
 							      	<div class="row">
 									    <dl class="dl-horizontal">
 									    	<h3><dt>Post Name:</dt>
-											<dd>{!! $post->title !!}</dd></h3>
+											<dd>{!! $element->title !!}</dd></h3>
 
 									        <dt>Post subtitle:</dt>
-									        <dd class="pb-3">{{ $post->subtitle}}</dd>
+									        <dd class="pb-3">{{ $element->subtitle}}</dd>
 
 									        <dt>Subcategory:</dt>
 									        <dd class="pb-3">
-									        	<a href="{{route('postcategories.show', $post->postcategory->slug)}}">
-									        	{{ $post->postcategory->title}}
+									        	<a href="{{route('postcategories.show', $element->postcategory->slug)}}">
+									        	{{ $element->postcategory->title}}
 										        </a>
 										    </dd>
 
 									        <dt>Author</dt>
 									        <dd class="pb-3">
-									        	<a href="{{route('profiles.show', $post->profile->slug)}}">
-									        		{!! $post->profile->title !!}
+									        	<a href="{{route('profiles.show', $element->profile->slug)}}">
+									        		{!! $element->profile->title !!}
 									        	</a>
 									        </dd>
 
 									        <dt>Status</dt>
-									        <dd class="pb-3">{!! $post->statuses[0]->status !!}</dd>
+									        <dd class="pb-3">{!! $element->statuses[0]->status !!}</dd>
 
 									        <dt>Registered at:</dt>
-									        <dd class="pb-3">{{ $post->created_at}}</dd>
+									        <dd class="pb-3">{{ $element->created_at}}</dd>
 
 									        <dt>Likes</dt>
-									        <dd class="pb-3">{{ $post->likes}}</dd>
+									        <dd class="pb-3">{{ $element->likes}}</dd>
 
 									        <dt>Body</dt>
-									        <dd class="pb-3">{!! $post->body !!}</dd>
+									        <dd class="pb-3">{!! $element->body !!}</dd>
 									    </dl>
 							         </div>		            
 						        </div>

@@ -5,7 +5,7 @@
     <div class="wrapper wrapper-content animated fadeInUp">
         <div class="row wrapper border-bottom white-bg">
 		<div class="inside">
-            <h2>Edit: {!! $profile->title !!}
+            <h2>Edit: {!! $element->title !!}
             <span class="small pull-right">
             	<i class="fa fa-chevron-left"></i> <a href="{{route('profiles.index')}}">Back to profiles</a>
             </span></h2>
@@ -22,10 +22,10 @@
 						<div class="tab-pane" id="tab-profile">
 							<div class="m-t-md">
 								<h2 class="pb-5">Profile information</h2>
-								 {!! Form::model($profile, ['method'=>'PATCH', 'action'=> ['DashboardProfileController@update', $profile->slug ],'files'=>true]) !!}   
+								 {!! Form::model($element, ['method'=>'PATCH', 'action'=> ['DashboardProfileController@update', $element->slug ],'files'=>true]) !!}   
 								<div class="row">        
 									<div class="col-md-4"> 
-										<img class="img-responsive"  src="{{URL::to('/images/' . $profile->image ) }}" alt="{{$profile->title}}" >
+										<img class="img-responsive"  src="{{URL::to('/images/' . $element->image ) }}" alt="{{$element->title}}" >
 										<div class=" pt-5">
 											{!!Form::label('image', 'Upload a Featured Image') !!}
 											{!!Form::file('image', null, array('class' => 'form-control', 'required' => ''))!!}

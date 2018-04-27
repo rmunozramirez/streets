@@ -1,12 +1,12 @@
 @extends('dashboard.index')
-@section ('title', "| $page_name")
+@section ('title', "| Edit: $page_name")
 @section('content')
 
 <section id="content">
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row wrapper border-bottom white-bg">
 			<div class="inside">
-                <h2>Edit: {{ $subcategory->title}}
+                <h2>Edit: {{ $element->title}}
     		    	<span class="small pull-right">
                     	<i class="fa fa-chevron-left"></i> <a href="{{route('subcategories.index')}}">Back to subcategories</a>
                     </span>
@@ -24,12 +24,12 @@
 
 					<div class="row">
 						<div class="card-body">        
-		        		{!! Form::model($subcategory, ['method'=>'PATCH', 'action'=> ['DashboardSubcategoriesController@update', $subcategory->slug ],'files'=>true]) !!} 
+		        		{!! Form::model($element, ['method'=>'PATCH', 'action'=> ['DashboardSubcategoriesController@update', $element->slug ],'files'=>true]) !!} 
 
 
 				            <div class="row">        
 					            <div class="col-md-4"> 
-				            	<img class="img-responsive"  src="{{URL::to('/images/' . $subcategory->image ) }}" alt="{{$subcategory->title}}" >
+				            	<img class="img-responsive"  src="{{URL::to('/images/' . $element->image ) }}" alt="{{$element->title}}" >
 
 					            	<div class=" pt-5">
 						                {!!Form::label('image', 'Upload a Featured Image') !!}

@@ -24,8 +24,9 @@ class PostcategoriesController extends Controller
         $all_ = Postcategory::withCount('posts')->get();
         $trash_postcat = Postcategory::onlyTrashed()->get();
         $page_name = 'postcategories';
+        $index = 'yes';
 
-       return view('dashboard.postcategories.index', compact('page_name','trash_postcat', 'all_'));
+       return view('dashboard.postcategories.index', compact('page_name','trash_postcat', 'all_', 'index'));
     }
 
     public function create()
@@ -34,8 +35,9 @@ class PostcategoriesController extends Controller
         $all_st = Status::pluck('status', 'id')->all();
         $all_ = Postcategory::all();
         $page_name =  'postcategories';
+        $index = 'create';
 
-        return view('dashboard.postcategories.create', compact('all_', 'page_name', 'all_postcat', 'all_st'));
+        return view('dashboard.postcategories.create', compact('all_', 'page_name', 'all_postcat', 'all_st', 'index'));
     }
 
     /**
@@ -77,11 +79,12 @@ class PostcategoriesController extends Controller
      */
     public function show($slug)
     {
-        $postcat = Postcategory::withCount('posts')->where('slug', $slug)->first();
+        $element = Postcategory::withCount('posts')->where('slug', $slug)->first();
         $page_name = 'postcategories';
         $all_ = Postcategory::all();
+        $index = 'show';
 
-        return view('dashboard.postcategories.show', compact('postcat', 'page_name', 'all_'));
+        return view('dashboard.postcategories.show', compact('element', 'page_name', 'all_', 'index'));
     }
 
     /**
@@ -92,11 +95,12 @@ class PostcategoriesController extends Controller
      */
     public function edit($slug)
     {
-        $postcat = Postcategory::where('slug', $slug)->first(); 
+        $element = Postcategory::where('slug', $slug)->first(); 
         $page_name = 'postcategories';
         $all_ = Postcategory::all();
+        $index = 'edit';
 
-          return view('dashboard.postcategories.edit', compact('postcat', 'page_name', 'all_'));
+          return view('dashboard.postcategories.edit', compact('element', 'page_name', 'all_', 'index'));
 
     }
 
@@ -155,11 +159,12 @@ class PostcategoriesController extends Controller
 
     public function trashed()
     {
-        $trash_postcat = Postcategory::onlyTrashed()->get();
+        $element = Postcategory::onlyTrashed()->get();
         $page_name = 'postcategories';
         $all_ = Postcategory::all();
+        $index = 'trash';
 
-        return view('dashboard.postcategories.trashed', compact('trash_postcat', 'page_name', 'all_'));
+        return view('dashboard.postcategories.trashed', compact('element', 'page_name', 'all_', 'index'));
     }
 
     public function restore($slug)

@@ -13,7 +13,7 @@
 			<div id="contenido"  class="card">
 			    <div class="row">
 			    	<div class="col-md-12 pt-4">
-						@if(count($trashed_pr) > 0)
+						@if(count($element) > 0)
 							<table class="table table-striped table-hover">
 					         <thead>
 					            <tr>
@@ -23,7 +23,7 @@
 					            </tr>
 					         </thead>
 					         <tbody>
-					         	@foreach ($trashed_pr as $profile)
+					         	@foreach ($element as $profile)
 					            <tr>
 					               <td>
 					               		<a href="{{route('profiles.show', $profile->slug)}}">

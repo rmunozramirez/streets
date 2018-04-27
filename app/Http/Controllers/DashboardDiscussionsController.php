@@ -26,8 +26,9 @@ class DashboardDiscussionsController extends Controller
 
         $all_ = Discussion::with('likes')->get();
         $page_name = 'discussions';
+        $index = 'yes';
 
-       return view('dashboard.discussions.index', compact( 'page_name', 'all_'));
+       return view('dashboard.discussions.index', compact( 'page_name', 'all_', 'index'));
     }
 
     /**
@@ -41,8 +42,9 @@ class DashboardDiscussionsController extends Controller
         $all_st = Status::pluck('status', 'id')->all();
         $all_ = Discussion::all();
         $page_name =  'discussions';
+        $index = 'create';
 
-        return view('dashboard.discussions.create', compact('all_', 'page_name', 'all_roles', 'all_st'));
+        return view('dashboard.discussions.create', compact('all_', 'page_name', 'all_roles', 'all_st', 'index'));
     }
 
     /**
@@ -84,20 +86,22 @@ class DashboardDiscussionsController extends Controller
 
     public function show($slug)
     {
-        $discussion = Discussion::where('slug', $slug)->first();
+        $element = Discussion::where('slug', $slug)->first();
         $page_name = 'discussions';
-        $all_ = Discussion::all(); 
+        $all_ = Discussion::all();
+        $index = 'show';
 
-        return view('dashboard.discussions.show', compact('discussion', 'page_name', 'all_'));
+        return view('dashboard.discussions.show', compact('element', 'page_name', 'all_', 'index'));
     }
 
     public function edit($slug)
     {
         $all_ = Discussion::with('statuses')->get();
-        $discussion = Discussion::where('slug', $slug)->first();
+        $element = Discussion::where('slug', $slug)->first();
         $page_name = 'discussions';
+        $index = 'edit'; 
 
-        return view('dashboard.discussions.edit', compact('discussion', 'page_name', 'all_'));
+        return view('dashboard.discussions.edit', compact('element', 'page_name', 'all_', 'index'));
 
     }
 
@@ -139,11 +143,12 @@ class DashboardDiscussionsController extends Controller
     public function trashed()
     {
 
-        $trash_disc = Discussion::onlyTrashed()->get();
+        $element = Discussion::onlyTrashed()->get();
         $page_name = 'discussions';
         $all_ = Discussion::all();
+        $index = 'trash';
 
-        return view('dashboard.discussions.trashed', compact('trash_disc', 'slug', 'page_name', 'all_'));
+        return view('dashboard.discussions.trashed', compact('element', 'slug', 'page_name', 'all_', 'index'));
     }
 
     public function restore($slug)

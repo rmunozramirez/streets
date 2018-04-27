@@ -18,11 +18,11 @@
 			    @endif
 
 					<div class="card-body">        
-	        		{!! Form::model($channel, ['method'=>'PATCH', 'action'=> ['DashboardChannelsController@update', $channel->slug ],'files'=>true]) !!} 
+	        		{!! Form::model($element, ['method'=>'PATCH', 'action'=> ['DashboardChannelsController@update', $element->slug ],'files'=>true]) !!} 
 
 			            <div class="row">        
 				            <div class="col-md-4"> 
-				            	<img class="img-responsive"  src="{{URL::to('/images/' . $channel->image ) }}" alt="{{$channel->title}}" >
+				            	<img class="img-responsive"  src="{{URL::to('/images/' . $element->image ) }}" alt="{{$element->title}}" >
 				            	<div class=" pt-5">
 					                {!!Form::label('image', 'Upload a Featured Image') !!}
 					                {!!Form::file('image', null, array('class' => 'form-control', 'required' => ''))!!}
