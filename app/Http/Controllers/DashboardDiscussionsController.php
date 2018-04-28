@@ -196,7 +196,6 @@ class DashboardDiscussionsController extends Controller
     public function reply(ReplyRequest $request, $slug)
     {
         if($request->body) {
-
             $element = Discussion::where('slug', $slug)->first();
             $user = Auth::user();
             $profile = Profile::where('user_id', $user->id)->first();
@@ -216,7 +215,7 @@ class DashboardDiscussionsController extends Controller
             $watchers = array();
 
             foreach ($element->watchers as $watcher) {
-                 array_push($watchers, User::find($watcher->profile->user->id));
+                 array_push($watchers, User::find($watcher->user_id));
             }
 
             Notification::send($watchers, new \App\Notifications\NewReplyAdded($element));
@@ -230,7 +229,6 @@ class DashboardDiscussionsController extends Controller
             Session::flash('info', 'Your answer is empty, please try again.');
             return redirect()->back();
         }
-
     }
 
 

@@ -71,7 +71,7 @@ class Discussion extends Model
         $watchers_id = array();
 
         foreach ($this->watchers as $w) {
-            array_push($watchers_id, $w->profile_id);
+            array_push($watchers_id, $w->user_id);
         }
 
         if (in_array($id, $watchers_id)) {

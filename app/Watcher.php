@@ -8,7 +8,7 @@ class Watcher extends Model
 {
 	protected $fillable = [
 		
-		'profile_id',
+		'user_id',
 		'discussion_id', 
   
 	];

@@ -61,10 +61,6 @@ class Profile extends Model
     {
         return $this->hasMany('App\Discussion');
     }
-    public function watchers()
-    {
-        return $this->hasMany('App\Watcher');
-    } 
     public function is_banned($id)
     {
         $profile = Profile::find($id);
