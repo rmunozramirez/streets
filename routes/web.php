@@ -14,6 +14,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()  {
 
 //admin Tags
 	Route::get('tags/trashed', 'TagController@trashed')->name('tags.trashed');
+	Route::get('tags/{slug}/restore', 'TagController@restore')->name('tags.restore');
+	Route::delete('tags/{slug}/kill', 'TagController@kill')->name('tags.kill');
 	Route::resource('tags', 'TagController');
 
 //admin Statuses
@@ -36,6 +38,14 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()  {
 	Route::get('posts/{slug}/restore', 'PostController@restore')->name('posts.restore');
 	Route::delete('posts/{slug}/kill', 'PostController@kill')->name('posts.kill');
 	Route::resource('posts', 'PostController');
+
+//admin posts-comments	
+	Route::resource('comments', 'PostCommentsController');
+
+//admin posts-comments-replies	
+	Route::resource('comments/replies', 'CommentRepliessController');
+
+
 
 //admin pages
 	Route::get('pages/trashed', 'PagesController@trashed')->name('pages.trashed');
@@ -92,5 +102,9 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()  {
 //admin replies
 	Route::get('replies/{id}/like', 'DashboardReplyController@like')->name('replies.like');
 	Route::get('replies/{id}/unlike', 'DashboardReplyController@unlike')->name('replies.unlike');
+	
+//admin watchers
+	Route::get('discussions/watch/{id}', 'WatchersController@watch')->name('discussions.watch');
+	Route::get('discussions/unwatch/{id}/', 'WatchersController@unwatch')->name('discussions.unwatch');
 
 });

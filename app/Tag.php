@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 Relation::morphMap([
 
@@ -19,9 +20,12 @@ class Tag extends Model
 {
 
 	protected $fillable = [	
-		    'title',
+            'title',
+		    'slug',
 	];
 
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
     /**
      * Get all of the pages that are assigned this tag.
      */
@@ -35,7 +39,7 @@ class Tag extends Model
      */
     public function profiles()
     {
-        return $this->morphedByMany('App\Profile', 'taggable');
+        return $this->morphedByMany('App\Profile', 'taggable')->withPivot('taggable_type');
     }
     /**
      * Get all of the posts that are assigned this tag.
@@ -59,4 +63,10 @@ class Tag extends Model
     {
         return $this->morphedByMany('App\Discussion', 'taggable');
     }
+
+    public function getMorphType()
+    {
+        return $this->morphType;
+    }
+
 }

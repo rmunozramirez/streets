@@ -66,7 +66,7 @@ class TagsTableSeeder extends Seeder
             'taggable_type'	=>	'pages',
         ]); 
         App\Taggable::create ([
-            'tag_id'		=>	12,
+            'tag_id'		=>	13,
             'taggable_id'	=>	1,
             'taggable_type'	=>	'pages',
         ]); 
@@ -76,7 +76,7 @@ class TagsTableSeeder extends Seeder
             'taggable_type'	=>	'pages',
         ]); 
         App\Taggable::create ([
-            'tag_id'		=>	12,
+            'tag_id'		=>	4,
             'taggable_id'	=>	2,
             'taggable_type'	=>	'pages',
         ]); 
@@ -86,7 +86,7 @@ class TagsTableSeeder extends Seeder
             'taggable_type'	=>	'pages',
         ]); 
         App\Taggable::create ([
-            'tag_id'		=>	12,
+            'tag_id'		=>	7,
             'taggable_id'	=>	3,
             'taggable_type'	=>	'pages',
         ]); 
@@ -96,7 +96,7 @@ class TagsTableSeeder extends Seeder
             'taggable_type'	=>	'pages',
         ]); 
         App\Taggable::create ([
-            'tag_id'		=>	12,
+            'tag_id'		=>	6,
             'taggable_id'	=>	4,
             'taggable_type'	=>	'pages',
         ]); 
@@ -154,12 +154,12 @@ class TagsTableSeeder extends Seeder
             'taggable_type' =>  'posts',
         ]); 
         App\Taggable::create ([
-            'tag_id'        =>  11,
+            'tag_id'        =>  5,
             'taggable_id'   =>  11,
             'taggable_type' =>  'posts',
         ]); 
         App\Taggable::create ([
-            'tag_id'        =>  12,
+            'tag_id'        =>  4,
             'taggable_id'   =>  1,
             'taggable_type' =>  'posts',
         ]); 
@@ -174,12 +174,12 @@ class TagsTableSeeder extends Seeder
             'taggable_type' =>  'posts',
         ]); 
         App\Taggable::create ([
-            'tag_id'        =>  11,
+            'tag_id'        =>  1,
             'taggable_id'   =>  3,
             'taggable_type' =>  'posts',
         ]); 
         App\Taggable::create ([
-            'tag_id'        =>  12,
+            'tag_id'        =>  8,
             'taggable_id'   =>  4,
             'taggable_type' =>  'posts',
         ]); 
@@ -262,12 +262,12 @@ class TagsTableSeeder extends Seeder
             'taggable_type'	=>	'profiles',
         ]); 
         App\Taggable::create ([
-            'tag_id'		=>	11,
+            'tag_id'		=>	4,
             'taggable_id'	=>	6,
             'taggable_type'	=>	'profiles',
         ]); 
         App\Taggable::create ([
-            'tag_id'		=>	12,
+            'tag_id'		=>	3,
             'taggable_id'	=>	1,
             'taggable_type'	=>	'profiles',
         ]); 
@@ -277,17 +277,17 @@ class TagsTableSeeder extends Seeder
             'taggable_type'	=>	'profiles',
         ]); 
         App\Taggable::create ([
-            'tag_id'		=>	10,
+            'tag_id'		=>	7,
             'taggable_id'	=>	7,
             'taggable_type'	=>	'profiles',
         ]); 
         App\Taggable::create ([
-            'tag_id'		=>	11,
+            'tag_id'		=>	6,
             'taggable_id'	=>	7,
             'taggable_type'	=>	'profiles',
         ]); 
         App\Taggable::create ([
-            'tag_id'		=>	12,
+            'tag_id'		=>	8,
             'taggable_id'	=>	7,
             'taggable_type'	=>	'profiles',
         ]); 
@@ -370,12 +370,12 @@ class TagsTableSeeder extends Seeder
             'taggable_type'	=>	'channels',
         ]); 
         App\Taggable::create ([
-            'tag_id'		=>	11,
+            'tag_id'		=>	1,
             'taggable_id'	=>	6,
             'taggable_type'	=>	'channels',
         ]); 
         App\Taggable::create ([
-            'tag_id'		=>	12,
+            'tag_id'		=>	7,
             'taggable_id'	=>	1,
             'taggable_type'	=>	'channels',
         ]); 
@@ -390,12 +390,12 @@ class TagsTableSeeder extends Seeder
             'taggable_type'	=>	'channels',
         ]); 
         App\Taggable::create ([
-            'tag_id'		=>	11,
+            'tag_id'		=>	6,
             'taggable_id'	=>	7,
             'taggable_type'	=>	'channels',
         ]); 
         App\Taggable::create ([
-            'tag_id'		=>	12,
+            'tag_id'		=>	3,
             'taggable_id'	=>	7,
             'taggable_type'	=>	'channels',
         ]); 
@@ -454,12 +454,12 @@ class TagsTableSeeder extends Seeder
             'taggable_type'	=>	'discussions',
         ]); 
         App\Taggable::create ([
-            'tag_id'		=>	11,
+            'tag_id'		=>	6,
             'taggable_id'	=>	6,
             'taggable_type'	=>	'discussions',
         ]); 
         App\Taggable::create ([
-            'tag_id'		=>	12,
+            'tag_id'		=>	3,
             'taggable_id'	=>	1,
             'taggable_type'	=>	'discussions',
         ]); 

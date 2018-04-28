@@ -7,12 +7,14 @@ use App\Http\Requests\DiscussionRequest;
 use App\Http\Requests\ReplyRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Profile;
+use App\User;
 use App\Discussion;
 use App\Like;
 use App\Reply;
 use App\Status;
 use App\Role;
 use Session;
+use Notification;
 
 class DashboardDiscussionsController extends Controller
 {
@@ -191,32 +193,44 @@ class DashboardDiscussionsController extends Controller
         return $all_likes;
     } 
 
-
     public function reply(ReplyRequest $request, $slug)
     {
         if($request->body) {
-            $discussion = Discussion::where('slug', $slug)->first();
+
+            $element = Discussion::where('slug', $slug)->first();
             $user = Auth::user();
             $profile = Profile::where('user_id', $user->id)->first();
             $all_user_discussions = Discussion::where('profile_id', $profile->id)->count();
             $page_name = 'discussions';
             $all_ = Discussion::all();
+            $index = 'show';
 
             $reply = Reply::create([
 
                 'profile_id'    => $user->profile->id,
-                'discussion_id' => $discussion->id,
+                'discussion_id' => $element->id,
                 'body'          =>   $request->body,
 
             ]);
+
+            $watchers = array();
+
+            foreach ($element->watchers as $watcher) {
+                 array_push($watchers, User::find($watcher->profile->user->id));
+            }
+
+            Notification::send($watchers, new \App\Notifications\NewReplyAdded($element));
+           
+
+            Session::flash('success', 'Answer successfully created!');
+            
+            return view('dashboard.discussions.show', compact('element', 'index', 'user',  'page_name', 'all_user_discussions', 'slug', 'all_'));
+
         } else {
             Session::flash('info', 'Your answer is empty, please try again.');
             return redirect()->back();
         }
 
-
-        Session::flash('success', 'Answer successfully created!');
-        return view('dashboard.discussions.show', compact('discussion', 'user',  'page_name', 'all_user_discussions', 'slug', 'all_'));
     }
 
 

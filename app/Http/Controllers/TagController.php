@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\StatusRequest;
+use App\Http\Requests\TagRequest;
 use App\Tag;
 use Session;
 
@@ -45,9 +45,20 @@ class TagController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TagRequest $request)
     {
-        //
+
+        $tag = Tag::create([
+
+            'title'         =>  $request->title,
+            'slug'          =>  str_slug($request->title, '-'),
+
+       ]);
+
+        $tag->save();
+
+        Session::flash('success', 'Tag successfully created!');
+        return redirect()->route('tags.show', $tag->slug);
     }
 
     /**
@@ -67,37 +78,70 @@ class TagController extends Controller
         return view('dashboard.tags.show', compact('element', 'all_', 'page_name', 'index'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+
+    public function edit($slug)
     {
-        //
+
+        $all_ = Tag::all();
+        $element = Tag::where('slug', $slug)->first(); 
+        $page_name = 'tags';
+        $index = 'edit'; 
+
+        return view('dashboard.tags.edit', compact('element', 'page_name', 'all_', 'index'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(TagRequest $request, $slug)
     {
-        //
+        $input = $request->all();
+        $input['slug'] = str_slug($request->title, '-');
+
+        $tag = Tag::where('slug', $slug)->first();
+        $tag->fill($input)->save();
+        $page_name = $tag->title;
+
+        Session::flash('success', 'Tag successfully updated!');
+     
+        return redirect()->route('tags.show', $tag->slug); 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+
+    public function destroy($slug)
     {
-        //
+        
+        $tag = Tag::where('slug', $slug)->first();
+        $tag->delete();
+
+        Session::flash('success', 'Tag successfully deleted!');
+        return redirect()->route('tags.index');
     }
+
+
+    public function trashed()
+    {
+        $element = Tag::onlyTrashed()->get();
+        $all_ = Tag::all();
+        $page_name = 'tags';
+        $index = 'trash';
+
+        return view('dashboard.tags.trashed', compact('element', 'page_name', 'all_', 'index'));
+    }
+
+    public function restore($slug)
+    {
+        $tag = Tag::withTrashed()->where('slug', $slug)->first();
+        $tag->restore();
+
+        Session::flash('success', 'Tag successfully restored!');
+        return redirect()->route('tags.index');
+    }
+
+    public function kill($slug)
+    {
+        $tag = Tag::withTrashed()->where('slug', $slug)->first();
+        $tag->forceDelete();
+
+        Session::flash('success', 'Tag pemanently deleted!');
+        return redirect()->route('tags.index');
+    }
+
 }

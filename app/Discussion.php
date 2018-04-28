@@ -26,7 +26,10 @@ class Discussion extends Model
         return $this->belongsTo('App\Profile');
     }
 
-
+    public function watchers()
+    {
+        return $this->hasMany('App\Watcher');
+    } 
     public function replies()
     {
         return $this->hasMany('App\Reply');
@@ -56,6 +59,22 @@ class Discussion extends Model
         }
 
         if (in_array($id, $likers)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function is_being_watched_by_auth_user()
+    {
+        $id = Auth::id();
+        $watchers_id = array();
+
+        foreach ($this->watchers as $w) {
+            array_push($watchers_id, $w->profile_id);
+        }
+
+        if (in_array($id, $watchers_id)) {
             return true;
         } else {
             return false;

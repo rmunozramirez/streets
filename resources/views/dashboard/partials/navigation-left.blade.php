@@ -46,8 +46,8 @@
                     <a href=""><i class="fa fa-envelope"></i> <span class="nav-label">Blog </span></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a href="{{route('posts.index')}}">Posts</a></li>
+                        <li><a href="{{route('comments.index')}}">Comments</a></li>
                         <li><a href="{{route('postcategories.index')}}">Post Categories</a></li>
-                        <li><a href="">Post Tags</a></li>
                         <li><a href="{{route('pages.index')}}">Pages</a></li>
 
                     </ul>
@@ -65,6 +65,9 @@
                 
                 <li>
                     <a href="{{route('status.index')}}"><i class="fa fa-users"></i>  <span class="nav-label">Statuses</span>  </a>
+                </li>
+                <li>
+                    <a href="{{route('tags.index')}}"><i class="fa fa-users"></i> Post Tags</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">E-commerce</span><span class="fa arrow"></span></a>

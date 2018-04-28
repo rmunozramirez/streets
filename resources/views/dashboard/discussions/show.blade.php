@@ -11,32 +11,53 @@
                 </span></h2>
             	<hr>
 		    
-		        <div class="row">        
+		        <div class="row pt-5"> 
+		            
 		            <div class="col-md-4"> 
-		            	<div class=" pt-5">
 			               <figure>
 				            	<img class="img-responsive" src="{{URL::to('/images/' . $element->image)}}" alt="{{ $element->title }}" name="{{ $element->title }}">
 				            </figure>
-		            	</div>
 		            </div>
 	            	<div class="col-md-8"> 
-	            	 	<div class="panel-body"> 
-							<div class="pt-5">{!! $element->body!!} </div>         	
-						</div>
-					  	<div class="panel-footer text-muted">
-					    	@if($element->is_like_by_auth_user())
-					    		<a href="{{route('discussions.unlike', $element->id)}}" class="btn btn-xs btn-danger">
-					    		<i class="fa fa-thumbs-down"></i>
-					    		<span class="badge">{{ $element->likes->count() }}</span>
-					    		</a>
-					    	@else
-					    		<a href="{{route('discussions.like', $element->id)}}" class="btn btn-xs btn-success">
-					    		<i class="fa fa-thumbs-up"></i>
-					    		<span class="badge">{{ $element->likes->count() }}</span>
-					    		</a>
-					    	@endif
-					  	</div>
-					</div>	
+	            		<div class="panel">
+		            	 	<div class="panel-header"> 
+								<h3>
+									{!! $element->title!!}
+									@if($element->is_being_watched_by_auth_user())
+										<span class="pull-right">
+											<a class="btn btn-xs  btn-light" href="{{route('discussions.unwatch', $element->id)}}">
+												<i class="fa fa-eye-slash"></i> Unwatch
+											</a>
+										</span>
+									@else
+										<span class="pull-right">
+											<a class="btn btn-xs btn-light" href="{{route('discussions.watch', $element->id)}}">
+												<i class="fa fa-eye"></i> Watch
+											</a>
+										</span>
+									@endif
+
+
+								</h3>
+							</div>
+		            	 	<div class="panel-body"> 
+								<div class="pt-5">{!! $element->body!!} </div>         	
+							</div>
+						  	<div class="panel-footer text-muted">
+						    	@if($element->is_like_by_auth_user())
+						    		<a href="{{route('discussions.unlike', $element->id)}}" class="btn btn-xs btn-danger">
+						    		<i class="fa fa-thumbs-down"></i>
+						    		<span class="badge">{{ $element->likes->count() }}</span>
+						    		</a>
+						    	@else
+						    		<a href="{{route('discussions.like', $element->id)}}" class="btn btn-xs btn-success">
+						    		<i class="fa fa-thumbs-up"></i>
+						    		<span class="badge">{{ $element->likes->count() }}</span>
+						    		</a>
+						    	@endif
+						  	</div>
+						</div>	
+		            </div>         
 	            </div>         
             </div>
         	<div class="row">

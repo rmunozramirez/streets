@@ -71,6 +71,44 @@
 					        </div>	
 							</div>
 						</div>
+			       <div class="col-md-8 col-md-offset-4"><hr />
+						<h3>Your Comment</h3>		
+		            	{!! Form::open(['route' => ['comments.create', $element->slug], 'method' => 'POST']) !!}
+				        {!!Form::textarea('body', null, array('id' => 'summernote','class' => 'form-control'))!!} 
+				         {!!Form::submit('Your Answer', array('class' => 'mt-5 btn btn-success btn-block', 'onclick' => 'clearform()')) !!}
+			             {!!Form::close() !!} 
+
+								@if(count($element->comments) > 0)
+						         	@foreach ($element->comments->reverse() as $comment)
+						         		<div class="panel mt-5">
+										  	<div class="panel-header">
+												  	@if($comment->profile->image)
+									               		<img height="50" class="img-circle mr-3" src="{{URL::to('/images/' . $comment->profile->image)}}" alt="{{ $element->title }}" name="{{ $element->title }}">
+									               	@else	
+									               		<i class="far fa-user fa-3x"></i>
+										            @endif 
+										            <a href="{{route('profiles.show', $comment->profile->slug )}}">{!! $comment->profile->title !!}</a>
+											    	{!! $comment->created_at->diffForHumans() !!}
+										  		<div class="small pull-right">		            
+											    	{!! Form::open(['route' => ['comments.destroy', $comment->id], 'method' => 'DELETE']) !!}
+
+													{!! Form::submit('Delete', ['class' => 'btn btn-block btn-danger']) !!}
+
+													{!! Form::close() !!}
+											  	</div>
+										  	</div>
+										  	<div class="panel-body">
+										    	{!! $comment->body !!}
+										  	</div>
+
+										</div>
+
+						            @endforeach 
+								@else
+								<div class="col-md-12 pt-5"><h3>No replies to: {!! $element->title !!}</h3></div>
+								@endif
+		            </div>
+
 					@else <h2>{!! $user_name !!} does not have a post</h2>
 			        @endif
 				</div>

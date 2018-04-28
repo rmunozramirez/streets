@@ -8,7 +8,7 @@
 			<div class="inside">
     		    <h2>Trashed {!! $page_name !!}
     		    	<span class="small pull-right">
-                    	<i class="fa fa-chevron-left"></i> <a href="{{route('discussions.index')}}">Back to discussions</a>
+                    	<i class="fa fa-chevron-left"></i> <a href="{{route('tags.index')}}">Back to tags</a>
                     </span>
 	                </h2>
 	             <hr />
@@ -19,29 +19,22 @@
 								<table class="table table-striped table-hover">
 						         <thead>
 						            <tr>
-						                <th>Channel</th>
+						                <th>Tag</th>
 						                <th>Profile</th>
-						                <th>Date</th>
+						                <th>Deleted at</th>
 						            </tr>
 						         </thead>
 						         <tbody>
-						         	@foreach ($element as $discussion)
+						         	@foreach ($element as $tag)
 						            <tr>
-						               <td><a href="{{route('discussions.show', $discussion->slug)}}">
-							               	<figure>
-								            	<img height="50" width="50" src="{{URL::to('/images/' . $discussion->image)}}" alt="{{ $discussion->title }}" name="{{ $discussion->title }}"><span class="pl-5"> {{$discussion->title}}</span>
-								            </figure>
-							               	
-							               </a>
-							           </td>
-						               <td><a href="{{route('profiles.show', $discussion->profile->slug)}}">{{$discussion->profile->title}}</a></td>
-						               <td>{{$discussion->created_at}}</td>
+						               <td><a href="{{route('tags.show', $tag->slug)}}">{{$tag->title}}</a></td>
+						               <td>{{$tag->deleted_at}}</td>
 						               <td>
-						               		<a href="{{route('discussions.restore', $discussion->slug)}}">Restore</a>
+						               		<a href="{{route('tags.restore', $tag->slug)}}">Restore</a>
 						               </td>
 						               <td>
 							            	<div class="col-md-6">
-								            	{!! Form::open(['route' => ['discussions.kill', $discussion->slug], 'method' => 'DELETE']) !!}
+								            	{!! Form::open(['route' => ['tags.kill', $tag->slug], 'method' => 'DELETE']) !!}
 
 												{!! Form::submit('Delete', ['class' => 'btn btn-block btn-danger']) !!}
 
@@ -53,7 +46,7 @@
 						         </tbody>
 						      	</table>
 							@else
-								<h3>No trashed discussions!</h3>
+								<h3>No trashed tags!</h3>
 							@endif
 						</div>	
 					</div>     
