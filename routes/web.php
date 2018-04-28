@@ -102,6 +102,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()  {
 //admin replies
 	Route::get('replies/{id}/like', 'DashboardReplyController@like')->name('replies.like');
 	Route::get('replies/{id}/unlike', 'DashboardReplyController@unlike')->name('replies.unlike');
+//admin best_replies
+	Route::get('replies/best/reply/{id}', 'DashboardReplyController@best_answer')->name('best.reply');
 	
 //admin watchers
 	Route::get('discussions/watch/{id}', 'WatchersController@watch')->name('discussions.watch');

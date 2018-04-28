@@ -92,8 +92,9 @@ class DashboardDiscussionsController extends Controller
         $page_name = 'discussions';
         $all_ = Discussion::all();
         $index = 'show';
+        $best_answer = $element->replies()->where('best_answer', 1)->first();
 
-        return view('dashboard.discussions.show', compact('element', 'page_name', 'all_', 'index'));
+        return view('dashboard.discussions.show', compact('element', 'page_name', 'all_', 'index', 'best_answer'));
     }
 
     public function edit($slug)
