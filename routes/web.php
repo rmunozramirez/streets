@@ -47,8 +47,10 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()  {
 
 
 //admin posts-comments-replies	
-	Route::resource('comments/replies', 'CommentRepliessController');
-
+	Route::resource('comments/replies', 'CommentRepliesController');
+	Route::post('comments/replies/{slug}', 'CommentRepliesController@tocomment')->name('comments.replies.tocomment');
+	Route::get('comments/replies/{id}/like', 'CommentRepliesController@like')->name('comments.replies.like');
+	Route::get('comments/replies/{id}/unlike', 'CommentRepliesController@unlike')->name('comments.replies.unlike');
 
 
 //admin pages

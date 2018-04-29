@@ -174,7 +174,7 @@ class StatusTableSeeder extends Seeder
         App\Status::create ([
             'statusable_id'     =>  5,
             'statusable_type'   =>  'channels',
-            'status'            =>  'banned',
+            'status'            =>  'active',
         ]); 
 
         App\Status::create ([
@@ -229,7 +229,7 @@ class StatusTableSeeder extends Seeder
         App\Status::create ([
             'statusable_id'     =>  7,
             'statusable_type'   =>  'profiles',
-            'status'            =>  'banned',
+            'status'            =>  'active',
         ]); 
 
 //discussionss
@@ -255,19 +255,19 @@ class StatusTableSeeder extends Seeder
         App\Status::create ([
             'statusable_id'     =>  4,
             'statusable_type'   =>  'discussions',
-            'status'            =>  'banned',
+            'status'            =>  'active',
         ]); 
 
         App\Status::create ([
             'statusable_id'     =>  5,
             'statusable_type'   =>  'discussions',
-            'status'            =>  'banned',
+            'status'            =>  'active',
         ]); 
 
         App\Status::create ([
             'statusable_id'     =>  6,
             'statusable_type'   =>  'discussions',
-            'status'            =>  'banned',
+            'status'            =>  'active',
         ]); 
 //pages
 
