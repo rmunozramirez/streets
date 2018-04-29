@@ -53,7 +53,7 @@
 								                			{{$post->profile->title}}
 								                		</a>
 							                		</td>
-									              	<td>Comments</td>
+									              	<td>{{ $post->comments->count()}}</td>
 									              	<td>{{$post->created_at}}</td>
 									               <td>
 									               		<a type="button" class="col-md-6 btn btn-secondary" href="{{route('posts.edit', $post->slug)}}">Edit</a>

@@ -39,8 +39,12 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()  {
 	Route::delete('posts/{slug}/kill', 'PostController@kill')->name('posts.kill');
 	Route::resource('posts', 'PostController');
 
-//admin posts-comments	
-	Route::resource('comments', 'PostCommentsController');
+//admin posts-comments
+	Route::resource('comments', 'PostCommentsController');	
+	Route::post('comments/{slug}', 'PostCommentsController@tocomment')->name('comments.tocomment');
+	Route::get('comments/{id}/like', 'PostCommentsController@like')->name('comments.like');
+	Route::get('comments/{id}/unlike', 'PostCommentsController@unlike')->name('comments.unlike');
+
 
 //admin posts-comments-replies	
 	Route::resource('comments/replies', 'CommentRepliessController');

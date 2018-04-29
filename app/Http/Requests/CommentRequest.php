@@ -25,9 +25,9 @@ class CommentRequest extends FormRequest
     {
         return [
 
-        'profile_id'    =>  'integer',
+        'profile_id' =>  'integer',
         'post_id'    =>  'integer',           
-        'body'          => 'required',   
+        'body'       => 'required',   
 
         ];
     }

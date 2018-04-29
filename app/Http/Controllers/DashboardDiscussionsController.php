@@ -135,12 +135,11 @@ class DashboardDiscussionsController extends Controller
     {
 
         $discussion = Discussion::where('slug', $slug)->first();
-        $user = Auth::user();
         $discussion->delete();
 
         Session::flash('success', 'Discussion successfully deleted!');
 
-        return redirect()->route('discussions.index', $user->slug);
+        return redirect()->back();
     }
 
     public function trashed()

@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 Relation::morphMap([
     'replies'    => 'App\Reply',
     'discussions'   => 'App\Discussion',
+    'posts'   => 'App\Post',
+    'comments'   => 'App\Comment',
+    'commentreplies'   => 'App\CommentReply',
 ]);
 
 class Like extends Model
@@ -21,17 +24,10 @@ class Like extends Model
     
 	];
 
-
     public function reply()
     {
         return $this->belongsTo('App\Reply');
     }
-
-    // public function profile()
-    // {
-    //     return $this->belongsTo('App\Profile');
-    // }
-
 
     public function likeable()
     {

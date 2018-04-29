@@ -44,4 +44,8 @@ class Post extends Model
     {
         return $this->hasMany('App\Comment');
     }
+    public function commentreplies()
+    {
+        return $this->hasManyThrough('App\Reply', 'App\Comment');
+    }
 }

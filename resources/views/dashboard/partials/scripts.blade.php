@@ -1,4 +1,3 @@
-<script src="{{ asset('js/admin/toastr.min.js') }}"></script>
 
 <script src="{{ asset('js/admin/jquery.min.js') }}"></script>
 <script src="{{ asset('js/admin/bootstrap.min.js') }}"></script>
@@ -9,7 +8,7 @@
 <script src="{{ asset('js/admin/jquery.steps.min.js') }}"></script>
 <script src="{{ asset('js/admin/select2.min.js') }}"></script>
 <script src="{{ asset('js/admin/summernote.js') }}"></script>
-
+<script src="{{ asset('js/admin/toastr.min.js') }}"></script>
     <script>
         //toastr
 

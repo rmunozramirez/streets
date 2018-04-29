@@ -9,10 +9,31 @@
 				<div class="inside">
 					@if( $element ) 
 		                <h2>{!! $element->title !!}
+
 		                <span class="small pull-right">
 	                    	<i class="fa fa-chevron-left"></i> <a class="small-link" href="{{route('posts.index')}}">Back to posts</a>
     	                 	<i class="fa fa-pencil"></i> <a href="{{route('posts.edit', $element->slug)}}">Edit</a>
-	                    </span></h2>
+	                    </span></h2> 
+	                <hr /> 
+		                <h3>{!! $element->subtitle !!}</h3>
+		                <div class="breadcrumb">
+							<li>Subcategory: <a href="{{route('postcategories.show', $element->postcategory->slug)}}">
+				        		{{ $element->postcategory->title}}</a>
+				        	</li>
+					        <li>Author: <a href="{{route('profiles.show', $element->profile->slug)}}">
+				        		{!! $element->profile->title !!}</a>
+				        	</li>
+					      	<li>Status: {!! $element->statuses[0]->status !!}</li>
+					      	<li>Created at: {{ $element->created_at}}</li>
+					      	<li>Likes: <a href="{{route('profiles.show', $element->profile->slug)}}">{{ $element->likes}}</a></li>
+					      	<li>Tags:
+					        	@foreach($element->tags as $tag)
+					        		<a class="btn btn-secondary btn-xs" href="{{route('tags.show', $tag->slug)}}">
+								    	{!! $tag->title !!} 
+								    </a>
+								@endforeach
+					        </li>
+						</div>
 	                <hr>
 						<div id="contenido"  class="card">
 							<div class="card-body">
@@ -20,93 +41,80 @@
 								<div class="col-md-4">
 					               <figure>
 						            	<img height="300" class="img-responsive" src="{{URL::to('/images/' . $element->image)}}" alt="{{ $element->title }}" name="{{ $element->title }}" />
-						            </figure>				
+						            </figure>
+						            <hr />
+							        <div class="pb-3">
+							        	@foreach($element->tags as $tag)
+							        		<a class="btn btn-info" href="{{route('tags.show', $tag->slug)}}">
+										    	{!! $tag->title !!}
+										    </a>
+										@endforeach
+							        </div>		
 				            	</div>
 								<div class="col-md-8">
-							      	<div class="row">
-									    <dl class="dl-horizontal">
-									    	<h3><dt>Post Name:</dt>
-											<dd>{!! $element->title !!}</dd></h3>
-
-									        <dt>Post subtitle:</dt>
-									        <dd class="pb-3">{{ $element->subtitle}}</dd>
-
-									        <dt>Subcategory:</dt>
-									        <dd class="pb-3">
-									        	<a href="{{route('postcategories.show', $element->postcategory->slug)}}">
-									        	{{ $element->postcategory->title}}
-										        </a>
-										    </dd>
-
-									        <dt>Author</dt>
-									        <dd class="pb-3">
-									        	<a href="{{route('profiles.show', $element->profile->slug)}}">
-									        		{!! $element->profile->title !!}
-									        	</a>
-									        </dd>
-
-									        <dt>Status</dt>
-									        <dd class="pb-3">{!! $element->statuses[0]->status !!}</dd>
-
-									        <dt>Registered at:</dt>
-									        <dd class="pb-3">{{ $element->created_at}}</dd>
-
-									        <dt>Likes</dt>
-									        <dd class="pb-3">{{ $element->likes}}</dd>
-
-									        <dt>Body</dt>
-									        <dd class="pb-3">{!! $element->body !!}</dd>
-
-									        <dt>Tags</dt>
-									        <dd class="pb-3">
-									        	@foreach($element->tags as $tag)
-									        		<a class="btn btn-info" href="{{route('tags.show', $tag->slug)}}">
-												    	{!! $tag->title !!}
-												    </a>
-												@endforeach
-									        </dd>
-									    </dl>
-							         </div>		            
+							      	{!! $element->body !!}	            
 						        </div>
 					        </div>	
 							</div>
 						</div>
 			       <div class="col-md-8 col-md-offset-4"><hr />
 						<h3>Your Comment</h3>		
-		            	{!! Form::open(['route' => ['comments.create', $element->slug], 'method' => 'POST']) !!}
+		            	{!! Form::open(['route' => ['comments.tocomment', $element->slug], 'method' => 'POST']) !!}
 				        {!!Form::textarea('body', null, array('id' => 'summernote','class' => 'form-control'))!!} 
 				         {!!Form::submit('Your Answer', array('class' => 'mt-5 btn btn-success btn-block', 'onclick' => 'clearform()')) !!}
 			             {!!Form::close() !!} 
 
-								@if(count($element->comments) > 0)
-						         	@foreach ($element->comments->reverse() as $comment)
-						         		<div class="panel mt-5">
-										  	<div class="panel-header">
-												  	@if($comment->profile->image)
-									               		<img height="50" class="img-circle mr-3" src="{{URL::to('/images/' . $comment->profile->image)}}" alt="{{ $element->title }}" name="{{ $element->title }}">
-									               	@else	
-									               		<i class="far fa-user fa-3x"></i>
-										            @endif 
-										            <a href="{{route('profiles.show', $comment->profile->slug )}}">{!! $comment->profile->title !!}</a>
-											    	{!! $comment->created_at->diffForHumans() !!}
-										  		<div class="small pull-right">		            
+						@if(count($element->comments) > 0)
+			         	@foreach ($element->comments->reverse() as $comment)
+			         		<hr />
+						  	<div class="row">
+							  	<div class="col-md-3">
+								  	@if($comment->profile->image)
+					               		<img height="50" class="img-circle mr-3" src="{{URL::to('/images/' . $comment->profile->image)}}" alt="{{ $element->title }}" name="{{ $element->title }}">
+					               	@else	
+					               		<i class="far fa-user fa-3x"></i>
+						            @endif 
+						            <br />
+						            <a href="{{route('profiles.show', $comment->profile->slug )}}">{!! $comment->profile->title !!}</a>
+						            <hr />
+							    	{!! $comment->created_at->diffForHumans() !!}
+							  		
+							  	</div>
+							  	<div class="col-md-9">
+							    	{!! $comment->body !!}
+							    	<div class="panel-footer">
+							    		<div class="row">		            
+								    		<div class="col-md-12">		            
+									    		<div class="pull-left small">		            
 											    	{!! Form::open(['route' => ['comments.destroy', $comment->id], 'method' => 'DELETE']) !!}
 
-													{!! Form::submit('Delete', ['class' => 'btn btn-block btn-danger']) !!}
+													{!! Form::submit('Delete', ['class' => 'btn btn-sm btn-secondary']) !!}
 
 													{!! Form::close() !!}
 											  	</div>
+											  	<div class="pull-right small">
+											  		@if($comment->is_like_by_auth_user())
+											    		<a href="{{route('comments.unlike', $comment->id)}}" class="btn btn-xs btn-secondary">
+											    		<i class="fa fa-thumbs-down"></i>
+											    		<span class="badge">{{ $comment->likes->count() }}</span>
+											    		</a>
+											    	@else
+											    		<a href="{{route('comments.like', $comment->id)}}" class="btn btn-xs btn-secondary">
+											    		<i class="fa fa-thumbs-up"></i>
+											    		<span class="badge">{{ $comment->likes->count() }}</span>
+											    		</a>
+											    	@endif
+											  	</div>
 										  	</div>
-										  	<div class="panel-body">
-										    	{!! $comment->body !!}
-										  	</div>
+									  	</div>
+							    	</div>
+							  	</div>
+						  	</div>
 
-										</div>
-
-						            @endforeach 
-								@else
-								<div class="col-md-12 pt-5"><h3>No replies to: {!! $element->title !!}</h3></div>
-								@endif
+			            @endforeach 
+						@else
+						<div class="col-md-12 pt-5"><h3>No replies to: {!! $element->title !!}</h3></div>
+						@endif
 		            </div>
 
 					@else <h2>{!! $user_name !!} does not have a post</h2>

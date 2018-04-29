@@ -7,6 +7,10 @@ use App\Http\Requests\CommentRequest;
 use App\Http\Requests\ReplyRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Profile;
+use App\Comment;
+use App\Post;
+use App\Like;
+use Session;
 
 class PostCommentsController extends Controller
 {
@@ -36,27 +40,30 @@ class PostCommentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CommentRequest $request)
+    public function tocomment(CommentRequest $request, $slug)
     {
+        if($request->body) {
+            $user = Auth::user();
+            $profile = Profile::where('user_id', $user->id)->first();
+            $post = Post::where('slug', $slug)->first();
+            $comment = Comment::create([
+        
+                'profile_id'    => Auth::user()->id,
+                'post_id'       => $post->id,     
+                'body'          => $request->body,            
+      
+           ]);   
 
-        $user = Auth::user();
-        $profile = Profile::where('user_id', $user->id)->first();
+            $page_name = 'comments';
 
-        $comment = comment::create([
-    
-            'profile_id'    => Auth::user()->id,
-            'post_id'         => $request->title,
-            'slug'          => str_slug($request->title, '-'),      
-            'body'          => $request->body,            
-  
-       ]);   
+            Session::flash('success', 'Comment successfully created!');
+            return redirect()->back();
 
 
-        $page_name = 'comments';
-
-        Session::flash('success', 'Comment successfully created!');
-     
-        return redirect()->route('comments.show', $comment->slug);
+        } else {
+            Session::flash('info', 'Your answer is empty, please try again.');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -101,6 +108,41 @@ class PostCommentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $comment = Comment::find($id);
+        $comment->delete();
+
+        Session::flash('success', 'Comment successfully deleted!');
+        return redirect()->back();
     }
+
+
+    public function like($id)
+    {
+        $comment = Comment::find($id);
+        $profile_id = Auth::user()->profile->id;
+
+        Like::create([
+            'likeable_id'   => $id,
+            'profile_id'    => $profile_id,
+            'likeable_type' => 'comments',
+            'like'          => 1,
+        ]);
+
+        Session::flash('success', 'Comment Liked!');
+        return redirect()->back();
+    }
+
+    public function unlike($id)
+    {
+        $user = Auth::user();
+        $profile = Profile::where('user_id', $user->id)->first();
+        $like = Like::where('likeable_id', $id)->where('profile_id', $profile->id)->where('likeable_type', 'comments')->first();
+
+        $like->delete();
+
+        Session::flash('success', 'Comment Unliked!');
+        return redirect()->back();
+    }
+
 }

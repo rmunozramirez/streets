@@ -52,15 +52,31 @@ class Profile extends Model
     {
         return $this->hasOne('App\Channel');
     }
+//blog
     public function posts()
     {
         return $this->hasMany('App\Post');
     }
-
+    public function comments()
+    {
+        return $this->hasMany('App\Discussion');
+    }
+    public function commentreplies()
+    {
+        return $this->hasMany('App\Reply');
+    }
+//forum
     public function discussions()
     {
         return $this->hasMany('App\Discussion');
     }
+    public function replies()
+    {
+        return $this->hasMany('App\Reply');
+    }
+
+
+
     public function is_banned($id)
     {
         $profile = Profile::find($id);
