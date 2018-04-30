@@ -9,11 +9,11 @@
             <h2>{!! $element->title !!}
             	<span class="ml-5">
             		@if($element->is_banned($element->id))
-			    		<a href="{{route('profiles.allow', $element->id)}}" class="btn btn-success">
+			    		<a href="{{route('profiles.allow', $element->id)}}" class="btn btn-success btn-sm">
 			    			<i class="fa fa-thumbs-up"></i> Remove BANN!
 			    		</a>
 			    	@else
-			    		<a href="{{route('profiles.ban', $element->id)}}" class="btn btn-danger">
+			    		<a href="{{route('profiles.ban', $element->id)}}" class="btn btn-danger btn-sm">
 			    			<i class="fa fa-ban"></i> BANN the user!
 			    		</a>
 			    	@endif
@@ -71,7 +71,7 @@
 							        <dt>Tags</dt>
 							        <dd class="pb-3">
 							        	@foreach($element->tags as $tag)
-							        		<a class="btn btn-info" href="{{route('tags.show', $tag->slug)}}">
+							        		<a class="btn btn-default btn-sm" href="{{route('tags.show', $tag->slug)}}">
 										    	{!! $tag->title !!}
 										    </a>
 										@endforeach
@@ -142,7 +142,7 @@
 									        <dt>Tags</dt>
 									        <dd class="pb-3">
 									        	@foreach($element->tags as $tag)
-									        		<a class="btn btn-info" href="{{route('tags.show', $tag->slug)}}">
+									        		<a class="btn btn-default btn-sm" href="{{route('tags.show', $tag->slug)}}">
 												    	{!! $tag->title !!}
 												    </a>
 												@endforeach

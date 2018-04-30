@@ -1,6 +1,7 @@
-@extends('dashboard.index')
-@section ('title', "| $element->title | Edit")
+@extends('userarea.index')
+@section ('title', "| $page_name")
 @section('content')
+
 <section id="content">
     <div class="wrapper wrapper-content animated fadeInUp">
         <div class="row wrapper border-bottom white-bg">

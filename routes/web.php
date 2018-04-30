@@ -6,6 +6,21 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::group(['prefix' => 'user', 'middleware' => 'auth'], function()  {
+
+//user area 
+	//User area home
+	Route::get('/{slug}', 'UserAreaController@index')->name('user');
+	Route::get('/{slug}/edit', 'UserAreaController@edit')->name('user.edit');
+
+	//User Area Profile
+	Route::get('/{slug}/profile', 'DashboardProfileController@user_show')->name('profile.user_show');
+	Route::get('/{slug}/profile/edit', 'DashboardProfileController@user_edit')->name('profile.user_edit');
+
+
+});
+
+
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()  {
 
 //admin 

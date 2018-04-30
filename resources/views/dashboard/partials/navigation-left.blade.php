@@ -34,16 +34,14 @@
                 </li>
 
                 <li>
-                    <a href=""><i class="fa fa-envelope"></i> <span class="nav-label">Forum </span></a>
+                    <a href=""><i class="fa fa-envelope"></i> <span class="nav-label">Forum </span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a href="{{route('discussions.index')}}">Discusssions</a></li>
-                        <li><a href="">Replies</a></li>
-
                     </ul>
                 </li>
 
                 <li>
-                    <a href=""><i class="fa fa-envelope"></i> <span class="nav-label">Blog </span></a>
+                    <a href=""><i class="fa fa-envelope"></i> <span class="nav-label">Blog </span><span class="fa arrow"></span></a></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a href="{{route('posts.index')}}">Posts</a></li>
                         <li><a href="{{route('comments.index')}}">Comments</a></li>
@@ -54,6 +52,13 @@
                 </li>
 
                 <li>
+                    <a href="{{route('status.index')}}"><i class="fa fa-users"></i>  <span class="nav-label">Statuses</span>  </a>
+                </li>
+                
+                <li>
+                    <a href="{{route('tags.index')}}"><i class="fa fa-users"></i>Tags</a>
+                </li>
+                <li>
                     <a href=""><i class="fa fa-envelope"></i> <span class="nav-label">Mailbox </span><span class="label label-warning pull-right">16/24</span></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a href="mailbox.html">Inbox</a></li>
@@ -63,12 +68,7 @@
                     </ul>
                 </li>
                 
-                <li>
-                    <a href="{{route('status.index')}}"><i class="fa fa-users"></i>  <span class="nav-label">Statuses</span>  </a>
-                </li>
-                <li>
-                    <a href="{{route('tags.index')}}"><i class="fa fa-users"></i> Post Tags</a>
-                </li>
+
                 <li>
                     <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">E-commerce</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">

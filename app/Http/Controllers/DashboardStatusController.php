@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\StatusRequest;
 use App\Tag;
+use App\Status;
 use App\Taggable;
 use Session;
 
@@ -30,7 +31,15 @@ class DashboardStatusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function create()
+    {
 
+        $all_ = Status::all();
+        $page_name =  'status';
+        $index = 'create';
+
+        return view('dashboard.status.create', compact('all_', 'page_name', 'index'));
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -38,10 +47,22 @@ class DashboardStatusController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StatusRequest $request)
     {
-        //
+
+        $status = Status::create([
+
+            'title'         =>  $request->title,
+            'slug'          =>  str_slug($request->title, '-'),
+
+       ]);
+
+        $status->save();
+
+        Session::flash('success', 'Tag successfully created!');
+        return redirect()->route('tags.show', $status->slug);
     }
+
 
     /**
      * Display the specified resource.
@@ -75,7 +96,7 @@ class DashboardStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StatusRequest $request, $id)
     {
         //
     }

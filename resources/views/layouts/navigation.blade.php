@@ -42,7 +42,7 @@
                                 <a class="dropdown-item" href="{{ route('dashboard') }}">
                                     Admin
                                 </a>
-                                <a class="dropdown-item" href="{{ route('profiles.index',  Auth::user()->slug ) }}">
+                                <a class="dropdown-item" href="{{route('user', Auth::user()->slug )}}">
                                     User area
                                 </a>
 

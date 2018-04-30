@@ -17,7 +17,7 @@
 
                 @yield('widgets')
 
-            @include('frontend.partials.content-footer')
+            @include('userarea.partials.content-footer')
         
         </main>  
 

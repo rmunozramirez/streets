@@ -15,6 +15,7 @@ class UserTableSeeder extends Seeder
 //user 1
         App\User::create ([
             'name'      =>  'Rafael Muñoz',
+            'slug'      =>  'rafael-munoz',
             'email'     =>  'rafaelmunoznl@yahoo.com',
             'password'  =>  bcrypt('Password'),
         ]);
@@ -41,6 +42,7 @@ De ascendencia itálica (por su madre), y púnica-bereber (por su padre), Severo
 //user 2
         App\User::create ([
             'name'      =>  'Enrique (Kike) Muñoz Botschka',
+            'slug'      =>  'enrique-kike-munoz-botschka',
             'email'     =>  'kike901@gmail.com',
             'password'  =>  bcrypt('Password'),
         ]);
@@ -64,6 +66,7 @@ De ascendencia itálica (por su madre), y púnica-bereber (por su padre), Severo
 //user 3
         App\User::create ([
             'name'      =>  'Amelie Muñoz Botschka',
+            'slug'      =>  'amelie-munoz-botschka',
             'email'     =>  'amelie@yahoo.com',
             'password'  =>  bcrypt('Password'),
         ]);
@@ -87,6 +90,7 @@ De ascendencia itálica (por su madre), y púnica-bereber (por su padre), Severo
 //user 4
         App\User::create ([
             'name'      =>  'Pamela Rodriguez',
+            'slug'      =>  'pamela-rodriguez',
             'email'     =>  'prdguez@yahoo.com',
             'password'  =>  bcrypt('Password'),
 
@@ -111,6 +115,7 @@ De ascendencia itálica (por su madre), y púnica-bereber (por su padre), Severo
 //user 5 
         App\User::create ([
             'name'      =>  'Arnaldo Schmidth',
+            'slug'      =>  'arnaldo-schmidth',
             'email'     =>  'a.schmidth@smidth-and-sons.com',
             'password'  =>  bcrypt('Password'),
 
@@ -135,6 +140,7 @@ De ascendencia itálica (por su madre), y púnica-bereber (por su padre), Severo
 //user 6   
         App\User::create ([
             'name'      =>  'Miguel Strogov',
+            'slug'      =>  'miguel-strogov',
             'email'     =>  'mstrogov@stroganov.ru',
             'password'  =>  bcrypt('Password'),
 
@@ -159,6 +165,7 @@ De ascendencia itálica (por su madre), y púnica-bereber (por su padre), Severo
 //user 7
         App\User::create ([
             'name'      =>  'Tomas Mann',
+            'slug'      =>  'tomas-mann',
             'email'     =>  't.lee@lee.cn',
             'password'  =>  bcrypt('Password'),
         ]);

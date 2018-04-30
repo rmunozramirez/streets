@@ -23,7 +23,7 @@
 								                <th>Profile</th>
 								                <th>User</th>
 								                <th>Role</th>
-								                <th>Date</th>
+								                <th>Joined</th>
 								            </tr>
 								         </thead>
 							         	<tbody>
@@ -69,7 +69,7 @@
 								                <th>Profile</th>
 								                <th>User</th>
 								                <th>Role</th>
-								                <th>Date</th>
+								                <th>Joined</th>
 								            </tr>
 								         </thead>
 							         	<tbody>
@@ -115,7 +115,8 @@
 								                <th>Profile</th>
 								                <th>User</th>
 								                <th>Role</th>
-								                <th>Date</th>
+								                <th>Joined</th>
+								                <th>Deleted at</th>
 								            </tr>
 								         </thead>
 							         	<tbody>
@@ -135,6 +136,7 @@
 						                			{{$pr->role->title}}</a>
 						                		</td>
 								              	<td>{{$pr->user->created_at}}</td>
+								              	<td>{{$pr->statuses[0]->updated_at}}</td>
 							              		<td>
 								               		<a type="button" class="col-md-6 btn btn-secondary" href="{{route('profiles.edit', $pr->slug)}}">Edit</a>
 									            	<div class="col-md-6">
