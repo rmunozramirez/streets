@@ -28,7 +28,7 @@ class UserAreaController extends Controller
         $page_name = 'Welcome ' .  Auth::user()->name;
         $element = User::find($id);
 
-        return view('userarea.users.show', compact('page_name', 'index', 'element'));
+        return view('user.users.show', compact('page_name', 'index', 'element'));
     }
 
     /**
@@ -39,14 +39,12 @@ class UserAreaController extends Controller
      */
     public function edit($slug)
     {
-        $all_roles = Role::pluck('title', 'id')->all();
-        $all_st = Status::pluck('status', 'id')->all();
-        $element = Profile::where('slug', $slug)->first();
-        $page_name = 'profiles';
-        $index = 'edit'; 
-        $all_ = Profile::all();
 
-          return view('userarea.user.edit', compact('element', 'page_name', 'all_roles', 'all_st', 'all_', 'index'));
+        $element = User::where('slug', $slug)->first();
+        $page_name = $element->name;
+        $index = 'edit'; 
+
+          return view('user.users.edit', compact('element', 'page_name', 'index'));
     }
 
     /**
@@ -56,9 +54,20 @@ class UserAreaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $slug)
     {
-        //
+
+        $input = $request->all();
+        $input['slug'] = str_slug($request->title, '-');
+        if ( $password = $request->file('password')) {
+            $input['password'] = Hash::make($request['password']);
+        }
+        $user = User::where('slug', $slug)->first();
+        $user->fill($input)->save();
+        $page_name = $user->name;
+
+        Session::flash('success', 'User successfully updated!');
+        return redirect()->route('user', $user->slug);
     }
 
     /**

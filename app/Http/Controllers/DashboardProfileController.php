@@ -88,29 +88,7 @@ class DashboardProfileController extends Controller
         return view('dashboard.profiles.show', compact('page_name', 'all_', 'index', 'element'));
     }
 
-    public function user_show($slug)
-    {
-        $slug = Auth::user()->profile->slug;
-        $index = 'index';
-        $page_name = 'Welcome ' .  Auth::user()->name;
-        $element = Profile::where('slug', $slug)->with('channel')->with('discussions')->first();
-
-        return view('userarea.profiles.show', compact('page_name', 'index', 'element'));
-    }
-
     public function edit($slug)
-    {
-        $all_roles = Role::pluck('title', 'id')->all();
-        $all_st = Status::pluck('status', 'id')->all();
-        $element = Profile::where('slug', $slug)->first();
-        $page_name = 'profiles';
-        $index = 'edit'; 
-        $all_ = Profile::all();
-
-          return view('userarea.profiles.edit', compact('element', 'page_name', 'all_roles', 'all_st', 'all_', 'index'));
-    }
-
-    public function user_edit($slug)
     {
         $all_roles = Role::pluck('title', 'id')->all();
         $all_st = Status::pluck('status', 'id')->all();

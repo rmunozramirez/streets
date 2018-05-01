@@ -12,11 +12,11 @@
 
 					    <li><a href="{{route('user', Auth::user()->slug )}}">Home</a></li>
 
-					    <li><a href="{{route('profile.user_show', Auth::user()->slug )}}">Profile</a></li>
+					    <li><a href="{{route('profile', Auth::user()->profile->slug )}}">Profile</a></li>
 
-					    <li><a href="">Chanel</a></li>
+					    <li><a href="{{route('channel', Auth::user()->profile->channel->slug )}}">Chanel</a></li>
 
-					    <li><a href="">Discussions</a></li>
+					    <li><a href="{{route('forum.index')}}">Discussions</a></li>
 
 					    <li><a href="photo/">Photos</a></li>
 

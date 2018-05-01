@@ -1,6 +1,5 @@
 <div id="page-wrapper" class="gray-bg" style="min-height: 750px;">
     <!-- Page wrapper -->
-    @include('layouts.navigation')
     <section id="content">
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row wrapper border-bottom white-bg">

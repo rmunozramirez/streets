@@ -23,20 +23,20 @@
             		<div class="panel">
 	            	 	<div class="panel-header"> 
 							<h3>
-								{!! $element->title!!}
-								@if($element->is_being_watched_by_auth_user())
-									<span class="pull-right">
-										<a class="btn btn-xs  btn-light" href="{{route('discussions.unwatch', $element->id)}}">
-											<i class="fa fa-eye-slash"></i> Unwatch
-										</a>
-									</span>
-								@else
-									<span class="pull-right">
-										<a class="btn btn-xs btn-light" href="{{route('discussions.watch', $element->id)}}">
-											<i class="fa fa-eye"></i> Watch
-										</a>
-									</span>
-								@endif
+							{!! $element->title!!}
+							@if($element->is_being_watched_by_auth_user())
+								<span class="pull-right">
+									<a class="btn btn-xs  btn-light" href="{{route('discussions.unwatch', $element->id)}}">
+										<i class="fa fa-eye-slash"></i> Unwatch
+									</a>
+								</span>
+							@else
+								<span class="pull-right">
+									<a class="btn btn-xs btn-light" href="{{route('discussions.watch', $element->id)}}">
+										<i class="fa fa-eye"></i> Watch
+									</a>
+								</span>
+							@endif
 							</h3>
 						</div>
 	            	 	<div class="panel-body"> 
@@ -63,7 +63,7 @@
 								</div>
 							</div>
 						</div>	
-					  	<div class="panel-footer">
+					  	<div class="panel-footer text-muted">
 					    	@if($element->is_like_by_auth_user())
 					    		<a href="{{route('discussions.unlike', $element->id)}}" class="btn btn-xs btn-danger">
 					    		<i class="fa fa-thumbs-down"></i>

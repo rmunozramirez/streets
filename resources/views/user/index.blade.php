@@ -7,7 +7,20 @@
     <div id="app">
 
         <main>
-            @yield('content')
+
+            <section id="inner-page" class="header">    
+            <!-- Navigation Section -->
+                @include('layouts.navigation')
+
+            </section>
+            
+            <section id="content">
+
+              @include ('user.partials.user_menu')
+              
+              @yield('content')
+
+            </section>
 
             @if($page_name != 'Home page' )
         
@@ -17,7 +30,7 @@
 
                 @yield('widgets')
 
-            @include('userarea.partials.content-footer')
+            @include('user.partials.content-footer')
         
         </main>  
 

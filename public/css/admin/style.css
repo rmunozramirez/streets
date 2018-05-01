@@ -8975,6 +8975,10 @@ body.md-skin {
   white-space: nowrap;
 }
 
+aside .sky-mega-menu li {
+  width: 100%;
+}
+
 .sky-mega-menu li > div::before {
   content: '';
   position: absolute;

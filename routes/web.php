@@ -9,13 +9,24 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function()  {
 
 //user area 
+
+	//User Area Channel
+	Route::resource('forum', 'UserDiscussionController');
+
 	//User area home
 	Route::get('/{slug}', 'UserAreaController@index')->name('user');
 	Route::get('/{slug}/edit', 'UserAreaController@edit')->name('user.edit');
+	Route::get('/{slug}/update', 'UserAreaController@update')->name('user.update');
 
 	//User Area Profile
-	Route::get('/{slug}/profile', 'DashboardProfileController@user_show')->name('profile.user_show');
-	Route::get('/{slug}/profile/edit', 'DashboardProfileController@user_edit')->name('profile.user_edit');
+	Route::get('profile/{slug}', 'UserProfileController@show')->name('profile');
+	Route::get('profile/{slug}/edit', 'UserProfileController@edit')->name('profile.edit');
+	Route::get('profile/{slug}/update', 'UserProfileController@update')->name('profile.update');
+
+	//User Area Channel
+	Route::get('channel/{slug}', 'UserChannelController@show')->name('channel');
+	Route::get('channel/{slug}/edit', 'UserChannelController@edit')->name('channel.edit');
+	Route::get('channel/{slug}/update', 'UserChannelController@update')->name('channel.update');
 
 
 });
@@ -26,6 +37,12 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()  {
 //admin 
 	//admin Dashboard
 	Route::get('/', 'DashboardController@index')->name('dashboard');
+
+	//admin Users
+	Route::get('users/trashed', 'UserController@trashed')->name('users.trashed');
+	Route::get('users/{slug}/restore', 'UserController@restore')->name('users.restore');
+	Route::delete('users/{slug}/kill', 'UserController@kill')->name('users.kill');
+	Route::resource('users', 'UserController');
 
 //admin Tags
 	Route::get('tags/trashed', 'TagController@trashed')->name('tags.trashed');

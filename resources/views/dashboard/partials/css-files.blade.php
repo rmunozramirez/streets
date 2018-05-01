@@ -1,4 +1,5 @@
   <link href="{{ asset('css/admin/animate.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/admin/sky-mega-menu.css') }}" rel="stylesheet">
   <link href="{{ asset('css/admin/toastr.css') }}" rel="stylesheet">
   <link href="{{ asset('css/admin/summernote.css') }}" rel="stylesheet">
   <link href="{{ asset('css/admin/bootstrap.min.css') }}" rel="stylesheet">
