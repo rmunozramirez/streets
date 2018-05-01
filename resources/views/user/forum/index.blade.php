@@ -28,31 +28,38 @@
 					         			@if($discussion->statuses[0]->status === 'active')
 					                	<tr>
 					                		<td>
-								               	<figure>
-									            	<img class="img-circle mr-2" height="50" width="50" src="{{URL::to('/images/' . $discussion->image)}}" alt="{{ $discussion->title }}" name="{{ $discussion->title }}"> {{$discussion->title}}
-									            </figure>	
+					                			<div class="row">
+					                				<div class="col-md-11">
+					                					<h3>
+						                					<a href="">
+						                						<img class="img-circle mr-2" height="50" width="50" src="{{URL::to('/images/' . $discussion->image)}}" alt="{{ $discussion->title }}" name="{{ $discussion->title }}"> {{$discussion->title}}
+						                					</a>
+						                					<span class="pull-right small pt-4">Author: <a href="">{{$discussion->profile->title}}</a></span>
+						                				</h3>
+					                				</div>
+					                			</div>
+					                			<div class="row">
+					                				<div class="col-md-5 col-md-offset-1 pt-3">
+					                					<span class="breadcrumb small">
+															Likes: <a href="">{{ $discussion->likes->count() }}</a>
+															Replies: <a href="">{{ $discussion->replies->count() }}</a>
+															
+															Created at: {{$discussion->created_at->diffForHumans() }}
+					                					</span>
+					                				</div>
+		
+					                				<div class="col-md-6 pt-3">
+					                				@foreach($discussion->tags as $tag)
+										        		<a class="btn btn-default btn-xs mr-1" href="{{route('tags.show', $tag->slug)}}">
+													    	{!! $tag->title !!}
+													    </a>
+													@endforeach    
+													</div>
+					                			</div>
+	
 					                		</td>
-					                		<td>
-					                			<div class="likes">
-										    		<h5>{{ $discussion->likes->count() }}</h5>
-										    		Likes
-										    	</div>
-					                		</td>
-					                		<td>
-					                			<div class="btn btn-basic">
-										    		<h5>{{ $discussion->replies->count() }}</h5>
-										    		Replies
-										    	</div>
-					                		</td>
-
-					                		<td>
-					                			<a href="{{route('profiles.show', $discussion->profile->slug)}}">
-					                				{{$discussion->profile->title}}
-					                			</a>
-					                		</td>
-				
-							              	<td>{{$discussion->created_at->format('m/d/Y')}}</td>
 					                	</tr>
+
 					                	@endif
 					            	@endforeach
 					         	</tbody>
