@@ -18,7 +18,8 @@ class CreateCommentRepliesTable extends Migration
             $table->integer('profile_id')->unsigned()->index();
             $table->integer('comment_id')->unsigned()->index();
             $table->text('body');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
     }
 

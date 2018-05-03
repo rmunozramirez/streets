@@ -52,6 +52,11 @@ class Profile extends Model
     {
         return $this->hasOne('App\Channel');
     }
+//images
+    public function images()
+    {
+        return $this->hasMany('App\Image');
+    }
 //blog
     public function posts()
     {
