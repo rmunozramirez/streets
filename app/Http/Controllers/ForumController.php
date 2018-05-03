@@ -33,16 +33,17 @@ class ForumController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $element = Discussion::where('slug', $slug)->first();
+        $page_name = 'discussions';
+        $all_ = Discussion::all();
+        $index = 'show';
+        $best_answer = $element->replies()->where('best_answer', 1)->first();
+
+        return view('forum.show', compact('element', 'page_name', 'all_', 'index', 'best_answer'));
     }
+
 
     /**
      * Show the form for editing the specified resource.

@@ -24,6 +24,12 @@
                     </ul>
                 </div>
             </li>  
+            <!-- frontend -->
+            <li>
+                <a href="{{route('landing')}}"><i class="fa fa-home"></i>Home page</a>
+            </li>
+            <!--/ dashboard -->
+              
             <!-- dashboard -->
             <li>
                 <a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i>Dashboard</a>

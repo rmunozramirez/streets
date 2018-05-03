@@ -8,7 +8,7 @@
 	        <div class="row wrapper border-bottom white-bg">
 				<div class="inside">
 		            <h2>Create a channel<span class="small pull-right">
-	                    	<i class="fa fa-chevron-left"></i> <a href="{{route('channels.index')}}">Back to channels</a>
+	                    	<i class="fa fa-chevron-left"></i> <a href="{{route('channel.index')}}">Back to channels</a>
 	                    </span>
 	                </h2>
 	                <hr>
@@ -24,7 +24,7 @@
 						
 							<div class="row">
 								<div class="card-body">        
-						            {!!Form::open(array('route' => 'channels.store', 'files' => true)) !!}   
+						            {!!Form::open(array('route' => 'channel.store', 'files' => true)) !!}   
 
 						            <div class="row">        
 							            <div class="col-md-4"> 

@@ -45,7 +45,7 @@ class UserDiscussionController extends Controller
         $page_name =  'discussions';
         $index = 'create';
 
-        return view('dashboard.discussions.create', compact('all_', 'page_name', 'all_st', 'index'));
+        return view('user.forum.create', compact('all_', 'page_name', 'all_st', 'index'));
     }
 
     /**
@@ -82,7 +82,7 @@ class UserDiscussionController extends Controller
 
         Session::flash('success', 'Discussion successfully created!');
      
-        return redirect()->route('discussions.show', $discussion->slug);
+        return redirect()->route('forum.show', $discussion->slug);
     }
 
     public function show($slug)
@@ -93,7 +93,7 @@ class UserDiscussionController extends Controller
         $index = 'show';
         $best_answer = $element->replies()->where('best_answer', 1)->first();
 
-        return view('dashboard.discussions.show', compact('element', 'page_name', 'all_', 'index', 'best_answer'));
+        return view('user.forum.show', compact('element', 'page_name', 'all_', 'index', 'best_answer'));
     }
 
     public function edit($slug)
@@ -103,7 +103,7 @@ class UserDiscussionController extends Controller
         $page_name = 'discussions';
         $index = 'edit'; 
 
-        return view('dashboard.discussions.edit', compact('element', 'page_name', 'all_', 'index'));
+        return view('user.forum.edit', compact('element', 'page_name', 'all_', 'index'));
 
     }
 
@@ -127,7 +127,7 @@ class UserDiscussionController extends Controller
 
         Session::flash('success', 'Discussion successfully updated!');
      
-        return redirect()->route('discussions.show', compact('slug', 'slug'));
+        return redirect()->route('forum.show', compact('slug', 'slug'));
     }
 
     public function destroy($slug)
@@ -149,7 +149,7 @@ class UserDiscussionController extends Controller
         $all_ = Discussion::all();
         $index = 'trash';
 
-        return view('dashboard.discussions.trashed', compact('element', 'slug', 'page_name', 'all_', 'index'));
+        return view('user.forum.trashed', compact('element', 'slug', 'page_name', 'all_', 'index'));
     }
 
     public function restore($slug)
@@ -158,7 +158,7 @@ class UserDiscussionController extends Controller
         $discussion->restore();
 
         Session::flash('success', 'Discussion successfully restored!');
-        return redirect()->route('discussions.trashed', $slug);
+        return redirect()->route('forum.trashed', $slug);
     }
 
     public function kill($slug)
@@ -169,11 +169,11 @@ class UserDiscussionController extends Controller
         } else {
             $user = Auth::user();
             Session::flash('info', 'Discussion does not exist!');
-            return redirect()->route('discussions.index', compact('user'));
+            return redirect()->route('forum.index', compact('user'));
         }
 
         Session::flash('success', 'Discussion pemanently deleted!');
-        return redirect()->route('discussions.trashed', $slug);
+        return redirect()->route('forum.trashed', $slug);
     }
 
     public static  function all_likes() {
@@ -202,6 +202,7 @@ class UserDiscussionController extends Controller
             $page_name = 'discussions';
             $all_ = Discussion::all();
             $index = 'show';
+            $best_answer = $element->replies()->where('best_answer', 1)->first();
 
             $reply = Reply::create([
 
@@ -222,7 +223,7 @@ class UserDiscussionController extends Controller
 
             Session::flash('success', 'Answer successfully created!');
             
-            return view('dashboard.discussions.show', compact('element', 'index', 'user',  'page_name', 'all_user_discussions', 'slug', 'all_'));
+            return view('user.forum.show', compact('element', 'index', 'user',  'page_name', 'all_user_discussions', 'slug', 'all_', 'best_answer'));
 
         } else {
             Session::flash('info', 'Your answer is empty, please try again.');
@@ -239,34 +240,6 @@ class UserDiscussionController extends Controller
 
         Session::flash('success', 'Reply successfully deleted!');
 
-        return redirect()->back();
-    }
-
-    public function like($id)
-    {
-        $discussion = Discussion::find($id);
-        $profile_id = Auth::user()->profile->id;
-
-        Like::create([
-            'likeable_id'   => $id,
-            'profile_id'    => $profile_id,
-            'likeable_type' => 'discussions',
-            'like'          => 1,
-        ]);
-
-        Session::flash('success', 'Discussion Liked!');
-        return redirect()->back();
-    }
-
-    public function unlike($id)
-    {
-        $user = Auth::user();
-        $profile = Profile::where('user_id', $user->id)->first();
-        $like = Like::where('likeable_id', $id)->where('profile_id', $profile->id)->where('likeable_type', 'discussions')->first();
-
-        $like->delete();
-
-        Session::flash('success', 'Discussion Unliked!');
         return redirect()->back();
     }
 

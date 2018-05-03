@@ -1,15 +1,15 @@
-@extends('dashboard.index')
+@extends('user.index')
 @section ('title', "| Create a discussion")
 @section('content')
-<div class="wrapper wrapper-content animated fadeInRight">
-    <div class="row wrapper border-bottom white-bg">
-    	<div class="inside">
+
+<div class="container left-right-shadow">
+	<div class="inside">
 			<h2>Create a discussion
                 <span class="small pull-right">
                 	<i class="fa fa-chevron-left"></i> <a href="{{route('discussions.index')}}">Back to discussions</a>
                 </span></h2>
             	<hr>
-			<div id="contenido"  class="card">
+			<div id="contenido">
 			    @if(count($errors) > 0)
 			        <ul class="list-group">
 			            @foreach($errors->all() as $error)
@@ -20,7 +20,7 @@
 
 		        <div class="row"> 
 					<div class="card-body">         
-				            {!!Form::open(array('route' => 'discussions.store', 'files' => true)) !!}         
+				            {!!Form::open(array('route' => 'forum.store', 'files' => true)) !!}         
 		            <div class="col-md-4"> 
 		            	<div class=" pt-5">
 			            	<i class="fa fa-image fa-4x"></i>
@@ -38,7 +38,7 @@
 				            </div>
 					      	<div class="col-md-12 pt-5">      
 					           	{!!Form::label('body', 'Discussion body:', array('class' => 'form-spacing-top'))!!}
-				                {!!Form::textarea('body', null, array('id' => 'summernote','class' => 'form-control', 'rows' => 9))!!}                       
+				                {!!Form::textarea('body', null, array('id' => 'summernote','class' => 'form-control', 'rows' => 9))!!}
 				            </div>
 				        </div>
 			            <div class="row">    
@@ -52,7 +52,7 @@
             </div>
 		</div>	
 	</div>
-</section>
+</div>
 
 	
 @endsection

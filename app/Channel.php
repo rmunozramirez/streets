@@ -16,6 +16,7 @@ class Channel extends Model
             'slug',
             'subtitle',
             'image',
+            'about',
 
 	];
 

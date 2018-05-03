@@ -42,7 +42,7 @@
 				        <dd class="pb-3">{!! $element->statuses[0]->status !!}</dd>
 
 				        <dt>Registered at:</dt>
-				        <dd class="pb-3">{{ $element->created_at}}</dd>
+				        <dd class="pb-3">{{ $element->created_at->format('l jS \of F Y')}}</dd>
 
 				        <dt>Likes</dt>
 				        <dd class="pb-3">{{ $element->likes}}</dd>
@@ -53,7 +53,7 @@
 				        <dt>Tags</dt>
 				        <dd class="pb-3">
 				        	@foreach($element->tags as $tag)
-				        		<a class="btn btn-info" href="{{route('tags.show', $tag->slug)}}">
+				        		<a class="btn btn-default btn-xs" href="{{route('tags.show', $tag->slug)}}">
 							    	{!! $tag->title !!}
 							    </a>
 							@endforeach

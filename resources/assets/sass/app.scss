@@ -439,6 +439,12 @@ h2.page-title {
 	padding-right: 10px;
 }
 
+.breadcrumb a:last-child {
+	border-right: none;
+	margin-right: 0;
+	padding-right: 0;
+}
+
 #replies .breadcrumb {
 	line-height: 40px;
 }
@@ -587,6 +593,7 @@ select.form-control {
 	background: rgba(248, 248, 248, 0.9) none repeat scroll 0 0;
 	display: block;
 	padding: 0 15px;
+	min-height: 158px;
 }
 
 .blue .section-call-to-action label {
@@ -692,7 +699,27 @@ select.form-control {
 // 	-ms-animation-timing-function: linear;
 // }
 
-.likes {
-  text-align: center;
-  border: 1px solid #dedede;
+.replies {
+	display: block;
+	text-align: center;
+	font-size: 25px;
+	font-weight: bold;
+	padding-top: 8px;
+	color: #fff;
+	background-color: #2da5da !important;
+	border: #fff;
+	line-height: 60px;
+	width: 60px;
+	border-radius: 4px;
+}
+
+.answers {
+	width: 60px;
+	text-transform: uppercase;
+}
+
+
+.nav li a img {
+	margin-top: -15px;
+	margin-right: 10px;
 }

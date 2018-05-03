@@ -31,7 +31,13 @@ class UserChannelController extends Controller
      */
     public function create()
     {
-        //
+
+        $all_sub = Subcategory::pluck('title', 'id')->all();
+        $all_ = Channel::all();
+        $page_name =  'channels';
+        $index = 'create';
+
+        return view('user.channels.create', compact('all_', 'page_name', 'all_st', 'all_sub', 'index'));
     }
 
     /**
@@ -40,9 +46,35 @@ class UserChannelController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ChannelRequest $request)
     {
-        //
+       $file = $request->file('image');
+        $name = time() . '-' . $file->getClientOriginalName();
+        $file->move('images', $name);
+
+        $user = Auth::user();
+        $profile = Profile::where('user_id', $user->id)->first();
+
+        $channel = Channel::create([
+
+            'subcategory_id' => $request->subcategory_id,
+            'profile_id'    =>  $profile->id, 
+            'title'         =>  $request->title,
+            'slug'          =>  str_slug($request->title, '-'),      
+            'subtitle'      =>  $request->subtitle,                
+            'about'         =>  $request->about,            
+            'image'         =>  $name,
+
+       ]);
+
+        $channel->save();
+
+        $type =  'channels';
+        $id = $channel->id;
+        $status = (new Status)->create_status($id, $type);
+
+        Session::flash('success', 'Channel successfully created!');
+        return redirect()->route('channel', $channel->slug);
     }
 
     public function show($slug)
@@ -69,6 +101,7 @@ class UserChannelController extends Controller
 
     public function update(ChannelRequest $request, $slug)
     {
+
         $input = $request->all();
         $input['slug'] = str_slug($request->title, '-');
 

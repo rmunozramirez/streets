@@ -1,6 +1,6 @@
 <?php
 
-Route::get('/', 'HomeController@landing');
+Route::get('/', 'HomeController@landing')->name('landing');
 
 Auth::routes();
 
@@ -11,22 +11,31 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth'], function()  {
 //user area 
 
 	//User Area Channel
+	Route::get('forum/trashed', 'UserDiscussionController@trashed')
+	->name('forum.trashed');
+	Route::get('forum/{slug}/restore', 'UserDiscussionController@restore')
+	->name('forum.restore');
+	Route::delete('forum/{slug}/kill', 'UserDiscussionController@kill')
+	->name('forum.kill');
+	Route::post('forum/{slug}', 'UserDiscussionController@reply')->name('forum.reply');
+	Route::delete('forum/{slug}/reply/destroy', 'UserDiscussionController@r_destroy')->name('forum.r_destroy');
 	Route::resource('forum', 'UserDiscussionController');
 
 	//User area home
 	Route::get('/{slug}', 'UserAreaController@index')->name('user');
 	Route::get('/{slug}/edit', 'UserAreaController@edit')->name('user.edit');
-	Route::get('/{slug}/update', 'UserAreaController@update')->name('user.update');
+	Route::patch('/{slug}/update', 'UserAreaController@update')->name('user.update');
 
 	//User Area Profile
 	Route::get('profile/{slug}', 'UserProfileController@show')->name('profile');
 	Route::get('profile/{slug}/edit', 'UserProfileController@edit')->name('profile.edit');
-	Route::get('profile/{slug}/update', 'UserProfileController@update')->name('profile.update');
+	Route::patch('profile/{slug}/update', 'UserProfileController@update')->name('profile.update');
 
 	//User Area Channel
 	Route::get('channel/{slug}', 'UserChannelController@show')->name('channel');
 	Route::get('channel/{slug}/edit', 'UserChannelController@edit')->name('channel.edit');
-	Route::get('channel/{slug}/update', 'UserChannelController@update')->name('channel.update');
+	Route::patch('channel/{slug}/update', 'UserChannelController@update')->name('channel.update');
+	Route::get('channel/{slug}/create', 'UserChannelController@create')->name('channel.create');
 
 
 });
@@ -131,7 +140,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()  {
 	->name('discussions.restore');
 	Route::delete('discussions/{slug}/kill', 'DashboardDiscussionsController@kill')
 	->name('discussions.kill');
-		Route::get('discussions/{id}/like', 'DashboardDiscussionsController@like')->name('discussions.like');
+	Route::get('discussions/{id}/like', 'DashboardDiscussionsController@like')->name('discussions.like');
 	Route::get('discussions/{id}/unlike', 'DashboardDiscussionsController@unlike')->name('discussions.unlike');
 	Route::post('discussions/{slug}', 'DashboardDiscussionsController@reply')->name('discussions.reply');
 	Route::delete('discussions/{slug}/reply/destroy', 'DashboardDiscussionsController@r_destroy')->name('discussions.r_destroy');

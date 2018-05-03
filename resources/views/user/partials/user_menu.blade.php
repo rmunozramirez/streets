@@ -7,10 +7,10 @@
 				<div class="col-md-9">
 
 					<ul class="nav navbar-nav visible-md visible-lg site_menu built" data-component="menu">
-					<span>
-						<img height="50" class="img-circle pull-left" src="{{URL::to('/images/' . Auth::user()->profile->image)}}" alt="{{ Auth::user()->name }}" name="{{ Auth::user()->name }}" /></span>
+						<li><a href="{{route('user', Auth::user()->slug )}}">
+							<img height="50" class="img-circle pull-left" src="{{URL::to('/images/' . Auth::user()->profile->image)}}" alt="{{ Auth::user()->name }}" name="{{ Auth::user()->name }}" />
 
-					    <li><a href="{{route('user', Auth::user()->slug )}}">Home</a></li>
+					    Home</a></li>
 
 					    <li><a href="{{route('profile', Auth::user()->profile->slug )}}">Profile</a></li>
 
@@ -23,8 +23,6 @@
 					    <li><a href="event/">Events</a></li>
 
 					    <li><a href="marketplace/">Marketplace</a></li>
-
-					    <li><a href="groups/">Groups</a></li>
 
 					</ul>
 				</div>

@@ -1,18 +1,16 @@
-@extends('dashboard.index')
+@extends('user.index')
 @section ('title', "| $element->title | Edit")
 @section('content')
 
-
-<div class="wrapper wrapper-content animated fadeInRight">
-    <div class="row wrapper border-bottom white-bg">
-		<div class="inside">
+<div class="container left-right-shadow">
+	<div class="inside">
 			<h2>{!! $element->title !!} 
                 <span class="small pull-right">
                 	<i class="fa fa-chevron-left"></i> <a class="small-link" href="{{route('discussions.index')}}">Back to discussions</a>
                  	<i class="fa fa-pencil"></i> Edit	
                 </span></h2>
             	<hr>
-		    <div id="contenido"  class="card">
+		    <div id="contenido">
 			    @if(count($errors) > 0)
 			        <ul class="list-group">		        
 			            @foreach($errors->all() as $error)
@@ -21,7 +19,7 @@
 			        </ul>
 			    @endif
 				<div class="card-body">        
-        		{!! Form::model($element, ['method'=>'PATCH', 'action'=> ['DashboardDiscussionsController@update', $element->slug ],'files'=>true]) !!} 
+        		{!! Form::model($element, ['method'=>'PATCH', 'action'=> ['UserDiscussionController@update', $element->slug ],'files'=>true]) !!} 
 		            <div class="row">        
 			            <div class="col-md-4"> 
 			            	<figure>
@@ -31,7 +29,7 @@
 				                {!!Form::label('image', 'Upload a Featured Image') !!}
 				                {!!Form::file('image', null, array('class' => 'form-control', 'required' => ''))!!}
 			            	</div>  
-			            	<hr>
+
 			            </div>
 	  
 		            	<div class="col-md-8"> 
@@ -53,7 +51,6 @@
 		            </div>        
 			    </div>
 			</div>
-		</div>
 	</div>
 </div>
 
