@@ -8,20 +8,11 @@
 
         <main>
             @yield('content')
-
-            @if(isset($page_name))
-
-              @if($page_name != 'Home page' )
-          
-                  @include('frontend.partials.bottomsection-inner') 
-
-               @endif
             
-
                 @yield('widgets')
 
             @include('frontend.partials.content-footer')
-         @endif
+        
         </main>  
 
         @include('frontend.partials.footer')   

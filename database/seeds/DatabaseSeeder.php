@@ -14,13 +14,13 @@ class DatabaseSeeder extends Seeder
         $this->call(UserTableSeeder::class);
         $this->call(RolesTableSeeder::class);
         $this->call(StatusTableSeeder::class);
-        $this->call(ChannelTableSeeder::class);
-        $this->call(SubcategoriesTableSeeder::class);
-        $this->call(CategoriesTableSeeder::class);
-        $this->call(PostcategoriesTableseeder::class);          
-        $this->call(PagesTableSeeder::class);  
-        $this->call(PostsTableSeeder::class);
-        $this->call(DiscussionTableSeeder::class);
-        $this->call(TagsTableSeeder::class);
+        // $this->call(ChannelTableSeeder::class);
+        // $this->call(SubcategoriesTableSeeder::class);
+        // $this->call(CategoriesTableSeeder::class);
+        // $this->call(PostcategoriesTableseeder::class);          
+        // $this->call(PagesTableSeeder::class);  
+        // $this->call(PostsTableSeeder::class);
+        // $this->call(DiscussionTableSeeder::class);
+        // $this->call(TagsTableSeeder::class);
     }
 }

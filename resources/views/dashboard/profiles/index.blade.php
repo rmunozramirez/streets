@@ -33,7 +33,11 @@
 						                		<td>
 													<a href="{{route('profiles.show', $pr->slug)}}">
 										               	<figure>
-											            	<img height="50" width="50" src="{{URL::to('/images/' . $pr->image)}}" alt="{{ $pr->title }}" name="{{ $pr->title }}">
+										               		@foreach($pr->images as $image)
+										               		@if($image->imageable_type === 'profiles')
+											            	<img height="50" width="50" src="{{URL::to('/images/' . $image->identifier)}}" alt="{{ $pr->title }}" name="{{ $pr->title }}">
+											            	@endif
+											            	@endforeach
 											            	<span class="pl-5"> {{$pr->title}}</span>
 											            </figure>
 						                			</a>

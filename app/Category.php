@@ -31,6 +31,11 @@ class Category extends Model
         return $this->morphMany('App\Status', 'statusable');
     }
 
+    public function images()
+    {
+        return $this->morphMany('App\Image', 'imageable');
+    }
+
     public function subcategories()
     {
         return $this->hasMany('App\Subcategory');

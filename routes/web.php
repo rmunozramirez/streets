@@ -66,6 +66,12 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()  {
 //admin Roles
 	Route::resource('roles', 'DashboardRolesController');
 
+//admin Images
+	Route::get('images/trashed', 'DashboardImagesController@trashed')->name('images.trashed');
+	Route::get('images/{slug}/restore', 'DashboardImagesController@restore')->name('images.restore');
+	Route::delete('images/{slug}/kill', 'DashboardImagesController@kill')->name('images.kill');
+	Route::resource('images', 'DashboardImagesController');
+
 //admin Profiles
 	Route::get('profiles/{id}/allow', 'DashboardProfileController@allow')->name('profiles.allow');
 	Route::get('profiles/{id}/ban', 'DashboardProfileController@ban')->name('profiles.ban');

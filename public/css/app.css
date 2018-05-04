@@ -11106,3 +11106,41 @@ select.form-control {
   margin-right: 10px;
 }
 
+/*--------------------------------------------------------------
+3. - Images section
+--------------------------------------------------------------*/
+
+.the_thumbnail {
+  position: relative;
+  width: 130px;
+  margin: 2px;
+  height: 200px;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  max-width: 100%;
+  opacity: 0;
+  -webkit-transition: .5s ease;
+  transition: .5s ease;
+  background-color: #000;
+  z-index: 600;
+}
+
+.image {
+  opacity: 1;
+  display: block;
+  width: 130px;
+  height: 200px;
+  -webkit-transition: .5s ease;
+  transition: .5s ease;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  margin: 2px;
+}
+

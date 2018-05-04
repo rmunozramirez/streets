@@ -26,7 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $page_name = 'Home page';
+        return view('home', compact('page_name'));
     }
 
     /**

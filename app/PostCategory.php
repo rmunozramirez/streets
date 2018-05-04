@@ -22,6 +22,11 @@ class Postcategory extends Model
         return $this->morphMany('App\Status', 'statusable');
     }
 
+    public function images()
+    {
+        return $this->morphMany('App\Image', 'imageable');
+    }
+        
     public function posts()
     {
         return $this->hasMany('App\Post');

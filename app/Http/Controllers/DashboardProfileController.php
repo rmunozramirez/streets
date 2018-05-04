@@ -10,6 +10,7 @@ use App\Discussion;
 use App\Channel;
 use App\Status;
 use App\Role;
+use App\Image;;
 use Session;
 
 class DashboardProfileController extends Controller
@@ -20,12 +21,12 @@ class DashboardProfileController extends Controller
 
         $all_roles = Role::pluck('title', 'id')->all();
         $profiles = Profile::orderBy('created_at', 'asc')->paginate(4);
-        $all_ = Profile::with('statuses')->get();
+        $all_ = Profile::with('statuses')->with('images')->get();
         $trashed_pr = Profile::onlyTrashed()->get();
         $page_name = 'profiles';
         $index = 'yes';
 
-       return view('dashboard.profiles.index', compact('all_roles', 'profiles', 'page_name', 'all_', 'trashed_pr', 'status', 'index'));
+       return view('dashboard.profiles.index', compact('all_roles', 'profiles', 'page_name', 'all_', 'trashed_pr', 'status', 'index', 'images'));
     }
 
     public function create()
@@ -43,9 +44,6 @@ class DashboardProfileController extends Controller
     {
 
         $file = $request->file('image');
-        $name = time() . '-' . $file->getClientOriginalName();
-        $file->move('images', $name);
-
         $user = Auth::user();
 
         $profile = Profile::create([
@@ -56,7 +54,6 @@ class DashboardProfileController extends Controller
             'birthday'      => $request->birthday,
             'slug'          => str_slug($request->title, '-'),      
             'about'         => $request->about,
-            'image'         => $name,
             'web'           => $request->web,
             'facebook'      =>  $request->facebook,
             'googleplus'    =>  $request->googleplus,
@@ -64,13 +61,14 @@ class DashboardProfileController extends Controller
             'linkedin'      =>  $request->linkedin,
             'youtube'       =>  $request->youtube,
 
-       ]);   
+       ]);
 
         $profile->save();
 
         $type =  'profiles';
         $id = $profile->id;
         Status::create_status($id, $type);
+        Image::create_image($profile, $file);
 
         Session::flash('success', 'Profile successfully created!');
      
@@ -84,8 +82,9 @@ class DashboardProfileController extends Controller
         $all_ = Profile::all();
         $index = 'show';
         $element = Profile::where('slug', $slug)->first();
+        $image = Image::where('imageable_id', $element->id)->where('imageable_type', 'profiles')->first();
 
-        return view('dashboard.profiles.show', compact('page_name', 'all_', 'index', 'element'));
+        return view('dashboard.profiles.show', compact('page_name', 'all_', 'index', 'element', 'image'));
     }
 
     public function edit($slug)
@@ -106,15 +105,19 @@ class DashboardProfileController extends Controller
         $input = $request->all();
         $input['slug'] = str_slug($request->title, '-');
 
-        if ( $file = $request->file('image')) {
-            $name = $file->getClientOriginalName()  . '_' . time();
-            $file->move('images', $name);
-            $input['image'] = $name;
-        }
         $profile = Profile::where('slug', $slug)->first();
         $profile->fill($input)->save();
-        $page_name = $profile;
+        $profile_id = $imageable_id = $profile->id;
+        $type = 'profiles';
+        if ( $file = $request->file('image')) {
+            $image = Image::where('imageable_type', 'profiles')->first();
+            if ($image) {
+                $image->forceDelete();
+            }
+            Image::create_image($profile_id, $file, $type, $imageable_id);
+        }
 
+        $page_name = $profile;
         Session::flash('success', 'Profile successfully updated!');
      
         return redirect()->route('profiles.show', $profile->slug);

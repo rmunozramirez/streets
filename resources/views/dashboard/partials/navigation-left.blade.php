@@ -182,7 +182,7 @@
                             <a href="#"><i class="fa fa-th-large"></i>Library</a>
                             <div class="grid-container3">
                                 <ul>
-                                    <li><a href="#"><i class="fa fa-picture"></i>Pictures</a></li>
+                                    <li><a href="{{route('images.index')}}"><i class="fa fa-picture"></i>Images</a></li>
                                     <li><a href="#"><i class="fa fa-film"></i>Video</a></li>
                                     <li><a href="#"><i class="fa fa-music"></i>Audio</a></li>
                                 </ul>

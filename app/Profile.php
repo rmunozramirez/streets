@@ -15,7 +15,6 @@ class Profile extends Model
 		'slug',
         'birthday', 
         'about',
-        'image',
         'likes',            
 		'web',
 		'facebook',

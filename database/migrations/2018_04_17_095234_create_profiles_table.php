@@ -21,7 +21,6 @@ class CreateProfilesTable extends Migration
             $table->string('slug')->nullable();
             $table->date('birthday')->nullable();
             $table->text('about')->nullable();
-            $table->string('image')->default('user.png');
             $table->string('web')->nullable();
             $table->string('facebook')->nullable();
             $table->string('googleplus')->nullable();

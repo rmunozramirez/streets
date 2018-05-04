@@ -29,7 +29,7 @@
 					<div class="row">
 						<div class="col-md-4">
 			               <figure>
-				            	<img height="300" class="img-responsive" src="{{URL::to('/images/' . $element->image)}}" alt="{{ $element->name }}" name="{{ $element->name }}" />
+				            	<img height="300" class="img-responsive" src="{{URL::to('/images/' . $image->slug)}}" alt="{{ $element->name }}" name="{{ $element->name }}" />
 				            </figure>				
 		            	</div>
 						<div class="col-md-8">

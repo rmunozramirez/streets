@@ -23,6 +23,11 @@ class Page extends Model
         return $this->morphMany('App\Status', 'statusable');
     }
 
+    public function images()
+    {
+        return $this->morphMany('App\Image', 'imageable');
+    }
+    
     public function tags()
     {
         return $this->morphToMany('App\Tag', 'taggable');
