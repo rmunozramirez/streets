@@ -34,24 +34,33 @@
 							            </tr>
 							         </thead>
 							         <tbody>
-							         		@foreach ($all_ as $sub)
-								         		@if($sub->statuses[0]->status === 'active')
+							         		@foreach ($all_ as $element)
+								         		@if($element->statuses[0]->status === 'active')
 							            <tr>
 							               <td>
-							               		<img class="mr-4" height="80" width="80" src="{{URL::to('/images/' . $sub->image ) }}" alt="{{$sub->title}}" > 
-							               		<a href="{{route('subcategories.show', $sub->slug)}}">
-							               		{{$sub->title}}
-							               		</a>
+							               		@foreach($element->images as $image)
+					                    			@if($image->imageable_type === 'subcategories')
+										               <a href="{{route('subcategories.show', $element->slug)}}"><figure>
+											            	<img class="mr-4 img-circle" height="50" width="50"  src="{{URL::to('/images/' . $image->slug)}}" alt="{{ $element->name }}" name="{{ $element->name }}" />
+											            	{{$element->title}}
+											            </figure>
+											            </a>
+											        @else
+											        <div class="text-center">
+											        	<i class="fa fa-image fa-5x pb-4"></i><br>
+										            </div>
+										        	@endif
+										        @endforeach	
 							               	</td>
-							               <td><a href="{{route('categories.show', $sub->category->slug)}}">
-							               		{{$sub->category->title}}
+							               <td><a href="{{route('categories.show', $element->category->slug)}}">
+							               		{{$element->category->title}}
 							               		</a></td>
-							               <td>{{count($sub->channels)}}</td>
-							               <td>{{$sub->created_at}}</td>
+							               <td>{{count($element->channels)}}</td>
+							               <td>{{$element->created_at}}</td>
 							               <td>
-							               		<a type="button" class="col-md-6 btn btn-secondary" href="{{route('subcategories.edit', $sub->slug)}}">Edit</a>
+							               		<a type="button" class="col-md-6 btn btn-secondary" href="{{route('subcategories.edit', $element->slug)}}">Edit</a>
 								            	<div class="col-md-6">
-									            	{!! Form::open(['route' => ['subcategories.destroy', $sub->slug], 'method' => 'DELETE']) !!}
+									            	{!! Form::open(['route' => ['subcategories.destroy', $element->slug], 'method' => 'DELETE']) !!}
 													{!! Form::submit('Delete', ['class' => 'btn btn-block btn-danger']) !!}
 													{!! Form::close() !!}
 												</div>
@@ -80,24 +89,24 @@
 							            </tr>
 							         </thead>
 							         <tbody>
-							         		@foreach ($all_ as $sub)
-								         		@if($sub->statuses[0]->status === 'inactive')
+							         		@foreach ($all_ as $element)
+								         		@if($element->statuses[0]->status === 'inactive')
 							            <tr>
 							               <td>
-							               		<img class="mr-4" height="80" width="80" src="{{URL::to('/images/' . $sub->image ) }}" alt="{{$sub->title}}" > 
-							               		<a href="{{route('subcategories.show', $sub->slug)}}">
-							               		{{$sub->title}}
+							               		<img class="mr-4" height="80" width="80" src="{{URL::to('/images/' . $element->image ) }}" alt="{{$element->title}}" > 
+							               		<a href="{{route('subcategories.show', $element->slug)}}">
+							               		{{$element->title}}
 							               		</a>
 							               	</td>
-							               <td><a href="{{route('categories.show', $sub->category->slug)}}">
-							               		{{$sub->category->title}}
+							               <td><a href="{{route('categories.show', $element->category->slug)}}">
+							               		{{$element->category->title}}
 							               		</a></td>
-							               <td>{{count($sub->channels)}}</td>
-							               <td>{{$sub->created_at}}</td>
+							               <td>{{count($element->channels)}}</td>
+							               <td>{{$element->created_at}}</td>
 							               <td>
-							               		<a type="button" class="col-md-6 btn btn-secondary" href="{{route('subcategories.edit', $sub->slug)}}">Edit</a>
+							               		<a type="button" class="col-md-6 btn btn-secondary" href="{{route('subcategories.edit', $element->slug)}}">Edit</a>
 								            	<div class="col-md-6">
-									            	{!! Form::open(['route' => ['subcategories.destroy', $sub->slug], 'method' => 'DELETE']) !!}
+									            	{!! Form::open(['route' => ['subcategories.destroy', $element->slug], 'method' => 'DELETE']) !!}
 
 													{!! Form::submit('Delete', ['class' => 'btn btn-block btn-danger']) !!}
 

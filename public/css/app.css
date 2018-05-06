@@ -11139,6 +11139,7 @@ select.form-control {
   opacity: 1;
   display: block;
   width: 130px;
+  height: 130px;
   -webkit-transition: .5s ease;
   transition: .5s ease;
   -webkit-backface-visibility: hidden;

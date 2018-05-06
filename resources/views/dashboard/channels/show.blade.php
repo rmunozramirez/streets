@@ -17,12 +17,21 @@
 					<div id="contenido"  class="card">
 						<div class="card-body">
 						<div class="row">
-							<div class="col-md-4">
-				               <figure>
-					            	<img height="300" class="img-responsive" src="{{URL::to('/images/' . $element->image)}}" alt="{{ $element->title }}" name="{{ $element->title }}" />
-					            </figure>				
+							<div class="col-md-3">
+								@foreach($element->images as $image)
+	                    			@if($image->imageable_type === 'channels')
+						               <figure>
+							            	<img  class="img-responsive" src="{{URL::to('/images/' . $image->slug)}}" alt="{{ $element->name }}" name="{{ $element->name }}" />
+							            </figure>
+							        @else
+							        <div class="text-center">
+							        	<i class="fa fa-image fa-5x pb-4"></i><br>
+							        	<a class="btn btn-default btn-sm" href="{{route('channels.edit', $element->slug)}}"> Add a nice picture</a>
+						            </div>
+						        	@endif
+						        @endforeach					
 			            	</div>
-							<div class="col-md-8">
+							<div class="col-md-9">
 						      	<div class="row">
 								    <dl class="dl-horizontal">
 								    	<h3><dt>Channel Name:</dt>

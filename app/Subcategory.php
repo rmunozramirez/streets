@@ -15,7 +15,6 @@ class Subcategory extends Model
             'slug',
             'subtitle',
             'about',
-            'image',
 
 	];
 

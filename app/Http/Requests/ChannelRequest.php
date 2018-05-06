@@ -31,7 +31,6 @@ class ChannelRequest extends FormRequest
             'slug'          => 'string|max:255',      
             'subtitle'      => 'required|string|max:255',
             'about'         => 'required',            
-            'image'         => 'image',
         ];
     }
 }

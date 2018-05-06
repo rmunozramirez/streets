@@ -36,30 +36,38 @@
 								            </tr>
 								         </thead>
 								         <tbody>
-							         		@foreach ($all_ as $channel)
-								         		@if($channel->statuses[0]->status === 'active')
+							         		@foreach ($all_ as $element)
+								         		@if($element->statuses[0]->status === 'active')
 							                	<tr>
 							                		<td>
-														<a href="{{route('channels.show', $channel->slug)}}">
-											               	<figure>
-												            	<img height="50" width="50" src="{{URL::to('/images/' . $channel->image)}}" alt="{{ $channel->title }}" name="{{ $channel->title }}">
-												            	<span class="pl-5"> {{$channel->title}}</span>
-												            </figure>
+														<a href="{{route('channels.show', $element->slug)}}">
+									               		@foreach($element->images as $image)
+							                    			@if($image->imageable_type === 'channels')
+																<figure>
+													            	<img class="mr-4 img-circle" height="50" width="50"  src="{{URL::to('/images/' . $image->slug)}}" alt="{{ $element->name }}" name="{{ $element->name }}" />
+													            	{{$image->title}}
+													            </figure>
+													        @else
+													        <div class="text-center">
+													        	<i class="fa fa-image fa-5x pb-4"></i><br>
+												            </div>
+												        	@endif
+												        @endforeach	
 							                			</a>
 							                		</td>
-							                		<td><a href="{{route('subcategories.show', $channel->subcategory->slug)}}">
-							                			{{$channel->subcategory->title}}</a>
+							                		<td><a href="{{route('subcategories.show', $element->subcategory->slug)}}">
+							                			{{$element->subcategory->title}}</a>
 							                		</td>					                		
 							                		<td>
-							                			<a href="{{route('profiles.show', $channel->profile->slug)}}">
-								                			{{$channel->profile->title}}
+							                			<a href="{{route('profiles.show', $element->profile->slug)}}">
+								                			{{$element->profile->title}}
 								                		</a>
 							                		</td>
-									              	<td>{{$channel->created_at}}</td>
+									              	<td>{{$element->created_at}}</td>
 									               <td>
-									               		<a type="button" class="col-md-6 btn btn-secondary" href="{{route('channels.edit', $channel->slug)}}">Edit</a>
+									               		<a type="button" class="col-md-6 btn btn-secondary" href="{{route('channels.edit', $element->slug)}}">Edit</a>
 										            	<div class="col-md-6">
-											            	{!! Form::open(['route' => ['channels.destroy', $channel->slug], 'method' => 'DELETE']) !!}
+											            	{!! Form::open(['route' => ['channels.destroy', $element->slug], 'method' => 'DELETE']) !!}
 
 															{!! Form::submit('Delete', ['class' => 'btn btn-block btn-danger']) !!}
 
@@ -90,30 +98,30 @@
 								            </tr>
 								         </thead>
 								         <tbody>
-								         	@foreach ($all_ as $channel)
-								         		@if($channel->statuses[0]->status === 'inactive')
+								         	@foreach ($all_ as $element)
+								         		@if($element->statuses[0]->status === 'inactive')
 							                	<tr>
 							                		<td>
-														<a href="{{route('channels.show', $channel->slug)}}">
+														<a href="{{route('channels.show', $element->slug)}}">
 											               	<figure>
-												            	<img height="50" width="50" src="{{URL::to('/images/' . $channel->image)}}" alt="{{ $channel->title }}" name="{{ $channel->title }}">
-												            	<span class="pl-5"> {{$channel->title}}</span>
+												            	<img height="50" width="50" src="{{URL::to('/images/' . $element->image)}}" alt="{{ $element->title }}" name="{{ $element->title }}">
+												            	<span class="pl-5"> {{$element->title}}</span>
 												            </figure>
 							                			</a>
 							                		</td>
-							                		<td><a href="{{route('roles.show', $channel->subcategory->slug)}}">
-							                			{{$channel->subcategory->title}}</a>
+							                		<td><a href="{{route('roles.show', $element->subcategory->slug)}}">
+							                			{{$element->subcategory->title}}</a>
 							                		</td>					                		
 							                		<td>
-							                			<a href="{{route('profiles.show', $channel->profile->slug)}}">
-								                			{{$channel->profile->title}}
+							                			<a href="{{route('profiles.show', $element->profile->slug)}}">
+								                			{{$element->profile->title}}
 								                		</a>
 							                		</td>
-									              	<td>{{$channel->created_at}}</td>
+									              	<td>{{$element->created_at}}</td>
 									               <td>
-									               		<a type="button" class="col-md-6 btn btn-secondary" href="{{route('channels.edit', $channel->slug)}}">Edit</a>
+									               		<a type="button" class="col-md-6 btn btn-secondary" href="{{route('channels.edit', $element->slug)}}">Edit</a>
 										            	<div class="col-md-6">
-											            	{!! Form::open(['route' => ['channels.destroy', $channel->slug], 'method' => 'DELETE']) !!}
+											            	{!! Form::open(['route' => ['channels.destroy', $element->slug], 'method' => 'DELETE']) !!}
 
 															{!! Form::submit('Delete', ['class' => 'btn btn-block btn-danger']) !!}
 
@@ -144,30 +152,30 @@
 								            </tr>
 								         </thead>
 								         <tbody>
-								         	@foreach ($all_ as $channel)
-								         		@if($channel->statuses[0]->status === 'banned')
+								         	@foreach ($all_ as $element)
+								         		@if($element->statuses[0]->status === 'banned')
 							                	<tr>
 							                		<td>
-														<a href="{{route('channels.show', $channel->slug)}}">
+														<a href="{{route('channels.show', $element->slug)}}">
 											               	<figure>
-												            	<img height="50" width="50" src="{{URL::to('/images/' . $channel->image)}}" alt="{{ $channel->title }}" name="{{ $channel->title }}">
-												            	<span class="pl-5"> {{$channel->title}}</span>
+												            	<img height="50" width="50" src="{{URL::to('/images/' . $element->image)}}" alt="{{ $element->title }}" name="{{ $element->title }}">
+												            	<span class="pl-5"> {{$element->title}}</span>
 												            </figure>
 							                			</a>
 							                		</td>
-							                		<td><a href="{{route('roles.show', $channel->subcategory->slug)}}">
-							                			{{$channel->subcategory->title}}</a>
+							                		<td><a href="{{route('roles.show', $element->subcategory->slug)}}">
+							                			{{$element->subcategory->title}}</a>
 							                		</td>					                		
 							                		<td>
-							                			<a href="{{route('profiles.show', $channel->profile->slug)}}">
-								                			{{$channel->profile->title}}
+							                			<a href="{{route('profiles.show', $element->profile->slug)}}">
+								                			{{$element->profile->title}}
 								                		</a>
 							                		</td>
-									              	<td>{{$channel->created_at}}</td>
+									              	<td>{{$element->created_at}}</td>
 									               <td>
-									               		<a type="button" class="col-md-6 btn btn-secondary" href="{{route('channels.edit', $channel->slug)}}">Edit</a>
+									               		<a type="button" class="col-md-6 btn btn-secondary" href="{{route('channels.edit', $element->slug)}}">Edit</a>
 										            	<div class="col-md-6">
-											            	{!! Form::open(['route' => ['channels.destroy', $channel->slug], 'method' => 'DELETE']) !!}
+											            	{!! Form::open(['route' => ['channels.destroy', $element->slug], 'method' => 'DELETE']) !!}
 
 															{!! Form::submit('Delete', ['class' => 'btn btn-block btn-danger']) !!}
 

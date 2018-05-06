@@ -10,7 +10,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth'], function()  {
 
 //user area 
 
-	//User Area Channel
+	//User Area Forum
 	Route::get('forum/trashed', 'UserDiscussionController@trashed')
 	->name('forum.trashed');
 	Route::get('forum/{slug}/restore', 'UserDiscussionController@restore')
@@ -39,7 +39,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth'], function()  {
 	Route::get('channel/{slug}/store', 'UserChannelController@store')->name('channel.store');
 
 	//User Area Images
-	Route::get('image/{slug}', 'UserImagesController@show')->name('image.show');
+	Route::get('image/{slug}/show', 'UserImagesController@show')->name('image.show');
 	Route::get('image/{slug}/edit', 'UserImagesController@edit')->name('image.edit');
 	Route::patch('image/{slug}/update', 'UserImagesController@update')->name('image.update');
 	Route::get('image/{slug}/create', 'UserImagesController@create')->name('image.create');

@@ -22,7 +22,7 @@ class DashboardSubcategoriesController extends Controller
     public function index()
     {
 
-        $all_ = Subcategory::all();
+        $all_ = Subcategory::with('statuses')->with('images')->get();
         $trash_sub = Subcategory::onlyTrashed()->get();
         $page_name = 'subcategories';
         $index = 'yes';
@@ -64,8 +64,9 @@ class DashboardSubcategoriesController extends Controller
         $type =  'subcategories';
         $imageable_id = $id = $subcategory->id;
         $profile_id = 1;
+
         if ( $file = $request->file('image')) {
-            $image = Image::where('imageable_type', 'subcategories')->where('imageable_id', $subcategory->id)->first();
+            $image = Image::where('imageable_type', $type)->where('imageable_id', $subcategory->id)->first();
             if ($image) {
                 $image->forceDelete();
             }
@@ -122,15 +123,20 @@ class DashboardSubcategoriesController extends Controller
     {
         $input = $request->all();
         $input['slug'] = str_slug($request->title, '-');
+        $subcategory = Subcategory::where('slug', $slug)->first();
+        $subcategory->fill($input)->save();        
+        $type =  'subcategories';
+        $profile_id = 1;
+        $imageable_id = $id = $subcategory->id;
 
-        if( $file = $request->file('image')) {
-            $name = time() . '-' . $file->getClientOriginalName();
-            $file->move('images', $name);
-            $input['image'] = $name;
+        if ( $file = $request->file('image')) {
+            $image = Image::where('imageable_type', $type)->where('imageable_id', $subcategory->id)->first();
+            if ($image) {
+                $image->forceDelete();
+            }
+            Image::create_image($profile_id, $file, $type, $imageable_id);
         }
 
-        $subcategory = Subcategory::where('slug', $slug)->first();
-        $subcategory->fill($input)->save();
         $page_name = $subcategory->title;
 
         Session::flash('success', 'Subcategory successfully updated!');

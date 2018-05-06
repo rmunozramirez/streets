@@ -40,7 +40,6 @@
 								            </div>
 								        	@endif
 								        @endforeach
-
 						           </td>
 					               <td>{{$element->deleted_at}}</td>
 					               	<td>	<a href="{{route('categories.restore', $element->slug)}}">Restore</a></td>

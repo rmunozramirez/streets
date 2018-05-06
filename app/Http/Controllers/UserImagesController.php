@@ -18,13 +18,14 @@ class UserImagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($slug)
     {
+        $element = Profile::with('images')->where('slug', $slug)->first();
         $all_ = Image::all();
         $page_name = 'images';
         $index = 'yes';
 
-       return view('user.images.index', compact( 'page_name', 'all_', 'index'));
+       return view('user.images.index', compact( 'page_name', 'all_', 'index', 'element'));
     }
 
     /**

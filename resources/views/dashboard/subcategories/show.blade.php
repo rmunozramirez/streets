@@ -86,10 +86,18 @@
 				         	@foreach ($element->channels as $channel)	
 				            <tr>
 				               <td>
-				               		<img class="mr-4" height="80" width="80" src="{{URL::to('/images/' . $channel->image ) }}" alt="{{$channel->title}}" > 
-				               		<a href="{{route('channels.show', $channel->slug)}}">
-				               		{{$channel->title}}
-				               		</a>
+				               		@foreach($channel->images as $image)
+		                    			@if($image->imageable_type === 'channels')
+											<a href="{{route('channels.show', $channel->slug)}}">
+								            	<img class="mr-4 img-circle" height="50" width="50"  src="{{URL::to('/images/' . $image->slug)}}" alt="{{ $element->name }}" name="{{ $element->name }}" /> {{$channel->title}}
+								            </span>
+								        @else
+								        <div class="text-center">
+								        	<i class="fa fa-image fa-5x pb-4"></i>{{$channel->title}}	<br>
+							            </div>
+							        	@endif
+							        @endforeach
+							        
 				               	</td>
 				               	<td>{{$channel->statuses[0]->status}}</td>
 				               	<td>

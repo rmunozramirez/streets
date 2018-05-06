@@ -49,7 +49,12 @@
 							               <figure>
 								            	<img  class="img-circle img-responsive" src="{{URL::to('/images/' . $image->slug)}}" alt="{{ $element->name }}" name="{{ $element->name }}" />
 								            </figure>
-								        @endif
+								        @else
+								        <div class="text-center">
+								        	<i class="fa fa-image fa-5x pb-4"></i><br>
+								        	<a class="btn btn-default btn-sm" href="{{route('profiles.edit', $element->slug)}}"> Add a nice picture</a>
+							            </div>
+							        	@endif
 							        @endforeach				
 				            	</div>
 								<div class="col-md-9">

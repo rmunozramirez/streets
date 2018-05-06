@@ -6,7 +6,7 @@
 		<div class="inside">
     		<h2>All {!! $page_name !!}</h2><hr />
         	<div class="row">
-        		@foreach ($all_ as $image)
+        		@foreach ($element->images as $image)
 			      <div class="the_thumbnail">
 			           <img class="image" src="{{URL::to('/images/' . $image->slug ) }}" alt="{{$image->title}}" name="$image->title" >
 			            <div class="overlay text-center">

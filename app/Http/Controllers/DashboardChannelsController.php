@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ChannelRequest;
 use App\Profile;
 use App\Channel;
+use App\Image;
 use App\Subcategory;
 use App\Status;
 use App\Role;
@@ -29,45 +30,12 @@ class DashboardChannelsController extends Controller
 
     public function create()
     {
-
-        $all_st = Status::pluck('status', 'id')->all();
         $all_sub = Subcategory::pluck('title', 'id')->all();
         $all_ = Channel::all();
         $page_name =  'channels';
         $index = 'create';
 
-        return view('dashboard.channels.create', compact('all_', 'page_name', 'all_st', 'all_sub', 'index'));
-    }
-
-    public function store(ChannelRequest $request)
-    {
-        $file = $request->file('image');
-        $name = time() . '-' . $file->getClientOriginalName();
-        $file->move('images', $name);
-
-        $user = Auth::user();
-        $profile = Profile::where('user_id', $user->id)->first();
-
-        $channel = Channel::create([
-
-            'subcategory_id' => $request->subcategory_id,
-            'profile_id'    =>  $profile->id, 
-            'title'         =>  $request->title,
-            'slug'          =>  str_slug($request->title, '-'),      
-            'subtitle'      =>  $request->subtitle,                
-            'about'         =>  $request->about,            
-            'image'         =>  $name,
-
-       ]);
-
-        $channel->save();
-
-        $type =  'channels';
-        $id = $channel->id;
-        $status = (new Status)->create_status($id, $type);
-
-        Session::flash('success', 'Channel successfully created!');
-        return redirect()->route('channels.show', $channel->slug);
+        return view('dashboard.channels.create', compact('all_', 'page_name', 'all_sub', 'index'));
     }
 
     public function show($slug)
@@ -92,23 +60,60 @@ class DashboardChannelsController extends Controller
         return view('dashboard.channels.edit', compact('element', 'subcategories', 'page_name', 'all_', 'all_sub', 'index'));
     }
 
+    public function store(ChannelRequest $request)
+    {
+        $file = $request->file('image');
+        $user = Auth::user();
+        $profile = Profile::where('user_id', $user->id)->first();
+
+        $channel = Channel::create([
+            'subcategory_id' => $request->subcategory_id,
+            'profile_id'    =>  $profile->id, 
+            'title'         =>  $request->title,
+            'slug'          =>  str_slug($request->title, '-'),      
+            'subtitle'      =>  $request->subtitle,                
+            'about'         =>  $request->about,            
+       ]);
+
+        $channel->save();
+        $type =  'channels';
+        $imageable_id = $id = $channel->id;
+        $profile_id = 1;
+
+        if ( $file = $request->file('image')) {
+            $image = Image::where('imageable_type', $type)->where('imageable_id', $channel->id)->first();
+            if ($image) {
+                $image->forceDelete();
+            }
+            Image::create_image($profile_id, $file, $type, $imageable_id);
+        }
+        Status::create_status($id, $type);
+
+        Session::flash('success', 'Channel successfully created!');
+        return redirect()->route('channels.show', $channel->slug);
+    }
+
     public function update(ChannelRequest $request, $slug)
     {
         $input = $request->all();
         $input['slug'] = str_slug($request->title, '-');
+        $channel = Channel::where('slug', $slug)->first();
+        $channel->fill($input)->save();        
+        $type =  'channels';
+        $profile_id = 1;
+        $imageable_id = $id = $channel->id;
 
-        if( $file = $request->file('image')) {
-            $name = time() . '-' . $file->getClientOriginalName();
-            $file->move('images', $name);
-            $input['image'] = $name;
+        if ( $file = $request->file('image')) {
+            $image = Image::where('imageable_type', $type)->where('imageable_id', $channel->id)->first();
+            if ($image) {
+                $image->forceDelete();
+            }
+            Image::create_image($profile_id, $file, $type, $imageable_id);
         }
 
-        $channel = Channel::where('slug', $slug)->first();
-        $channel->fill($input)->save();
         $page_name = $channel->title;
 
         Session::flash('success', 'Channel successfully updated!');
-     
         return redirect()->route('channels.show', $channel->slug); 
     }
 

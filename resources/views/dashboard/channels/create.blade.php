@@ -25,7 +25,6 @@
 							<div class="row">
 								<div class="card-body">        
 						            {!!Form::open(array('route' => 'channels.store', 'files' => true)) !!}   
-
 						            <div class="row">        
 							            <div class="col-md-4"> 
 							            	<i class="fa fa-image fa-4x"></i>
