@@ -9028,3 +9028,58 @@ aside .sky-mega-menu li {
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
 }
+
+.the_thumbnail {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  margin: 2px;
+  float: left;
+
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  max-width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #000;
+  /*margin: 2px;*/
+}
+
+.the_thumbnail:hover .overlay{
+  opacity: 0.6;
+}
+
+.overlay a {
+  color: #fff;
+  text-transform: uppercase;
+  line-height: 130px;
+  margin: 0 auto;  
+}
+
+.image {
+  opacity: 1;
+  display: block;
+  width: 130px;
+  height: 130px;
+  transition: .5s ease;
+  backface-visibility: hidden;
+  
+}
+
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%)
+}

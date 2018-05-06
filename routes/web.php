@@ -36,7 +36,14 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth'], function()  {
 	Route::get('channel/{slug}/edit', 'UserChannelController@edit')->name('channel.edit');
 	Route::patch('channel/{slug}/update', 'UserChannelController@update')->name('channel.update');
 	Route::get('channel/{slug}/create', 'UserChannelController@create')->name('channel.create');
+	Route::get('channel/{slug}/store', 'UserChannelController@store')->name('channel.store');
 
+	//User Area Images
+	Route::get('image/{slug}', 'UserImagesController@show')->name('image.show');
+	Route::get('image/{slug}/edit', 'UserImagesController@edit')->name('image.edit');
+	Route::patch('image/{slug}/update', 'UserImagesController@update')->name('image.update');
+	Route::get('image/{slug}/create', 'UserImagesController@create')->name('image.create');
+	Route::get('image/{slug}/', 'UserImagesController@index')->name('image');
 
 });
 
@@ -78,6 +85,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()  {
 	Route::get('profiles/trashed', 'DashboardProfileController@trashed')->name('profiles.trashed');
 	Route::get('profiles/{slug}/restore', 'DashboardProfileController@restore')->name('profiles.restore');
 	Route::delete('profiles/{slug}/kill', 'DashboardProfileController@kill')->name('profiles.kill');
+	Route::delete('profiles/admin', 'DashboardProfileController@admin')->name('profiles.admin');
 	Route::resource('profiles', 'DashboardProfileController');
 
 //admin posts

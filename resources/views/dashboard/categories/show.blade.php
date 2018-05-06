@@ -15,11 +15,22 @@
 			    <div id="contenido"  class="card">
 					<div class="card-body">        
 			            <div class="row">
-				            <div class="col-md-4"> 
-				            	<img class="img-responsive"  src="{{URL::to('/images/' . $element->image ) }}" name="{{$element->title}}" alt="{{$element->title}}" >
-				            </div>
-		  
-			            	<div class="col-md-8"> 
+				            <div class="col-md-3">
+								@foreach($element->images as $image)
+	                    			@if($image->imageable_type === 'categories')
+						               <figure>
+							            	<img  class="img-responsive" src="{{URL::to('/images/' . $image->slug)}}" alt="{{ $element->name }}" name="{{ $element->name }}" />
+							            </figure>
+							        @else
+							        <div class="text-center">
+							        	<i class="fa fa-image fa-5x pb-4"></i><br>
+							        	<a class="btn btn-default btn-sm" href="{{route('profiles.edit', $element->slug)}}"> Add a nice picture</a>
+						            </div>
+						        	@endif
+						        @endforeach				
+			            	</div>
+	  
+			            	<div class="col-md-9"> 
 					            <dl class="dl-horizontal">
 							    	<h3><dt>Category Name:</dt>
 									<dd>{!! $element->title !!}</dd></h3>
@@ -38,11 +49,13 @@
 							        
 							        <dt>Tags</dt>
 							        <dd class="pb-3">
+							        	@if($element->tags)
 							        	@foreach($element->tags as $tag)
 							        		<a class="btn btn-info" href="{{route('tags.show', $tag->slug)}}">
 										    	{!! $tag->title !!}
 										    </a>
 										@endforeach
+										@endif
 							        </dd>
 							    </dl>	            		
 				            </div>
@@ -79,10 +92,22 @@
 				         	@foreach ($element->subcategories as $subcategory)	
 				            <tr>
 				               <td>
-				               		<img class="mr-4" height="80" width="80" src="{{URL::to('/images/' . $subcategory->image ) }}" alt="{{$subcategory->title}}" > 
-				               		<a href="{{route('subcategories.show', $subcategory->slug)}}">
-				               		{{$subcategory->title}}
-				               		</a>
+
+								@foreach($subcategory->images as $image)
+	                    			@if($image->imageable_type === 'subcategories')
+						               <a href="{{route('subcategories.show', $subcategory->slug)}}">
+						               	<img class="mr-4 img-circle" height="50" width="50"  src="{{URL::to('/images/' . $image->slug)}}" alt="{{ $element->name }}" name="{{ $element->name }}" />
+								            {{$subcategory->title}}
+					               		</a>
+							        @else
+							        <div class="text-center">
+							        	<i class="fa fa-image fa-5x pb-4"></i><br>
+							        	<a class="btn btn-default btn-sm" href="{{route('subcategories.edit', $element->slug)}}"> Add a nice picture</a>
+						            </div>
+						        	@endif
+						        @endforeach			
+				               		
+				               		
 				               	</td>
 				               <td>{{$subcategory->statuses[0]->status}}</td>
 				               <td>{{$subcategory->channels->count()}}</td>

@@ -37,7 +37,7 @@ class UserChannelController extends Controller
         $page_name =  'channels';
         $index = 'create';
 
-        return view('user.channels.create', compact('all_', 'page_name', 'all_st', 'all_sub', 'index'));
+        return view('user.channel.create', compact('all_', 'page_name', 'all_st', 'all_sub', 'index'));
     }
 
     /**

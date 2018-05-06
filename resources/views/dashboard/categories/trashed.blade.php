@@ -23,20 +23,30 @@
 					            </tr>
 					         </thead>
 					         <tbody>
-					         	@foreach ($element as $cat)
+					         	@foreach ($element as $element)
 					            <tr>
-					               <td><a href="{{route('categories.show', $cat->slug)}}">
-						               	<figure>
-							            	<img class="img-circle" height="50" src="{{URL::to('/images/' . $cat->image)}}" alt="{{ $cat->title }}" name="{{ $cat->title }}"><span class="pl-5"> {{$cat->title}}</span>
-							            </figure>
-						               	
-						               </a>
+					               <td>
+					               		@foreach($element->images as $image)
+			                    			@if($image->imageable_type === 'categories')
+								               <a href="{{route('categories.show', $element->slug)}}"><figure>
+									            	<img class="mr-4 img-circle" height="50" width="50"  src="{{URL::to('/images/' . $image->slug)}}" alt="{{ $element->name }}" name="{{ $element->name }}" />
+									            	{{$element->title}}
+									            </figure>
+									            </a>
+									        @else
+									        <div class="text-center">
+									        	<i class="fa fa-image fa-5x pb-4"></i><br>
+									        	<a class="btn btn-default btn-sm" href="{{route('profiles.edit', $element->slug)}}"> Add a nice picture</a>
+								            </div>
+								        	@endif
+								        @endforeach
+
 						           </td>
-					               <td>{{$cat->deleted_at}}</td>
-					               	<td>	<a href="{{route('categories.restore', $cat->slug)}}">Restore</a></td>
+					               <td>{{$element->deleted_at}}</td>
+					               	<td>	<a href="{{route('categories.restore', $element->slug)}}">Restore</a></td>
 					               <td>
 						            	<div class="col-md-6">
-							            	{!! Form::open(['route' => ['categories.kill', $cat->slug], 'method' => 'DELETE']) !!}
+							            	{!! Form::open(['route' => ['categories.kill', $element->slug], 'method' => 'DELETE']) !!}
 											{!! Form::submit('Delete', ['class' => 'btn btn-block btn-danger']) !!}
 											{!! Form::close() !!}
 										</div>

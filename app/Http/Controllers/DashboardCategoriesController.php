@@ -8,16 +8,11 @@ use App\Profile;
 use App\Category;
 use App\Status;
 use App\Role;
+use App\Image;
 use Session;
 
 class DashboardCategoriesController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $all_ = Category::all();
-
-    //     return $all_;
-    // }
 
     public function index()
     {
@@ -42,23 +37,28 @@ class DashboardCategoriesController extends Controller
     public function store(CategoriesRequest $request)
     {
         $file = $request->file('image');
-        $name = time() . '-' . $file->getClientOriginalName();
-        $file->move('images', $name);
-
         $category = Category::create([
 
             'title'             => $request->title,
             'subtitle'          => $request->subtitle,
             'slug'              => str_slug($request->title, '-'),
             'about'             => $request->about, 
-            'image'             => $name,      
 
        ]);   
 
         $category->save();
 
         $type =  'categories';
-        $id = $category->id;
+        $imageable_id = $id = $category->id;
+        $profile_id = 1;
+
+        if ( $file = $request->file('image')) {
+            $image = Image::where('imageable_type', 'categories')->where('imageable_id', $category->id)->first();
+            if ($image) {
+                $image->forceDelete();
+            }
+            Image::create_image($profile_id, $file, $type, $imageable_id);
+        }
         Status::create_status($id, $type);
 
         Session::flash('success', 'Category successfully created!');
@@ -68,7 +68,7 @@ class DashboardCategoriesController extends Controller
 
     public function show($slug)
     {
-        $element = Category::withCount('subcategories')->where('slug', $slug)->first();
+        $element = Category::withCount('subcategories')->with('images')->where('slug', $slug)->first();
         $all_ = Category::all();
         $page_name = 'categories';
         $index = 'show';
@@ -90,15 +90,21 @@ class DashboardCategoriesController extends Controller
     {
         $input = $request->all();
         $input['slug'] = str_slug($request->title, '-');
-
-        if ( $file = $request->file('image')) {
-            $name = time() . '-' . $file->getClientOriginalName();
-            $file->move('images', $name);
-            $input['image'] = $name;
-        }
-
+        $type =  'categories';
         $category = Category::where('slug', $slug)->first();
         $category->fill($input)->save();
+        $profile_id = 1;
+        $imageable_id = $category->id;
+
+        if ( $file = $request->file('image')) {
+            $image = Image::where('imageable_type', $type)->where('imageable_id', $category->id)->first();
+            if ($image) {
+                $image->forceDelete();
+            }
+            Image::create_image($profile_id, $file, $type, $imageable_id);
+        }
+
+
         $page_name = $category->title;
 
         Session::flash('success', 'Category successfully updated!');

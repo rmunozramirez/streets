@@ -15,9 +15,20 @@
 			    <div id="contenido"  class="card">
 					<div class="card-body">        
 			            <div class="row">
-				            <div class="col-md-4"> 
-				            	<img class="img-responsive"  src="{{URL::to('/images/' . $element->image ) }}" name="{{$element->title}}" alt="{{$element->title}}" >
-				            </div>
+				            <div class="col-md-3">
+								@foreach($element->images as $image)
+	                    			@if($image->imageable_type === 'subcategories')
+						               <figure>
+							            	<img  class="img-responsive" src="{{URL::to('/images/' . $image->slug)}}" alt="{{ $element->name }}" name="{{ $element->name }}" />
+							            </figure>
+							        @else
+							        <div class="text-center">
+							        	<i class="fa fa-image fa-5x pb-4"></i><br>
+							        	<a class="btn btn-default btn-sm" href="{{route('subcategories.edit', $element->slug)}}"> Add a nice picture</a>
+						            </div>
+						        	@endif
+						        @endforeach				
+			            	</div>
 		  
 			            	<div class="col-md-8"> 
 					            <dl class="dl-horizontal">

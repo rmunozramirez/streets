@@ -18,11 +18,11 @@
 			 @for ($i = 0; $i <= 3; $i++)
 			<div class="col-lg-3 col-md-4">	
 				<div class="card hovercard">
-					<img class="cardheader" src="{{URL::to('/images/' . $home_categories[$i]->image)}}">
-						<h3><a href="{{ url('categories/'.$home_categories[$i]->slug) }}">{{ $home_categories[$i]->title }}</a></h3>
+					<img class="cardheader" src="">
+						<h3><a href=""></a></h3>
 					<div class="card-body">					
 						<h5 class="subcat">
-						{{count($home_categories[$i]->subcategories)}} subcategories
+						
 						</h5>					   
 						<p>
 							Event Rating:<br />
@@ -35,7 +35,7 @@
 						</p>	
 						<hr>
 
-						<a href="{{ url('blogs/'.$home_categories[$i]->slug) }}">View</a>
+						<a href="">View</a>
 
 						| Edit | <a href="event.php">Delete</a>
 					</div>

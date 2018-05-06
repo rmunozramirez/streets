@@ -95,8 +95,9 @@ class DashboardProfileController extends Controller
         $page_name = 'profiles';
         $index = 'edit'; 
         $all_ = Profile::all();
+        $image = Image::where('imageable_id', $element->id)->where('imageable_type', 'profiles')->first();
 
-          return view('dashboard.profiles.edit', compact('element', 'page_name', 'all_roles', 'all_st', 'all_', 'index'));
+          return view('dashboard.profiles.edit', compact('element', 'page_name', 'all_roles', 'all_st', 'all_', 'index', 'image'));
     }
 
     public function update(ProfileRequest $request, $slug)
@@ -110,7 +111,7 @@ class DashboardProfileController extends Controller
         $profile_id = $imageable_id = $profile->id;
         $type = 'profiles';
         if ( $file = $request->file('image')) {
-            $image = Image::where('imageable_type', 'profiles')->first();
+            $image = Image::where('imageable_type', 'profiles')->where('imageable_id', $profile_id)->first();
             if ($image) {
                 $image->forceDelete();
             }
@@ -127,7 +128,8 @@ class DashboardProfileController extends Controller
     {
         
         $profile = Profile::where('slug', $slug)->first();
-        if ($profile->channel) {
+
+        if ($this->has_a_channel($profile->id)) {
 
             Session::flash('info', 'Profile has a channel. Please deleted channel first!');
             return redirect()->route('profiles.show', $profile->slug);
@@ -147,6 +149,15 @@ class DashboardProfileController extends Controller
         return redirect()->route('profiles.index');
     }
 
+    public function has_a_channel($id){
+        $has_a_channel = Profile::has('channel');
+
+        if ($has_a_channel) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public function trashed()
     {
@@ -185,20 +196,24 @@ class DashboardProfileController extends Controller
         $status = Status::where('statusable_id', $id)->where('statusable_type', 'profiles')->first();
         $status->status =  'banned';
         $status->save();
-
         $profile = Profile::where('id', $id)->first();
+
 // Look for Profiles'channel and ban them
+        if ($profile->channel) {
         $channel_id = $profile->channel->id;
         $status = Status::where('statusable_id', $channel_id)->where('statusable_type', 'channels')->first();
         $status->status =  'banned';
         $status->save();
+        }
+
 
 // Look for Profile's discussions, and ban them
-        $discussions = $profile->discussions;
-        foreach ($discussions as $discussion) {
-            $status = Status::where('statusable_id', $discussion->id)->where('statusable_type', 'discussions')->first();
-            $status->status =  'banned';
-            $status->save();
+        if ($discussions = $profile->discussions) {
+            foreach ($discussions as $discussion) {
+                $status = Status::where('statusable_id', $discussion->id)->where('statusable_type', 'discussions')->first();
+                $status->status =  'banned';
+                $status->save();
+            }
         }
         
         Session::flash('success', 'User banned!');
@@ -207,29 +222,54 @@ class DashboardProfileController extends Controller
 
     public function allow($id)
     {
+
 // Remove ban from profile
         $status = Status::where('statusable_id', $id)->where('statusable_type', 'profiles')->first();
         $status->status =  'active';
         $status->save();
 
 // Look for Profile's channel, remove the ban by setting it "inactive"
-        $profile = Profile::where('id', $id)->first();
+        $profile = Profile::where('id', $id)->first();        
+       if ($profile->channel) {
         $channel_id = $profile->channel->id;
         $status = Status::where('statusable_id', $channel_id)->where('statusable_type', 'channels')->first();
         $status->status =  'inactive';
         $status->save();
+       }
 
 // Look for Profile's discussions, remove the ban by setting it "inactive"
-       $discussions = $profile->discussions;
+      if ($discussions = $profile->discussions) {
         foreach ($discussions as $discussion) {
             $status = Status::where('statusable_id', $discussion->id)->where('statusable_type', 'discussions')->first();
             $status->status =  'inactive';
             $status->save();
         }
-
+      }
 
         Session::flash('success', 'User banned!');
         return redirect()->back();
     }
 
+    public function admin()
+    {
+         $profile = Profile::with('statuses')->with('images')->get();
+         $all_roles = Role::pluck('title', 'id')->all();
+        $page_name = 'admins';
+        $index = 'admin';
+         $all_ = array();
+
+        foreach ($profile as $a) {
+            if ($a->statuses->statusable_id <= 2) {
+                array_push($all_, a);
+            }
+        }
+
+        return view('dashboard.profiles.admin', compact('all_roles', 'all_', 'page_name', 'index'));
+    }
 }
+
+
+
+        
+
+       

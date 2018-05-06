@@ -104,16 +104,21 @@ class UserProfileController extends Controller
         $input = $request->all();
         $input['slug'] = str_slug($request->title, '-');
 
-        if ( $file = $request->file('image')) {
-            $name = $file->getClientOriginalName()  . '_' . time();
-            $file->move('images', $name);
-            $input['image'] = $name;
-        }
         $profile = Profile::where('slug', $slug)->first();
         $profile->fill($input)->save();
-        $page_name = $profile;
+        $profile_id = $imageable_id = $profile->id;
+        $type = 'profiles';
+        if ( $file = $request->file('image')) {
+            $image = Image::where('imageable_type', 'profiles')->first();
+            if ($image) {
+                $image->forceDelete();
+            }
+            Image::create_image($profile_id, $file, $type, $imageable_id);
+        }
 
+        $page_name = $profile;
         Session::flash('success', 'Profile successfully updated!');
+
      
         return redirect()->route('profile', $profile->slug);
     }

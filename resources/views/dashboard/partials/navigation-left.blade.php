@@ -5,8 +5,12 @@
         <ul class="sky-mega-menu sky-mega-menu-pos-left sky-mega-menu-anim-scale sky-mega-menu-response-to-switcher">
             <li>
                 <a href="#" class="text-center py-5">
-                    <img height="80" class="img-circle thumbnail-admin"  src="{{URL::to('/images/' . Auth::user()->profile->image) }}" alt="{{Auth::user()->name}}" title="{{Auth::user()->name}}" />
+                    @foreach(Auth::user()->profile->images as $image)
+                    @if($image->imageable_type === 'profiles')
+                    <img height="80" class="img-circle thumbnail-admin"  src="{{URL::to('/images/' . $image->slug) }}" alt="{{Auth::user()->name}}" title="{{Auth::user()->name}}" />
                     <br />
+                    @endif
+                    @endforeach
                     {{Auth::user()->name}}
                 </a>
                 <div class="grid-container3">
@@ -15,7 +19,7 @@
                         <li><a href="contacts.html">Contacts</a></li>
                         <li><a href="mailbox.html">Mailbox</a></li>
                         <li>
-                            <a class="dropdown-item" href="{{ route('logout') }}"
+                            <a class="" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
@@ -53,6 +57,7 @@
                 <div class="grid-container3">
                     <ul>
                         <li><a href="{{route('profiles.index')}}"><i class="fa fa-list"></i>All profiles</a></li>
+                        <li><a href="{{route('profiles.admin')}}"><i class="fa fa-list"></i>All administrators</a></li>
                         <li><a href="{{route('profiles.create')}}"><i class="fa fa-plus"></i>Add new</a></li>
                     </ul>
                 </div>

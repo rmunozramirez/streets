@@ -18,7 +18,6 @@ class CreatePostcategoriesTable extends Migration
             $table->string('title')->unique();
             $table->string('slug')->unique();
             $table->text('about')->nullable();
-            $table->string('image')->unique();
             $table->softDeletes();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP')); 

@@ -7,6 +7,7 @@ use App\Http\Requests\SubcategoriesRequest;
 use App\Profile;
 use App\Subcategory;
 use App\Category;
+use App\Image;
 use App\Status;
 use App\Role;
 use Session;
@@ -49,9 +50,6 @@ class DashboardSubcategoriesController extends Controller
     public function store(SubcategoriesRequest $request)
     {
         $file = $request->file('image');
-        $name = time() . '-' . $file->getClientOriginalName();
-        $file->move('images', $name);
-
         $subcategory = Subcategory::create([
     
             'category_id'       => $request->category_id,
@@ -59,12 +57,20 @@ class DashboardSubcategoriesController extends Controller
             'subtitle'          => $request->subtitle,
             'slug'              => str_slug($request->title, '-'),
             'about'             => $request->about, 
-            'image'             => $name,
+
        ]);   
 
         $subcategory->save();
         $type =  'subcategories';
-        $id = $subcategory->id;
+        $imageable_id = $id = $subcategory->id;
+        $profile_id = 1;
+        if ( $file = $request->file('image')) {
+            $image = Image::where('imageable_type', 'subcategories')->where('imageable_id', $subcategory->id)->first();
+            if ($image) {
+                $image->forceDelete();
+            }
+            Image::create_image($profile_id, $file, $type, $imageable_id);
+        }
         Status::create_status($id, $type);
         
         Session::flash('success', 'Subcategory successfully created!');
@@ -79,7 +85,7 @@ class DashboardSubcategoriesController extends Controller
      */
     public function show($slug)
     {
-        $element = Subcategory::withCount('channels')->where('slug', $slug)->first();
+        $element = Subcategory::withCount('channels')->with('images')->where('slug', $slug)->first();
         $page_name = 'subcategories';
         $all_ = Subcategory::all();
         $index = 'show';

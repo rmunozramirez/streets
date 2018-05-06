@@ -21,7 +21,6 @@ class CreatePostsTable extends Migration
             $table->string('slug')->unique();  
             $table->string('subtitle')->nullable();  
             $table->text('body');
-            $table->string('image');
             $table->softDeletes();              
             $table->dateTime('published_at')->nullable();      
             $table->timestamp('created_at')->useCurrent();

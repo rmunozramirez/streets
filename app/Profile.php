@@ -10,7 +10,6 @@ class Profile extends Model
    protected $fillable = [
         'user_id',
         'title',
-        'status_id',
         'role_id',
 		'slug',
         'birthday', 

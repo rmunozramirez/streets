@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Profile;
+use App\Status;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -28,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -64,11 +66,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'slug' => str_slug($data['name']),
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        $profile = Profile::create([
+            'user_id'   => $user->id,
+            'title'     => $data['name'],
+            'role_id'   => 4,
+            'slug' => str_slug($data['name']),
+
+        ]);
+
+        $status = Status::create([
+            'statusable_type' => 'profiles',
+            'statusable_id' => $profile->id,
+            'status'    => 'active',
+        ]);
+
+        return $user;
     }
 }

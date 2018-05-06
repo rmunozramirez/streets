@@ -47,7 +47,7 @@ class Image extends Model
 
         $name = str_slug($file->getClientOriginalName());
         $slug = time() . '-' . $name;        
-        $file->move('images', $identifier);
+        $file->move('images', $slug);
 
         $image = new Image;
         $image->profile_id =  $profile_id;

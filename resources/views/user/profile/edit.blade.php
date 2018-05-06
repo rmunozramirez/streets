@@ -21,14 +21,25 @@
 				<div class="m-t-md">
 					 {!! Form::model($element, ['method'=>'PATCH', 'action'=> array('UserProfileController@update',  Auth::user()->slug, $element->slug ),'files'=>true]) !!} 
 					<div class="row">        
-						<div class="col-md-4"> 
-							<img class="img-responsive"  src="{{URL::to('/images/' . $element->image ) }}" alt="{{$element->title}}" >
+						<div class="col-md-3"> 
+							@foreach($element->images as $image)
+		            			@if($image->imageable_type === 'profiles')
+					               <figure>
+						            	<img  class="img-circle img-responsive" src="{{URL::to('/images/' . $image->slug)}}" alt="{{ $element->name }}" name="{{ $element->name }}" />
+						            </figure>
+						        @else
+						        <div class="text-center">
+						        	<i class="fa fa-image fa-5x pb-4"></i><br>
+						        	<a class="btn btn-default btn-sm" href="{{route('profiles.edit', $element->slug)}}"> Add a nice picture</a>
+					            </div>
+					        	@endif
+					        @endforeach	
 							<div class=" pt-5">
 								{!!Form::label('image', 'Upload a Featured Image') !!}
 								{!!Form::file('image', null, array('class' => 'form-control', 'required' => ''))!!}
 							</div>
 						</div>
-						<div class="col-md-8"> 
+						<div class="col-md-9"> 
 							<div class="row">
 								<div class="col-md-12">       
 									{!!Form::label('title', 'Profile title', array('class' => 'pt-3'))!!}

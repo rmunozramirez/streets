@@ -28,8 +28,18 @@
 
 
 				            <div class="row">        
-					            <div class="col-md-4"> 
-					            	<i class="fa fa-image fa-4x"></i>
+					            <div class="col-md-3"> 
+									@foreach($element->images as $image)
+		                    			@if($image->imageable_type === 'categories')
+							               <figure>
+								            	<img  class="img-responsive" src="{{URL::to('/images/' . $image->slug)}}" alt="{{ $element->name }}" name="{{ $element->name }}" />
+								            </figure>
+								        @else
+								        <div class="text-center">
+								        	<i class="fa fa-image fa-5x pb-4"></i><br>
+								        </div>
+							        	@endif
+							        @endforeach				
 
 					            	<div class=" pt-5">
 						                {!!Form::label('image', 'Upload a Featured Image') !!}
@@ -37,7 +47,7 @@
 					            	</div>  
 					            </div>
 		      
-				            	<div class="col-md-8"> 
+				            	<div class="col-md-9"> 
 						            <div class="row">
 						            	<div class="col-md-6">       
 							                {!!Form::label('title', 'Add a subategory title', array('class' => 'form-spacing-top'))!!}

@@ -41,8 +41,7 @@ De ascendencia itálica (por su madre), y púnica-bereber (por su padre), Severo
             'imageable_id'      =>  '1',
             'imageable_type'    =>  'profiles',
             'profile_id'        =>  '1',            
-            'slug'              =>  'rafael.png',
-            'identifier'        =>  'rafael.png',
+            'slug'              =>  'rafael.jpg',
             'name'              =>  'rafael',
         ]);
        

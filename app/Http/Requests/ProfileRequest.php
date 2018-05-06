@@ -31,12 +31,12 @@ class ProfileRequest extends FormRequest
         'slug'          => 'string|max:255',
         'birthday'      => 'date', 
         'about'         => 'required',          
-        'web'           => 'string|max:255',
-        'facebook'      => 'string|max:255',
-        'googleplus'    => 'string|max:255',
-        'twitter'       => 'string|max:255',
-        'linkedin'      => 'string|max:255',
-        'youtube'       => 'string|max:255',
+        'web'           => 'max:255',
+        'facebook'      => 'max:255',
+        'googleplus'    => 'max:255',
+        'twitter'       => 'max:255',
+        'linkedin'      => 'max:255',
+        'youtube'       => 'max:255',
         ];
     }
 }

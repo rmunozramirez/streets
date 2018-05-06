@@ -728,12 +728,11 @@ select.form-control {
 3. - Images section
 --------------------------------------------------------------*/
 
-
 .the_thumbnail {
   position: relative;
   width: 130px;
-  margin: 2px;
-  height: 200px
+  /*margin: 2px;*/
+
 }
 
 .overlay {
@@ -747,17 +746,26 @@ select.form-control {
   opacity: 0;
   transition: .5s ease;
   background-color: #000;
-  z-index: 600;
+  /*margin: 2px;*/
+}
+
+.the_thumbnail:hover .overlay{
+  opacity: 0.6;
 }
 
 .image {
-	opacity: 1;
-	display: block;
-	width: 130px;
-	height: 200px;
-	-webkit-transition: .5s ease;
-	transition: .5s ease;
-	-webkit-backface-visibility: hidden;
-	backface-visibility: hidden;
-	margin: 2px;
+  opacity: 1;
+  display: block;
+  width: 130px;
+  transition: .5s ease;
+  backface-visibility: hidden;
+  /*margin: 2px;*/
+}
+
+
+.overlay a {
+  color: #fff;
+  text-transform: uppercase;
+  line-height: 130px;
+  margin: 0 auto;  
 }

@@ -5,20 +5,24 @@
 		<header class="content-header">
 			<div class="row">
 				<div class="col-md-9">
-
 					<ul class="nav navbar-nav visible-md visible-lg site_menu built" data-component="menu">
 						<li><a href="{{route('user', Auth::user()->slug )}}">
-							<img height="50" class="img-circle pull-left" src="{{URL::to('/images/' . Auth::user()->profile->image)}}" alt="{{ Auth::user()->name }}" name="{{ Auth::user()->name }}" />
-
-					    Home</a></li>
+							@foreach(Auth::user()->profile->images as $image)
+							@if($image->imageable_type === 'profiles')
+							<img height="50" class="img-circle pull-left" src="{{URL::to('/images/' . $image->slug)}}" alt="{{ Auth::user()->name }}" name="{{ Auth::user()->name }}" />
+							@endif
+							@endforeach
+						Home</a></li>
 
 					    <li><a href="{{route('profile', Auth::user()->profile->slug )}}">Profile</a></li>
-
-					    <li><a href="{{route('channel', Auth::user()->profile->channel->slug )}}">Chanel</a></li>
-
+						@if(Auth::user()->profile->channel)
+					    <li><a href="{{route('channel', Auth::user()->profile->slug )}}">Chanel</a></li>
+					    @else
+					    <li><a href="{{route('channel.create', Auth::user()->profile->slug) }}">Chanel</a></li>
+						@endif
 					    <li><a href="{{route('forum.index')}}">Discussions</a></li>
 
-					    <li><a href="photo/">Photos</a></li>
+					    <li><a href="{{route('image', Auth::user()->profile->slug )}}">Photos</a></li>
 
 					    <li><a href="event/">Events</a></li>
 
